@@ -9,6 +9,12 @@ const CveListPage = lazy(() =>
   )
 );
 
+const ClusterListPage = lazy(() =>
+  import(
+    /* webpackChunkName: "ClusterListPage" */ './Components/SmartComponents/ClusterListPage'
+  )
+);
+
 export const Routes = () => (
   <Suspense
     fallback={
@@ -19,6 +25,7 @@ export const Routes = () => (
   >
     <Switch>
       <Route path="/cves" component={CveListPage} />
+      <Route path="/clusters" component={ClusterListPage} />
       <Route>
         <Redirect to="/cves" />
       </Route>
