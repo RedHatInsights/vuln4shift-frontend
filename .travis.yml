@@ -23,6 +23,3 @@ env:
   - REPO_DIR="vuln4shift-frontend-build"
   - BRANCH=${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}
   - NODE_OPTIONS="--max-old-space-size=4096 --max_old_space_size=4096"
-before_install:
-- openssl aes-256-cbc -K $encrypted_e6cc0fb2b8da_key -iv $encrypted_e6cc0fb2b8da_iv
-  -in travis.enc -out travis -d
