@@ -1,5 +1,5 @@
 {
-  "name": "frontend-starter-app",
+  "name": "ocp-advisor-frontend",
   "version": "1.1.0",
   "private": false,
   "engines": {
@@ -18,6 +18,8 @@
     "patch:hosts": "fec patch-etc-hosts",
     "start": "webpack serve --config config/dev.webpack.config.js",
     "start:beta": "BETA=true npm start",
+    "start:proxy": "PROXY=true npm start",
+    "start:proxy:beta": "BETA=true PROXY=true npm start",
     "test": "jest",
     "verify": "npm-run-all build lint test"
   },
@@ -60,6 +62,6 @@
     "webpack-bundle-analyzer": "4.4.2"
   },
   "insights": {
-    "appname": "starter"
+    "appname": "ocp-vulnerability"
   }
 }
