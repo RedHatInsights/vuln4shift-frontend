@@ -1,2 +1,10 @@
 // Importing Global Variables
 @import "~@redhat-cloud-services/frontend-components-utilities/styles/_all";
+
+.cves-header-questionmark {
+    font-size: var(--pf-global--FontSize--md);
+}
+
+.pointer {
+    cursor: pointer;
+}
