@@ -1,3 +1,5 @@
+![travis](https://app.travis-ci.com/RedHatInsights/vuln4shift-frontend.svg?branch=master)
+
 # Vulnerability for OpenShift frontend
 
 ## First time setup
@@ -21,6 +23,16 @@ There is a [comprehensive quick start guide in the Storybook Documentation](http
 - ```npm run lint``` - run linter
 - ```npm run test -- -u``` - run all tests and update snapshots
 - ```npm run test -- --watch``` - run tests in watch mode
+
+## Deploying
+Any push to the following branches will trigger a build in [vuln4shift-frontend-build repository](https://github.com/RedHatInsights/vuln4shift-frontend-build) which will deploy to corresponding environment.
+
+| Push to branch in this repo  | Updated branch in build repo  | Environment       | Available at
+| :--------------------------- | :---------------------------- | :---------------- | :-----------
+| master                       | stage-beta                    | stage beta        | https://console.stage.redhat.com/beta
+| stage-stable                 | stage-stable                  | stage stable      | https://console.stage.redhat.com
+| prod-beta                    | prod-beta                     | production beta   | https://console.redhat.com/beta 
+| prod-stable                  | prod-stable                   | production stable | https://console.redhat.com
 
 ## Design System
 This project uses [Patternfly React](https://github.com/patternfly/patternfly-react).

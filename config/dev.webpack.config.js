@@ -8,7 +8,7 @@ const { config: webpackConfig, plugins } = config({
   deployment: process.env.BETA ? 'beta/apps' : 'apps',
   useProxy: true,
   appUrl: process.env.BETA
-    ? '/beta/openshift/insights/vulnerability/'
+    ? '/beta/openshift/insights/vulnerability'
     : '/openshift/insights/vulnerability',
   env: process.env.BETA ? 'stage-beta' : 'stage-stable',
 });
