@@ -4,24 +4,24 @@ import {
   PageHeader,
   PageHeaderTitle,
 } from '@redhat-cloud-services/frontend-components/PageHeader';
-import ClusterTable from './CveTable';
+import CveTable from './CveTable';
 import PropTypes from 'prop-types';
 
-const CveDetailPage = ({ match }) => {
+const ClusterDetailPage = ({ match }) => {
   return (
     <Fragment>
       <PageHeader>
-        <PageHeaderTitle title={match.params.cveId} />
+        <PageHeaderTitle title={match.params.clusterId} />
       </PageHeader>
       <Main>
-        <ClusterTable />
+        <CveTable />
       </Main>
     </Fragment>
   );
 };
 
-CveDetailPage.propTypes = {
+ClusterDetailPage.propTypes = {
   match: PropTypes.object,
 };
 
-export default CveDetailPage;
+export default ClusterDetailPage;

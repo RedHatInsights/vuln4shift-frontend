@@ -21,6 +21,12 @@ const CveDetailPage = lazy(() =>
   )
 );
 
+const ClusterDetailPage = lazy(() =>
+  import(
+    /* webpackChunkName: "ClusterDetailPage" */ './Components/SmartComponents/ClusterDetailPage'
+  )
+);
+
 export const Routes = () => (
   <Suspense
     fallback={
@@ -30,7 +36,8 @@ export const Routes = () => (
     }
   >
     <Switch>
-      <Route path="/cves/:cve" component={CveDetailPage} />
+      <Route path="/cves/:cveId" component={CveDetailPage} />
+      <Route path="/clusters/:clusterId" component={ClusterDetailPage} />
       <Route path="/cves" component={CveListPage} />
       <Route path="/clusters" component={ClusterListPage} />
       <Route>
