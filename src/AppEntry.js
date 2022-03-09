@@ -12,7 +12,7 @@ const AppEntry = () => (
       ...(process.env.NODE_ENV !== 'production' ? [logger] : [])
     ).getStore()}
   >
-    <Router basename={getBaseName(window.location.pathname)}>
+    <Router basename={getBaseName(window.location.pathname, 3)}>
       <App />
     </Router>
   </Provider>
