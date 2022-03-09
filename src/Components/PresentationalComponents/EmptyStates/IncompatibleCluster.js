@@ -6,9 +6,11 @@ import {
   Bullseye,
   Title,
   EmptyStateVariant,
+  Button,
 } from '@patternfly/react-core';
 import { CogIcon } from '@patternfly/react-icons';
 
+// TODO: Update button link
 const IncompatibleCluster = () => (
   <Bullseye>
     <EmptyState variant={EmptyStateVariant.large}>
@@ -24,6 +26,14 @@ const IncompatibleCluster = () => (
         Vulnerability information applies for
         <strong> OCP4.8+ version</strong> only.
       </EmptyStateBody>
+      <Button
+        variant="primary"
+        component="a"
+        href="https://console.redhat.com/"
+        target="_blank"
+      >
+        Learn more
+      </Button>
     </EmptyState>
   </Bullseye>
 );
