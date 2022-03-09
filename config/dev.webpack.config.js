@@ -11,6 +11,7 @@ const { config: webpackConfig, plugins } = config({
     ? '/beta/openshift/insights/vulnerability'
     : '/openshift/insights/vulnerability',
   env: process.env.BETA ? 'stage-beta' : 'stage-stable',
+  sassPrefix: '.ocp-vulnerability, .ocpVulnerability',
 });
 plugins.push(...commonPlugins);
 
