@@ -10,12 +10,13 @@ import PropTypes from 'prop-types';
 import { Breadcrumb, BreadcrumbItem } from '@patternfly/react-core';
 import { Link } from 'react-router-dom';
 import { Shield } from '@redhat-cloud-services/frontend-components/Shield';
+import CvssVector from '../PresentationalComponents/CvssVector';
 
 const CveDetailPage = ({ match }) => {
   return (
     <Fragment>
       <PageHeader>
-        <Breadcrumb>
+        <Breadcrumb className="pf-u-mb-md">
           <BreadcrumbItem>
             <Link to="/">Vulnerability</Link>
           </BreadcrumbItem>
@@ -35,6 +36,11 @@ const CveDetailPage = ({ match }) => {
             moderate: 0,
             low: 4,
           }}
+        />
+        <CvssVector
+          isLoading={false}
+          score={7.8}
+          cvss3Vector="CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H"
         />
       </PageHeader>
       <Main>
