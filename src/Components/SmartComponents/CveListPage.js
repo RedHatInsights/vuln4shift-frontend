@@ -10,6 +10,7 @@ import {
   PageHeaderTitle,
 } from '@redhat-cloud-services/frontend-components/PageHeader';
 import CveTable from './CveTable';
+import { Link } from 'react-router-dom';
 
 const CveListPage = () => {
   // TODO: Add correct link
@@ -56,6 +57,8 @@ const CveListPage = () => {
           className="pf-u-mt-md"
           title="Vulnerability information applies to OCP4.8+ version only"
         />
+        {/* Remove the following line after implementing table */}
+        <Link to="/cves/CVE-2022-1234">Go to CVE detail page</Link>
       </PageHeader>
       <Main>
         <CveTable />

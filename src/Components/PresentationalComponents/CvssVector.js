@@ -14,7 +14,7 @@ import {
 import propTypes from 'prop-types';
 import React from 'react';
 import WithLoader, { LoaderType } from './WithLoader';
-import { V3names, V2names } from './vectorNames';
+import { V3names, V2names } from '../../Helpers/vectorNames';
 
 export const parseVector = (vector, namesMapping) => {
   let parsedVector = {};
@@ -33,15 +33,21 @@ export const parseVector = (vector, namesMapping) => {
   return parsedVector;
 };
 
-const CvssVector = ({ cvss2Vector, cvss3Vector, score, isLoading }) => {
-  const cvssVersion = cvss3Vector ? 'CVSS 3.0' : 'CVSS 2.0';
-  const cvssVector = cvss3Vector || cvss2Vector;
-  const namesMapping = cvss3Vector ? V3names : V2names;
+const CvssVector = ({
+  cvss2Vector,
+  cvss3Vector,
+  score,
+  isLoading,
+  hasMetadata,
+}) => {
+  const cvssVersion = cvss2Vector ? 'CVSS 2.0' : 'CVSS 3.0';
+  const cvssVector = cvss2Vector || cvss3Vector;
+  const namesMapping = cvss2Vector ? V2names : V3names;
   const parsedVector = parseVector(cvssVector, namesMapping);
 
   delete parsedVector.cvssVersion;
 
-  return (
+  return hasMetadata ? (
     <TextContent>
       <Popover
         id="popover-cvss"
@@ -81,7 +87,6 @@ const CvssVector = ({ cvss2Vector, cvss3Vector, score, isLoading }) => {
           />
         </Text>
       </Popover>
-
       <WithLoader isLoading={isLoading} style={{ width: '320px' }}>
         <span className="pf-u-mr-md">{score}</span>
         <span id="cvss-vector-content">
@@ -89,6 +94,13 @@ const CvssVector = ({ cvss2Vector, cvss3Vector, score, isLoading }) => {
           {cvssVector?.substring(cvssVector.indexOf('/') + 1) || 'N/A'}
         </span>
       </WithLoader>
+    </TextContent>
+  ) : (
+    <TextContent>
+      <Text component={TextVariants.h6} className="pf-u-mb-xs">
+        CVSS base score
+      </Text>
+      Unknown
     </TextContent>
   );
 };
@@ -98,6 +110,7 @@ CvssVector.propTypes = {
   cvss3Vector: propTypes.string,
   score: propTypes.any.isRequired,
   isLoading: propTypes.bool.isRequired,
+  hasMetadata: propTypes.bool.isRequired,
 };
 
 export default CvssVector;

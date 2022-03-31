@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { SEVERITY_OPTIONS } from '../../constants';
+import { SEVERITY_OPTIONS } from '../../Helpers/constants';
 import { SecurityIcon } from '@patternfly/react-icons';
 import { Link } from 'react-router-dom';
 
