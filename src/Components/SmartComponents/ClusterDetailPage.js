@@ -13,16 +13,21 @@ const ClusterDetailPage = ({ match }) => {
   return (
     <Fragment>
       <PageHeader>
-        <Breadcrumb>
+        <Breadcrumb className="pf-u-mb-md">
           <BreadcrumbItem>
             <Link to="/">Vulnerability</Link>
           </BreadcrumbItem>
           <BreadcrumbItem>
             <Link to="/clusters">Clusters</Link>
           </BreadcrumbItem>
-          <BreadcrumbItem>{match.params.clusterId}</BreadcrumbItem>
+          <BreadcrumbItem>rhel-9.0</BreadcrumbItem>
         </Breadcrumb>
-        <PageHeaderTitle title={match.params.clusterId} />
+        <PageHeaderTitle title="rhel-9.0" className="pf-u-mb-sm" />
+        <Fragment>
+          UUID: {match.params.clusterId}
+          <br />
+          Last seen: 31 Mar 2022 06:33 UTC
+        </Fragment>
       </PageHeader>
       <Main>
         <CveTable />

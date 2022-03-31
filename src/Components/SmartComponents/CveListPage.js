@@ -50,14 +50,14 @@ const CveListPage = () => {
   return (
     <Fragment>
       <PageHeader>
-        <PageHeaderTitle title={HeaderTitle} />
+        <PageHeaderTitle title={HeaderTitle} className="pf-u-mb-sm" />
         <Alert
           variant={AlertVariant.info}
           isInline
           className="pf-u-mt-md"
           title="Vulnerability information applies to OCP4.8+ version only"
         />
-        {/* Remove the following line after implementing table */}
+        {/* Remove the following component after implementing table */}
         <Link to="/cves/CVE-2022-1234">Go to CVE detail page</Link>
       </PageHeader>
       <Main>

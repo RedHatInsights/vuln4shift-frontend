@@ -49,7 +49,7 @@ const CveDetailPageHeader = () => {
         </BreadcrumbItem>
         <BreadcrumbItem>{match.params.cveId}</BreadcrumbItem>
       </Breadcrumb>
-      <PageHeaderTitle title={match.params.cveId} />
+      <PageHeaderTitle title={match.params.cveId} className="pf-u-mb-sm" />
       <Grid hasGutter>
         <GridItem md={8} sm={12}>
           <Stack hasGutter>
