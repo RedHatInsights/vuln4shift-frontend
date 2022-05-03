@@ -5,7 +5,7 @@ import {
   PageHeader,
   PageHeaderTitle,
 } from '@redhat-cloud-services/frontend-components/PageHeader';
-import ClusterTable from './CveTable';
+import ClusterTable from './ClusterTable';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 const ClusterListPage = () => {

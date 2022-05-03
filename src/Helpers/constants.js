@@ -1,3 +1,9 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { processDate } from '@redhat-cloud-services/frontend-components-utilities/helpers';
+import parseCvssScore from '@redhat-cloud-services/frontend-components-utilities/parseCvssScore';
+import { Shield } from '@redhat-cloud-services/frontend-components/Shield';
+
 export const SEVERITY_OPTIONS = {
   critical: {
     label: 'Critical',
@@ -27,3 +33,41 @@ export const SEVERITY_OPTIONS = {
     label: 'Unknown',
   },
 };
+
+export const CVE_LIST_TABLE_COLUMNS = [
+  {
+    title: 'CVE ID',
+  },
+  {
+    title: 'Publish date',
+  },
+  {
+    title: 'Severity',
+  },
+  {
+    title: 'CVSS base score',
+  },
+  {
+    title: 'Clusters exposed',
+  },
+  {
+    title: 'Images exposed',
+  },
+];
+
+export const CVE_LIST_TABLE_MAPPER = (row) => ({
+  key: row.synopsis,
+  cells: [
+    <Link to={'/cves/' + row.synopsis} key={row.synopsis}>
+      {row.synopsis}
+    </Link>,
+    processDate(row.publish_date),
+    <Shield hasLabel impact={row.severity} key={row.synopsis} />,
+    parseCvssScore(row.cvss2_score, row.cvss3_score, true),
+    <Link to={'/cves/' + row.synopsis} key={row.synopsis}>
+      {row.clusters_exposed}
+    </Link>,
+    row.images_exposed,
+  ],
+  description: row.description,
+});
