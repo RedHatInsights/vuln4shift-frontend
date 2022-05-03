@@ -69,5 +69,5 @@ export const CVE_LIST_TABLE_MAPPER = (row) => ({
     </Link>,
     row.images_exposed,
   ],
-  description: row.description,
+  expandableContent: row.description,
 });

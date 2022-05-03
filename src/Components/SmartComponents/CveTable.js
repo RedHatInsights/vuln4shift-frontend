@@ -32,7 +32,7 @@ const CveTable = () => {
         columns={CVE_LIST_TABLE_COLUMNS}
         rows={cves.map((row) => CVE_LIST_TABLE_MAPPER(row))}
       />
-      <BottomPagination />
+      <BottomPagination page={1} perPage={20} itemCount={20} />
     </Fragment>
   );
 };

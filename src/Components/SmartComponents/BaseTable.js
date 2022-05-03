@@ -51,7 +51,9 @@ const BaseTable = ({ columns, rows }) => {
             </Tr>
             <Tr isExpanded={isRowExpanded(row.key)}>
               <Td colspan={100}>
-                <ExpandableRowContent>{row.description}</ExpandableRowContent>
+                <ExpandableRowContent>
+                  {row.expandableContent}
+                </ExpandableRowContent>
               </Td>
             </Tr>
           </Fragment>
@@ -62,8 +64,19 @@ const BaseTable = ({ columns, rows }) => {
 };
 
 BaseTable.propTypes = {
-  columns: propTypes.array,
-  rows: propTypes.array,
+  columns: propTypes.arrayOf(
+    propTypes.shape({
+      title: propTypes.node.isRequired,
+      sortParam: propTypes.string,
+    })
+  ).isRequired,
+  rows: propTypes.arrayOf(
+    propTypes.shape({
+      key: propTypes.string.isRequired,
+      cells: propTypes.arrayOf(propTypes.node).isRequired,
+      expandableContent: propTypes.node,
+    })
+  ).isRequired,
 };
 
 export default BaseTable;
