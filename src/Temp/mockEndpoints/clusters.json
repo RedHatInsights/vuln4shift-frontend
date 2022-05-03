@@ -1,0 +1,335 @@
+{
+    "data": [
+        {
+            "display_name": "rhel-9.0-1",
+            "insights_id": "20692751-4d45-4251-ac95-fd0e3e01119f",
+            "status_id": 0,
+            "status_text": "N/A",
+            "version": "4.9.12",
+            "type": "ocp",
+            "provider": "N/A",
+            "cves_severity": {
+                "low": 1,
+                "moderate": 0,
+                "important": 10,
+                "critical": 2
+            },
+            "id": "fc60b5ad-3874-4449-99b8-f3e7ea25c69b"
+        },
+        {
+            "display_name": "rhel-9.0-2",
+            "insights_id": "20692751-4d45-4251-ac95-fd0e3e01119g",
+            "status_id": 1,
+            "status_text": "stale",
+            "version": "4.7.1",
+            "type": "ocp",
+            "provider": "AWS (us-east-2)",
+            "cves_severity": {
+                "low": 1,
+                "moderate": 2,
+                "important": 11,
+                "critical": 3
+            },
+            "id": "fc60b5ad-3874-4449-99b8-f3e7ea25c69c"
+        },
+        {
+            "display_name": "rhel-9.0-3",
+            "insights_id": "20692751-4d45-4251-ac95-fd0e3e01119h",
+            "status_id": 1,
+            "status_text": "stale",
+            "version": "4.9.3",
+            "type": "ocp",
+            "provider": "N/A",
+            "cves_severity": {
+                "low": 4,
+                "moderate": 0,
+                "important": 10,
+                "critical": 2
+            },
+            "id": "fc60b5ad-3874-4449-99b8-f3e7ea25c69d"
+        },
+        {
+            "display_name": "rhel-9.0-4",
+            "insights_id": "20692751-4d45-4251-ac95-fd0e3e01119i",
+            "status_id": 0,
+            "status_text": "N/A",
+            "version": "4.9.12",
+            "type": "ocp",
+            "provider": "N/A",
+            "cves_severity": {
+                "low": 4,
+                "moderate": 1,
+                "important": 3,
+                "critical": 8
+            },
+            "id": "fc60b5ad-3874-4449-99b8-f3e7ea25c69e"
+        },
+        {
+            "display_name": "rhel-9.0-5",
+            "insights_id": "20692751-4d45-4251-ac95-fd0e3e01119j",
+            "status_id": 3,
+            "status_text": "connected",
+            "version": "4.9.12",
+            "type": "ocp",
+            "provider": "N/A",
+            "cves_severity": {
+                "low": 32,
+                "moderate": 19,
+                "important": 16,
+                "critical": 7
+            },
+            "id": "fc60b5ad-3874-4449-99b8-f3e7ea25c69f"
+        },
+        {
+            "display_name": "rhel-9.0-6",
+            "insights_id": "20692751-4d45-4251-ac95-fd0e3e01119k",
+            "status_id": 1,
+            "status_text": "disconnected",
+            "version": "4.9.12",
+            "type": "ocp",
+            "provider": "AWS (us-east-2)",
+            "cves_severity": {
+                "low": 4,
+                "moderate": 0,
+                "important": 10,
+                "critical": 2
+            },
+            "id": "fc60b5ad-3874-4449-99b8-f3e7ea25c69g"
+        },
+        {
+            "display_name": "rhel-9.0-7",
+            "insights_id": "20692751-4d45-4251-ac95-fd0e3e01119l",
+            "status_id": 1,
+            "status_text": "stale",
+            "version": "4.9.12",
+            "type": "ocp",
+            "provider": "N/A",
+            "cves_severity": {
+                "low": 4,
+                "moderate": 0,
+                "important": 10,
+                "critical": 2
+            },
+            "id": "fc60b5ad-3874-4449-99b8-f3e7ea25c69h"
+        },
+        {
+            "display_name": "rhel-9.0-8",
+            "insights_id": "20692751-4d45-4251-ac95-fd0e3e01119m",
+            "status_id": 0,
+            "status_text": "N/A",
+            "version": "4.9.12",
+            "type": "ocp",
+            "provider": "N/A",
+            "cves_severity": {
+                "low": 4,
+                "moderate": 0,
+                "important": 10,
+                "critical": 2
+            },
+            "id": "fc60b5ad-3874-4449-99b8-f3e7ea25c69i"
+        },
+        {
+            "display_name": "rhel-9.0-9",
+            "insights_id": "20692751-4d45-4251-ac95-fd0e3e01119n",
+            "status_id": 0,
+            "status_text": "N/A",
+            "version": "4.9.12",
+            "type": "ocp",
+            "provider": "N/A",
+            "cves_severity": {
+                "low": 4,
+                "moderate": 0,
+                "important": 14,
+                "critical": 2
+            },
+            "id": "fc60b5ad-3874-4449-99b8-f3e7ea25c69j"
+        },
+        {
+            "display_name": "rhel-9.0-10",
+            "insights_id": "20692751-4d45-4251-ac95-fd0e3e01119o",
+            "status_id": 0,
+            "status_text": "N/A",
+            "version": "4.7.12",
+            "type": "ocp",
+            "provider": "N/A",
+            "cves_severity": {
+                "low": 4,
+                "moderate": 0,
+                "important": 10,
+                "critical": 2
+            },
+            "id": "fc60b5ad-3874-4449-99b8-f3e7ea25c69k"
+        },
+        {
+            "display_name": "rhel-9.0-11",
+            "insights_id": "20692751-4d45-4251-ac95-fd0e3e01119p",
+            "status_id": 1,
+            "status_text": "stale",
+            "version": "4.9.12",
+            "type": "ocp",
+            "provider": "N/A",
+            "cves_severity": {
+                "low": 4,
+                "moderate": 0,
+                "important": 10,
+                "critical": 2
+            },
+            "id": "fc60b5ad-3874-4449-99b8-f3e7ea25c69l"
+        },
+        {
+            "display_name": "rhel-9.0-12",
+            "insights_id": "20692751-4d45-4251-ac95-fd0e3e01119q",
+            "status_id": 3,
+            "status_text": "connected",
+            "version": "4.9.12",
+            "type": "ocp",
+            "provider": "N/A",
+            "cves_severity": {
+                "low": 4,
+                "moderate": 0,
+                "important": 10,
+                "critical": 2
+            },
+            "id": "fc60b5ad-3874-4449-99b8-f3e7ea25c69m"
+        },
+        {
+            "display_name": "rhel-9.0-13",
+            "insights_id": "20692751-4d45-4251-ac95-fd0e3e01119r",
+            "status_id": 3,
+            "status_text": "connected",
+            "version": "N/A",
+            "type": "ocp",
+            "provider": "N/A",
+            "cves_severity": {
+                "low": 4,
+                "moderate": 0,
+                "important": 10,
+                "critical": 2
+            },
+            "id": "fc60b5ad-3874-4449-99b8-f3e7ea25c69n"
+        },
+        {
+            "display_name": "rhel-9.0-14",
+            "insights_id": "20692751-4d45-4251-ac95-fd0e3e01119s",
+            "status_id": 2,
+            "status_text": "disconnected",
+            "version": "4.9.12",
+            "type": "ocp",
+            "provider": "N/A",
+            "cves_severity": {
+                "low": 4,
+                "moderate": 0,
+                "important": 10,
+                "critical": 2
+            },
+            "id": "fc60b5ad-3874-4449-99b8-f3e7ea25c69o"
+        },
+        {
+            "display_name": "rhel-9.0-15",
+            "insights_id": "20692751-4d45-4251-ac95-fd0e3e01119t",
+            "status_id": 2,
+            "status_text": "disconnected",
+            "version": "4.9.12",
+            "type": "ocp",
+            "provider": "N/A",
+            "cves_severity": {
+                "low": 4,
+                "moderate": 0,
+                "important": 10,
+                "critical": 2
+            },
+            "id": "fc60b5ad-3874-4449-99b8-f3e7ea25c69p"
+        },
+        {
+            "display_name": "rhel-9.0-16",
+            "insights_id": "20692751-4d45-4251-ac95-fd0e3e01119u",
+            "status_id": 2,
+            "status_text": "disconnected",
+            "version": "4.9.12",
+            "type": "ocp",
+            "provider": "N/A",
+            "cves_severity": {
+                "low": 4,
+                "moderate": 0,
+                "important": 10,
+                "critical": 2
+            },
+            "id": "fc60b5ad-3874-4449-99b8-f3e7ea25c69q"
+        },
+        {
+            "display_name": "rhel-9.0-17",
+            "insights_id": "20692751-4d45-4251-ac95-fd0e3e01119v",
+            "status_id": 0,
+            "status_text": "N/A",
+            "version": "4.9.12",
+            "type": "ocp",
+            "provider": "N/A",
+            "cves_severity": {
+                "low": 4,
+                "moderate": 0,
+                "important": 10,
+                "critical": 2
+            },
+            "id": "fc60b5ad-3874-4449-99b8-f3e7ea25c69r"
+        },
+        {
+            "display_name": "rhel-9.0-18",
+            "insights_id": "20692751-4d45-4251-ac95-fd0e3e01119w",
+            "status_id": 0,
+            "status_text": "N/A",
+            "version": "N/A",
+            "type": "ocp",
+            "provider": "N/A",
+            "cves_severity": {
+                "low": 4,
+                "moderate": 0,
+                "important": 10,
+                "critical": 2
+            },
+            "id": "fc60b5ad-3874-4449-99b8-f3e7ea25c69s"
+        },
+        {
+            "display_name": "rhel-9.0-19",
+            "insights_id": "20692751-4d45-4251-ac95-fd0e3e01119x",
+            "status_id": 0,
+            "status_text": "N/A",
+            "version": "4.9.12",
+            "type": "ocp",
+            "provider": "N/A",
+            "cves_severity": {
+                "low": 4,
+                "moderate": 0,
+                "important": 10,
+                "critical": 2
+            },
+            "id": "fc60b5ad-3874-4449-99b8-f3e7ea25c69t"
+        },
+        {
+            "display_name": "rhel-9.0-20",
+            "insights_id": "20692751-4d45-4251-ac95-fd0e3e01119y",
+            "status_id": 0,
+            "status_text": "N/A",
+            "version": "4.9.12",
+            "type": "ocp",
+            "provider": "N/A",
+            "cves_severity": {
+                "low": 1,
+                "moderate": 2,
+                "important": 0,
+                "critical": 3
+            },
+            "id": "fc60b5ad-3874-4449-99b8-f3e7ea25c69u"
+        }
+     ],
+    "meta": {
+        "data_format": "json",
+        "limit": 20,
+        "offset": 0,
+        "sort": "display_name",
+        "total_items": 20,
+        "filters": {
+          "search": "rhel-9.0",
+          "cves_severity": "low,moderate,important"
+        }
+    }
+}
