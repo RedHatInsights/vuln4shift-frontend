@@ -4,10 +4,10 @@ import {
   PageHeader,
   PageHeaderTitle,
 } from '@redhat-cloud-services/frontend-components/PageHeader';
-import CveTable from './CveTable';
 import PropTypes from 'prop-types';
 import { Breadcrumb, BreadcrumbItem } from '@patternfly/react-core';
 import { Link } from 'react-router-dom';
+import ClusterDetailTable from './ClusterDetailTable';
 
 const ClusterDetailPage = ({ match }) => {
   return (
@@ -30,7 +30,7 @@ const ClusterDetailPage = ({ match }) => {
         </Fragment>
       </PageHeader>
       <Main>
-        <CveTable />
+        <ClusterDetailTable />
       </Main>
     </Fragment>
   );

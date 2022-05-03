@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
 import { Main } from '@redhat-cloud-services/frontend-components/Main';
-import ClusterTable from './ClusterTable';
-import CveDetailPageHeader from '../PresentationalComponents/CveDetailPageHeader';
+import CveDetailPageHeader from '../../PresentationalComponents/CveDetailPageHeader';
 import { Text, TextContent, TextVariants } from '@patternfly/react-core';
+import CveDetailTable from './CveDetailTable';
 
 const CveDetailPage = () => {
   return (
@@ -14,7 +14,7 @@ const CveDetailPage = () => {
             Exposed clusters
           </Text>
         </TextContent>
-        <ClusterTable />
+        <CveDetailTable />
       </Main>
     </Fragment>
   );

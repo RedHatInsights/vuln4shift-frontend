@@ -5,7 +5,7 @@ import {
   PageHeader,
   PageHeaderTitle,
 } from '@redhat-cloud-services/frontend-components/PageHeader';
-import ClusterTable from './ClusterTable';
+import ClusterListTable from './ClusterListTable';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 const ClusterListPage = () => {
@@ -26,7 +26,7 @@ const ClusterListPage = () => {
         </Link>
       </PageHeader>
       <Main>
-        <ClusterTable />
+        <ClusterListTable />
       </Main>
     </Fragment>
   );

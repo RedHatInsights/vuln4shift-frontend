@@ -9,7 +9,7 @@ import {
   PageHeader,
   PageHeaderTitle,
 } from '@redhat-cloud-services/frontend-components/PageHeader';
-import CveTable from './CveTable';
+import CveListTable from './CveListTable';
 
 const CveListPage = () => {
   // TODO: Add correct link
@@ -58,7 +58,7 @@ const CveListPage = () => {
         />
       </PageHeader>
       <Main>
-        <CveTable />
+        <CveListTable />
       </Main>
     </Fragment>
   );

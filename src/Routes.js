@@ -5,25 +5,25 @@ import { Bullseye, Spinner } from '@patternfly/react-core';
 
 const CveListPage = lazy(() =>
   import(
-    /* webpackChunkName: "CveListPage" */ './Components/SmartComponents/CveListPage'
+    /* webpackChunkName: "CveListPage" */ './Components/SmartComponents/CveList/CveListPage'
   )
 );
 
 const ClusterListPage = lazy(() =>
   import(
-    /* webpackChunkName: "ClusterListPage" */ './Components/SmartComponents/ClusterListPage'
+    /* webpackChunkName: "ClusterListPage" */ './Components/SmartComponents/ClusterList/ClusterListPage'
   )
 );
 
 const CveDetailPage = lazy(() =>
   import(
-    /* webpackChunkName: "CveDetailPage" */ './Components/SmartComponents/CveDetailPage'
+    /* webpackChunkName: "CveDetailPage" */ './Components/SmartComponents/CveDetail/CveDetailPage'
   )
 );
 
 const ClusterDetailPage = lazy(() =>
   import(
-    /* webpackChunkName: "ClusterDetailPage" */ './Components/SmartComponents/ClusterDetailPage'
+    /* webpackChunkName: "ClusterDetailPage" */ './Components/SmartComponents/ClusterDetail/ClusterDetailPage'
   )
 );
 

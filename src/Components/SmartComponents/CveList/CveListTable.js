@@ -1,16 +1,17 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import SkeletonTable from '@redhat-cloud-services/frontend-components/SkeletonTable/SkeletonTable';
-import BaseTable from './BaseTable';
+import BaseTable from '../BaseTable';
 import {
   CVE_LIST_TABLE_COLUMNS,
   CVE_LIST_TABLE_MAPPER,
-} from '../../Helpers/constants';
+} from '../../../Helpers/constants';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCveListTable } from '../../Store/Actions';
-import BaseToolbar from './BaseToolbar';
-import BottomPagination from '../PresentationalComponents/BottomPagination';
+import { fetchCveListTable } from '../../../Store/Actions';
+import BaseToolbar from '../BaseToolbar';
+import BottomPagination from '../../PresentationalComponents/BottomPagination';
+import { TableVariant } from '@patternfly/react-table';
 
-const CveTable = () => {
+const CveListTable = () => {
   const dispatch = useDispatch();
   const cves = useSelector(({ CveListStore }) => CveListStore.cves);
 
@@ -24,7 +25,11 @@ const CveTable = () => {
   }, []);
 
   return isLoading ? (
-    <SkeletonTable colSize={CVE_LIST_TABLE_COLUMNS.length} rowSize={20} />
+    <SkeletonTable
+      colSize={CVE_LIST_TABLE_COLUMNS.length}
+      rowSize={20}
+      variant={TableVariant.compact}
+    />
   ) : (
     <Fragment>
       <BaseToolbar />
@@ -37,4 +42,4 @@ const CveTable = () => {
   );
 };
 
-export default CveTable;
+export default CveListTable;
