@@ -27,7 +27,7 @@ const BaseTable = ({ columns, rows }) => {
         <Tr>
           <Th /> {/* expandible caret column */}
           {columns.map((column) => (
-            <Th key={column.title} sort>
+            <Th key={column.title} sort={column.sortParam}>
               {column.title}
             </Th>
           ))}

@@ -1,4 +1,4 @@
-import * as ActionTypes from '../Store/ActionTypes';
+import * as ActionTypes from '../ActionTypes';
 
 const inititalState = {
   limit: 20,
@@ -12,6 +12,7 @@ const CveListStore = (state = inititalState, action) => {
       return { ...state, cves: action.payload.data, ...action.payload.meta };
     }
   }
+
   return state;
 };
 
