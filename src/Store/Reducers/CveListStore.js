@@ -1,12 +1,12 @@
 import * as ActionTypes from '../ActionTypes';
 
-const inititalState = {
+const initialState = {
   limit: 20,
   offset: 0,
-  data: [],
+  cves: [],
 };
 
-const CveListStore = (state = inititalState, action) => {
+const CveListStore = (state = initialState, action) => {
   switch (action.type) {
     case ActionTypes.FETCH_CVE_LIST_TABLE: {
       return { ...state, cves: action.payload.data, ...action.payload.meta };

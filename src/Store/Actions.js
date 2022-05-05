@@ -1,12 +1,16 @@
 import * as ActionTypes from '../Store/ActionTypes';
-import { fetchCves, fetchClusterCves } from '../Temp/mockAPI';
+import {
+  API_fetchCves,
+  API_fetchClusterCves,
+  API_fetchClusterDetails,
+} from '../Temp/mockAPI';
 
 export const fetchCveListTable = (params) => ({
   type: ActionTypes.FETCH_CVE_LIST_TABLE,
   meta: {
     timestamp: new Date(),
   },
-  payload: () => fetchCves(params),
+  payload: () => API_fetchCves(params),
 });
 
 export const fetchClusterDetailTable = (params) => ({
@@ -14,5 +18,13 @@ export const fetchClusterDetailTable = (params) => ({
   meta: {
     timestamp: new Date(),
   },
-  payload: () => fetchClusterCves(params),
+  payload: () => API_fetchClusterCves(params),
+});
+
+export const fetchClusterDetails = (params) => ({
+  type: ActionTypes.FETCH_CLUSTER_DETAILS,
+  meta: {
+    timestamp: new Date(),
+  },
+  payload: () => API_fetchClusterDetails(params),
 });

@@ -9,26 +9,26 @@ import clusterDetails from './mockEndpoints/clusterDetails.json';
 import exposedClusters from './mockEndpoints/exposedClusters.json';
 import clusterCves from './mockEndpoints/clusterCves.json';
 
-export const fetchCves = () => {
+export const API_fetchCves = () => {
   return cves;
 };
 
-export const fetchCveDetails = () => {
+export const API_fetchCveDetails = () => {
   return cveDetails;
 };
 
-export const fetchClusters = () => {
+export const API_fetchClusters = () => {
   return clusters;
 };
 
-export const fetchClusterDetails = () => {
+export const API_fetchClusterDetails = () => {
   return clusterDetails;
 };
 
-export const fetchExposedClusters = () => {
+export const API_fetchExposedClusters = () => {
   return exposedClusters;
 };
 
-export const fetchClusterCves = () => {
+export const API_fetchClusterCves = () => {
   return clusterCves;
 };

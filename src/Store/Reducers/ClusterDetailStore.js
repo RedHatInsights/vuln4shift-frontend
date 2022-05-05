@@ -1,15 +1,19 @@
 import * as ActionTypes from '../ActionTypes';
 
-const inititalState = {
+const initialState = {
   limit: 20,
   offset: 0,
-  data: [],
+  cves: [],
+  cluster: {},
 };
 
-const ClusterDetailStore = (state = inititalState, action) => {
+const ClusterDetailStore = (state = initialState, action) => {
   switch (action.type) {
     case ActionTypes.FETCH_CLUSTER_DETAIL_TABLE: {
       return { ...state, cves: action.payload.data, ...action.payload.meta };
+    }
+    case ActionTypes.FETCH_CLUSTER_DETAILS: {
+      return { ...state, cluster: action.payload.data, ...action.payload.meta };
     }
   }
 
