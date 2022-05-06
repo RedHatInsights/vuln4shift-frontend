@@ -6,7 +6,6 @@ import {
   PageHeaderTitle,
 } from '@redhat-cloud-services/frontend-components/PageHeader';
 import ClusterListTable from './ClusterListTable';
-import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 const ClusterListPage = () => {
   // TODO: The alert should be dismissable (actionClose prop)
@@ -20,10 +19,6 @@ const ClusterListPage = () => {
           className="pf-u-mt-md"
           title="Vulnerability information applies to OCP4.8+ version only"
         />
-        {/* Remove the following component after implementing table */}
-        <Link to="/clusters/ce7e3b0d-216e-410d-9111-3e1a06ff409e">
-          Go to cluster detail page
-        </Link>
       </PageHeader>
       <Main>
         <ClusterListTable />

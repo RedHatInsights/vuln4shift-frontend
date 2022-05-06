@@ -1,5 +1,4 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import SkeletonTable from '@redhat-cloud-services/frontend-components/SkeletonTable/SkeletonTable';
 import BaseTable from '../BaseTable';
 import {
   CLUSTER_DETAIL_TABLE_COLUMNS,
@@ -9,35 +8,33 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchClusterDetailTable } from '../../../Store/Actions';
 import BaseToolbar from '../BaseToolbar';
 import BottomPagination from '../../PresentationalComponents/BottomPagination';
-import { TableVariant } from '@patternfly/react-table';
 
 const ClusterDetailTable = () => {
   const dispatch = useDispatch();
-  const cves = useSelector(({ ClusterDetailStore }) => ClusterDetailStore.cves);
+  const { cves, total_items } = useSelector(
+    ({ ClusterDetailStore }) => ClusterDetailStore
+  );
 
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
     // API response delay simulation
-    setTimeout(() => setLoading(false), 1000);
-
-    dispatch(fetchClusterDetailTable());
+    setTimeout(() => {
+      dispatch(fetchClusterDetailTable());
+      setLoading(false);
+    }, 2000);
   }, []);
 
-  return isLoading ? (
-    <SkeletonTable
-      colSize={CLUSTER_DETAIL_TABLE_COLUMNS.length}
-      rowSize={20}
-      variant={TableVariant.compact}
-    />
-  ) : (
+  return (
     <Fragment>
-      <BaseToolbar />
+      <BaseToolbar page={1} perPage={20} itemCount={total_items} />
       <BaseTable
+        isLoading={isLoading}
         columns={CLUSTER_DETAIL_TABLE_COLUMNS}
         rows={cves.map((row) => CLUSTER_DETAIL_TABLE_MAPPER(row))}
+        isExpandable
       />
-      <BottomPagination page={1} perPage={20} itemCount={20} />
+      <BottomPagination page={1} perPage={20} itemCount={total_items} />
     </Fragment>
   );
 };

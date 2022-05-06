@@ -3,6 +3,7 @@ import * as ActionTypes from '../ActionTypes';
 const initialState = {
   limit: 20,
   offset: 0,
+  total_items: 0,
   cves: [],
 };
 

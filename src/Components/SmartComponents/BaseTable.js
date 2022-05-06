@@ -9,8 +9,10 @@ import {
   Td,
   ExpandableRowContent,
 } from '@patternfly/react-table';
+import SkeletonTable from '@redhat-cloud-services/frontend-components/SkeletonTable/SkeletonTable';
+import { TableVariant } from '@patternfly/react-table';
 
-const BaseTable = ({ columns, rows }) => {
+const BaseTable = ({ isLoading, columns, rows, isExpandable = false }) => {
   const [expandedRows, setExpandedRows] = useState([]);
 
   const setRowExpanded = (row, isExpanding) =>
@@ -21,11 +23,17 @@ const BaseTable = ({ columns, rows }) => {
 
   const isRowExpanded = (row) => expandedRows.includes(row);
 
-  return (
-    <TableComposable variant="compact">
+  return isLoading ? (
+    <SkeletonTable
+      colSize={columns.length}
+      rowSize={20}
+      variant={TableVariant.compact}
+    />
+  ) : (
+    <TableComposable variant={TableVariant.compact}>
       <Thead>
         <Tr>
-          <Th /> {/* expandible caret column */}
+          {isExpandable && <Th />}
           {columns.map((column) => (
             <Th key={column.title} sort={column.sortParam}>
               {column.title}
@@ -37,25 +45,29 @@ const BaseTable = ({ columns, rows }) => {
         {rows.map((row, rowIndex) => (
           <Fragment key={rowIndex}>
             <Tr>
-              <Td
-                expand={{
-                  rowIndex,
-                  isExpanded: isRowExpanded(row.key),
-                  onToggle: () =>
-                    setRowExpanded(row.key, !isRowExpanded(row.key)),
-                }}
-              />
+              {isExpandable && (
+                <Td
+                  expand={{
+                    rowIndex,
+                    isExpanded: isRowExpanded(row.key),
+                    onToggle: () =>
+                      setRowExpanded(row.key, !isRowExpanded(row.key)),
+                  }}
+                />
+              )}
               {row.cells.map((cell, cellIndex) => (
                 <Td key={cellIndex}>{cell}</Td>
               ))}
             </Tr>
-            <Tr isExpanded={isRowExpanded(row.key)}>
-              <Td colspan={100}>
-                <ExpandableRowContent>
-                  {row.expandableContent}
-                </ExpandableRowContent>
-              </Td>
-            </Tr>
+            {isExpandable && (
+              <Tr isExpanded={isRowExpanded(row.key)}>
+                <Td colspan={100}>
+                  <ExpandableRowContent>
+                    {row.expandableContent}
+                  </ExpandableRowContent>
+                </Td>
+              </Tr>
+            )}
           </Fragment>
         ))}
       </Tbody>
@@ -64,6 +76,7 @@ const BaseTable = ({ columns, rows }) => {
 };
 
 BaseTable.propTypes = {
+  isLoading: propTypes.bool,
   columns: propTypes.arrayOf(
     propTypes.shape({
       title: propTypes.node.isRequired,
@@ -77,6 +90,7 @@ BaseTable.propTypes = {
       expandableContent: propTypes.node,
     })
   ).isRequired,
+  isExpandable: propTypes.bool,
 };
 
 export default BaseTable;

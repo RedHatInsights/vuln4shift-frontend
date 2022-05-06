@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { processDate } from '@redhat-cloud-services/frontend-components-utilities/helpers';
 import parseCvssScore from '@redhat-cloud-services/frontend-components-utilities/parseCvssScore';
 import { Shield } from '@redhat-cloud-services/frontend-components/Shield';
+import ShieldSet from '../Components/PresentationalComponents/ShieldSet';
 
 export const SEVERITY_OPTIONS = {
   critical: {
@@ -61,6 +62,29 @@ export const CVE_LIST_TABLE_COLUMNS = [
   },
 ];
 
+export const CLUSTER_LIST_TABLE_COLUMNS = [
+  {
+    title: 'Name',
+    sortParam: 'display_name',
+  },
+  {
+    title: 'Status',
+  },
+  {
+    title: 'Type',
+  },
+  {
+    title: 'Version',
+  },
+  {
+    title: 'CVEs severity',
+  },
+  {
+    title: 'Provider',
+    sortParam: 'provider',
+  },
+];
+
 export const CLUSTER_DETAIL_TABLE_COLUMNS = [
   {
     title: 'CVE ID',
@@ -99,6 +123,24 @@ export const CVE_LIST_TABLE_MAPPER = (row) => ({
     row.images_exposed,
   ],
   expandableContent: row.description,
+});
+
+export const CLUSTER_LIST_TABLE_MAPPER = (row) => ({
+  key: row.id,
+  cells: [
+    <Link to={'/clusters/' + row.id} key={row.id}>
+      {row.display_name}
+    </Link>,
+    row.status_text,
+    row.type,
+    row.version,
+    <ShieldSet
+      key={row.id}
+      count={{ ...row.cves_severity }}
+      linkTo={`/clusters/${row.id}`}
+    />,
+    row.provider,
+  ],
 });
 
 export const CLUSTER_DETAIL_TABLE_MAPPER = (row) => ({

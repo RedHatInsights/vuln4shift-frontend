@@ -5,7 +5,7 @@ import { SecurityIcon } from '@patternfly/react-icons';
 import { Link } from 'react-router-dom';
 
 // TODO: Setup link to navigate to Cluster detail page with severity filter applied
-const ShieldSet = ({ count }) => {
+const ShieldSet = ({ count, linkTo }) => {
   const DISABLED_COLOR = 'var(--pf-global--disabled-color--200)';
 
   return (
@@ -19,7 +19,7 @@ const ShieldSet = ({ count }) => {
               <span>0</span>
             </Link>
           ) : (
-            <Link key={severityValue}>
+            <Link key={severityValue} to={linkTo}>
               <SecurityIcon style={{ color: severityProps.iconColor }} />
               <span>{count[severityValue]}</span>
             </Link>
@@ -36,6 +36,7 @@ ShieldSet.propTypes = {
     moderate: PropTypes.number,
     low: PropTypes.number,
   }).isRequired,
+  linkTo: PropTypes.string,
 };
 
 export default ShieldSet;

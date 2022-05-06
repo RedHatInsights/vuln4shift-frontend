@@ -3,13 +3,10 @@ import {
   PageHeader,
   PageHeaderTitle,
 } from '@redhat-cloud-services/frontend-components/PageHeader';
-import ShieldSet from '../PresentationalComponents/ShieldSet';
 import {
   Breadcrumb,
   BreadcrumbItem,
   Checkbox,
-  Flex,
-  FlexItem,
   Grid,
   GridItem,
   Stack,
@@ -35,7 +32,7 @@ const CveDetailPageHeader = () => {
   useEffect(() => {
     setTimeout(() => {
       setIsLoading(false);
-    }, 1000);
+    }, 2000);
   }, []);
 
   return (
@@ -55,18 +52,16 @@ const CveDetailPageHeader = () => {
           <Stack hasGutter>
             {hasMetadata && (
               <StackItem className="pf-u-mt-sm">
-                <Flex>
-                  <FlexItem>Publish date:</FlexItem>
-                  <FlexItem grow={{ default: 'grow' }}>
-                    <WithLoader
-                      isLoading={isLoading}
-                      variant={LoaderType.inlineSkeleton}
-                      size="sm"
-                    >
-                      23 Feb 2022
-                    </WithLoader>
-                  </FlexItem>
-                </Flex>
+                Publish date:&nbsp;
+                <WithLoader
+                  isLoading={isLoading}
+                  variant={LoaderType.inlineSkeleton}
+                  width="150px"
+                  fontSize="sm"
+                  style={{ verticalAlign: -4 }}
+                >
+                  23 Feb 2022
+                </WithLoader>
               </StackItem>
             )}
             <StackItem>
@@ -88,16 +83,6 @@ const CveDetailPageHeader = () => {
                       Pellentesque habitant morbi tristique senectus et netus et
                       malesuada fames ac turpis egestas. Mauris nec volutpat mi.
                     </Text>
-                    {/* Delete this shield set example after table is implemented */}
-                    Shield set example:
-                    <ShieldSet
-                      count={{
-                        critical: 1,
-                        important: 2,
-                        moderate: 0,
-                        low: 4,
-                      }}
-                    />
                   </TextContent>
                 ) : (
                   <MissingMetadata />
