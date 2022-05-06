@@ -85,6 +85,26 @@ export const CLUSTER_LIST_TABLE_COLUMNS = [
   },
 ];
 
+export const CVE_DETAIL_TABLE_COLUMNS = [
+  {
+    title: 'Name',
+    sortParam: 'display_name',
+  },
+  {
+    title: 'Status',
+  },
+  {
+    title: 'Type',
+  },
+  {
+    title: 'Version',
+  },
+  {
+    title: 'Provider',
+    sortParam: 'provider',
+  },
+];
+
 export const CLUSTER_DETAIL_TABLE_COLUMNS = [
   {
     title: 'CVE ID',
@@ -139,6 +159,19 @@ export const CLUSTER_LIST_TABLE_MAPPER = (row) => ({
       count={{ ...row.cves_severity }}
       linkTo={`/clusters/${row.id}`}
     />,
+    row.provider,
+  ],
+});
+
+export const CVE_DETAIL_TABLE_MAPPER = (row) => ({
+  key: row.id,
+  cells: [
+    <Link to={'/clusters/' + row.id} key={row.id}>
+      {row.display_name}
+    </Link>,
+    row.status_text,
+    row.type,
+    row.version,
     row.provider,
   ],
 });
