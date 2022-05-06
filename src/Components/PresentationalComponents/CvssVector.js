@@ -87,7 +87,11 @@ const CvssVector = ({
           />
         </Text>
       </Popover>
-      <WithLoader isLoading={isLoading} style={{ width: '320px' }}>
+      <WithLoader
+        isLoading={isLoading}
+        variant={LoaderType.inlineSkeleton}
+        width="360px"
+      >
         <span className="pf-u-mr-md">{score}</span>
         <span id="cvss-vector-content">
           Vector:

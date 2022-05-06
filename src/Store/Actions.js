@@ -40,7 +40,6 @@ export const fetchCveDetails = (params) => ({
   payload: () => API_fetchCveDetails(params),
 });
 
-
 export const fetchClusterDetailTable = (params) => ({
   type: ActionTypes.FETCH_CLUSTER_DETAIL_TABLE,
   meta: {

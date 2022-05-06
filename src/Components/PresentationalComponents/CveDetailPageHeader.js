@@ -22,15 +22,31 @@ import { useRouteMatch } from 'react-router-dom';
 import WithLoader, { LoaderType } from './WithLoader';
 import MissingMetadata from '../PresentationalComponents/EmptyStates/MissingMetadata';
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchCveDetails } from '../../Store/Actions';
+import { processDate } from '@redhat-cloud-services/frontend-components-utilities/helpers';
+import parseCvssScore from '@redhat-cloud-services/frontend-components-utilities/parseCvssScore';
 
 const CveDetailPageHeader = () => {
   const match = useRouteMatch();
+
+  const dispatch = useDispatch();
+  const {
+    description,
+    severity,
+    publish_date,
+    cvss2_score,
+    cvss3_score,
+    cvss2_metrics,
+    cvss3_metrics,
+  } = useSelector(({ CveDetailStore }) => CveDetailStore.cve);
 
   const [hasMetadata, setHasMetadata] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setTimeout(() => {
+      dispatch(fetchCveDetails());
       setIsLoading(false);
     }, 2000);
   }, []);
@@ -56,11 +72,11 @@ const CveDetailPageHeader = () => {
                 <WithLoader
                   isLoading={isLoading}
                   variant={LoaderType.inlineSkeleton}
-                  width="150px"
+                  width="100px"
                   fontSize="sm"
                   style={{ verticalAlign: -4 }}
                 >
-                  23 Feb 2022
+                  {processDate(publish_date)}
                 </WithLoader>
               </StackItem>
             )}
@@ -72,17 +88,7 @@ const CveDetailPageHeader = () => {
               >
                 {hasMetadata ? (
                   <TextContent style={{ textAlign: 'justify' }}>
-                    <Text component={TextVariants.p}>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Nulla laoreet congue ante a pellentesque. Aenean tincidunt
-                      at ipsum pellentesque facilisis. Morbi tristique in magna
-                      vitae venenatis. Maecenas scelerisque purus sed enim
-                      mollis, id ultricies dolor malesuada. Etiam nec ligula
-                      auctor mauris placerat consequat hendrerit eget lorem.
-                      Nunc iaculis nunc erat, vitae rhoncus dui ultricies in.
-                      Pellentesque habitant morbi tristique senectus et netus et
-                      malesuada fames ac turpis egestas. Mauris nec volutpat mi.
-                    </Text>
+                    <Text component={TextVariants.p}>{description}</Text>
                   </TextContent>
                 ) : (
                   <MissingMetadata />
@@ -108,18 +114,27 @@ const CveDetailPageHeader = () => {
                   Severity
                 </Text>
               </TextContent>
-              <b>
-                <Shield
-                  impact={hasMetadata ? 'Critical' : 'Unknown'}
-                  hasLabel
-                />
-              </b>
+              <WithLoader
+                isLoading={isLoading}
+                variant={LoaderType.inlineSkeleton}
+                width="100px"
+                fontSize="sm"
+                style={{ verticalAlign: -4 }}
+              >
+                <b>
+                  <Shield
+                    impact={hasMetadata ? severity : 'Unknown'}
+                    hasLabel
+                  />
+                </b>
+              </WithLoader>
             </StackItem>
             <StackItem>
               <CvssVector
-                isLoading={false}
-                score={hasMetadata ? 7.8 : 0}
-                cvss3Vector={'CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:H'}
+                isLoading={isLoading}
+                score={parseCvssScore(cvss3_score ?? cvss2_score)}
+                cvss2Vector={cvss2_metrics}
+                cvss3Vector={cvss3_metrics}
                 hasMetadata={hasMetadata}
               />
             </StackItem>

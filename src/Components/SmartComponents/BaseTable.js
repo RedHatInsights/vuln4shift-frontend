@@ -56,7 +56,9 @@ const BaseTable = ({ isLoading, columns, rows, isExpandable = false }) => {
                 />
               )}
               {row.cells.map((cell, cellIndex) => (
-                <Td key={cellIndex}>{cell}</Td>
+                <Td key={cellIndex} dataLabel={columns[cellIndex].title}>
+                  {cell}
+                </Td>
               ))}
             </Tr>
             {isExpandable && (
