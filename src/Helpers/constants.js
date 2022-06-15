@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { processDate } from '@redhat-cloud-services/frontend-components-utilities/helpers';
 import parseCvssScore from '@redhat-cloud-services/frontend-components-utilities/parseCvssScore';
 import { Shield } from '@redhat-cloud-services/frontend-components/Shield';
 import ShieldSet from '../Components/PresentationalComponents/ShieldSet';
+import { Text, TextContent, TextVariants } from '@patternfly/react-core';
 
 export const SEVERITY_OPTIONS = {
   critical: {
@@ -128,6 +129,23 @@ export const CLUSTER_DETAIL_TABLE_COLUMNS = [
   },
 ];
 
+const createCveDescription = (row) => (
+  <Fragment>
+    <TextContent>
+      <Text component={TextVariants.h6} style={{ fontSize: 14 }}>
+        CVE description
+      </Text>
+    </TextContent>
+    {row.description}
+    <Link
+      to={'/cves/' + row.synopsis}
+      className="pf-u-mt-md pf-u-display-block"
+    >
+      View more information about this CVE
+    </Link>
+  </Fragment>
+);
+
 export const CVE_LIST_TABLE_MAPPER = (row) => ({
   key: row.synopsis,
   cells: [
@@ -142,7 +160,7 @@ export const CVE_LIST_TABLE_MAPPER = (row) => ({
     </Link>,
     row.images_exposed,
   ],
-  expandableContent: row.description,
+  expandableContent: createCveDescription(row),
 });
 
 export const CLUSTER_LIST_TABLE_MAPPER = (row) => ({
@@ -187,5 +205,5 @@ export const CLUSTER_DETAIL_TABLE_MAPPER = (row) => ({
     parseCvssScore(row.cvss2_score, row.cvss3_score, true),
     row.images_exposed,
   ],
-  expandableContent: row.description,
+  expandableContent: createCveDescription(row),
 });
