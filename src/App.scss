@@ -29,3 +29,9 @@
         color: var(--pf-global--disabled-color--100);
     }
 }
+
+.known-exploit-popover {
+    .pf-c-popover__content {
+        width: 380px;
+    }
+}

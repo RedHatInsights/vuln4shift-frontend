@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Fragment } from 'react';
 import {
   PageHeader,
   PageHeaderTitle,
@@ -26,6 +26,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchCveDetails } from '../../Store/Actions';
 import { processDate } from '@redhat-cloud-services/frontend-components-utilities/helpers';
 import parseCvssScore from '@redhat-cloud-services/frontend-components-utilities/parseCvssScore';
+import KnownExploitLabel from './KnownExploitLabel';
 
 const CveDetailPageHeader = () => {
   const match = useRouteMatch();
@@ -62,7 +63,17 @@ const CveDetailPageHeader = () => {
         </BreadcrumbItem>
         <BreadcrumbItem>{match.params.cveId}</BreadcrumbItem>
       </Breadcrumb>
-      <PageHeaderTitle title={match.params.cveId} className="pf-u-mb-sm" />
+      <PageHeaderTitle
+        title={
+          <Fragment>
+            <span className="pf-u-mr-md">{match.params.cveId}</span>
+            <KnownExploitLabel
+              labelProps={{ style: { verticalAlign: 4, fontWeight: 300 } }}
+            />
+          </Fragment>
+        }
+        className="pf-u-mb-sm"
+      />
       <Grid hasGutter>
         <GridItem md={8} sm={12}>
           <Stack hasGutter>
