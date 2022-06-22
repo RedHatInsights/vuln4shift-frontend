@@ -23,7 +23,8 @@
 }
 
 .disabled-shield {
-    pointer-events: none;
+    text-decoration: none;
+    cursor: default;
 
     span {
         color: var(--pf-global--disabled-color--100);

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { SEVERITY_OPTIONS } from '../../Helpers/constants';
 import { SecurityIcon } from '@patternfly/react-icons';
 import { Link } from 'react-router-dom';
+import { Tooltip } from '@patternfly/react-core';
 
 // TODO: Setup link to navigate to Cluster detail page with severity filter applied
 const ShieldSet = ({ count, linkTo }) => {
@@ -11,19 +12,27 @@ const ShieldSet = ({ count, linkTo }) => {
   return (
     <div className="shield-set">
       {Object.entries(SEVERITY_OPTIONS).map(
-        ([severityValue, severityProps]) =>
-          severityProps.isInShieldSet &&
-          (count[severityValue] === 0 ? (
-            <Link key={severityValue} className="disabled-shield">
-              <SecurityIcon style={{ color: DISABLED_COLOR }} />
-              <span>0</span>
-            </Link>
-          ) : (
-            <Link key={severityValue} to={linkTo}>
-              <SecurityIcon style={{ color: severityProps.iconColor }} />
-              <span>{count[severityValue]}</span>
-            </Link>
-          ))
+        ([severityOption, severityOptionDetails]) => (
+          <Tooltip
+            key={severityOption}
+            content={`${severityOptionDetails.label} severity`}
+          >
+            {severityOptionDetails.isInShieldSet &&
+              (count[severityOption] === 0 ? (
+                <Link className="disabled-shield">
+                  <SecurityIcon style={{ color: DISABLED_COLOR }} />
+                  <span>0</span>
+                </Link>
+              ) : (
+                <Link key={severityOption} to={linkTo}>
+                  <SecurityIcon
+                    style={{ color: severityOptionDetails.iconColor }}
+                  />
+                  <span>{count[severityOption]}</span>
+                </Link>
+              ))}
+          </Tooltip>
+        )
       )}
     </div>
   );
