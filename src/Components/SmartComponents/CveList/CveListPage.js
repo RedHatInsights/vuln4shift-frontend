@@ -1,5 +1,12 @@
 import React, { Fragment } from 'react';
-import { Alert, AlertVariant, Popover, Split, SplitItem } from '@patternfly/react-core';
+import {
+  Alert,
+  AlertActionCloseButton,
+  AlertVariant,
+  Popover,
+  Split,
+  SplitItem,
+} from '@patternfly/react-core';
 import {
   OutlinedQuestionCircleIcon,
   ExternalLinkAltIcon,
@@ -10,10 +17,16 @@ import {
   PageHeaderTitle,
 } from '@redhat-cloud-services/frontend-components/PageHeader';
 import CveListTable from './CveListTable';
+import { useLocalStorage } from '../../../Helpers/hooks';
+import { HEADER_ALERT_DISMISSED_KEY } from '../../../Helpers/constants';
 
 const CveListPage = () => {
   // TODO: Add correct link
   const PRODUCT_DOC = 'https://access.redhat.com/';
+
+  const [wasHeaderAlertDismissed, setHeaderAlertDismissed] = useLocalStorage(
+    HEADER_ALERT_DISMISSED_KEY
+  );
 
   const HeaderTitle = (
     <Popover
@@ -58,17 +71,23 @@ const CveListPage = () => {
     </Popover>
   );
 
-  // TODO: The alert should be dismissable (actionClose prop)
   return (
     <Fragment>
       <PageHeader>
         <PageHeaderTitle title={HeaderTitle} className="pf-u-mb-sm" />
-        <Alert
-          variant={AlertVariant.info}
-          isInline
-          className="pf-u-mt-md"
-          title="Vulnerability information applies to OCP4.8+ version only"
-        />
+        {!wasHeaderAlertDismissed && (
+          <Alert
+            variant={AlertVariant.info}
+            isInline
+            className="pf-u-mt-md"
+            title="Vulnerability information applies to OCP4.8+ version only"
+            actionClose={
+              <AlertActionCloseButton
+                onClose={() => setHeaderAlertDismissed(true)}
+              />
+            }
+          />
+        )}
       </PageHeader>
       <Main>
         <CveListTable />

@@ -6,6 +6,8 @@ import { Shield } from '@redhat-cloud-services/frontend-components/Shield';
 import ShieldSet from '../Components/PresentationalComponents/ShieldSet';
 import { Text, TextContent, TextVariants } from '@patternfly/react-core';
 
+export const HEADER_ALERT_DISMISSED_KEY = 'vuln4shift:header-alert-dismissed';
+
 export const SEVERITY_OPTIONS = {
   critical: {
     label: 'Critical',
