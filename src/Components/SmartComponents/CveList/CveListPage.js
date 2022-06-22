@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Alert, AlertVariant, Popover } from '@patternfly/react-core';
+import { Alert, AlertVariant, Popover, Split, SplitItem } from '@patternfly/react-core';
 import {
   OutlinedQuestionCircleIcon,
   ExternalLinkAltIcon,
@@ -17,22 +17,35 @@ const CveListPage = () => {
 
   const HeaderTitle = (
     <Popover
-      enableFlip
+      className="cve-list-page-header-popover"
       position="right"
+      flipBehavior={[]}
       bodyContent={
         <Fragment>
           The Vulnerability service identifies CVEs with errata that may affect
-          your Insights-connected OpenShift clusters.
+          your Insights-connected OpenShift clusters. Vulnerability information
+          applies for OCP4.8+ version only.
           <br />
           <br />
-          Vulnerability information applies for OCP4.8+ version only.
+          To access comprehensive Kubernetes security solution, go to&nbsp;
+          <a>Red Hat Advanced Cluster Security for Kubernetes</a>.
         </Fragment>
       }
       footerContent={
-        <a href={PRODUCT_DOC} target="__blank" rel="noopener noreferrer">
-          Learn more <ExternalLinkAltIcon />
-        </a>
+        <Split hasGutter>
+          <SplitItem>
+            <a href={PRODUCT_DOC} target="__blank" rel="noopener noreferrer">
+              Learn more <ExternalLinkAltIcon />
+            </a>
+          </SplitItem>
+          <SplitItem>
+            <a href={PRODUCT_DOC} target="__blank" rel="noopener noreferrer">
+              Learn about ACS <ExternalLinkAltIcon />
+            </a>
+          </SplitItem>
+        </Split>
       }
+      appendTo={document.querySelector('.ocpVulnerability')}
     >
       <span>
         CVEs
