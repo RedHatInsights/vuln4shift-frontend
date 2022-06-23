@@ -1,11 +1,6 @@
 import * as ActionTypes from '../Store/ActionTypes';
 import * as api from '../Helpers/apiHelper';
-import {
-  API_fetchClusterCves,
-  API_fetchClusterDetails,
-  API_fetchExposedClusters,
-  API_fetchCveDetails,
-} from '../Temp/mockAPI';
+import { API_fetchClusterCves, API_fetchClusterDetails } from '../Temp/mockAPI';
 
 export const fetchCveListTable = (params) => ({
   type: ActionTypes.FETCH_CVE_LIST_TABLE,
@@ -23,20 +18,20 @@ export const fetchClusterListTable = (params) => ({
   payload: () => api.fetchClusters(params),
 });
 
-export const fetchCveDetailTable = (params) => ({
+export const fetchCveDetailTable = (cveId, params) => ({
   type: ActionTypes.FETCH_CVE_DETAIL_TABLE,
   meta: {
     timestamp: new Date(),
   },
-  payload: () => API_fetchExposedClusters(params),
+  payload: () => api.fetchExposedClusters(cveId, params),
 });
 
-export const fetchCveDetails = (params) => ({
+export const fetchCveDetails = (cveId, params) => ({
   type: ActionTypes.FETCH_CVE_DETAILS,
   meta: {
     timestamp: new Date(),
   },
-  payload: () => API_fetchCveDetails(params),
+  payload: () => api.fetchCveDetails(cveId, params),
 });
 
 export const fetchClusterDetailTable = (params) => ({

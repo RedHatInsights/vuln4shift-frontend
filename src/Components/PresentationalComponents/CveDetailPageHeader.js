@@ -26,7 +26,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchCveDetails } from '../../Store/Actions';
 import { processDate } from '@redhat-cloud-services/frontend-components-utilities/helpers';
 import parseCvssScore from '@redhat-cloud-services/frontend-components-utilities/parseCvssScore';
-import KnownExploitLabel from './KnownExploitLabel';
 
 const CveDetailPageHeader = () => {
   const match = useRouteMatch();
@@ -40,16 +39,12 @@ const CveDetailPageHeader = () => {
     cvss3_score,
     cvss2_metrics,
     cvss3_metrics,
+    isDetailLoading,
   } = useSelector(({ CveDetailStore }) => CveDetailStore.cve);
 
   const [hasMetadata, setHasMetadata] = useState(true);
-  const [isLoading, setIsLoading] = useState(true);
-
   useEffect(() => {
-    setTimeout(() => {
-      dispatch(fetchCveDetails());
-      setIsLoading(false);
-    }, 2000);
+    dispatch(fetchCveDetails(match.params.cveId));
   }, []);
 
   return (
@@ -67,9 +62,11 @@ const CveDetailPageHeader = () => {
         title={
           <Fragment>
             <span className="pf-u-mr-md">{match.params.cveId}</span>
-            <KnownExploitLabel
+            {/* TODO: Implement after backend starts providing known exploit param
+            hasKnownExploit && <KnownExploitLabel
               labelProps={{ style: { verticalAlign: 4, fontWeight: 300 } }}
             />
+            */}
           </Fragment>
         }
         className="pf-u-mb-sm"
@@ -81,7 +78,7 @@ const CveDetailPageHeader = () => {
               <StackItem className="pf-u-mt-sm">
                 Publish date:&nbsp;
                 <WithLoader
-                  isLoading={isLoading}
+                  isLoading={isDetailLoading}
                   variant={LoaderType.inlineSkeleton}
                   width="100px"
                   fontSize="sm"
@@ -93,7 +90,7 @@ const CveDetailPageHeader = () => {
             )}
             <StackItem>
               <WithLoader
-                isLoading={isLoading}
+                isLoading={isDetailLoading}
                 variant={LoaderType.rectangle}
                 style={{ height: '132px', width: '100%' }}
               >
@@ -107,7 +104,11 @@ const CveDetailPageHeader = () => {
               </WithLoader>
             </StackItem>
             <StackItem className="pf-u-mt-sm pf-u-mb-md">
-              <a>
+              <a
+                href={`https://access.redhat.com/security/cve/${match.params.cveId}`}
+                target="__blank"
+                rel="noopener noreferrer"
+              >
                 View in Red Hat CVE database <ExternalLinkAltIcon />
               </a>
             </StackItem>
@@ -126,7 +127,7 @@ const CveDetailPageHeader = () => {
                 </Text>
               </TextContent>
               <WithLoader
-                isLoading={isLoading}
+                isLoading={isDetailLoading}
                 variant={LoaderType.inlineSkeleton}
                 width="100px"
                 fontSize="sm"
@@ -142,7 +143,7 @@ const CveDetailPageHeader = () => {
             </StackItem>
             <StackItem>
               <CvssVector
-                isLoading={isLoading}
+                isLoading={isDetailLoading}
                 score={parseCvssScore(cvss3_score ?? cvss2_score)}
                 cvss2Vector={cvss2_metrics}
                 cvss3Vector={cvss3_metrics}
