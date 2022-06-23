@@ -12,7 +12,13 @@ import {
 import SkeletonTable from '@redhat-cloud-services/frontend-components/SkeletonTable/SkeletonTable';
 import { TableVariant } from '@patternfly/react-table';
 
-const BaseTable = ({ isLoading, columns, rows, isExpandable = false }) => {
+const BaseTable = ({
+  isLoading,
+  columns,
+  rows,
+  isExpandable = false,
+  emptyState,
+}) => {
   const [expandedRows, setExpandedRows] = useState([]);
 
   const setRowExpanded = (row, isExpanding) =>
@@ -42,43 +48,49 @@ const BaseTable = ({ isLoading, columns, rows, isExpandable = false }) => {
         </Tr>
       </Thead>
       <Tbody>
-        {rows.map((row, rowIndex) => (
-          <Fragment key={rowIndex}>
-            <Tr>
-              {isExpandable && (
-                <Td
-                  expand={{
-                    rowIndex,
-                    isExpanded: isRowExpanded(row.key),
-                    onToggle: () =>
-                      setRowExpanded(row.key, !isRowExpanded(row.key)),
-                  }}
-                />
-              )}
-              {row.cells.map((cell, cellIndex) => (
-                <Td key={cellIndex} dataLabel={columns[cellIndex].title}>
-                  {cell}
-                </Td>
-              ))}
-            </Tr>
-            {isExpandable && (
-              <Tr isExpanded={isRowExpanded(row.key)}>
-                <Td colspan={100}>
-                  <ExpandableRowContent>
-                    {row.expandableContent}
-                  </ExpandableRowContent>
-                </Td>
+        {rows.length === 0 ? (
+          <Tr>
+            <Td colSpan={columns.length}>{emptyState}</Td>
+          </Tr>
+        ) : (
+          rows.map((row, rowIndex) => (
+            <Fragment key={rowIndex}>
+              <Tr>
+                {isExpandable && (
+                  <Td
+                    expand={{
+                      rowIndex,
+                      isExpanded: isRowExpanded(row.key),
+                      onToggle: () =>
+                        setRowExpanded(row.key, !isRowExpanded(row.key)),
+                    }}
+                  />
+                )}
+                {row.cells.map((cell, cellIndex) => (
+                  <Td key={cellIndex} dataLabel={columns[cellIndex].title}>
+                    {cell}
+                  </Td>
+                ))}
               </Tr>
-            )}
-          </Fragment>
-        ))}
+              {isExpandable && (
+                <Tr isExpanded={isRowExpanded(row.key)}>
+                  <Td colspan={100}>
+                    <ExpandableRowContent>
+                      {row.expandableContent}
+                    </ExpandableRowContent>
+                  </Td>
+                </Tr>
+              )}
+            </Fragment>
+          ))
+        )}
       </Tbody>
     </TableComposable>
   );
 };
 
 BaseTable.propTypes = {
-  isLoading: propTypes.bool,
+  isLoading: propTypes.bool.isRequired,
   columns: propTypes.arrayOf(
     propTypes.shape({
       title: propTypes.node.isRequired,
@@ -93,6 +105,7 @@ BaseTable.propTypes = {
     })
   ).isRequired,
   isExpandable: propTypes.bool,
+  emptyState: propTypes.node.isRequired,
 };
 
 export default BaseTable;

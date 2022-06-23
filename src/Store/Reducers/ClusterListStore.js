@@ -1,19 +1,28 @@
 import * as ActionTypes from '../ActionTypes';
 
-const initialState = {
+const initialState = Object.freeze({
   limit: 20,
   offset: 0,
   total_items: 0,
   clusters: [],
-};
+  isLoading: true,
+});
 
 const ClusterListStore = (state = initialState, action) => {
   switch (action.type) {
-    case ActionTypes.FETCH_CLUSTER_LIST_TABLE: {
+    case `${ActionTypes.FETCH_CLUSTER_LIST_TABLE}_PENDING`: {
       return {
         ...state,
-        clusters: action.payload.data,
-        ...action.payload.meta,
+        isLoading: true,
+      };
+    }
+
+    case `${ActionTypes.FETCH_CLUSTER_LIST_TABLE}_FULFILLED`: {
+      return {
+        ...state,
+        clusters: action.payload.data.data,
+        ...action.payload.data.meta,
+        isLoading: false,
       };
     }
   }

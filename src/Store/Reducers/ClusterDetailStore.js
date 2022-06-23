@@ -1,12 +1,12 @@
 import * as ActionTypes from '../ActionTypes';
 
-const initialState = {
+const initialState = Object.freeze({
   limit: 20,
   offset: 0,
   total_items: 0,
   cves: [],
   cluster: {},
-};
+});
 
 const ClusterDetailStore = (state = initialState, action) => {
   switch (action.type) {

@@ -1,7 +1,7 @@
 import * as ActionTypes from '../Store/ActionTypes';
+import * as api from '../Helpers/apiHelper';
 import {
   API_fetchCves,
-  API_fetchClusters,
   API_fetchClusterCves,
   API_fetchClusterDetails,
   API_fetchExposedClusters,
@@ -21,7 +21,7 @@ export const fetchClusterListTable = (params) => ({
   meta: {
     timestamp: new Date(),
   },
-  payload: () => API_fetchClusters(params),
+  payload: () => api.fetchClusters(params),
 });
 
 export const fetchCveDetailTable = (params) => ({

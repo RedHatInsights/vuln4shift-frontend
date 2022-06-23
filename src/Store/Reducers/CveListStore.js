@@ -1,11 +1,11 @@
 import * as ActionTypes from '../ActionTypes';
 
-const initialState = {
+const initialState = Object.freeze({
   limit: 20,
   offset: 0,
   total_items: 0,
   cves: [],
-};
+});
 
 const CveListStore = (state = initialState, action) => {
   switch (action.type) {
