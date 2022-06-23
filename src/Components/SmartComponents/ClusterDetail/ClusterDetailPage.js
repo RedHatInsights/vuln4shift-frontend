@@ -1,12 +1,11 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { Main } from '@redhat-cloud-services/frontend-components/Main';
 import {
   PageHeader,
   PageHeaderTitle,
 } from '@redhat-cloud-services/frontend-components/PageHeader';
-import PropTypes from 'prop-types';
 import { Breadcrumb, BreadcrumbItem } from '@patternfly/react-core';
-import { Link } from 'react-router-dom';
+import { Link, useRouteMatch } from 'react-router-dom';
 import ClusterDetailTable from './ClusterDetailTable';
 import WithLoader, {
   LoaderType,
@@ -15,19 +14,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchClusterDetails } from '../../../Store/Actions';
 import DateFormat from '@redhat-cloud-services/frontend-components/DateFormat/DateFormat';
 
-const ClusterDetailPage = ({ match }) => {
+const ClusterDetailPage = () => {
+  const match = useRouteMatch();
   const dispatch = useDispatch();
-  const cluster = useSelector(
-    ({ ClusterDetailStore }) => ClusterDetailStore.cluster
+
+  const { cluster, isDetailLoading } = useSelector(
+    ({ ClusterDetailStore }) => ClusterDetailStore
   );
 
-  const [isLoading, setLoading] = useState(true);
-
   useEffect(() => {
-    // API response delay simulation
-    setTimeout(() => setLoading(false), 2000);
-
-    dispatch(fetchClusterDetails());
+    dispatch(fetchClusterDetails(match.params.clusterId));
   }, []);
 
   const pageTitle = (
@@ -35,7 +31,7 @@ const ClusterDetailPage = ({ match }) => {
       variant={LoaderType.inlineSkeleton}
       width="300px"
       fontSize="lg"
-      isLoading={isLoading}
+      isLoading={isDetailLoading}
       style={{ verticalAlign: -4 }}
     >
       {cluster.display_name}
@@ -57,7 +53,7 @@ const ClusterDetailPage = ({ match }) => {
               variant={LoaderType.inlineSkeleton}
               width="200px"
               fontSize="sm"
-              isLoading={isLoading}
+              isLoading={isDetailLoading}
               style={{ verticalAlign: -4 }}
             >
               {cluster.display_name}
@@ -71,7 +67,7 @@ const ClusterDetailPage = ({ match }) => {
             variant={LoaderType.inlineSkeleton}
             width="300px"
             fontSize="sm"
-            isLoading={isLoading}
+            isLoading={isDetailLoading}
             style={{ verticalAlign: -4 }}
           >
             {match.params.clusterId}
@@ -82,7 +78,7 @@ const ClusterDetailPage = ({ match }) => {
             variant={LoaderType.inlineSkeleton}
             width="200px"
             fontSize="sm"
-            isLoading={isLoading}
+            isLoading={isDetailLoading}
             style={{ verticalAlign: -4 }}
           >
             <DateFormat date={cluster.updated} type="exact" />
@@ -94,10 +90,6 @@ const ClusterDetailPage = ({ match }) => {
       </Main>
     </Fragment>
   );
-};
-
-ClusterDetailPage.propTypes = {
-  match: PropTypes.object,
 };
 
 export default ClusterDetailPage;

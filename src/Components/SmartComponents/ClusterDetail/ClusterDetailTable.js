@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import BaseTable from '../BaseTable';
 import {
   CLUSTER_DETAIL_TABLE_COLUMNS,
@@ -8,31 +8,30 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchClusterDetailTable } from '../../../Store/Actions';
 import BaseToolbar from '../BaseToolbar';
 import BottomPagination from '../../PresentationalComponents/BottomPagination';
+import NoCves from '../../PresentationalComponents/EmptyStates/NoCves';
+import { useRouteMatch } from 'react-router-dom';
 
 const ClusterDetailTable = () => {
+  const match = useRouteMatch();
   const dispatch = useDispatch();
-  const { cves, total_items } = useSelector(
+
+  const { cves, total_items, isTableLoading } = useSelector(
     ({ ClusterDetailStore }) => ClusterDetailStore
   );
 
-  const [isLoading, setLoading] = useState(true);
-
   useEffect(() => {
-    // API response delay simulation
-    setTimeout(() => {
-      dispatch(fetchClusterDetailTable());
-      setLoading(false);
-    }, 2000);
+    dispatch(fetchClusterDetailTable(match.params.clusterId));
   }, []);
 
   return (
     <Fragment>
       <BaseToolbar page={1} perPage={20} itemCount={total_items} />
       <BaseTable
-        isLoading={isLoading}
+        isLoading={isTableLoading}
         columns={CLUSTER_DETAIL_TABLE_COLUMNS}
         rows={cves.map((row) => CLUSTER_DETAIL_TABLE_MAPPER(row))}
         isExpandable
+        emptyState={<NoCves />}
       />
       <BottomPagination page={1} perPage={20} itemCount={total_items} />
     </Fragment>
