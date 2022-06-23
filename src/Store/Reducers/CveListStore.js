@@ -5,12 +5,25 @@ const initialState = Object.freeze({
   offset: 0,
   total_items: 0,
   cves: [],
+  isLoading: true,
 });
 
 const CveListStore = (state = initialState, action) => {
   switch (action.type) {
-    case ActionTypes.FETCH_CVE_LIST_TABLE: {
-      return { ...state, cves: action.payload.data, ...action.payload.meta };
+    case `${ActionTypes.FETCH_CVE_LIST_TABLE}_PENDING`: {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
+
+    case `${ActionTypes.FETCH_CVE_LIST_TABLE}_FULFILLED`: {
+      return {
+        ...state,
+        cves: action.payload.data.data,
+        ...action.payload.data.meta,
+        isLoading: false,
+      };
     }
   }
 

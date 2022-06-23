@@ -50,7 +50,7 @@ const BaseTable = ({
       <Tbody>
         {rows.length === 0 ? (
           <Tr>
-            <Td colSpan={columns.length}>{emptyState}</Td>
+            <Td colSpan={100}>{emptyState}</Td>
           </Tr>
         ) : (
           rows.map((row, rowIndex) => (

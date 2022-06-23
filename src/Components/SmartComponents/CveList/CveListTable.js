@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import BaseTable from '../BaseTable';
 import {
   CVE_LIST_TABLE_COLUMNS,
@@ -8,20 +8,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchCveListTable } from '../../../Store/Actions';
 import BaseToolbar from '../BaseToolbar';
 import BottomPagination from '../../PresentationalComponents/BottomPagination';
+import NoCves from '../../PresentationalComponents/EmptyStates/NoCves';
 
 const CveListTable = () => {
   const dispatch = useDispatch();
 
-  const { cves, total_items } = useSelector(({ CveListStore }) => CveListStore);
-
-  const [isLoading, setLoading] = useState(true);
+  const { cves, total_items, isLoading } = useSelector(
+    ({ CveListStore }) => CveListStore
+  );
 
   useEffect(() => {
-    // API response delay simulation
-    setTimeout(() => {
-      dispatch(fetchCveListTable());
-      setLoading(false);
-    }, 2000);
+    dispatch(fetchCveListTable());
   }, []);
 
   return (
@@ -32,6 +29,7 @@ const CveListTable = () => {
         columns={CVE_LIST_TABLE_COLUMNS}
         rows={cves.map((row) => CVE_LIST_TABLE_MAPPER(row))}
         isExpandable
+        emptyState={<NoCves />}
       />
       <BottomPagination page={1} perPage={20} itemCount={total_items} />
     </Fragment>
