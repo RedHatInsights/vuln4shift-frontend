@@ -1,6 +1,7 @@
 import * as ActionTypes from '../Store/ActionTypes';
 import * as api from '../Helpers/apiHelper';
 
+/* FETCHING DATA */
 export const fetchCveListTable = (params) => ({
   type: ActionTypes.FETCH_CVE_LIST_TABLE,
   meta: {
@@ -47,4 +48,13 @@ export const fetchClusterDetails = (clusterId, params) => ({
     timestamp: new Date(),
   },
   payload: () => api.fetchClusterDetails(clusterId, params),
+});
+
+/* CHANGING TABLE PARAMS */
+export const changeCveListTableParams = (params) => ({
+  type: ActionTypes.CHANGE_CVE_LIST_TABLE_PARAMS,
+  meta: {
+    timestamp: new Date(),
+  },
+  payload: () => params,
 });

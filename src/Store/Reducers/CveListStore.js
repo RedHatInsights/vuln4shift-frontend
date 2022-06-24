@@ -1,11 +1,13 @@
 import * as ActionTypes from '../ActionTypes';
 
 const initialState = Object.freeze({
-  limit: 20,
-  offset: 0,
-  total_items: 0,
   cves: [],
   isLoading: true,
+  meta: {
+    limit: 20,
+    offset: 0,
+    total_items: 0,
+  },
 });
 
 const CveListStore = (state = initialState, action) => {
@@ -21,8 +23,18 @@ const CveListStore = (state = initialState, action) => {
       return {
         ...state,
         cves: action.payload.data.data,
-        ...action.payload.data.meta,
+        meta: action.payload.data.meta,
         isLoading: false,
+      };
+    }
+
+    case `${ActionTypes.CHANGE_CVE_LIST_TABLE_PARAMS}`: {
+      return {
+        ...state,
+        meta: {
+          ...state.meta,
+          ...action.payload,
+        },
       };
     }
   }

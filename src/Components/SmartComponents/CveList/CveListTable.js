@@ -5,7 +5,10 @@ import {
   CVE_LIST_TABLE_MAPPER,
 } from '../../../Helpers/constants';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCveListTable } from '../../../Store/Actions';
+import {
+  fetchCveListTable,
+  changeCveListTableParams,
+} from '../../../Store/Actions';
 import BaseToolbar from '../BaseToolbar';
 import BottomPagination from '../../PresentationalComponents/BottomPagination';
 import NoCves from '../../PresentationalComponents/EmptyStates/NoCves';
@@ -13,17 +16,28 @@ import NoCves from '../../PresentationalComponents/EmptyStates/NoCves';
 const CveListTable = () => {
   const dispatch = useDispatch();
 
-  const { cves, total_items, isLoading } = useSelector(
+  const { cves, isLoading, meta } = useSelector(
     ({ CveListStore }) => CveListStore
   );
 
+  const { total_items, limit, offset } = meta;
+
   useEffect(() => {
-    dispatch(fetchCveListTable());
-  }, []);
+    dispatch(fetchCveListTable({ limit, offset }));
+  }, [limit, offset]);
+
+  const apply = (params) => {
+    dispatch(changeCveListTableParams(params));
+  };
 
   return (
     <Fragment>
-      <BaseToolbar page={1} perPage={20} itemCount={total_items} />
+      <BaseToolbar
+        page={offset / limit + 1}
+        perPage={limit}
+        itemCount={total_items}
+        apply={apply}
+      />
       <BaseTable
         isLoading={isLoading}
         columns={CVE_LIST_TABLE_COLUMNS}
@@ -31,7 +45,12 @@ const CveListTable = () => {
         isExpandable
         emptyState={<NoCves />}
       />
-      <BottomPagination page={1} perPage={20} itemCount={total_items} />
+      <BottomPagination
+        page={offset / limit + 1}
+        perPage={limit}
+        itemCount={total_items}
+        apply={apply}
+      />
     </Fragment>
   );
 };

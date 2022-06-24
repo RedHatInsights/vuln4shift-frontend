@@ -74,7 +74,7 @@ const BaseTable = ({
               </Tr>
               {isExpandable && (
                 <Tr isExpanded={isRowExpanded(row.key)}>
-                  <Td colspan={100}>
+                  <Td colSpan={100}>
                     <ExpandableRowContent>
                       {row.expandableContent}
                     </ExpandableRowContent>
