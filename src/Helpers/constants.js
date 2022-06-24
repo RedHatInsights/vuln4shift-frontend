@@ -209,3 +209,8 @@ export const CLUSTER_DETAIL_TABLE_MAPPER = (row) => ({
   ],
   expandableContent: createCveDescription(row),
 });
+
+export const CVE_LIST_ALLOWED_PARAMS = ['limit', 'offset', 'sort'];
+export const CLUSTER_LIST_ALLOWED_PARAMS = ['limit', 'offset', 'sort'];
+export const CVE_DETAIL_ALLOWED_PARAMS = ['limit', 'offset', 'sort'];
+export const CLUSTER_DETAIL_ALLOWED_PARAMS = ['limit', 'offset', 'sort'];
