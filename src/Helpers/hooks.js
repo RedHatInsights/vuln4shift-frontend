@@ -1,5 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import qs from 'query-string';
+import { useDispatch } from 'react-redux';
+import useDeepCompareEffect from 'use-deep-compare-effect';
 
 export const useLocalStorage = (key) => {
   const [sessionValue, setSessionValue] = useState(localStorage.getItem(key));
@@ -37,4 +39,25 @@ export const useUrlParams = (allowedParams) => {
   };
 
   return [urlParams, setUrlParams];
+};
+
+export const useUrlBoundParams = (allowedParams, meta, fetch, changeParams) => {
+  const dispatch = useDispatch();
+
+  const [urlParameters, setUrlParams] = useUrlParams(allowedParams);
+
+  useEffect(() => {
+    apply({ ...meta, ...urlParameters });
+  }, []);
+
+  useDeepCompareEffect(() => {
+    dispatch(fetch(urlParameters));
+  }, [urlParameters]);
+
+  const apply = (params) => {
+    setUrlParams(params);
+    dispatch(changeParams(urlParameters));
+  };
+
+  return apply;
 };

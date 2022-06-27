@@ -1,11 +1,11 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment } from 'react';
 import BaseTable from '../BaseTable';
 import {
   CVE_LIST_ALLOWED_PARAMS,
   CVE_LIST_TABLE_COLUMNS,
   CVE_LIST_TABLE_MAPPER,
 } from '../../../Helpers/constants';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import {
   fetchCveListTable,
   changeCveListTableParams,
@@ -13,31 +13,21 @@ import {
 import BaseToolbar from '../BaseToolbar';
 import BottomPagination from '../../PresentationalComponents/BottomPagination';
 import NoCves from '../../PresentationalComponents/EmptyStates/NoCves';
-import { useUrlParams } from '../../../Helpers/hooks';
-import useDeepCompareEffect from 'use-deep-compare-effect';
+import { useUrlBoundParams } from '../../../Helpers/hooks';
 
 const CveListTable = () => {
-  const dispatch = useDispatch();
-  const [urlParameters, setUrlParams] = useUrlParams(CVE_LIST_ALLOWED_PARAMS);
-
   const { cves, isLoading, meta } = useSelector(
     ({ CveListStore }) => CveListStore
   );
 
+  const apply = useUrlBoundParams(
+    CVE_LIST_ALLOWED_PARAMS,
+    meta,
+    fetchCveListTable,
+    changeCveListTableParams
+  );
+
   const { total_items, limit, offset } = meta;
-
-  useEffect(() => {
-    setUrlParams(meta);
-  }, []);
-
-  useDeepCompareEffect(() => {
-    dispatch(fetchCveListTable(urlParameters));
-  }, [urlParameters]);
-
-  const apply = (params) => {
-    setUrlParams(params);
-    dispatch(changeCveListTableParams(urlParameters));
-  };
 
   return (
     <Fragment>
