@@ -54,8 +54,8 @@ export const useUrlBoundParams = (allowedParams, meta, fetch, changeParams) => {
     dispatch(fetch(urlParameters));
   }, [urlParameters]);
 
-  const apply = (params) => {
-    setUrlParams(params);
+  const apply = (newParams) => {
+    setUrlParams({ ...urlParameters, ...newParams });
     dispatch(changeParams(urlParameters));
   };
 

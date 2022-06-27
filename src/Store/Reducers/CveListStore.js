@@ -7,6 +7,7 @@ const initialState = Object.freeze({
     limit: 20,
     offset: 0,
     total_items: 0,
+    sort: '-publish_date',
   },
 });
 

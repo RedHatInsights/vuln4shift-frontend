@@ -8,6 +8,7 @@ import {
   Tbody,
   Td,
   ExpandableRowContent,
+  SortByDirection,
 } from '@patternfly/react-table';
 import SkeletonTable from '@redhat-cloud-services/frontend-components/SkeletonTable/SkeletonTable';
 import { TableVariant } from '@patternfly/react-table';
@@ -18,6 +19,8 @@ const BaseTable = ({
   rows,
   isExpandable = false,
   emptyState,
+  sortParam,
+  apply,
 }) => {
   const [expandedRows, setExpandedRows] = useState([]);
 
@@ -28,6 +31,33 @@ const BaseTable = ({
     });
 
   const isRowExpanded = (row) => expandedRows.includes(row);
+
+  const createSortBy = (columns, sortParam) => {
+    const direction =
+      sortParam[0] === '-' ? SortByDirection.desc : SortByDirection.asc;
+    sortParam = sortParam.replace(/^(-|\+)/, '').split(',')[0];
+    const index = columns.findIndex((item) => item.sortParam === sortParam);
+
+    return {
+      index,
+      direction,
+      defaultDirection: SortByDirection.desc,
+    };
+  };
+
+  const getSortParams = (columnIndex) => ({
+    sortBy: createSortBy(columns, sortParam),
+    onSort: (event, index, direction) => {
+      let columnName = columns[columnIndex].sortParam;
+
+      if (direction === SortByDirection.desc) {
+        columnName = '-' + columnName;
+      }
+
+      apply({ sort: columnName });
+    },
+    columnIndex,
+  });
 
   return isLoading ? (
     <SkeletonTable
@@ -40,8 +70,11 @@ const BaseTable = ({
       <Thead>
         <Tr>
           {isExpandable && <Th />}
-          {columns.map((column) => (
-            <Th key={column.title} sort={column.sortParam}>
+          {columns.map((column, index) => (
+            <Th
+              key={column.title}
+              sort={column.sortParam && getSortParams(index)}
+            >
               {column.title}
             </Th>
           ))}
@@ -106,6 +139,8 @@ BaseTable.propTypes = {
   ).isRequired,
   isExpandable: propTypes.bool,
   emptyState: propTypes.node.isRequired,
+  sortParam: propTypes.string,
+  apply: propTypes.func,
 };
 
 export default BaseTable;

@@ -27,7 +27,7 @@ const CveListTable = () => {
     changeCveListTableParams
   );
 
-  const { total_items, limit, offset } = meta;
+  const { total_items, limit, offset, sort } = meta;
 
   return (
     <Fragment>
@@ -43,6 +43,8 @@ const CveListTable = () => {
         rows={cves.map((row) => CVE_LIST_TABLE_MAPPER(row))}
         isExpandable
         emptyState={<NoCves />}
+        sortParam={sort}
+        apply={apply}
       />
       <BottomPagination
         page={offset / limit + 1}

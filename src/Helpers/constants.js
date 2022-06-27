@@ -57,18 +57,18 @@ export const CVE_LIST_TABLE_COLUMNS = [
   },
   {
     title: 'Clusters exposed',
-    sortParam: 'clusters_exposed',
+    /* TODO: Readd after BE implementation: sortParam: 'clusters_exposed', */
   },
   {
     title: 'Images exposed',
-    sortParam: 'images_exposed',
+    /* TODO: Readd after BE implementation: sortParam: 'images_exposed', */
   },
 ];
 
 export const CLUSTER_LIST_TABLE_COLUMNS = [
   {
     title: 'Name',
-    sortParam: 'display_name',
+    /* TODO: Readd after endpoint integration: sortParam: 'display_name', */
   },
   {
     title: 'Status',
@@ -84,14 +84,14 @@ export const CLUSTER_LIST_TABLE_COLUMNS = [
   },
   {
     title: 'Provider',
-    sortParam: 'provider',
+    /* TODO: Readd after endpoint integration: sortParam: 'provider', */
   },
 ];
 
 export const CVE_DETAIL_TABLE_COLUMNS = [
   {
     title: 'Name',
-    sortParam: 'display_name',
+    /* TODO: Readd after endpoint integration: sortParam: 'display_name', */
   },
   {
     title: 'Status',
@@ -104,30 +104,30 @@ export const CVE_DETAIL_TABLE_COLUMNS = [
   },
   {
     title: 'Provider',
-    sortParam: 'provider',
+    /* TODO: Readd after endpoint integration: sortParam: 'provider', */
   },
 ];
 
 export const CLUSTER_DETAIL_TABLE_COLUMNS = [
   {
     title: 'CVE ID',
-    sortParam: 'synopsis',
+    /* TODO: Readd after endpoint integration: sortParam: 'synopsis', */
   },
   {
     title: 'Publish date',
-    sortParam: 'publish_date',
+    /* TODO: Readd after endpoint integration: sortParam: 'publish_date', */
   },
   {
     title: 'Severity',
-    sortParam: 'severity',
+    /* TODO: Readd after endpoint integration: sortParam: 'severity', */
   },
   {
     title: 'CVSS base score',
-    sortParam: 'cvss_score',
+    /* TODO: Readd after endpoint integration: sortParam: 'cvss_score', */
   },
   {
     title: 'Images exposed',
-    sortParam: 'images_exposed',
+    /* TODO: Readd after endpoint integration: sortParam: 'images_exposed', */
   },
 ];
 
