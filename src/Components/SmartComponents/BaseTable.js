@@ -66,7 +66,7 @@ const BaseTable = ({
       variant={TableVariant.compact}
     />
   ) : (
-    <TableComposable variant={TableVariant.compact}>
+    <TableComposable variant={TableVariant.compact} isStickyHeader>
       <Thead>
         <Tr>
           {isExpandable && <Th />}
