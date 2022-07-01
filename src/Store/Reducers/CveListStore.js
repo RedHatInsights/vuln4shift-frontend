@@ -1,6 +1,6 @@
 import * as ActionTypes from '../ActionTypes';
 
-const initialState = Object.freeze({
+export const initialState = Object.freeze({
   cves: [],
   isLoading: true,
   meta: {
