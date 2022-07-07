@@ -1,15 +1,12 @@
 ![travis](https://app.travis-ci.com/RedHatInsights/vuln4shift-frontend.svg?branch=master)
 
 # Vulnerability for OpenShift frontend
+Red Hat Vulnerability for OpenShift service is used to assess and monitor the status of security vulnerabilities on OpenShift clusters, understand the level of exposure of infrastructure, and plan a course of action. This is the front-end repository for this service.
 
 ## First time setup
-### Quick start
-1. Make sure you have [`Node.js`](https://nodejs.org/en/) and [`npm`](https://www.npmjs.com/) installed
+1. Make sure you have [`Node.js`](https://nodejs.org/en/) version >= 16 installed
 2. Run [script to patch your `/etc/hosts`](https://github.com/RedHatInsights/insights-proxy/blob/master/scripts/patch-etc-hosts.sh)
 3. Make sure you are using [Red Hat proxy](http://hdn.corp.redhat.com/proxy.pac)
-
-### Comprehensive documentation
-There is a [comprehensive quick start guide in the Storybook Documentation](https://github.com/RedHatInsights/insights-frontend-storybook/blob/master/src/docs/welcome/quickStart/DOC.md) to setting up an Insights environment.
 
 ## Running locally
 1. Install dependencies with `npm install`
@@ -25,7 +22,7 @@ There is a [comprehensive quick start guide in the Storybook Documentation](http
 - ```npm run test -- --watch``` - run tests in watch mode
 
 ## Deploying
-Any push to the following branches will trigger a build in [vuln4shift-frontend-build repository](https://github.com/RedHatInsights/vuln4shift-frontend-build) which will deploy to corresponding environment.
+Any push to the following branches will trigger a build in [vuln4shift-frontend-build repository](https://github.com/RedHatInsights/vuln4shift-frontend-build) which will deploy to corresponding environment. Travis is used to deploy the application.
 
 | Push to branch in this repo  | Updated branch in build repo  | Environment       | Available at
 | :--------------------------- | :---------------------------- | :---------------- | :-----------
@@ -38,4 +35,4 @@ Any push to the following branches will trigger a build in [vuln4shift-frontend-
 This project uses [Patternfly React](https://github.com/patternfly/patternfly-react).
 
 ## Insights Components
-This app imports components from [Insights Front-end Components library](https://github.com/RedHatInsights/frontend-components). ESI tags are used to import [Insights Chrome](https://github.com/RedHatInsights/insights-chrome) which takes care of the header, sidebar, and footer.
+This app imports components from [Insights Front-end Components library](https://github.com/RedHatInsights/frontend-components). ESI tags are used to import [Insights Chrome](https://github.com/RedHatInsights/insights-chrome) which takes care of the header, sidebar, and footer. These libraries are described in the [Platform experience documentation](http://front-end-docs-insights.apps.ocp4.prod.psi.redhat.com/).
