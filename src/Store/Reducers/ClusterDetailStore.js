@@ -1,6 +1,7 @@
+import { deepFreeze } from '../../Helpers/miscHelper';
 import * as ActionTypes from '../ActionTypes';
 
-const initialState = Object.freeze({
+const initialState = deepFreeze({
   limit: 20,
   offset: 0,
   total_items: 0,

@@ -1,6 +1,7 @@
+import { deepFreeze } from '../../Helpers/miscHelper';
 import * as ActionTypes from '../ActionTypes';
 
-export const initialState = Object.freeze({
+export const initialState = deepFreeze({
   cves: [],
   isLoading: true,
   meta: {
