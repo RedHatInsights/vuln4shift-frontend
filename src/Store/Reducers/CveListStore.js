@@ -24,7 +24,10 @@ const CveListStore = (state = initialState, action) => {
       return {
         ...state,
         cves: action.payload.data.data,
-        meta: action.payload.data.meta,
+        meta: {
+          ...state.meta,
+          total_items: action.payload.data.meta.total_items,
+        },
         isLoading: false,
       };
     }

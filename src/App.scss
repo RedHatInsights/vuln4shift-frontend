@@ -36,3 +36,19 @@
         width: 380px;
     }
 }
+
+.ins-c-conditional-filter {
+    .pf-c-select__toggle-wrapper {
+        .pf-c-select__toggle-text {
+            max-width: 250px;
+        }
+    }
+
+    .pf-c-dropdown__toggle {
+        min-width: 156px;
+    }
+}
+
+.range-filter-input {
+    width: 5em;
+}

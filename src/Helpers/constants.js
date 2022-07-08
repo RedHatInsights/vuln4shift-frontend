@@ -57,11 +57,11 @@ export const CVE_LIST_TABLE_COLUMNS = [
   },
   {
     title: 'Clusters exposed',
-    /* TODO: Readd after BE implementation: sortParam: 'clusters_exposed', */
+    sortParam: 'clusters_exposed',
   },
   {
     title: 'Images exposed',
-    /* TODO: Readd after BE implementation: sortParam: 'images_exposed', */
+    sortParam: 'images_exposed',
   },
 ];
 
@@ -210,7 +210,30 @@ export const CLUSTER_DETAIL_TABLE_MAPPER = (row) => ({
   expandableContent: createCveDescription(row),
 });
 
-export const CVE_LIST_ALLOWED_PARAMS = ['limit', 'offset', 'sort'];
-export const CLUSTER_LIST_ALLOWED_PARAMS = ['limit', 'offset', 'sort'];
-export const CVE_DETAIL_ALLOWED_PARAMS = ['limit', 'offset', 'sort'];
-export const CLUSTER_DETAIL_ALLOWED_PARAMS = ['limit', 'offset', 'sort'];
+export const GENERIC_ALLOWED_PARAMS = ['limit', 'offset', 'sort'];
+
+export const CVE_LIST_ALLOWED_PARAMS = [
+  ...GENERIC_ALLOWED_PARAMS,
+  'search',
+  'published',
+  'severity',
+  'cvss_score',
+  'clusters_exposed',
+];
+
+export const CLUSTER_LIST_ALLOWED_PARAMS = [
+  ...GENERIC_ALLOWED_PARAMS,
+  'search',
+  'cve_severity',
+];
+
+export const CVE_DETAIL_ALLOWED_PARAMS = [...GENERIC_ALLOWED_PARAMS, 'search'];
+
+export const CLUSTER_DETAIL_ALLOWED_PARAMS = [
+  ...GENERIC_ALLOWED_PARAMS,
+  'search',
+  'published',
+  'severity',
+  'cvss_score',
+  'images_exposed',
+];

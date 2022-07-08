@@ -41,22 +41,27 @@ export const useUrlParams = (allowedParams) => {
   return [urlParams, setUrlParams];
 };
 
-export const useUrlBoundParams = (allowedParams, meta, fetch, changeParams) => {
+export const useUrlBoundParams = (
+  allowedParams,
+  defaultParams,
+  fetchAction,
+  changeParamsAction
+) => {
   const dispatch = useDispatch();
 
   const [urlParameters, setUrlParams] = useUrlParams(allowedParams);
 
   useEffect(() => {
-    apply({ ...meta, ...urlParameters });
+    apply({ ...defaultParams, ...urlParameters });
   }, []);
 
   useDeepCompareEffect(() => {
-    dispatch(fetch(urlParameters));
+    dispatch(fetchAction(urlParameters));
   }, [urlParameters]);
 
   const apply = (newParams) => {
     setUrlParams({ ...urlParameters, ...newParams });
-    dispatch(changeParams(urlParameters));
+    dispatch(changeParamsAction(urlParameters));
   };
 
   return apply;

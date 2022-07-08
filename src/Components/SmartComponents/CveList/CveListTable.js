@@ -14,6 +14,9 @@ import BaseToolbar from '../BaseToolbar';
 import BottomPagination from '../../PresentationalComponents/BottomPagination';
 import NoCves from '../../PresentationalComponents/EmptyStates/NoCves';
 import { useUrlBoundParams } from '../../../Helpers/hooks';
+import useTextFilter from '../Filters/TextFilter';
+import useRangeFilter from '../Filters/RangeFilter';
+import { getCvssScoreFromUrlParam } from '../../../Helpers/miscHelper';
 
 const CveListTable = () => {
   const { cves, isLoading, meta } = useSelector(
@@ -27,7 +30,8 @@ const CveListTable = () => {
     changeCveListTableParams
   );
 
-  const { total_items, limit, offset, sort } = meta;
+  const { total_items, limit, offset, sort, search, cvss_score } = meta;
+  const [cvss_score_min, cvss_score_max] = getCvssScoreFromUrlParam(cvss_score);
 
   return (
     <Fragment>
@@ -36,6 +40,35 @@ const CveListTable = () => {
         perPage={limit}
         itemCount={total_items}
         apply={apply}
+        filterConfig={{
+          items: [
+            useTextFilter({
+              urlParam: 'search',
+              label: 'CVE',
+              placeholder: 'Search ID or description',
+              value: search,
+              apply,
+            }),
+            useRangeFilter({
+              urlParam: 'cvss_score',
+              label: 'CVSS score',
+              minMaxLabels: {
+                min: 'Min CVSS',
+                max: 'Max CVSS',
+              },
+              range: {
+                min: 0,
+                max: 10,
+              },
+              value: {
+                min: cvss_score_min,
+                max: cvss_score_max,
+              },
+              placeholder: 'Filter by CVSS score range',
+              apply,
+            }),
+          ],
+        }}
       />
       <BaseTable
         isLoading={isLoading}
