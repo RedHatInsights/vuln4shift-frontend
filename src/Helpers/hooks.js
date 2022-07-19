@@ -61,7 +61,7 @@ export const useUrlBoundParams = (
 
   const apply = (newParams) => {
     setUrlParams({ ...urlParameters, ...newParams });
-    dispatch(changeParamsAction(urlParameters));
+    dispatch(changeParamsAction({ ...urlParameters, ...newParams }));
   };
 
   return apply;
