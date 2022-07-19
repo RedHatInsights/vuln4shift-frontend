@@ -5,6 +5,7 @@ import parseCvssScore from '@redhat-cloud-services/frontend-components-utilities
 import { Shield } from '@redhat-cloud-services/frontend-components/Shield';
 import ShieldSet from '../Components/PresentationalComponents/ShieldSet';
 import { Text, TextContent, TextVariants } from '@patternfly/react-core';
+import { DateFormat } from '@redhat-cloud-services/frontend-components/DateFormat';
 
 export const HEADER_ALERT_DISMISSED_KEY = 'vuln4shift:header-alert-dismissed';
 
@@ -86,6 +87,10 @@ export const CLUSTER_LIST_TABLE_COLUMNS = [
     title: 'Provider',
     /* TODO: Readd after endpoint integration: sortParam: 'provider', */
   },
+  {
+    title: 'Last seen',
+    /* TODO: Readd after endpoint integration: sortParam: 'last_seen', */
+  },
 ];
 
 export const CVE_DETAIL_TABLE_COLUMNS = [
@@ -105,6 +110,10 @@ export const CVE_DETAIL_TABLE_COLUMNS = [
   {
     title: 'Provider',
     /* TODO: Readd after endpoint integration: sortParam: 'provider', */
+  },
+  {
+    title: 'Last seen',
+    /* TODO: Readd after endpoint integration: sortParam: 'last_seen', */
   },
 ];
 
@@ -180,6 +189,7 @@ export const CLUSTER_LIST_TABLE_MAPPER = (row) => ({
       linkTo={`/clusters/${row.id}`}
     />,
     row.provider,
+    <DateFormat key={row.id} date={row.last_seen} type="relative" />,
   ],
 });
 
@@ -193,6 +203,7 @@ export const CVE_DETAIL_TABLE_MAPPER = (row) => ({
     row.type,
     row.version,
     row.provider,
+    <DateFormat key={row.id} date={row.last_seen} type="relative" />,
   ],
 });
 
