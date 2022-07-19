@@ -11,29 +11,25 @@ const ShieldSet = ({ count, linkTo }) => {
 
   return (
     <div className="shield-set">
-      {Object.entries(SEVERITY_OPTIONS).map(
-        ([severityOption, severityOptionDetails]) => (
-          <Tooltip
-            key={severityOption}
-            content={`${severityOptionDetails.label} severity`}
-          >
-            {severityOptionDetails.isInShieldSet &&
-              (count[severityOption] === 0 ? (
-                <Link className="disabled-shield">
-                  <SecurityIcon style={{ color: DISABLED_COLOR }} />
-                  <span>0</span>
-                </Link>
-              ) : (
-                <Link key={severityOption} to={linkTo}>
-                  <SecurityIcon
-                    style={{ color: severityOptionDetails.iconColor }}
-                  />
-                  <span>{count[severityOption]}</span>
-                </Link>
-              ))}
-          </Tooltip>
-        )
-      )}
+      {SEVERITY_OPTIONS.map((severityOption) => (
+        <Tooltip
+          key={severityOption.value}
+          content={`${severityOption.label} severity`}
+        >
+          {severityOption.hasIcon &&
+            (count[severityOption.value] === 0 ? (
+              <Link className="disabled-shield">
+                <SecurityIcon style={{ color: DISABLED_COLOR }} />
+                <span>0</span>
+              </Link>
+            ) : (
+              <Link key={severityOption.value} to={linkTo}>
+                <SecurityIcon style={{ color: severityOption.iconColor }} />
+                <span>{count[severityOption.value]}</span>
+              </Link>
+            ))}
+        </Tooltip>
+      ))}
     </div>
   );
 };

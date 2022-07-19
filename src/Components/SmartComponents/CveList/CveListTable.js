@@ -4,6 +4,7 @@ import {
   CVE_LIST_ALLOWED_PARAMS,
   CVE_LIST_TABLE_COLUMNS,
   CVE_LIST_TABLE_MAPPER,
+  SEVERITY_OPTIONS,
 } from '../../../Helpers/constants';
 import { useSelector } from 'react-redux';
 import {
@@ -17,6 +18,7 @@ import { useUrlBoundParams } from '../../../Helpers/hooks';
 import useTextFilter from '../Filters/TextFilter';
 import useRangeFilter from '../Filters/RangeFilter';
 import { getCvssScoreFromUrlParam } from '../../../Helpers/miscHelper';
+import checkboxFilter from '../Filters/CheckboxFilter';
 
 const CveListTable = () => {
   const { cves, isLoading, meta } = useSelector(
@@ -30,7 +32,8 @@ const CveListTable = () => {
     changeCveListTableParams
   );
 
-  const { total_items, limit, offset, sort, search, cvss_score } = meta;
+  const { total_items, limit, offset, sort, search, cvss_score, severity } =
+    meta;
   const [cvss_score_min, cvss_score_max] = getCvssScoreFromUrlParam(cvss_score);
 
   return (
@@ -65,6 +68,13 @@ const CveListTable = () => {
                 max: cvss_score_max,
               },
               placeholder: 'Filter by CVSS score range',
+              apply,
+            }),
+            checkboxFilter({
+              urlParam: 'severity',
+              label: 'Severity',
+              value: severity,
+              items: SEVERITY_OPTIONS,
               apply,
             }),
           ],

@@ -9,35 +9,40 @@ import { DateFormat } from '@redhat-cloud-services/frontend-components/DateForma
 
 export const HEADER_ALERT_DISMISSED_KEY = 'vuln4shift:header-alert-dismissed';
 
-export const SEVERITY_OPTIONS = {
-  critical: {
+export const SEVERITY_OPTIONS = [
+  {
+    value: 'critical',
     label: 'Critical',
     iconColor: 'var(--pf-global--danger-color--100)',
     textColor: 'var(--pf-global--danger-color--100)',
-    isInShieldSet: true,
+    hasIcon: true,
   },
-  important: {
+  {
+    value: 'important',
     label: 'Important',
     iconColor: 'var(--pf-global--palette--orange-300)',
     textColor: 'var(--pf-global--palette--orange-400)',
-    isInShieldSet: true,
+    hasIcon: true,
   },
-  moderate: {
+  {
+    value: 'moderate',
     label: 'Moderate',
     iconColor: 'var(--pf-global--warning-color--100)',
     textColor: 'var(--pf-global--warning-color--200)',
-    isInShieldSet: true,
+    hasIcon: true,
   },
-  low: {
+  {
+    value: 'low',
     label: 'Low',
     iconColor: 'var(--pf-global--Color--200)',
     textColor: 'var(--pf-global--default-color--300)',
-    isInShieldSet: true,
+    hasIcon: true,
   },
-  unknown: {
+  {
+    value: 'unknown',
     label: 'Unknown',
   },
-};
+];
 
 export const CVE_LIST_TABLE_COLUMNS = [
   {
