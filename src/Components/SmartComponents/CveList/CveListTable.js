@@ -4,6 +4,7 @@ import {
   CVE_LIST_ALLOWED_PARAMS,
   CVE_LIST_TABLE_COLUMNS,
   CVE_LIST_TABLE_MAPPER,
+  EXPOSED_CLUSTERS_OPTIONS,
   PUBLISHED_OPTIONS,
   SEVERITY_OPTIONS,
 } from '../../../Helpers/constants';
@@ -21,6 +22,7 @@ import useRangeFilter from '../Filters/RangeFilter';
 import { getCvssScoreFromUrlParam } from '../../../Helpers/miscHelper';
 import checkboxFilter from '../Filters/CheckboxFilter';
 import radioFilter from '../Filters/RadioFilter';
+import ternaryFilter from '../Filters/TernaryFilter';
 
 const CveListTable = () => {
   const { cves, isLoading, meta } = useSelector(
@@ -43,6 +45,7 @@ const CveListTable = () => {
     cvss_score,
     severity,
     published,
+    affected_clusters,
   } = meta;
 
   const [cvss_score_min, cvss_score_max] = getCvssScoreFromUrlParam(cvss_score);
@@ -95,6 +98,14 @@ const CveListTable = () => {
                 max: cvss_score_max,
               },
               placeholder: 'Filter by CVSS score range',
+              apply,
+            }),
+            ternaryFilter({
+              urlParam: 'affected_clusters',
+              label: 'Exposed clusters',
+              value: affected_clusters,
+              items: EXPOSED_CLUSTERS_OPTIONS,
+              placeholder: 'Filter by exposed clusters',
               apply,
             }),
           ],

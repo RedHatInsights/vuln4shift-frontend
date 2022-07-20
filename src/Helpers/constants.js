@@ -10,6 +10,8 @@ import { subtractDays, subtractYears } from './miscHelper';
 
 export const HEADER_ALERT_DISMISSED_KEY = 'vuln4shift:header-alert-dismissed';
 
+/* FILTER OPTIONS */
+
 export const PUBLISHED_OPTIONS = [
   {
     value: 'all',
@@ -76,6 +78,19 @@ export const SEVERITY_OPTIONS = [
     label: 'Unknown',
   },
 ];
+
+export const EXPOSED_CLUSTERS_OPTIONS = [
+  {
+    value: 'true',
+    label: '1 or more',
+  },
+  {
+    value: 'false',
+    label: 'None',
+  },
+];
+
+/* TABLE COLUMNS */
 
 export const CVE_LIST_TABLE_COLUMNS = [
   {
@@ -178,6 +193,8 @@ export const CLUSTER_DETAIL_TABLE_COLUMNS = [
   },
 ];
 
+/* TABLE ROW MAPPERS */
+
 const createCveDescription = (row) => (
   <Fragment>
     <TextContent>
@@ -259,6 +276,8 @@ export const CLUSTER_DETAIL_TABLE_MAPPER = (row) => ({
   expandableContent: createCveDescription(row),
 });
 
+/* ALLOWED PARAMETERS */
+
 export const GENERIC_ALLOWED_PARAMS = ['limit', 'offset', 'sort'];
 
 export const CVE_LIST_ALLOWED_PARAMS = [
@@ -267,7 +286,7 @@ export const CVE_LIST_ALLOWED_PARAMS = [
   'published',
   'severity',
   'cvss_score',
-  'clusters_exposed',
+  'affected_clusters',
 ];
 
 export const CLUSTER_LIST_ALLOWED_PARAMS = [
