@@ -4,6 +4,7 @@ import {
   CVE_LIST_ALLOWED_PARAMS,
   CVE_LIST_TABLE_COLUMNS,
   CVE_LIST_TABLE_MAPPER,
+  PUBLISHED_OPTIONS,
   SEVERITY_OPTIONS,
 } from '../../../Helpers/constants';
 import { useSelector } from 'react-redux';
@@ -19,6 +20,7 @@ import useTextFilter from '../Filters/TextFilter';
 import useRangeFilter from '../Filters/RangeFilter';
 import { getCvssScoreFromUrlParam } from '../../../Helpers/miscHelper';
 import checkboxFilter from '../Filters/CheckboxFilter';
+import radioFilter from '../Filters/RadioFilter';
 
 const CveListTable = () => {
   const { cves, isLoading, meta } = useSelector(
@@ -32,8 +34,17 @@ const CveListTable = () => {
     changeCveListTableParams
   );
 
-  const { total_items, limit, offset, sort, search, cvss_score, severity } =
-    meta;
+  const {
+    total_items,
+    limit,
+    offset,
+    sort,
+    search,
+    cvss_score,
+    severity,
+    published,
+  } = meta;
+
   const [cvss_score_min, cvss_score_max] = getCvssScoreFromUrlParam(cvss_score);
 
   return (
@@ -52,6 +63,22 @@ const CveListTable = () => {
               value: search,
               apply,
             }),
+            radioFilter({
+              urlParam: 'published',
+              label: 'Publish date',
+              value: published,
+              items: PUBLISHED_OPTIONS,
+              placeholder: 'Filter by publish date',
+              apply,
+            }),
+            checkboxFilter({
+              urlParam: 'severity',
+              label: 'Severity',
+              value: severity,
+              items: SEVERITY_OPTIONS,
+              placeholder: 'Filter by severity',
+              apply,
+            }),
             useRangeFilter({
               urlParam: 'cvss_score',
               label: 'CVSS score',
@@ -68,14 +95,6 @@ const CveListTable = () => {
                 max: cvss_score_max,
               },
               placeholder: 'Filter by CVSS score range',
-              apply,
-            }),
-            checkboxFilter({
-              urlParam: 'severity',
-              label: 'Severity',
-              value: severity,
-              items: SEVERITY_OPTIONS,
-              placeholder: 'Filter by severity',
               apply,
             }),
           ],

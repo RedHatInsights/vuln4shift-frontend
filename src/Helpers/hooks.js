@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import qs from 'query-string';
 import { useDispatch } from 'react-redux';
 import useDeepCompareEffect from 'use-deep-compare-effect';
+import { PUBLISHED_OPTIONS } from './constants';
 
 export const useLocalStorage = (key) => {
   const [sessionValue, setSessionValue] = useState(localStorage.getItem(key));
@@ -41,6 +42,46 @@ export const useUrlParams = (allowedParams) => {
   return [urlParams, setUrlParams];
 };
 
+const transformPublishedParam = (urlParams) => {
+  const formatDate = (timestamp) => {
+    const pad = (number) => `${`${number}`.length === 1 ? '0' : ''}${number}`;
+
+    const date = new Date(timestamp);
+
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1; // month is zero indexed
+    const day = date.getDate();
+
+    return `${year}-${pad(month)}-${pad(day)}`;
+  };
+
+  if (urlParams.published) {
+    const option = PUBLISHED_OPTIONS.find(
+      (option) => option.value === urlParams.published
+    );
+
+    urlParams.published = `${option.from ? formatDate(option.from) : ''},${
+      option.to ? formatDate(option.to) : ''
+    }`;
+  }
+
+  return urlParams;
+};
+
+// when creating additional transformer in the future
+// create a new function for it and then add the function to this array
+const urlTransformers = [transformPublishedParam];
+
+const transformUrlParamsBeforeFetching = (urlParams) => {
+  let newParams = { ...urlParams };
+
+  urlTransformers.forEach((transformer) => {
+    newParams = transformer(newParams);
+  });
+
+  return newParams;
+};
+
 export const useUrlBoundParams = (
   allowedParams,
   defaultParams,
@@ -49,19 +90,19 @@ export const useUrlBoundParams = (
 ) => {
   const dispatch = useDispatch();
 
-  const [urlParameters, setUrlParams] = useUrlParams(allowedParams);
+  const [urlParams, setUrlParams] = useUrlParams(allowedParams);
 
   useEffect(() => {
-    apply({ ...defaultParams, ...urlParameters });
+    apply({ ...defaultParams, ...urlParams });
   }, []);
 
   useDeepCompareEffect(() => {
-    dispatch(fetchAction(urlParameters));
-  }, [urlParameters]);
+    dispatch(fetchAction(transformUrlParamsBeforeFetching(urlParams)));
+  }, [urlParams]);
 
   const apply = (newParams) => {
-    setUrlParams({ ...urlParameters, ...newParams });
-    dispatch(changeParamsAction({ ...urlParameters, ...newParams }));
+    setUrlParams({ ...urlParams, ...newParams });
+    dispatch(changeParamsAction({ ...urlParams, ...newParams }));
   };
 
   return apply;

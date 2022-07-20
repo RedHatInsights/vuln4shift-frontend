@@ -6,8 +6,41 @@ import { Shield } from '@redhat-cloud-services/frontend-components/Shield';
 import ShieldSet from '../Components/PresentationalComponents/ShieldSet';
 import { Text, TextContent, TextVariants } from '@patternfly/react-core';
 import { DateFormat } from '@redhat-cloud-services/frontend-components/DateFormat';
+import { subtractDays, subtractYears } from './miscHelper';
 
 export const HEADER_ALERT_DISMISSED_KEY = 'vuln4shift:header-alert-dismissed';
+
+export const PUBLISHED_OPTIONS = [
+  {
+    value: 'all',
+    label: 'All',
+  },
+  {
+    value: 'last7days',
+    label: 'Last 7 days',
+    from: subtractDays(new Date(), 7),
+  },
+  {
+    value: 'last30days',
+    label: 'Last 30 days',
+    from: subtractDays(new Date(), 30),
+  },
+  {
+    value: 'last90days',
+    label: 'Last 90 days',
+    from: subtractDays(new Date(), 90),
+  },
+  {
+    value: 'lastYear',
+    label: 'Last year',
+    from: subtractYears(new Date(), 1),
+  },
+  {
+    value: 'moreThanYear',
+    label: 'More than 1 year ago',
+    to: subtractYears(new Date(), 1),
+  },
+];
 
 export const SEVERITY_OPTIONS = [
   {

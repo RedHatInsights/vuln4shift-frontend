@@ -27,3 +27,11 @@ export const deepFreeze = (object) => {
 
   return Object.freeze(object);
 };
+
+export const subtractDays = (currentDate, toSubtract) => {
+  return currentDate.setDate(currentDate.getDate() - toSubtract);
+};
+
+export const subtractYears = (currentDate, toSubtract) => {
+  return currentDate.setFullYear(currentDate.getFullYear() - toSubtract);
+};

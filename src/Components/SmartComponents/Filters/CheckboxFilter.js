@@ -8,7 +8,7 @@ const checkboxFilter = ({
   items,
   apply,
 }) => {
-  const onValueChanged = (values) => {
+  const onValuesChanged = (values) => {
     apply({
       [urlParam]: values.join(','),
       page: 1,
@@ -22,7 +22,7 @@ const checkboxFilter = ({
     key: urlParam,
     filterValues: {
       onChange: (event, value) => {
-        onValueChanged(value);
+        onValuesChanged(value);
       },
       items,
       value: value ? value.split(',') : [],
