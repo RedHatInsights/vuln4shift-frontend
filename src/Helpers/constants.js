@@ -39,7 +39,7 @@ export const SEVERITY_OPTIONS = [
     hasIcon: true,
   },
   {
-    value: 'unknown',
+    value: 'none',
     label: 'Unknown',
   },
 ];

@@ -1,37 +1,28 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import propTypes from 'prop-types';
 import { Split, SplitItem, TextInput, Select } from '@patternfly/react-core';
 
 const RangeFilterComponent = ({
-  value,
-  setValue,
+  defaultValues,
+  setValues,
   range,
   minMaxLabels,
   selectProps,
 }) => {
   const [isOpen, setOpen] = useState(false);
   const [inputValue, setInputValue] = useState({
-    min: value.min.toString(),
-    max: value.max.toString(),
+    min: defaultValues.min.toString(),
+    max: defaultValues.max.toString(),
   });
 
-  useEffect(() => {
-    if (isInputValid('min') && isInputValid('max')) {
-      setValue({
-        min: Number(inputValue.min),
-        max: Number(inputValue.max),
-      });
-    }
-  }, [inputValue]);
-
-  const isInputValid = (inputName) => {
+  const areValuesValid = (currentValues, inputName) => {
     const numberValue = {
-      min: Number(inputValue.min),
-      max: Number(inputValue.max),
+      min: Number(currentValues.min),
+      max: Number(currentValues.max),
     };
 
     return (
-      inputValue[inputName] != '' &&
+      currentValues[inputName] != '' &&
       numberValue[inputName] <= range.max &&
       numberValue[inputName] >= range.min &&
       numberValue.min <= numberValue.max
@@ -39,7 +30,16 @@ const RangeFilterComponent = ({
   };
 
   const handleInputChange = (newValue, inputName) => {
-    setInputValue({ ...inputValue, [inputName]: newValue });
+    const newRange = { ...inputValue, [inputName]: newValue };
+
+    if (areValuesValid(newRange, 'min') && areValuesValid(newRange, 'max')) {
+      setValues({
+        min: Number(newRange.min),
+        max: Number(newRange.max),
+      });
+    }
+
+    setInputValue(newRange);
   };
 
   const filterContent = (
@@ -52,7 +52,7 @@ const RangeFilterComponent = ({
         <TextInput
           type="number"
           onChange={(value) => handleInputChange(value, 'min')}
-          validated={isInputValid('min') ? 'default' : 'error'}
+          validated={areValuesValid(inputValue, 'min') ? 'default' : 'error'}
           className="range-filter-input"
           id="range-filter-input-min"
           value={inputValue.min}
@@ -70,7 +70,7 @@ const RangeFilterComponent = ({
         <TextInput
           type="number"
           onChange={(value) => handleInputChange(value, 'max')}
-          validated={isInputValid('max') ? 'default' : 'error'}
+          validated={areValuesValid(inputValue, 'max') ? 'default' : 'error'}
           className="range-filter-input"
           id="range-filter-input-max"
           value={inputValue.max}
@@ -93,8 +93,11 @@ const RangeFilterComponent = ({
 };
 
 RangeFilterComponent.propTypes = {
-  value: propTypes.shape({ min: propTypes.number, max: propTypes.number }),
-  setValue: propTypes.func,
+  defaultValues: propTypes.shape({
+    min: propTypes.number,
+    max: propTypes.number,
+  }),
+  setValues: propTypes.func,
   range: propTypes.shape({ min: propTypes.number, max: propTypes.number }),
   minMaxLabels: propTypes.shape({ min: propTypes.node, max: propTypes.node }),
   selectProps: propTypes.object,

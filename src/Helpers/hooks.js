@@ -15,9 +15,9 @@ export const useLocalStorage = (key) => {
 };
 
 export function filterUrlParams(urlParams, allowedParams) {
-  Object.keys(urlParams)
-    .filter((key) => !allowedParams.includes(key))
-    .forEach((key) => delete urlParams[key]);
+  Object.entries(urlParams)
+    .filter(([key, value]) => !allowedParams.includes(key) || value === '')
+    .forEach(([key]) => delete urlParams[key]);
 
   return urlParams;
 }

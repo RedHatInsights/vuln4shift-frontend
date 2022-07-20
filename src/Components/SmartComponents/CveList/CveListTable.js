@@ -75,6 +75,7 @@ const CveListTable = () => {
               label: 'Severity',
               value: severity,
               items: SEVERITY_OPTIONS,
+              placeholder: 'Filter by severity',
               apply,
             }),
           ],

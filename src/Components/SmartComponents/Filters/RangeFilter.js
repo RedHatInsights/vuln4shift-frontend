@@ -48,8 +48,8 @@ const useRangeFilter = ({
     filterValues: {
       children: (
         <RangeFilterComponent
-          value={searchValue}
-          setValue={setValue}
+          defaultValues={searchValue}
+          setValues={setValue}
           range={range}
           className="pf-u-mb-0"
           selectProps={{ placeholderText: placeholder }}

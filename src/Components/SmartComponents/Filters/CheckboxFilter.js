@@ -1,6 +1,13 @@
 import { conditionalFilterType } from '@redhat-cloud-services/frontend-components/ConditionalFilter';
 
-const checkboxFilter = ({ urlParam, label, value, items, apply }) => {
+const checkboxFilter = ({
+  urlParam,
+  label,
+  value,
+  placeholder,
+  items,
+  apply,
+}) => {
   const onValueChanged = (values) => {
     apply({
       [urlParam]: values.join(','),
@@ -19,6 +26,7 @@ const checkboxFilter = ({ urlParam, label, value, items, apply }) => {
       },
       items,
       value: value ? value.split(',') : [],
+      placeholder,
     },
   };
 };

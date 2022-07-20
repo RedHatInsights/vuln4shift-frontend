@@ -25,7 +25,7 @@ const useTextFilter = ({ urlParam, label, placeholder, value, apply }) => {
         setSearchValue(value);
         handleSearch(value);
       },
-      placeholder: placeholder,
+      placeholder,
       value: searchValue,
     },
   };
