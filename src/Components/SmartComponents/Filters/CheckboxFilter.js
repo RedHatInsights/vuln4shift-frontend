@@ -7,15 +7,16 @@ const checkboxFilter = ({
   placeholder,
   items,
   apply,
+  chipLabel,
 }) => {
   const onValuesChanged = (values) => {
     apply({
       [urlParam]: values.join(','),
-      page: 1,
+      offset: 0,
     });
   };
 
-  return {
+  const filterConfig = {
     label,
     type: conditionalFilterType.checkbox,
     urlParam,
@@ -29,6 +30,26 @@ const checkboxFilter = ({
       placeholder,
     },
   };
+
+  const activeFiltersConfig = {
+    isShown: !!value,
+    onDelete: (chips) => {
+      const itemsToRemove = chips.map((chip) => chip.value);
+
+      const newValue = value
+        .split(',')
+        .filter((value) => !itemsToRemove.includes(value));
+
+      onValuesChanged(newValue);
+    },
+    key: urlParam,
+    category: chipLabel,
+    chips: items
+      .filter((item) => value?.split(',').includes(item.value))
+      .map((item) => ({ name: item.label, value: item.value })),
+  };
+
+  return { filterConfig, activeFiltersConfig };
 };
 
 export default checkboxFilter;

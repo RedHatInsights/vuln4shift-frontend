@@ -3,7 +3,14 @@ import propTypes from 'prop-types';
 import { PrimaryToolbar } from '@redhat-cloud-services/frontend-components/PrimaryToolbar';
 
 // TODO: Move the page, perPage calculation to this component
-const BaseToolbar = ({ page, perPage, itemCount, apply, filterConfig }) => {
+const BaseToolbar = ({
+  page,
+  perPage,
+  itemCount,
+  apply,
+  filterConfig,
+  activeFiltersConfig,
+}) => {
   return (
     <PrimaryToolbar
       pagination={{
@@ -16,6 +23,7 @@ const BaseToolbar = ({ page, perPage, itemCount, apply, filterConfig }) => {
         onPerPageSelect: (event, limit) => apply({ limit, offset: 0 }),
       }}
       filterConfig={filterConfig}
+      activeFiltersConfig={activeFiltersConfig}
     />
   );
 };
@@ -27,6 +35,9 @@ BaseToolbar.propTypes = {
   apply: propTypes.func,
   filterConfig: propTypes.shape({
     items: propTypes.array,
+  }),
+  activeFiltersConfig: propTypes.shape({
+    filters: propTypes.array,
   }),
 };
 

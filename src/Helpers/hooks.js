@@ -90,7 +90,7 @@ export const useUrlBoundParams = (
 ) => {
   const dispatch = useDispatch();
 
-  const [urlParams, setUrlParams] = useUrlParams(allowedParams);
+  const [urlParams] = useUrlParams(allowedParams);
 
   useEffect(() => {
     apply({ ...defaultParams, ...urlParams });
@@ -101,6 +101,8 @@ export const useUrlBoundParams = (
   }, [urlParams]);
 
   const apply = (newParams) => {
+    const [urlParams, setUrlParams] = useUrlParams(allowedParams);
+
     setUrlParams({ ...urlParams, ...newParams });
     dispatch(changeParamsAction({ ...urlParams, ...newParams }));
   };

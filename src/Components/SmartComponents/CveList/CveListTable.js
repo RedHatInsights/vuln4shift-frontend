@@ -19,7 +19,10 @@ import NoCves from '../../PresentationalComponents/EmptyStates/NoCves';
 import { useUrlBoundParams } from '../../../Helpers/hooks';
 import useTextFilter from '../Filters/TextFilter';
 import useRangeFilter from '../Filters/RangeFilter';
-import { getCvssScoreFromUrlParam } from '../../../Helpers/miscHelper';
+import {
+  getCvssScoreFromUrlParam,
+  setupFilters,
+} from '../../../Helpers/miscHelper';
 import checkboxFilter from '../Filters/CheckboxFilter';
 import radioFilter from '../Filters/RadioFilter';
 import ternaryFilter from '../Filters/TernaryFilter';
@@ -50,6 +53,60 @@ const CveListTable = () => {
 
   const [cvss_score_min, cvss_score_max] = getCvssScoreFromUrlParam(cvss_score);
 
+  const [filterConfig, activeFiltersConfig] = setupFilters([
+    useTextFilter({
+      urlParam: 'search',
+      label: 'CVE',
+      placeholder: 'Search ID or description',
+      value: search,
+      apply,
+      chipLabel: 'Search term',
+    }),
+    radioFilter({
+      urlParam: 'published',
+      label: 'Publish date',
+      value: published,
+      items: PUBLISHED_OPTIONS,
+      placeholder: 'Filter by publish date',
+      apply,
+    }),
+    checkboxFilter({
+      urlParam: 'severity',
+      label: 'Severity',
+      value: severity,
+      items: SEVERITY_OPTIONS,
+      placeholder: 'Filter by severity',
+      apply,
+      chipLabel: 'Severity',
+    }),
+    useRangeFilter({
+      urlParam: 'cvss_score',
+      label: 'CVSS score',
+      minMaxLabels: {
+        min: 'Min CVSS',
+        max: 'Max CVSS',
+      },
+      range: {
+        min: 0,
+        max: 10,
+      },
+      value: {
+        min: cvss_score_min,
+        max: cvss_score_max,
+      },
+      placeholder: 'Filter by CVSS score range',
+      apply,
+    }),
+    ternaryFilter({
+      urlParam: 'affected_clusters',
+      label: 'Exposed clusters',
+      value: affected_clusters,
+      items: EXPOSED_CLUSTERS_OPTIONS,
+      placeholder: 'Filter by exposed clusters',
+      apply,
+    }),
+  ]);
+
   return (
     <Fragment>
       <BaseToolbar
@@ -57,59 +114,8 @@ const CveListTable = () => {
         perPage={limit}
         itemCount={total_items}
         apply={apply}
-        filterConfig={{
-          items: [
-            useTextFilter({
-              urlParam: 'search',
-              label: 'CVE',
-              placeholder: 'Search ID or description',
-              value: search,
-              apply,
-            }),
-            radioFilter({
-              urlParam: 'published',
-              label: 'Publish date',
-              value: published,
-              items: PUBLISHED_OPTIONS,
-              placeholder: 'Filter by publish date',
-              apply,
-            }),
-            checkboxFilter({
-              urlParam: 'severity',
-              label: 'Severity',
-              value: severity,
-              items: SEVERITY_OPTIONS,
-              placeholder: 'Filter by severity',
-              apply,
-            }),
-            useRangeFilter({
-              urlParam: 'cvss_score',
-              label: 'CVSS score',
-              minMaxLabels: {
-                min: 'Min CVSS',
-                max: 'Max CVSS',
-              },
-              range: {
-                min: 0,
-                max: 10,
-              },
-              value: {
-                min: cvss_score_min,
-                max: cvss_score_max,
-              },
-              placeholder: 'Filter by CVSS score range',
-              apply,
-            }),
-            ternaryFilter({
-              urlParam: 'affected_clusters',
-              label: 'Exposed clusters',
-              value: affected_clusters,
-              items: EXPOSED_CLUSTERS_OPTIONS,
-              placeholder: 'Filter by exposed clusters',
-              apply,
-            }),
-          ],
-        }}
+        filterConfig={filterConfig}
+        activeFiltersConfig={activeFiltersConfig}
       />
       <BaseTable
         isLoading={isLoading}

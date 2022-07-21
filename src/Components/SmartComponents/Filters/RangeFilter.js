@@ -40,7 +40,7 @@ const useRangeFilter = ({
     handleSearch(newValue);
   };
 
-  return {
+  const filterConfig = {
     label,
     type: conditionalFilterType.custom,
     key: urlParam,
@@ -58,6 +58,8 @@ const useRangeFilter = ({
       ),
     },
   };
+
+  return { filterConfig };
 };
 
 export default useRangeFilter;

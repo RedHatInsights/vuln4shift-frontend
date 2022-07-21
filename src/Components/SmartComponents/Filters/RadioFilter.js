@@ -4,11 +4,11 @@ const radioFilter = ({ urlParam, label, value, placeholder, items, apply }) => {
   const onValueChanged = (value) => {
     apply({
       [urlParam]: value,
-      page: 1,
+      offset: 0,
     });
   };
 
-  return {
+  const filterConfig = {
     label,
     type: conditionalFilterType.radio,
     urlParam,
@@ -22,6 +22,8 @@ const radioFilter = ({ urlParam, label, value, placeholder, items, apply }) => {
       placeholder,
     },
   };
+
+  return { filterConfig };
 };
 
 export default radioFilter;

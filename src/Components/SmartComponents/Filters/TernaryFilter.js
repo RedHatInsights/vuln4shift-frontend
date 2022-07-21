@@ -11,11 +11,11 @@ const ternaryFilter = ({
   const onValuesChanged = (values) => {
     apply({
       [urlParam]: items.map((item) => values.includes(item.value)).join(','),
-      page: 1,
+      offset: 0,
     });
   };
 
-  return {
+  const filterConfig = {
     label,
     type: conditionalFilterType.checkbox,
     urlParam,
@@ -33,6 +33,8 @@ const ternaryFilter = ({
       placeholder,
     },
   };
+
+  return { filterConfig };
 };
 
 export default ternaryFilter;

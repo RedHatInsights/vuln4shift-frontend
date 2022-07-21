@@ -35,3 +35,24 @@ export const subtractDays = (currentDate, toSubtract) => {
 export const subtractYears = (currentDate, toSubtract) => {
   return currentDate.setFullYear(currentDate.getFullYear() - toSubtract);
 };
+
+export const setupFilters = (filters) => {
+  let filterConfig = { items: [] };
+  let activeFiltersConfig = {
+    filters: [],
+    onDelete: (_, categories) =>
+      categories.forEach((category) => category.onDelete(category.chips)),
+    deleteTitle: 'Reset filter',
+  };
+
+  filters.forEach((filter) => {
+    filterConfig.items.push(filter.filterConfig);
+
+    filter.activeFiltersConfig?.isShown &&
+      activeFiltersConfig.filters.push(filter.activeFiltersConfig);
+  });
+
+  activeFiltersConfig.showDeleteButton = activeFiltersConfig.filters.length > 0;
+
+  return [filterConfig, activeFiltersConfig];
+};
