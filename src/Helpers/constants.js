@@ -142,7 +142,7 @@ export const CLUSTER_LIST_TABLE_COLUMNS = [
   },
   {
     title: 'Last seen',
-    /* TODO: Readd after endpoint integration: sortParam: 'last_seen', */
+    sortParam: 'last_seen',
   },
 ];
 

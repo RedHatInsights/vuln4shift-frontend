@@ -81,7 +81,7 @@ const ClusterDetailPage = () => {
             isLoading={isDetailLoading}
             style={{ verticalAlign: -4 }}
           >
-            <DateFormat date={cluster.updated} type="exact" />
+            <DateFormat date={cluster.last_seen} type="exact" />
           </WithLoader>
         </Fragment>
       </PageHeader>
