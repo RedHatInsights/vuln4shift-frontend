@@ -1,5 +1,4 @@
-import React, { Fragment } from 'react';
-import BaseTable from '../BaseTable';
+import React from 'react';
 import {
   CVE_LIST_ALLOWED_PARAMS,
   CVE_LIST_TABLE_COLUMNS,
@@ -13,19 +12,15 @@ import {
   fetchCveListTable,
   changeCveListTableParams,
 } from '../../../Store/Actions';
-import BaseToolbar from '../BaseToolbar';
-import BottomPagination from '../../PresentationalComponents/BottomPagination';
 import NoCves from '../../PresentationalComponents/EmptyStates/NoCves';
 import { useUrlBoundParams } from '../../../Helpers/hooks';
 import useTextFilter from '../Filters/TextFilter';
 import useRangeFilter from '../Filters/RangeFilter';
-import {
-  getCvssScoreFromUrlParam,
-  setupFilters,
-} from '../../../Helpers/miscHelper';
+import { getCvssScoreFromUrlParam } from '../../../Helpers/miscHelper';
 import checkboxFilter from '../Filters/CheckboxFilter';
 import radioFilter from '../Filters/RadioFilter';
 import ternaryFilter from '../Filters/TernaryFilter';
+import BaseTable from '../Generic/BaseTable';
 
 const CveListTable = () => {
   const { cves, isLoading, meta } = useSelector(
@@ -39,21 +34,11 @@ const CveListTable = () => {
     changeCveListTableParams
   );
 
-  const {
-    total_items,
-    limit,
-    offset,
-    sort,
-    search,
-    cvss_score,
-    severity,
-    published,
-    affected_clusters,
-  } = meta;
+  const { search, cvss_score, severity, published, affected_clusters } = meta;
 
   const [cvss_score_min, cvss_score_max] = getCvssScoreFromUrlParam(cvss_score);
 
-  const [filterConfig, activeFiltersConfig] = setupFilters([
+  const filters = [
     useTextFilter({
       urlParam: 'search',
       label: 'CVE',
@@ -105,34 +90,19 @@ const CveListTable = () => {
       placeholder: 'Filter by exposed clusters',
       apply,
     }),
-  ]);
+  ];
 
   return (
-    <Fragment>
-      <BaseToolbar
-        page={offset / limit + 1}
-        perPage={limit}
-        itemCount={total_items}
-        apply={apply}
-        filterConfig={filterConfig}
-        activeFiltersConfig={activeFiltersConfig}
-      />
-      <BaseTable
-        isLoading={isLoading}
-        columns={CVE_LIST_TABLE_COLUMNS}
-        rows={cves.map((row) => CVE_LIST_TABLE_MAPPER(row))}
-        isExpandable
-        emptyState={<NoCves />}
-        sortParam={sort}
-        apply={apply}
-      />
-      <BottomPagination
-        page={offset / limit + 1}
-        perPage={limit}
-        itemCount={total_items}
-        apply={apply}
-      />
-    </Fragment>
+    <BaseTable
+      isLoading={isLoading}
+      isExpandable
+      rows={cves.map((row) => CVE_LIST_TABLE_MAPPER(row))}
+      columns={CVE_LIST_TABLE_COLUMNS}
+      filters={filters}
+      meta={meta}
+      emptyState={<NoCves />}
+      apply={apply}
+    />
   );
 };
 

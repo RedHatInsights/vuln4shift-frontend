@@ -1,12 +1,12 @@
 import React, { Fragment, useEffect } from 'react';
-import BaseTable from '../BaseTable';
+import BaseTableBody from '../Generic/BaseTableBody';
 import {
   CLUSTER_DETAIL_TABLE_COLUMNS,
   CLUSTER_DETAIL_TABLE_MAPPER,
 } from '../../../Helpers/constants';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchClusterDetailTable } from '../../../Store/Actions';
-import BaseToolbar from '../BaseToolbar';
+import BaseToolbar from '../Generic/BaseToolbar';
 import BottomPagination from '../../PresentationalComponents/BottomPagination';
 import NoCves from '../../PresentationalComponents/EmptyStates/NoCves';
 import { useRouteMatch } from 'react-router-dom';
@@ -26,7 +26,7 @@ const ClusterDetailTable = () => {
   return (
     <Fragment>
       <BaseToolbar page={1} perPage={20} itemCount={total_items} />
-      <BaseTable
+      <BaseTableBody
         isLoading={isTableLoading}
         columns={CLUSTER_DETAIL_TABLE_COLUMNS}
         rows={cves.map((row) => CLUSTER_DETAIL_TABLE_MAPPER(row))}

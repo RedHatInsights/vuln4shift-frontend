@@ -13,7 +13,7 @@ import {
 import SkeletonTable from '@redhat-cloud-services/frontend-components/SkeletonTable/SkeletonTable';
 import { TableVariant } from '@patternfly/react-table';
 
-const BaseTable = ({
+const BaseTableBody = ({
   isLoading,
   columns,
   rows,
@@ -123,7 +123,7 @@ const BaseTable = ({
   );
 };
 
-BaseTable.propTypes = {
+BaseTableBody.propTypes = {
   isLoading: propTypes.bool.isRequired,
   columns: propTypes.arrayOf(
     propTypes.shape({
@@ -144,4 +144,4 @@ BaseTable.propTypes = {
   apply: propTypes.func,
 };
 
-export default BaseTable;
+export default BaseTableBody;

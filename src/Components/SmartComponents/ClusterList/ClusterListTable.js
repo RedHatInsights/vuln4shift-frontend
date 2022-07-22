@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import BaseTable from '../BaseTable';
+import BaseTableBody from '../Generic/BaseTableBody';
 import {
   CLUSTER_LIST_ALLOWED_PARAMS,
   CLUSTER_LIST_TABLE_COLUMNS,
@@ -10,7 +10,7 @@ import {
   changeClusterListTableParams,
   fetchClusterListTable,
 } from '../../../Store/Actions';
-import BaseToolbar from '../BaseToolbar';
+import BaseToolbar from '../Generic/BaseToolbar';
 import BottomPagination from '../../PresentationalComponents/BottomPagination';
 import NoClusters from '../../PresentationalComponents/EmptyStates/NoClusters';
 import { setupFilters } from '../../../Helpers/miscHelper';
@@ -52,7 +52,7 @@ const ClusterDetailTable = () => {
         filterConfig={filterConfig}
         activeFiltersConfig={activeFiltersConfig}
       />
-      <BaseTable
+      <BaseTableBody
         isLoading={isLoading}
         columns={CLUSTER_LIST_TABLE_COLUMNS}
         rows={clusters.map((row) => CLUSTER_LIST_TABLE_MAPPER(row))}

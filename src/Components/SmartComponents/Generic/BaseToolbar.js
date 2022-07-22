@@ -2,7 +2,6 @@ import React from 'react';
 import propTypes from 'prop-types';
 import { PrimaryToolbar } from '@redhat-cloud-services/frontend-components/PrimaryToolbar';
 
-// TODO: Move the page, perPage calculation to this component
 const BaseToolbar = ({
   page,
   perPage,
