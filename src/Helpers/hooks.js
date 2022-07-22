@@ -70,17 +70,19 @@ const transformPublishedParam = (urlParams) => {
 
 // when creating additional transformer in the future
 // create a new function for it and then add the function to this array
-const urlTransformers = [transformPublishedParam];
+const URL_TRANSFORMERS = [transformPublishedParam];
 
 const transformUrlParamsBeforeFetching = (urlParams) => {
   let newParams = { ...urlParams };
 
-  urlTransformers.forEach((transformer) => {
+  URL_TRANSFORMERS.forEach((transformer) => {
     newParams = transformer(newParams);
   });
 
   return newParams;
 };
+
+const NUMERICAL_URL_PARAMS = ['limit', 'offset'];
 
 export const useUrlBoundParams = ({
   allowedParams,
@@ -106,8 +108,16 @@ export const useUrlBoundParams = ({
   const apply = (newParams) => {
     const [urlParams, setUrlParams] = useUrlParams(allowedParams);
 
-    setUrlParams({ ...urlParams, ...newParams });
-    dispatch(changeParamsAction({ ...urlParams, ...newParams }));
+    let combinedParams = { ...urlParams, ...newParams };
+
+    for (const property in combinedParams) {
+      if (NUMERICAL_URL_PARAMS.includes(property)) {
+        combinedParams[property] = Number(combinedParams[property]);
+      }
+    }
+
+    setUrlParams(combinedParams);
+    dispatch(changeParamsAction(combinedParams));
   };
 
   return apply;

@@ -18,10 +18,10 @@ const ShieldSet = ({ count, linkTo }) => {
         >
           {severityOption.hasIcon &&
             (count[severityOption.value] === 0 ? (
-              <Link className="disabled-shield">
+              <a className="disabled-shield">
                 <SecurityIcon style={{ color: DISABLED_COLOR }} />
                 <span>0</span>
-              </Link>
+              </a>
             ) : (
               <Link key={severityOption.value} to={linkTo}>
                 <SecurityIcon style={{ color: severityOption.iconColor }} />

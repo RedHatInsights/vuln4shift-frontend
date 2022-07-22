@@ -155,8 +155,9 @@ const CveDetailPageHeader = () => {
               />
             </StackItem>
             <StackItem>
-              {/* Remove following component after no metadata state is handled */}
+              {/* TODO: Remove following component after no metadata state is handled */}
               <Checkbox
+                id="temporary-has-metadata-checkbox"
                 isChecked={hasMetadata}
                 onChange={(checked) => setHasMetadata(checked)}
                 label="Has metadata"
