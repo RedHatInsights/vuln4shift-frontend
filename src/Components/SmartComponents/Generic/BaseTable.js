@@ -10,7 +10,7 @@ const BaseTable = ({
   isExpandable,
   rows,
   columns,
-  filters,
+  filters = [],
   meta,
   emptyState,
   apply,

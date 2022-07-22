@@ -82,12 +82,13 @@ const transformUrlParamsBeforeFetching = (urlParams) => {
   return newParams;
 };
 
-export const useUrlBoundParams = (
+export const useUrlBoundParams = ({
   allowedParams,
   defaultParams,
+  additionalParam,
   fetchAction,
-  changeParamsAction
-) => {
+  changeParamsAction,
+}) => {
   const dispatch = useDispatch();
 
   const [urlParams] = useUrlParams(allowedParams);
@@ -97,7 +98,9 @@ export const useUrlBoundParams = (
   }, []);
 
   useDeepCompareEffect(() => {
-    dispatch(fetchAction(transformUrlParamsBeforeFetching(urlParams)));
+    dispatch(
+      fetchAction(transformUrlParamsBeforeFetching(urlParams), additionalParam)
+    );
   }, [urlParams]);
 
   const apply = (newParams) => {

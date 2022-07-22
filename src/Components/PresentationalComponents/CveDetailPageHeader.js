@@ -29,8 +29,12 @@ import parseCvssScore from '@redhat-cloud-services/frontend-components-utilities
 
 const CveDetailPageHeader = () => {
   const match = useRouteMatch();
-
   const dispatch = useDispatch();
+
+  const { cve, isDetailLoading } = useSelector(
+    ({ CveDetailStore }) => CveDetailStore
+  );
+
   const {
     description,
     severity,
@@ -39,10 +43,10 @@ const CveDetailPageHeader = () => {
     cvss3_score,
     cvss2_metrics,
     cvss3_metrics,
-    isDetailLoading,
-  } = useSelector(({ CveDetailStore }) => CveDetailStore.cve);
+  } = cve;
 
   const [hasMetadata, setHasMetadata] = useState(true);
+
   useEffect(() => {
     dispatch(fetchCveDetails(match.params.cveId));
   }, []);

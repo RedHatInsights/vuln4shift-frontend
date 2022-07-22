@@ -27,12 +27,12 @@ const CveListTable = () => {
     ({ CveListStore }) => CveListStore
   );
 
-  const apply = useUrlBoundParams(
-    CVE_LIST_ALLOWED_PARAMS,
-    meta,
-    fetchCveListTable,
-    changeCveListTableParams
-  );
+  const apply = useUrlBoundParams({
+    allowedParams: CVE_LIST_ALLOWED_PARAMS,
+    defaultParams: meta,
+    fetchAction: fetchCveListTable,
+    changeParamsAction: changeCveListTableParams,
+  });
 
   const { search, cvss_score, severity, published, affected_clusters } = meta;
 

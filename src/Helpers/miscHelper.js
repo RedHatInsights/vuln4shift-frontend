@@ -37,6 +37,10 @@ export const subtractYears = (currentDate, toSubtract) => {
 };
 
 export const setupFilters = (filters) => {
+  if (filters.length === 0) {
+    return [undefined, undefined];
+  }
+
   let filterConfig = { items: [] };
   let activeFiltersConfig = {
     filters: [],

@@ -19,12 +19,12 @@ const ClusterDetailTable = () => {
     ({ ClusterListStore }) => ClusterListStore
   );
 
-  const apply = useUrlBoundParams(
-    CLUSTER_LIST_ALLOWED_PARAMS,
-    meta,
-    fetchClusterListTable,
-    changeClusterListTableParams
-  );
+  const apply = useUrlBoundParams({
+    allowedParams: CLUSTER_LIST_ALLOWED_PARAMS,
+    defaultParams: meta,
+    fetchAction: fetchClusterListTable,
+    changeParamsAction: changeClusterListTableParams,
+  });
 
   const { search } = meta;
 

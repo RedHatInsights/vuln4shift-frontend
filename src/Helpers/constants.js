@@ -166,7 +166,7 @@ export const CVE_DETAIL_TABLE_COLUMNS = [
   },
   {
     title: 'Last seen',
-    /* TODO: Readd after endpoint integration: sortParam: 'last_seen', */
+    sortParam: 'last_seen',
   },
 ];
 

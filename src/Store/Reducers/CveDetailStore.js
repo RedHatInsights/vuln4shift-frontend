@@ -2,13 +2,16 @@ import { deepFreeze } from '../../Helpers/miscHelper';
 import * as ActionTypes from '../ActionTypes';
 
 const initialState = deepFreeze({
-  limit: 20,
-  offset: 0,
-  total_items: 0,
-  clusters: [],
   cve: {},
-  isTableLoading: true,
+  clusters: [],
   isDetailLoading: true,
+  isTableLoading: true,
+  meta: {
+    limit: 20,
+    offset: 0,
+    total_items: 0,
+    sort: '-last_seen',
+  },
 });
 
 const CveDetailStore = (state = initialState, action) => {
@@ -24,8 +27,21 @@ const CveDetailStore = (state = initialState, action) => {
       return {
         ...state,
         clusters: action.payload.data.data,
-        ...action.payload.data.meta,
+        meta: {
+          ...state.meta,
+          total_items: action.payload.data.meta.total_items,
+        },
         isTableLoading: false,
+      };
+    }
+
+    case `${ActionTypes.CHANGE_CVE_DETAIL_TABLE_PARAMS}`: {
+      return {
+        ...state,
+        meta: {
+          ...state.meta,
+          ...action.payload,
+        },
       };
     }
 
@@ -40,7 +56,6 @@ const CveDetailStore = (state = initialState, action) => {
       return {
         ...state,
         cve: action.payload.data.data,
-        ...action.payload.data.meta,
         isDetailLoading: false,
       };
     }
