@@ -1,0 +1,48 @@
+apiVersion: v1
+kind: Template
+metadata:
+  name: vuln4shift-frontend
+objects:
+  - apiVersion: cloud.redhat.com/v1alpha1
+    kind: Frontend
+    metadata:
+      name: ocp-vulnerability
+    spec:
+      envName: ${ENV_NAME}
+      title: Vulnerability
+      deploymentRepo: https://github.com/RedHatInsights/vuln4shift-frontend
+      API:
+        versions:
+          - v1
+      frontend:
+        paths:
+          - /apps/ocp-vulnerability
+      image: ${IMAGE}:${IMAGE_TAG}
+      navItems:
+        - appId: "ocp-vulnerability"
+          title: "Vulnerability"
+          href: "/openshift/insights/vulnerability"
+          product: "Red Hat Insights"
+          expandable: true
+          routes:
+            - appId: 'ocp-vulnerability'
+              title: 'CVEs'
+              href: '/openshift/insights/vulnerability/cves'
+            - appId: 'ocp-vulnerability'
+              title: 'Clusters'
+              href: '/openshift/insights/vulnerability/clusters'
+      module:
+        manifestLocation: "/apps/ocp-vulnerability/fed-mods.json"
+        modules:
+          - id: "ocp-vulnerability"
+            module: "./RootApp"
+            routes:
+              - pathname: /openshift/insights/vulnerability
+
+parameters:
+  - name: ENV_NAME
+    required: true
+  - name: IMAGE_TAG
+    required: true
+  - name: IMAGE
+    value: quay.io/cloudservices/vuln4shift-frontend
