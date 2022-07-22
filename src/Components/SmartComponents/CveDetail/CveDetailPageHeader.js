@@ -17,13 +17,15 @@ import {
 } from '@patternfly/react-core';
 import { Link } from 'react-router-dom';
 import { Shield } from '@redhat-cloud-services/frontend-components/Shield';
-import CvssVector from '../PresentationalComponents/CvssVector';
+import CvssVector from '../../PresentationalComponents/CvssVector';
 import { useRouteMatch } from 'react-router-dom';
-import WithLoader, { LoaderType } from './WithLoader';
-import MissingMetadata from '../PresentationalComponents/EmptyStates/MissingMetadata';
+import WithLoader, {
+  LoaderType,
+} from '../../PresentationalComponents/WithLoader';
+import MissingMetadata from '../../PresentationalComponents/EmptyStates/MissingMetadata';
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCveDetails } from '../../Store/Actions';
+import { fetchCveDetails } from '../../../Store/Actions';
 import { processDate } from '@redhat-cloud-services/frontend-components-utilities/helpers';
 import parseCvssScore from '@redhat-cloud-services/frontend-components-utilities/parseCvssScore';
 

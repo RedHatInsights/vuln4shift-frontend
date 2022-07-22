@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { Main } from '@redhat-cloud-services/frontend-components/Main';
-import CveDetailPageHeader from '../../PresentationalComponents/CveDetailPageHeader';
 import { Text, TextContent, TextVariants } from '@patternfly/react-core';
+import CveDetailPageHeader from './CveDetailPageHeader';
 import CveDetailTable from './CveDetailTable';
 
 const CveDetailPage = () => {

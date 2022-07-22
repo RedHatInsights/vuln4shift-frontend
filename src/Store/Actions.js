@@ -74,3 +74,11 @@ export const changeCveDetailsTableParams = (params) => ({
   },
   payload: () => params,
 });
+
+export const changeClusterDetailsTableParams = (params) => ({
+  type: ActionTypes.CHANGE_CLUSTER_DETAIL_TABLE_PARAMS,
+  meta: {
+    timestamp: new Date(),
+  },
+  payload: () => params,
+});
