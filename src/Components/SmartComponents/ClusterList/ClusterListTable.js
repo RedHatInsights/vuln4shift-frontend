@@ -1,5 +1,4 @@
-import React, { Fragment } from 'react';
-import BaseTableBody from '../Generic/BaseTableBody';
+import React from 'react';
 import {
   CLUSTER_LIST_ALLOWED_PARAMS,
   CLUSTER_LIST_TABLE_COLUMNS,
@@ -10,12 +9,10 @@ import {
   changeClusterListTableParams,
   fetchClusterListTable,
 } from '../../../Store/Actions';
-import BaseToolbar from '../Generic/BaseToolbar';
-import BottomPagination from '../../PresentationalComponents/BottomPagination';
 import NoClusters from '../../PresentationalComponents/EmptyStates/NoClusters';
-import { setupFilters } from '../../../Helpers/miscHelper';
 import useTextFilter from '../Filters/TextFilter';
 import { useUrlBoundParams } from '../../../Helpers/hooks';
+import BaseTable from '../Generic/BaseTable';
 
 const ClusterDetailTable = () => {
   const { clusters, isLoading, meta } = useSelector(
@@ -29,9 +26,9 @@ const ClusterDetailTable = () => {
     changeClusterListTableParams
   );
 
-  const { total_items, limit, offset, sort, search } = meta;
+  const { search } = meta;
 
-  const [filterConfig, activeFiltersConfig] = setupFilters([
+  const filters = [
     useTextFilter({
       urlParam: 'search',
       label: 'Name',
@@ -40,33 +37,18 @@ const ClusterDetailTable = () => {
       apply,
       chipLabel: 'Search term',
     }),
-  ]);
+  ];
 
   return (
-    <Fragment>
-      <BaseToolbar
-        page={offset / limit + 1}
-        perPage={limit}
-        itemCount={total_items}
-        apply={apply}
-        filterConfig={filterConfig}
-        activeFiltersConfig={activeFiltersConfig}
-      />
-      <BaseTableBody
-        isLoading={isLoading}
-        columns={CLUSTER_LIST_TABLE_COLUMNS}
-        rows={clusters.map((row) => CLUSTER_LIST_TABLE_MAPPER(row))}
-        emptyState={<NoClusters />}
-        sortParam={sort}
-        apply={apply}
-      />
-      <BottomPagination
-        page={offset / limit + 1}
-        perPage={limit}
-        itemCount={total_items}
-        apply={apply}
-      />
-    </Fragment>
+    <BaseTable
+      isLoading={isLoading}
+      rows={clusters.map((row) => CLUSTER_LIST_TABLE_MAPPER(row))}
+      columns={CLUSTER_LIST_TABLE_COLUMNS}
+      filters={filters}
+      meta={meta}
+      emptyState={<NoClusters />}
+      apply={apply}
+    />
   );
 };
 
