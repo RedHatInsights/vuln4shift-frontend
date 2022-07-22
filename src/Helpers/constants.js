@@ -173,23 +173,23 @@ export const CVE_DETAIL_TABLE_COLUMNS = [
 export const CLUSTER_DETAIL_TABLE_COLUMNS = [
   {
     title: 'CVE ID',
-    /* TODO: Readd after endpoint integration: sortParam: 'synopsis', */
+    sortParam: 'synopsis',
   },
   {
     title: 'Publish date',
-    /* TODO: Readd after endpoint integration: sortParam: 'publish_date', */
+    sortParam: 'publish_date',
   },
   {
     title: 'Severity',
-    /* TODO: Readd after endpoint integration: sortParam: 'severity', */
+    sortParam: 'severity',
   },
   {
     title: 'CVSS base score',
-    /* TODO: Readd after endpoint integration: sortParam: 'cvss_score', */
+    sortParam: 'cvss_score',
   },
   {
     title: 'Images exposed',
-    /* TODO: Readd after endpoint integration: sortParam: 'images_exposed', */
+    sortParam: 'images_exposed',
   },
 ];
 

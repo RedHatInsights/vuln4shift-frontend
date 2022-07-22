@@ -2,13 +2,16 @@ import { deepFreeze } from '../../Helpers/miscHelper';
 import * as ActionTypes from '../ActionTypes';
 
 const initialState = deepFreeze({
-  limit: 20,
-  offset: 0,
-  total_items: 0,
-  cves: [],
   cluster: {},
-  isTableLoading: true,
+  cves: [],
   isDetailLoading: true,
+  isTableLoading: true,
+  meta: {
+    limit: 20,
+    offset: 0,
+    total_items: 0,
+    sort: '-publish_date',
+  },
 });
 
 const ClusterDetailStore = (state = initialState, action) => {
@@ -24,8 +27,21 @@ const ClusterDetailStore = (state = initialState, action) => {
       return {
         ...state,
         cves: action.payload.data.data,
-        ...action.payload.data.meta,
+        meta: {
+          ...state.meta,
+          total_items: action.payload.data.meta.total_items,
+        },
         isTableLoading: false,
+      };
+    }
+
+    case `${ActionTypes.CHANGE_CLUSTER_DETAIL_TABLE_PARAMS}`: {
+      return {
+        ...state,
+        meta: {
+          ...state.meta,
+          ...action.payload,
+        },
       };
     }
 
@@ -40,7 +56,6 @@ const ClusterDetailStore = (state = initialState, action) => {
       return {
         ...state,
         cluster: action.payload.data.data,
-        ...action.payload.data.meta,
         isDetailLoading: false,
       };
     }

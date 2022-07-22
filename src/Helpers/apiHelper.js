@@ -18,14 +18,12 @@ export const fetchCveDetails = async (cveId) => {
   return axios.get(`/api/ocp-vulnerability/v1/cves/${cveId}`);
 };
 
-export const fetchClusterCves = async (clusterId, params) => {
+export const fetchClusterCves = async (params, clusterId) => {
   return axios.get(`/api/ocp-vulnerability/v1/clusters/${clusterId}/cves`, {
     params,
   });
 };
 
-export const fetchClusterDetails = async (clusterId, params) => {
-  return axios.get(`/api/ocp-vulnerability/v1/clusters/${clusterId}`, {
-    params,
-  });
+export const fetchClusterDetails = async (clusterId) => {
+  return axios.get(`/api/ocp-vulnerability/v1/clusters/${clusterId}`);
 };
