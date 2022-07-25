@@ -32,8 +32,11 @@ const BaseTableBody = ({
 
   const isRowExpanded = (row) => expandedRows.includes(row);
 
-  // temporary fix by assigning a default sortParam
-  const createSortBy = (columns, sortParam = '-publish_date') => {
+  const createSortBy = (columns, sortParam) => {
+    if (rows.length === 0) {
+      return {};
+    }
+
     const direction =
       sortParam[0] === '-' ? SortByDirection.desc : SortByDirection.asc;
     sortParam = sortParam.replace(/^(-|\+)/, '').split(',')[0];
@@ -55,7 +58,7 @@ const BaseTableBody = ({
         columnName = '-' + columnName;
       }
 
-      apply({ sort: columnName });
+      rows.length === 0 && apply({ sort: columnName });
     },
     columnIndex,
   });
