@@ -23,7 +23,11 @@ const ShieldSet = ({ count, linkTo }) => {
                 <span>0</span>
               </a>
             ) : (
-              <Link key={severityOption.value} to={linkTo}>
+              <Link
+                key={severityOption.value}
+                to={`${linkTo}?severity=${severityOption.value}`}
+                style={{ whiteSpace: 'nowrap' }}
+              >
                 <SecurityIcon style={{ color: severityOption.iconColor }} />
                 <span>{count[severityOption.value]}</span>
               </Link>
