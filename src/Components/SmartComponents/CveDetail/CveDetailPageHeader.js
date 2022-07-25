@@ -28,6 +28,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchCveDetails } from '../../../Store/Actions';
 import { processDate } from '@redhat-cloud-services/frontend-components-utilities/helpers';
 import parseCvssScore from '@redhat-cloud-services/frontend-components-utilities/parseCvssScore';
+import { SEVERITY_OPTIONS } from '../../../Helpers/constants';
 
 const CveDetailPageHeader = () => {
   const match = useRouteMatch();
@@ -140,10 +141,20 @@ const CveDetailPageHeader = () => {
                 style={{ verticalAlign: -4 }}
               >
                 <b>
-                  <Shield
-                    impact={hasMetadata ? severity : 'Unknown'}
-                    hasLabel
-                  />
+                  <span
+                    style={{
+                      color:
+                        hasMetadata &&
+                        SEVERITY_OPTIONS.find(
+                          (option) => option.label === severity
+                        )?.textColor,
+                    }}
+                  >
+                    <Shield
+                      impact={hasMetadata ? severity : 'Unknown'}
+                      hasLabel
+                    />
+                  </span>
                 </b>
               </WithLoader>
             </StackItem>

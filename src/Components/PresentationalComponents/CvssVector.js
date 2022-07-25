@@ -95,7 +95,7 @@ const CvssVector = ({
         <span className="pf-u-mr-md">{score}</span>
         <span id="cvss-vector-content">
           Vector:
-          {cvssVector?.substring(cvssVector.indexOf('/') + 1) || 'N/A'}
+          {' ' + cvssVector?.substring(cvssVector.indexOf('/') + 1) || 'N/A'}
         </span>
       </WithLoader>
     </TextContent>
