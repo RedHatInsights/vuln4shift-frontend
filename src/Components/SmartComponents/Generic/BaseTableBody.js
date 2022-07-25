@@ -74,7 +74,7 @@ const BaseTableBody = ({
     <TableComposable variant={TableVariant.compact} isStickyHeader>
       <Thead>
         <Tr>
-          {isExpandable && <Th />}
+          {isExpandable && rows.length > 0 && <Th />}
           {columns.map((column, index) => (
             <Th
               key={column.title}
