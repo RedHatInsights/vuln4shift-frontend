@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 import {
   TableComposable,
@@ -24,8 +24,19 @@ const BaseTableBody = ({
   apply,
 }) => {
   const [expandedRows, setExpandedRows] = useState([]);
+  const [areAllRowsExpanded, setAreAllRowsExpanded] = useState(false);
 
-  const setRowExpanded = (row, isExpanding) =>
+  useEffect(() => {
+    setAreAllRowsExpanded(
+      rows.length > 0 && rows.length === expandedRows.length
+    );
+  }, [expandedRows]);
+
+  useEffect(() => {
+    areAllRowsExpanded && setExpandedRows(rows.map((row) => row.key));
+  }, [rows]);
+
+  const onExpandRow = (row, isExpanding) =>
     setExpandedRows((prevExpanded) => {
       const otherExpandedRows = prevExpanded.filter((r) => r !== row);
       return isExpanding ? [...otherExpandedRows, row] : otherExpandedRows;
@@ -74,7 +85,18 @@ const BaseTableBody = ({
     <TableComposable variant={TableVariant.compact} isStickyHeader>
       <Thead>
         <Tr>
-          {isExpandable && rows.length > 0 && <Th />}
+          {isExpandable && rows.length > 0 && (
+            <Th
+              expand={{
+                onToggle: () =>
+                  setExpandedRows(
+                    areAllRowsExpanded ? [] : rows.map((row) => row.key)
+                  ),
+                // looks like Patternfly has this condition reversed
+                areAllExpanded: !areAllRowsExpanded,
+              }}
+            />
+          )}
           {columns.map((column, index) => (
             <Th
               key={column.title}
@@ -100,7 +122,7 @@ const BaseTableBody = ({
                       rowIndex,
                       isExpanded: isRowExpanded(row.key),
                       onToggle: () =>
-                        setRowExpanded(row.key, !isRowExpanded(row.key)),
+                        onExpandRow(row.key, !isRowExpanded(row.key)),
                     }}
                   />
                 )}
