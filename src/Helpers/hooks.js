@@ -1,7 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import qs from 'query-string';
 import { useDispatch } from 'react-redux';
-import useDeepCompareEffect from 'use-deep-compare-effect';
 import { PUBLISHED_OPTIONS } from './constants';
 
 export const useLocalStorage = (key) => {
@@ -15,32 +14,15 @@ export const useLocalStorage = (key) => {
   return [sessionValue, setValue];
 };
 
-export function filterUrlParams(urlParams, allowedParams) {
-  Object.entries(urlParams)
+export function filterParams(urlParams, allowedParams) {
+  const paramsCopy = { ...urlParams };
+
+  Object.entries(paramsCopy)
     .filter(([key, value]) => !allowedParams.includes(key) || value === '')
-    .forEach(([key]) => delete urlParams[key]);
+    .forEach(([key]) => delete paramsCopy[key]);
 
-  return urlParams;
+  return paramsCopy;
 }
-
-export const useUrlParams = (allowedParams) => {
-  const url = new URL(window.location);
-  const urlParams = filterUrlParams(qs.parse(url.search), allowedParams);
-
-  const setUrlParams = (parameters) => {
-    const searchParams = qs.stringify(
-      filterUrlParams(parameters, allowedParams)
-    );
-
-    window.history.replaceState(
-      null,
-      null,
-      `${url.origin}${url.pathname}?${searchParams}`
-    );
-  };
-
-  return [urlParams, setUrlParams];
-};
 
 const transformPublishedParam = (urlParams) => {
   const formatDate = (timestamp) => {
@@ -84,40 +66,67 @@ const transformUrlParamsBeforeFetching = (urlParams) => {
 
 const NUMERICAL_URL_PARAMS = ['limit', 'offset'];
 
+export const useUrlParams = (allowedParams) => {
+  const getUrlParams = () => {
+    const url = new URL(window.location);
+    return filterParams(qs.parse(url.search), allowedParams);
+  };
+
+  const setUrlParams = (newParams) => {
+    const url = new URL(window.location);
+    const queryParams = qs.stringify(newParams);
+
+    window.history.replaceState(
+      null,
+      null,
+      `${url.origin}${url.pathname}?${queryParams}`
+    );
+  };
+
+  return [getUrlParams, setUrlParams];
+};
+
 export const useUrlBoundParams = ({
   allowedParams,
-  defaultParams,
+  initialParams,
   additionalParam,
   fetchAction,
   changeParamsAction,
 }) => {
   const dispatch = useDispatch();
 
-  const [urlParams] = useUrlParams(allowedParams);
+  const [getUrlParams, setUrlParams] = useUrlParams(allowedParams);
 
   useEffect(() => {
-    apply({ ...defaultParams, ...urlParams });
+    const initialUrlParams = getUrlParams();
+
+    apply({ ...initialParams, ...initialUrlParams });
   }, []);
 
-  useDeepCompareEffect(() => {
-    dispatch(
-      fetchAction(transformUrlParamsBeforeFetching(urlParams), additionalParam)
-    );
-  }, [urlParams]);
-
   const apply = (newParams) => {
-    const [urlParams, setUrlParams] = useUrlParams(allowedParams);
+    const previousUrlParams = getUrlParams();
 
-    let combinedParams = { ...urlParams, ...newParams };
+    let combinedParams = { ...previousUrlParams, ...newParams };
 
+    // convert numerical params to numbers
     for (const property in combinedParams) {
       if (NUMERICAL_URL_PARAMS.includes(property)) {
         combinedParams[property] = Number(combinedParams[property]);
       }
     }
 
-    setUrlParams(combinedParams);
     dispatch(changeParamsAction(combinedParams));
+
+    const filteredParams = filterParams(combinedParams, allowedParams);
+
+    dispatch(
+      fetchAction(
+        transformUrlParamsBeforeFetching(filteredParams),
+        additionalParam
+      )
+    );
+
+    setUrlParams(filteredParams);
   };
 
   return apply;

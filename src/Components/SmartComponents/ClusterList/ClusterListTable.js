@@ -21,7 +21,7 @@ const ClusterDetailTable = () => {
 
   const apply = useUrlBoundParams({
     allowedParams: CLUSTER_LIST_ALLOWED_PARAMS,
-    defaultParams: meta,
+    initialParams: meta,
     fetchAction: fetchClusterListTable,
     changeParamsAction: changeClusterListTableParams,
   });

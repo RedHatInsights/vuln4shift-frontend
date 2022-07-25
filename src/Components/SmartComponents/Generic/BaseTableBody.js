@@ -20,6 +20,7 @@ const BaseTableBody = ({
   isExpandable = false,
   emptyState,
   sortParam,
+  perPage,
   apply,
 }) => {
   const [expandedRows, setExpandedRows] = useState([]);
@@ -58,7 +59,7 @@ const BaseTableBody = ({
         columnName = '-' + columnName;
       }
 
-      rows.length === 0 && apply({ sort: columnName });
+      rows.length > 0 && apply({ sort: columnName });
     },
     columnIndex,
   });
@@ -66,7 +67,7 @@ const BaseTableBody = ({
   return isLoading ? (
     <SkeletonTable
       colSize={columns.length}
-      rowSize={20}
+      rowSize={perPage || 20}
       variant={TableVariant.compact}
     />
   ) : (
@@ -144,6 +145,7 @@ BaseTableBody.propTypes = {
   isExpandable: propTypes.bool,
   emptyState: propTypes.node.isRequired,
   sortParam: propTypes.string,
+  perPage: propTypes.number,
   apply: propTypes.func,
 };
 

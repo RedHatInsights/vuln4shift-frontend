@@ -36,6 +36,7 @@ const BaseTable = ({
         isExpandable={isExpandable}
         emptyState={emptyState}
         sortParam={sort}
+        perPage={limit}
         apply={apply}
       />
       <BottomPagination

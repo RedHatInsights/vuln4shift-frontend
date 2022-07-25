@@ -29,7 +29,7 @@ const CveListTable = () => {
 
   const apply = useUrlBoundParams({
     allowedParams: CVE_LIST_ALLOWED_PARAMS,
-    defaultParams: meta,
+    initialParams: meta,
     fetchAction: fetchCveListTable,
     changeParamsAction: changeCveListTableParams,
   });

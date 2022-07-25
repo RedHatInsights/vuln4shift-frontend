@@ -13,9 +13,7 @@ const useTextFilter = ({
   const [searchValue, setSearchValue] = useState();
   const [handleSearch] = useState(() =>
     debounce((newValue) => {
-      if (newValue !== undefined) {
-        apply({ [urlParam]: newValue, offset: 0 });
-      }
+      apply({ [urlParam]: newValue, offset: 0 });
     }, 400)
   );
 

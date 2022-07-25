@@ -24,7 +24,7 @@ const CveDetailTable = () => {
 
   const apply = useUrlBoundParams({
     allowedParams: CVE_DETAIL_ALLOWED_PARAMS,
-    defaultParams: meta,
+    initialParams: meta,
     additionalParam: match.params.cveId,
     fetchAction: fetchCveDetailTable,
     changeParamsAction: changeCveDetailsTableParams,
