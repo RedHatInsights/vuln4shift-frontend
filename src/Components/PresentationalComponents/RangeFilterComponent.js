@@ -3,17 +3,14 @@ import propTypes from 'prop-types';
 import { Split, SplitItem, TextInput, Select } from '@patternfly/react-core';
 
 const RangeFilterComponent = ({
-  defaultValues,
   setValues,
   range,
   minMaxLabels,
   selectProps,
+  inputValue,
+  setInputValue,
 }) => {
   const [isOpen, setOpen] = useState(false);
-  const [inputValue, setInputValue] = useState({
-    min: defaultValues.min.toString(),
-    max: defaultValues.max.toString(),
-  });
 
   const areValuesValid = (currentValues, inputName) => {
     const numberValue = {
@@ -93,14 +90,12 @@ const RangeFilterComponent = ({
 };
 
 RangeFilterComponent.propTypes = {
-  defaultValues: propTypes.shape({
-    min: propTypes.number,
-    max: propTypes.number,
-  }),
   setValues: propTypes.func,
   range: propTypes.shape({ min: propTypes.number, max: propTypes.number }),
   minMaxLabels: propTypes.shape({ min: propTypes.node, max: propTypes.node }),
   selectProps: propTypes.object,
+  inputValue: propTypes.shape({ min: propTypes.string, max: propTypes.string }),
+  setInputValue: propTypes.func,
 };
 
 export default RangeFilterComponent;

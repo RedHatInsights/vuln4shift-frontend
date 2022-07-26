@@ -81,6 +81,7 @@ const CveListTable = () => {
       },
       placeholder: 'Filter by CVSS score range',
       apply,
+      chipLabel: 'CVSS base score',
     }),
     checkboxFilter({
       urlParam: 'affected_clusters',

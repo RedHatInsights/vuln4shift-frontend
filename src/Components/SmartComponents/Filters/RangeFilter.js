@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import debounce from 'lodash/debounce';
 import RangeFilterComponent from '../../PresentationalComponents/RangeFilterComponent';
 import { conditionalFilterType } from '@redhat-cloud-services/frontend-components/ConditionalFilter';
+import useDeepCompareEffect from 'use-deep-compare-effect';
 
 const useRangeFilter = ({
   urlParam,
@@ -11,13 +12,14 @@ const useRangeFilter = ({
   value,
   placeholder,
   apply,
+  chipLabel,
+  chipDecimalPlaces = 1,
 }) => {
-  const [searchValue, setSearchValue] = useState();
   const [handleSearch] = useState(() =>
     debounce((newValue) => {
       if (
-        newValue.min >= 0 &&
-        newValue.max <= 10 &&
+        newValue.min >= range.min &&
+        newValue.max <= range.max &&
         newValue.min <= newValue.max
       ) {
         apply({
@@ -28,17 +30,14 @@ const useRangeFilter = ({
     }, 600)
   );
 
-  useEffect(() => {
-    setSearchValue({
-      min: isNaN(value.min) ? range.min : value.min,
-      max: isNaN(value.max) ? range.max : value.max,
-    });
-  }, [value.min, value.max]);
+  const [inputValue, setInputValue] = useState();
 
-  const setValue = (newValue) => {
-    setSearchValue(newValue);
-    handleSearch(newValue);
-  };
+  useDeepCompareEffect(() => {
+    setInputValue({
+      min: (value ?? range).min.toString(),
+      max: (value ?? range).max.toString(),
+    });
+  }, [value]);
 
   const filterConfig = {
     label,
@@ -48,18 +47,39 @@ const useRangeFilter = ({
     filterValues: {
       children: (
         <RangeFilterComponent
-          defaultValues={searchValue}
-          setValues={setValue}
+          setValues={handleSearch}
           range={range}
           className="pf-u-mb-0"
           selectProps={{ placeholderText: placeholder }}
           minMaxLabels={minMaxLabels}
+          inputValue={inputValue}
+          setInputValue={setInputValue}
         />
       ),
     },
   };
 
-  return { filterConfig };
+  const activeFiltersConfig = {
+    isShown: value.min !== range.min || value.max !== range.max,
+    onDelete: () => {
+      apply({
+        [urlParam]: undefined,
+        offset: 0,
+      });
+    },
+    key: urlParam,
+    category: chipLabel,
+    chips: [
+      {
+        name:
+          value.min.toFixed(chipDecimalPlaces) +
+          ' - ' +
+          value.max.toFixed(chipDecimalPlaces),
+      },
+    ],
+  };
+
+  return { filterConfig, activeFiltersConfig };
 };
 
 export default useRangeFilter;

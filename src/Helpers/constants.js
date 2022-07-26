@@ -81,11 +81,11 @@ export const SEVERITY_OPTIONS = [
 
 export const EXPOSED_CLUSTERS_OPTIONS = [
   {
-    value: 'true',
+    value: 'oneOrMore',
     label: '1 or more',
   },
   {
-    value: 'false',
+    value: 'none',
     label: 'None',
   },
 ];

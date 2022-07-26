@@ -84,6 +84,7 @@ const ClusterDetailTable = () => {
       },
       placeholder: 'Filter by CVSS score range',
       apply,
+      chipLabel: 'CVSS base score',
     }),
   ];
 
