@@ -56,6 +56,7 @@ const ClusterDetailTable = () => {
       items: PUBLISHED_OPTIONS,
       placeholder: 'Filter by publish date',
       apply,
+      chipLabel: 'Publish date',
     }),
     checkboxFilter({
       urlParam: 'severity',

@@ -1,6 +1,14 @@
 import { conditionalFilterType } from '@redhat-cloud-services/frontend-components/ConditionalFilter';
 
-const radioFilter = ({ urlParam, label, value, placeholder, items, apply }) => {
+const radioFilter = ({
+  urlParam,
+  label,
+  value,
+  placeholder,
+  items,
+  apply,
+  chipLabel,
+}) => {
   const onValueChanged = (value) => {
     apply({
       [urlParam]: value,
@@ -23,7 +31,19 @@ const radioFilter = ({ urlParam, label, value, placeholder, items, apply }) => {
     },
   };
 
-  return { filterConfig };
+  const activeFiltersConfig = {
+    isShown: !!value,
+    onDelete: () => {
+      onValueChanged(undefined);
+    },
+    key: urlParam,
+    category: chipLabel,
+    chips: items
+      .filter((item) => item.value === value)
+      ?.map((item) => ({ name: item.label, value: item.value })),
+  };
+
+  return { filterConfig, activeFiltersConfig };
 };
 
 export default radioFilter;
