@@ -19,7 +19,6 @@ import useRangeFilter from '../Filters/RangeFilter';
 import { getCvssScoreFromUrlParam } from '../../../Helpers/miscHelper';
 import checkboxFilter from '../Filters/CheckboxFilter';
 import radioFilter from '../Filters/RadioFilter';
-import ternaryFilter from '../Filters/TernaryFilter';
 import BaseTable from '../Generic/BaseTable';
 
 const CveListTable = () => {
@@ -82,13 +81,14 @@ const CveListTable = () => {
       placeholder: 'Filter by CVSS score range',
       apply,
     }),
-    ternaryFilter({
+    checkboxFilter({
       urlParam: 'affected_clusters',
       label: 'Exposed clusters',
       value: affected_clusters,
       items: EXPOSED_CLUSTERS_OPTIONS,
       placeholder: 'Filter by exposed clusters',
       apply,
+      chipLabel: 'Exposed clusters',
     }),
   ];
 

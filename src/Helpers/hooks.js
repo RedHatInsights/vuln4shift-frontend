@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import qs from 'query-string';
 import { useDispatch } from 'react-redux';
-import { PUBLISHED_OPTIONS } from './constants';
+import { EXPOSED_CLUSTERS_OPTIONS, PUBLISHED_OPTIONS } from './constants';
 
 // TODO: Consider moving some of these non-hook functions to constants.js or miscHelper.js
 
@@ -52,9 +52,24 @@ const transformPublishedParam = (urlParams) => {
   return urlParams;
 };
 
+const transformExposedClustersParam = (urlParams) => {
+  if (urlParams.affected_clusters) {
+    urlParams.affected_clusters = EXPOSED_CLUSTERS_OPTIONS.map((item) =>
+      urlParams.affected_clusters.split(',').includes(item.value)
+        ? 'true'
+        : 'false'
+    ).join(',');
+  }
+
+  return urlParams;
+};
+
 // when creating additional transformer in the future
 // create a new function for it and then add the function to this array
-const URL_TRANSFORMERS = [transformPublishedParam];
+const URL_TRANSFORMERS = [
+  transformPublishedParam,
+  transformExposedClustersParam,
+];
 
 const transformUrlParamsBeforeFetching = (urlParams) => {
   let newParams = { ...urlParams };
