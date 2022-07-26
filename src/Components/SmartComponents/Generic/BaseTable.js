@@ -14,6 +14,7 @@ const BaseTable = ({
   meta,
   emptyState,
   apply,
+  onExport,
 }) => {
   const { offset, limit, total_items, sort } = meta;
 
@@ -28,6 +29,7 @@ const BaseTable = ({
         apply={apply}
         filterConfig={filterConfig}
         activeFiltersConfig={activeFiltersConfig}
+        onExport={onExport}
       />
       <BaseTableBody
         isLoading={isLoading}
@@ -75,6 +77,7 @@ BaseTable.propTypes = {
     sort: propTypes.string,
   }),
   apply: propTypes.func,
+  onExport: propTypes.func,
 };
 
 export default BaseTable;

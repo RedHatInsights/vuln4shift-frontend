@@ -1,6 +1,8 @@
 import * as ActionTypes from '../Store/ActionTypes';
 import * as api from '../Helpers/apiHelper';
 
+// TODO: Consider adding prefix to distinguish from API functions
+
 /* FETCHING DATA */
 export const fetchCveListTable = (params) => ({
   type: ActionTypes.FETCH_CVE_LIST_TABLE,

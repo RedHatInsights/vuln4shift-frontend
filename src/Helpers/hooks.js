@@ -3,6 +3,8 @@ import qs from 'query-string';
 import { useDispatch } from 'react-redux';
 import { PUBLISHED_OPTIONS } from './constants';
 
+// TODO: Consider moving some of these non-hook functions to constants.js or miscHelper.js
+
 export const useLocalStorage = (key) => {
   const [sessionValue, setSessionValue] = useState(localStorage.getItem(key));
 
@@ -130,4 +132,22 @@ export const useUrlBoundParams = ({
   };
 
   return apply;
+};
+
+export const useExport = (fetchAction, filenamePrefix) => {
+  const DEFAULT_PARAMS = {
+    offset: 0,
+    limit: Number.MAX_SAFE_INTEGER,
+  };
+
+  const onExport = async (format, params) => {
+    const payload = await fetchAction({
+      ...params,
+      ...DEFAULT_PARAMS,
+    });
+
+    console.log(payload, filenamePrefix);
+  };
+
+  return onExport;
 };
