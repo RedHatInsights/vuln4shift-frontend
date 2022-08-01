@@ -30,9 +30,10 @@ const CveListPage = () => {
 
   const HeaderTitle = (
     <Popover
-      className="cve-list-page-header-popover"
+      hasAutoWidth
+      maxWidth="380px"
       position="right"
-      flipBehavior={[]}
+      enableFlip
       bodyContent={
         <Fragment>
           The Vulnerability service identifies CVEs with errata that may affect
@@ -58,7 +59,6 @@ const CveListPage = () => {
           </SplitItem>
         </Split>
       }
-      appendTo={document.querySelector('.ocpVulnerability')}
     >
       <span>
         CVEs
