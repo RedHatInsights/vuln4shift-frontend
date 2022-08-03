@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   CLUSTER_LIST_ALLOWED_PARAMS,
+  CLUSTER_LIST_DEFAULT_FILTERS,
   CLUSTER_LIST_TABLE_COLUMNS,
   CLUSTER_LIST_TABLE_MAPPER,
 } from '../../../Helpers/constants';
@@ -13,6 +14,8 @@ import NoClusters from '../../PresentationalComponents/EmptyStates/NoClusters';
 import useTextFilter from '../Filters/TextFilter';
 import { useUrlBoundParams } from '../../../Helpers/hooks';
 import BaseTable from '../Generic/BaseTable';
+import { setupFilters } from '../../../Helpers/miscHelper';
+import NoMatchingClusters from '../../PresentationalComponents/EmptyStates/NoMatchingClusters';
 
 const ClusterDetailTable = () => {
   const { clusters, isLoading, meta } = useSelector(
@@ -39,14 +42,20 @@ const ClusterDetailTable = () => {
     }),
   ];
 
+  const [filterConfig, activeFiltersConfig, areAnyFiltersApplied] =
+    setupFilters(filters, meta, CLUSTER_LIST_DEFAULT_FILTERS, apply);
+
   return (
     <BaseTable
       isLoading={isLoading}
       rows={clusters.map((row) => CLUSTER_LIST_TABLE_MAPPER(row))}
       columns={CLUSTER_LIST_TABLE_COLUMNS}
-      filters={filters}
+      filterConfig={filterConfig}
+      activeFiltersConfig={activeFiltersConfig}
       meta={meta}
-      emptyState={<NoClusters />}
+      emptyState={
+        areAnyFiltersApplied ? <NoMatchingClusters /> : <NoClusters />
+      }
       apply={apply}
     />
   );

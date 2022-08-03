@@ -8,8 +8,9 @@ import {
   EmptyStateVariant,
 } from '@patternfly/react-core';
 import { CheckCircleIcon } from '@patternfly/react-icons';
+import propTypes from 'prop-types';
 
-const NoCves = () => (
+const NoCves = ({ multipleClusters = false }) => (
   <Bullseye>
     <EmptyState variant={EmptyStateVariant.large}>
       <EmptyStateIcon icon={CheckCircleIcon} size="sm" />
@@ -17,10 +18,16 @@ const NoCves = () => (
         No CVEs
       </Title>
       <EmptyStateBody>
-        Your clusters are not affected by any CVEs.
+        {multipleClusters
+          ? 'Your clusters are not affected by any CVEs.'
+          : 'Your cluster is not affected by any CVEs.'}
       </EmptyStateBody>
     </EmptyState>
   </Bullseye>
 );
+
+NoCves.propTypes = {
+  multipleClusters: propTypes.bool,
+};
 
 export default NoCves;

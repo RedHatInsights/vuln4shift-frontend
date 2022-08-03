@@ -1,11 +1,12 @@
 import React from 'react';
 import {
   CVE_DETAIL_ALLOWED_PARAMS,
+  CVE_DETAIL_DEFAULT_FILTERS,
   CVE_DETAIL_TABLE_COLUMNS,
   CVE_DETAIL_TABLE_MAPPER,
 } from '../../../Helpers/constants';
 import { useSelector } from 'react-redux';
-import NoClusters from '../../PresentationalComponents/EmptyStates/NoClusters';
+import NoMatchingClusters from '../../PresentationalComponents/EmptyStates/NoMatchingClusters';
 import { useRouteMatch } from 'react-router-dom';
 import BaseTable from '../Generic/BaseTable';
 import { useUrlBoundParams } from '../../../Helpers/hooks';
@@ -14,6 +15,7 @@ import {
   fetchCveDetailTable,
 } from '../../../Store/Actions';
 import useTextFilter from '../Filters/TextFilter';
+import { setupFilters } from '../../../Helpers/miscHelper';
 
 const CveDetailTable = () => {
   const match = useRouteMatch();
@@ -43,14 +45,22 @@ const CveDetailTable = () => {
     }),
   ];
 
+  const [filterConfig, activeFiltersConfig] = setupFilters(
+    filters,
+    meta,
+    CVE_DETAIL_DEFAULT_FILTERS,
+    apply
+  );
+
   return (
     <BaseTable
       isLoading={isTableLoading}
       rows={clusters.map((row) => CVE_DETAIL_TABLE_MAPPER(row))}
       columns={CVE_DETAIL_TABLE_COLUMNS}
-      filters={filters}
+      filterConfig={filterConfig}
+      activeFiltersConfig={activeFiltersConfig}
       meta={meta}
-      emptyState={<NoClusters />}
+      emptyState={<NoMatchingClusters />}
       apply={apply}
     />
   );

@@ -305,3 +305,15 @@ export const CLUSTER_DETAIL_ALLOWED_PARAMS = [
   'cvss_score',
   'images_exposed',
 ];
+
+/* DEFAULT FILTERS */
+
+export const CVE_LIST_DEFAULT_FILTERS = {
+  affected_clusters: 'oneOrMore',
+};
+
+export const CLUSTER_LIST_DEFAULT_FILTERS = {};
+
+export const CVE_DETAIL_DEFAULT_FILTERS = {};
+
+export const CLUSTER_DETAIL_DEFAULT_FILTERS = {};

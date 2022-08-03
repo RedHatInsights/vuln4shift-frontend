@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   CLUSTER_DETAIL_ALLOWED_PARAMS,
+  CLUSTER_DETAIL_DEFAULT_FILTERS,
   CLUSTER_DETAIL_TABLE_COLUMNS,
   CLUSTER_DETAIL_TABLE_MAPPER,
   PUBLISHED_OPTIONS,
@@ -14,12 +15,16 @@ import {
 import NoCves from '../../PresentationalComponents/EmptyStates/NoCves';
 import { useRouteMatch } from 'react-router-dom';
 import { useUrlBoundParams } from '../../../Helpers/hooks';
-import { getCvssScoreFromUrlParam } from '../../../Helpers/miscHelper';
+import {
+  getCvssScoreFromUrlParam,
+  setupFilters,
+} from '../../../Helpers/miscHelper';
 import useTextFilter from '../Filters/TextFilter';
 import useRangeFilter from '../Filters/RangeFilter';
 import checkboxFilter from '../Filters/CheckboxFilter';
 import radioFilter from '../Filters/RadioFilter';
 import BaseTable from '../Generic/BaseTable';
+import NoMatchingCves from '../../PresentationalComponents/EmptyStates/NoMatchingCves';
 
 const ClusterDetailTable = () => {
   const match = useRouteMatch();
@@ -88,15 +93,19 @@ const ClusterDetailTable = () => {
     }),
   ];
 
+  const [filterConfig, activeFiltersConfig, areAnyFiltersApplied] =
+    setupFilters(filters, meta, CLUSTER_DETAIL_DEFAULT_FILTERS, apply);
+
   return (
     <BaseTable
       isLoading={isTableLoading}
       isExpandable
       rows={cves.map((row) => CLUSTER_DETAIL_TABLE_MAPPER(row))}
       columns={CLUSTER_DETAIL_TABLE_COLUMNS}
-      filters={filters}
+      filterConfig={filterConfig}
+      activeFiltersConfig={activeFiltersConfig}
       meta={meta}
-      emptyState={<NoCves />}
+      emptyState={areAnyFiltersApplied ? <NoMatchingCves /> : <NoCves />}
       apply={apply}
     />
   );

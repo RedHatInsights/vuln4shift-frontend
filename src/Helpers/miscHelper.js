@@ -1,3 +1,5 @@
+import isEqual from 'lodash/isEqual';
+
 export const getCvssScoreFromUrlParam = (urlParam) => {
   if (!urlParam?.includes(',')) {
     urlParam = ',';
@@ -36,17 +38,44 @@ export const subtractYears = (currentDate, toSubtract) => {
   return currentDate.setFullYear(currentDate.getFullYear() - toSubtract);
 };
 
-export const setupFilters = (filters) => {
+export const areAnyFiltersApplied = ({
+  currentParams,
+  defaultParams,
+  filterParams,
+}) => {
+  // filter out params which have nothing to do with filtering, like page, sort, etc.
+  const reducedParams = filterParams.reduce(
+    (acc, param) => ({
+      ...acc,
+      ...(currentParams[param] && { [param]: currentParams[param] }),
+    }),
+    {}
+  );
+
+  return !isEqual(reducedParams, defaultParams);
+};
+
+export const setupFilters = (filters, meta, defaultFilters, apply) => {
   if (filters.length === 0) {
     return [undefined, undefined];
   }
 
+  const filterKeys = filters.map((item) => item.filterConfig.key);
+  const showDeleteButton = areAnyFiltersApplied({
+    currentParams: meta,
+    defaultParams: defaultFilters,
+    filterParams: filterKeys,
+  });
+
   let filterConfig = { items: [] };
   let activeFiltersConfig = {
     filters: [],
-    onDelete: (_, categories) =>
-      categories.forEach((category) => category.onDelete(category.chips)),
+    onDelete: (_, categories, isReset) =>
+      isReset
+        ? apply({ ...defaultFilters, offset: 0 }, true)
+        : categories.forEach((category) => category.onDelete(category.chips)),
     deleteTitle: 'Reset filter',
+    showDeleteButton,
   };
 
   filters.forEach((filter) => {
@@ -56,7 +85,5 @@ export const setupFilters = (filters) => {
       activeFiltersConfig.filters.push(filter.activeFiltersConfig);
   });
 
-  activeFiltersConfig.showDeleteButton = activeFiltersConfig.filters.length > 0;
-
-  return [filterConfig, activeFiltersConfig];
+  return [filterConfig, activeFiltersConfig, showDeleteButton];
 };

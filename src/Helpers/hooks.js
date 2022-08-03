@@ -120,10 +120,12 @@ export const useUrlBoundParams = ({
     apply({ ...initialParams, ...initialUrlParams });
   }, []);
 
-  const apply = (newParams) => {
+  const apply = (newParams, isReset = false) => {
     const previousUrlParams = getUrlParams();
 
-    let combinedParams = { ...previousUrlParams, ...newParams };
+    let combinedParams = isReset
+      ? { ...newParams }
+      : { ...previousUrlParams, ...newParams };
 
     // convert numerical params to numbers
     for (const property in combinedParams) {

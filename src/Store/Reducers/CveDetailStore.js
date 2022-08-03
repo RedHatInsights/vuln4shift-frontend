@@ -1,3 +1,4 @@
+import { CVE_DETAIL_DEFAULT_FILTERS } from '../../Helpers/constants';
 import { deepFreeze } from '../../Helpers/miscHelper';
 import * as ActionTypes from '../ActionTypes';
 
@@ -11,6 +12,7 @@ const initialState = deepFreeze({
     offset: 0,
     total_items: 0,
     sort: '-last_seen',
+    ...CVE_DETAIL_DEFAULT_FILTERS,
   },
 });
 
@@ -39,7 +41,9 @@ const CveDetailStore = (state = initialState, action) => {
       return {
         ...state,
         meta: {
-          ...state.meta,
+          total_items: state.meta.total_items,
+          sort: state.meta.sort,
+          limit: state.meta.limit,
           ...action.payload,
         },
       };

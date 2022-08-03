@@ -3,22 +3,20 @@ import propTypes from 'prop-types';
 import BaseTableBody from '../Generic/BaseTableBody';
 import BaseToolbar from '../Generic/BaseToolbar';
 import BottomPagination from '../../PresentationalComponents/BottomPagination';
-import { setupFilters } from '../../../Helpers/miscHelper';
 
 const BaseTable = ({
   isLoading,
   isExpandable,
   rows,
   columns,
-  filters = [],
+  filterConfig = [],
+  activeFiltersConfig = [],
   meta,
   emptyState,
   apply,
   onExport,
 }) => {
   const { offset, limit, total_items, sort } = meta;
-
-  const [filterConfig, activeFiltersConfig] = setupFilters(filters);
 
   return (
     <Fragment>
@@ -69,7 +67,8 @@ BaseTable.propTypes = {
   isExpandable: propTypes.bool,
   emptyState: propTypes.node.isRequired,
   sortParam: propTypes.string,
-  filters: propTypes.array,
+  filterConfig: propTypes.array,
+  activeFiltersConfig: propTypes.array,
   meta: propTypes.shape({
     offset: propTypes.number,
     limit: propTypes.number,

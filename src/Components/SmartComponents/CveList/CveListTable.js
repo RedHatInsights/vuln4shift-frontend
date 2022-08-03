@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   CVE_LIST_ALLOWED_PARAMS,
+  CVE_LIST_DEFAULT_FILTERS,
   CVE_LIST_TABLE_COLUMNS,
   CVE_LIST_TABLE_MAPPER,
   EXPOSED_CLUSTERS_OPTIONS,
@@ -13,10 +14,14 @@ import {
   changeCveListTableParams,
 } from '../../../Store/Actions';
 import NoCves from '../../PresentationalComponents/EmptyStates/NoCves';
+import NoMatchingCves from '../../PresentationalComponents/EmptyStates/NoMatchingCves';
 import { useUrlBoundParams } from '../../../Helpers/hooks';
 import useTextFilter from '../Filters/TextFilter';
 import useRangeFilter from '../Filters/RangeFilter';
-import { getCvssScoreFromUrlParam } from '../../../Helpers/miscHelper';
+import {
+  getCvssScoreFromUrlParam,
+  setupFilters,
+} from '../../../Helpers/miscHelper';
 import checkboxFilter from '../Filters/CheckboxFilter';
 import radioFilter from '../Filters/RadioFilter';
 import BaseTable from '../Generic/BaseTable';
@@ -94,15 +99,21 @@ const CveListTable = () => {
     }),
   ];
 
+  const [filterConfig, activeFiltersConfig, areAnyFiltersApplied] =
+    setupFilters(filters, meta, CVE_LIST_DEFAULT_FILTERS, apply);
+
   return (
     <BaseTable
       isLoading={isLoading}
       isExpandable
       rows={cves.map((row) => CVE_LIST_TABLE_MAPPER(row))}
       columns={CVE_LIST_TABLE_COLUMNS}
-      filters={filters}
+      filterConfig={filterConfig}
+      activeFiltersConfig={activeFiltersConfig}
       meta={meta}
-      emptyState={<NoCves />}
+      emptyState={
+        areAnyFiltersApplied ? <NoMatchingCves /> : <NoCves multipleClusters />
+      }
       apply={apply}
     />
   );
