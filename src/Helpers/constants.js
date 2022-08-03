@@ -126,19 +126,21 @@ export const CLUSTER_LIST_TABLE_COLUMNS = [
   },
   {
     title: 'Status',
+    sortParam: 'status',
   },
   {
     title: 'Type',
   },
   {
     title: 'Version',
+    sortParam: 'version',
   },
   {
     title: 'CVEs severity',
   },
   {
     title: 'Provider',
-    /* TODO: Readd after endpoint integration: sortParam: 'provider', */
+    sortParam: 'provider',
   },
   {
     title: 'Last seen',
@@ -153,16 +155,18 @@ export const CVE_DETAIL_TABLE_COLUMNS = [
   },
   {
     title: 'Status',
+    sortParam: 'status',
   },
   {
     title: 'Type',
   },
   {
     title: 'Version',
+    sortParam: 'version',
   },
   {
     title: 'Provider',
-    /* TODO: Readd after endpoint integration: sortParam: 'provider', */
+    sortParam: 'provider',
   },
   {
     title: 'Last seen',
