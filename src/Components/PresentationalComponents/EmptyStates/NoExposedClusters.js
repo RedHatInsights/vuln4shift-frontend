@@ -8,9 +8,8 @@ import {
   EmptyStateVariant,
 } from '@patternfly/react-core';
 import { CheckCircleIcon } from '@patternfly/react-icons';
-import propTypes from 'prop-types';
 
-const NoCves = ({ multipleClusters = false }) => (
+const NoExposedClusters = () => (
   <Bullseye>
     <EmptyState variant={EmptyStateVariant.large}>
       <EmptyStateIcon
@@ -19,19 +18,11 @@ const NoCves = ({ multipleClusters = false }) => (
         size="sm"
       />
       <Title headingLevel="h5" size="lg">
-        No CVEs
+        No clusters found
       </Title>
-      <EmptyStateBody>
-        {multipleClusters
-          ? 'Your clusters are not affected by any CVEs.'
-          : 'Your cluster is not affected by any CVEs.'}
-      </EmptyStateBody>
+      <EmptyStateBody>This CVE doesn&apos;t affect any cluster.</EmptyStateBody>
     </EmptyState>
   </Bullseye>
 );
 
-NoCves.propTypes = {
-  multipleClusters: propTypes.bool,
-};
-
-export default NoCves;
+export default NoExposedClusters;

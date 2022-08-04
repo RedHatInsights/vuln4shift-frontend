@@ -7,6 +7,7 @@ import {
 } from '../../../Helpers/constants';
 import { useSelector } from 'react-redux';
 import NoMatchingClusters from '../../PresentationalComponents/EmptyStates/NoMatchingClusters';
+import NoExposedClusters from '../../PresentationalComponents/EmptyStates/NoExposedClusters';
 import { useRouteMatch } from 'react-router-dom';
 import BaseTable from '../Generic/BaseTable';
 import { useUrlBoundParams } from '../../../Helpers/hooks';
@@ -45,12 +46,8 @@ const CveDetailTable = () => {
     }),
   ];
 
-  const [filterConfig, activeFiltersConfig] = setupFilters(
-    filters,
-    meta,
-    CVE_DETAIL_DEFAULT_FILTERS,
-    apply
-  );
+  const [filterConfig, activeFiltersConfig, areAnyFiltersApplied] =
+    setupFilters(filters, meta, CVE_DETAIL_DEFAULT_FILTERS, apply);
 
   return (
     <BaseTable
@@ -60,7 +57,9 @@ const CveDetailTable = () => {
       filterConfig={filterConfig}
       activeFiltersConfig={activeFiltersConfig}
       meta={meta}
-      emptyState={<NoMatchingClusters />}
+      emptyState={
+        areAnyFiltersApplied ? <NoMatchingClusters /> : <NoExposedClusters />
+      }
       apply={apply}
     />
   );

@@ -67,8 +67,8 @@ BaseTable.propTypes = {
   isExpandable: propTypes.bool,
   emptyState: propTypes.node.isRequired,
   sortParam: propTypes.string,
-  filterConfig: propTypes.array,
-  activeFiltersConfig: propTypes.array,
+  filterConfig: propTypes.object,
+  activeFiltersConfig: propTypes.object,
   meta: propTypes.shape({
     offset: propTypes.number,
     limit: propTypes.number,
