@@ -7,6 +7,7 @@ import {
   EXPOSED_CLUSTERS_OPTIONS,
   PUBLISHED_OPTIONS,
   SEVERITY_OPTIONS,
+  CVE_LIST_EXPORT_PREFIX,
 } from '../../../Helpers/constants';
 import { useSelector } from 'react-redux';
 import {
@@ -15,7 +16,7 @@ import {
 } from '../../../Store/Actions';
 import NoCves from '../../PresentationalComponents/EmptyStates/NoCves';
 import NoMatchingCves from '../../PresentationalComponents/EmptyStates/NoMatchingCves';
-import { useUrlBoundParams } from '../../../Helpers/hooks';
+import { useUrlBoundParams, useExport } from '../../../Helpers/hooks';
 import useTextFilter from '../Filters/TextFilter';
 import useRangeFilter from '../Filters/RangeFilter';
 import {
@@ -25,6 +26,7 @@ import {
 import checkboxFilter from '../Filters/CheckboxFilter';
 import radioFilter from '../Filters/RadioFilter';
 import BaseTable from '../Generic/BaseTable';
+import { fetchCves } from '../../../Helpers/apiHelper';
 
 const CveListTable = () => {
   const { cves, isLoading, meta } = useSelector(
@@ -41,6 +43,8 @@ const CveListTable = () => {
   const { search, cvss_score, severity, published, affected_clusters } = meta;
 
   const [cvss_score_min, cvss_score_max] = getCvssScoreFromUrlParam(cvss_score);
+
+  const onExport = useExport(CVE_LIST_EXPORT_PREFIX, fetchCves);
 
   const filters = [
     useTextFilter({
@@ -115,6 +119,7 @@ const CveListTable = () => {
         areAnyFiltersApplied ? <NoMatchingCves /> : <NoCves multipleClusters />
       }
       apply={apply}
+      onExport={(format) => onExport(format, meta)}
     />
   );
 };

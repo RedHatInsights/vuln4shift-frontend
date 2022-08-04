@@ -2,6 +2,7 @@ import React from 'react';
 import {
   CVE_DETAIL_ALLOWED_PARAMS,
   CVE_DETAIL_DEFAULT_FILTERS,
+  CVE_DETAIL_EXPORT_PREFIX,
   CVE_DETAIL_TABLE_COLUMNS,
   CVE_DETAIL_TABLE_MAPPER,
 } from '../../../Helpers/constants';
@@ -10,13 +11,14 @@ import NoMatchingClusters from '../../PresentationalComponents/EmptyStates/NoMat
 import NoExposedClusters from '../../PresentationalComponents/EmptyStates/NoExposedClusters';
 import { useRouteMatch } from 'react-router-dom';
 import BaseTable from '../Generic/BaseTable';
-import { useUrlBoundParams } from '../../../Helpers/hooks';
+import { useExport, useUrlBoundParams } from '../../../Helpers/hooks';
 import {
   changeCveDetailsTableParams,
   fetchCveDetailTable,
 } from '../../../Store/Actions';
 import useTextFilter from '../Filters/TextFilter';
 import { setupFilters } from '../../../Helpers/miscHelper';
+import { fetchExposedClusters } from '../../../Helpers/apiHelper';
 
 const CveDetailTable = () => {
   const match = useRouteMatch();
@@ -34,6 +36,12 @@ const CveDetailTable = () => {
   });
 
   const { search } = meta;
+
+  const onExport = useExport(
+    CVE_DETAIL_EXPORT_PREFIX,
+    fetchExposedClusters,
+    match.params.cveId
+  );
 
   const filters = [
     useTextFilter({
@@ -61,6 +69,7 @@ const CveDetailTable = () => {
         areAnyFiltersApplied ? <NoMatchingClusters /> : <NoExposedClusters />
       }
       apply={apply}
+      onExport={(format) => onExport(format, meta)}
     />
   );
 };

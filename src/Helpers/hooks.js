@@ -2,6 +2,11 @@ import { useEffect, useState } from 'react';
 import qs from 'query-string';
 import { useDispatch } from 'react-redux';
 import { EXPOSED_CLUSTERS_OPTIONS, PUBLISHED_OPTIONS } from './constants';
+import {
+  addNotification,
+  clearNotifications,
+} from '@redhat-cloud-services/frontend-components-notifications/redux';
+import { downloadFile } from '@redhat-cloud-services/frontend-components-utilities/helpers';
 
 // TODO: Consider moving some of these non-hook functions to constants.js or miscHelper.js
 
@@ -72,7 +77,7 @@ const URL_TRANSFORMERS = [
 ];
 
 const transformUrlParamsBeforeFetching = (urlParams) => {
-  let newParams = { ...urlParams };
+  let newParams = { ...urlParams, total_items: undefined };
 
   URL_TRANSFORMERS.forEach((transformer) => {
     newParams = transformer(newParams);
@@ -151,19 +156,49 @@ export const useUrlBoundParams = ({
   return apply;
 };
 
-export const useExport = (fetchAction, filenamePrefix) => {
+export const useExport = (filenamePrefix, fetchAction, fetchActionParam) => {
+  const dispatch = useDispatch();
+
   const DEFAULT_PARAMS = {
     offset: 0,
-    limit: Number.MAX_SAFE_INTEGER,
+    // TODO: Change this to Number.MAX_SAFE_INTEGER once backend starts supporting it
+    limit: 100,
   };
 
   const onExport = async (format, params) => {
-    const payload = await fetchAction({
-      ...params,
-      ...DEFAULT_PARAMS,
-    });
+    dispatch(
+      addNotification({
+        variant: 'info',
+        title:
+          'Preparing export. Once complete, your download will start automatically.',
+      })
+    );
 
-    console.log(payload, filenamePrefix);
+    const formattedDate =
+      new Date().toISOString().replace(/[T:]/g, '-').split('.')[0] + '-utc';
+
+    const payload = await fetchAction(
+      {
+        ...transformUrlParamsBeforeFetching(params),
+        ...DEFAULT_PARAMS,
+      },
+      fetchActionParam
+    );
+
+    let data = format === 'json' ? JSON.stringify(payload) : payload;
+
+    downloadFile(data, filenamePrefix + formattedDate, format);
+
+    dispatch(clearNotifications());
+
+    dispatch(
+      addNotification({
+        variant: 'success',
+        title: 'Downloading export.',
+        description:
+          'Temporary message to QA: Report currently contains only at most 100 items.',
+      })
+    );
   };
 
   return onExport;

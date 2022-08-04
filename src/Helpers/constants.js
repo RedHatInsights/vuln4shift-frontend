@@ -321,3 +321,9 @@ export const CLUSTER_LIST_DEFAULT_FILTERS = {};
 export const CVE_DETAIL_DEFAULT_FILTERS = {};
 
 export const CLUSTER_DETAIL_DEFAULT_FILTERS = {};
+
+/* EXPORTS */
+export const CVE_LIST_EXPORT_PREFIX = 'ocp-vulnerability_cves--';
+export const CLUSTER_LIST_EXPORT_PREFIX = 'ocp-vulnerability_clusters--';
+export const CVE_DETAIL_EXPORT_PREFIX = 'ocp-vulnerability_exposed-clusters--';
+export const CLUSTER_DETAIL_EXPORT_PREFIX = 'ocp-vulnerability_cluster-cves--';

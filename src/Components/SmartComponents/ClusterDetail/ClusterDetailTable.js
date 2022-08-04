@@ -2,6 +2,7 @@ import React from 'react';
 import {
   CLUSTER_DETAIL_ALLOWED_PARAMS,
   CLUSTER_DETAIL_DEFAULT_FILTERS,
+  CLUSTER_DETAIL_EXPORT_PREFIX,
   CLUSTER_DETAIL_TABLE_COLUMNS,
   CLUSTER_DETAIL_TABLE_MAPPER,
   PUBLISHED_OPTIONS,
@@ -14,7 +15,7 @@ import {
 } from '../../../Store/Actions';
 import NoCves from '../../PresentationalComponents/EmptyStates/NoCves';
 import { useRouteMatch } from 'react-router-dom';
-import { useUrlBoundParams } from '../../../Helpers/hooks';
+import { useExport, useUrlBoundParams } from '../../../Helpers/hooks';
 import {
   getCvssScoreFromUrlParam,
   setupFilters,
@@ -25,6 +26,7 @@ import checkboxFilter from '../Filters/CheckboxFilter';
 import radioFilter from '../Filters/RadioFilter';
 import BaseTable from '../Generic/BaseTable';
 import NoMatchingCves from '../../PresentationalComponents/EmptyStates/NoMatchingCves';
+import { fetchClusterCves } from '../../../Helpers/apiHelper';
 
 const ClusterDetailTable = () => {
   const match = useRouteMatch();
@@ -44,6 +46,12 @@ const ClusterDetailTable = () => {
   const { search, cvss_score, severity, published } = meta;
 
   const [cvss_score_min, cvss_score_max] = getCvssScoreFromUrlParam(cvss_score);
+
+  const onExport = useExport(
+    CLUSTER_DETAIL_EXPORT_PREFIX,
+    fetchClusterCves,
+    match.params.clusterId
+  );
 
   const filters = [
     useTextFilter({
@@ -107,6 +115,7 @@ const ClusterDetailTable = () => {
       meta={meta}
       emptyState={areAnyFiltersApplied ? <NoMatchingCves /> : <NoCves />}
       apply={apply}
+      onExport={(format) => onExport(format, meta)}
     />
   );
 };
