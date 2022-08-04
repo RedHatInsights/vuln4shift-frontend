@@ -34,14 +34,14 @@ describe('CveList Items', () => {
     );
   });
   it('are expandable and collapsable', () => {
-    cy.get('[id^=expand-toggle]').each((item, index) => {
+    cy.get('tbody [id^=expand-toggle]').each((item, index) => {
       if (index < 5) cy.wrap(item).click();
     });
     cy.get('.pf-c-table__expandable-row.pf-m-expanded > td').should(
       'have.length',
       5
     );
-    cy.get('[id^=expand-toggle]').each((item, index) => {
+    cy.get('tbody [id^=expand-toggle]').each((item, index) => {
       if (index < 5) cy.wrap(item).click();
     });
     cy.get('.pf-c-table__expandable-row.pf-m-expanded > td').should(

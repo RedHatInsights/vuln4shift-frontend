@@ -1,5 +1,9 @@
 import axios from 'axios';
 
+if (window.Cypress) {
+  axios.defaults.baseURL = 'http://localhost:5500';
+}
+
 export const fetchCves = async (params) => {
   return axios.get('/api/ocp-vulnerability/v1/cves', { params });
 };

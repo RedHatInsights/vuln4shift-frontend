@@ -1,15 +1,6 @@
 {
     "data": [
-        {
-            "cvss2_score": null,
-            "cvss3_score": "7.800",
-            "description": "A flaw was found in the way the \"flags\" member of the new pipe buffer structure was lacking proper initialization in copy_page_to_iter_pipe and push_pipe functions in the Linux kernel and could thus contain stale values. An unprivileged local user could use this flaw to write to pages in the page cache backed by read only files and as such escalate their privileges on the system.",
-            "severity": "Critical",
-            "publish_date": "2022-03-07T12:00:00+00:00",
-            "synopsis": "CVE-2022-0001",
-            "clusters_exposed": 3,
-            "images_exposed": 5
-        },
+
         {
             "cvss2_score": null,
             "cvss3_score": "9.800",
@@ -19,6 +10,16 @@
             "synopsis": "CVE-2022-0002",
             "clusters_exposed": 1,
             "images_exposed": 1
+        },
+        {
+            "cvss2_score": null,
+            "cvss3_score": "7.800",
+            "description": "A flaw was found in the way the \"flags\" member of the new pipe buffer structure was lacking proper initialization in copy_page_to_iter_pipe and push_pipe functions in the Linux kernel and could thus contain stale values. An unprivileged local user could use this flaw to write to pages in the page cache backed by read only files and as such escalate their privileges on the system.",
+            "severity": "Critical",
+            "publish_date": "2022-11-11T12:00:00+00:00",
+            "synopsis": "CVE-2022-0001",
+            "clusters_exposed": 3,
+            "images_exposed": 5
         },
         {
             "cvss2_score": null,
@@ -52,7 +53,7 @@
         },
         {
             "cvss2_score": null,
-            "cvss3_score": "7.800",
+            "cvss3_score": "6.900",
             "description": "A flaw was found in the way the \"flags\" member of the new pipe buffer structure was lacking proper initialization in copy_page_to_iter_pipe and push_pipe functions in the Linux kernel and could thus contain stale values. An unprivileged local user could use this flaw to write to pages in the page cache backed by read only files and as such escalate their privileges on the system.",
             "severity": "Critical",
             "publish_date": "2021-02-26T12:00:00+00:00",
@@ -199,17 +200,217 @@
             "synopsis": "CVE-2022-0020",
             "clusters_exposed": 8,
             "images_exposed": 10
+        },
+        {
+            "cvss2_score": null,
+            "cvss3_score": "7.800",
+            "description": "A flaw was found in the way the \"flags\" member of the new pipe buffer structure was lacking proper initialization in copy_page_to_iter_pipe and push_pipe functions in the Linux kernel and could thus contain stale values. An unprivileged local user could use this flaw to write to pages in the page cache backed by read only files and as such escalate their privileges on the system.",
+            "severity": "Critical",
+            "publish_date": "2022-03-07T12:00:00+00:00",
+            "synopsis": "CVE-2022-0021",
+            "clusters_exposed": 3,
+            "images_exposed": 5
+        },
+        {
+            "cvss2_score": null,
+            "cvss3_score": "9.800",
+            "description": "A flaw was found in the way the \"flags\" member of the new pipe buffer structure was lacking proper initialization in copy_page_to_iter_pipe and push_pipe functions in the Linux kernel and could thus contain stale values. An unprivileged local user could use this flaw to write to pages in the page cache backed by read only files and as such escalate their privileges on the system.",
+            "severity": "Important",
+            "publish_date": "2022-03-12T12:00:00+00:00",
+            "synopsis": "CVE-2022-0022",
+            "clusters_exposed": 1,
+            "images_exposed": 1
+        },
+        {
+            "cvss2_score": null,
+            "cvss3_score": "7.800",
+            "description": "A flaw was found in the way the \"flags\" member of the new pipe buffer structure was lacking proper initialization in copy_page_to_iter_pipe and push_pipe functions in the Linux kernel and could thus contain stale values. An unprivileged local user could use this flaw to write to pages in the page cache backed by read only files and as such escalate their privileges on the system.",
+            "severity": "Critical",
+            "publish_date": "2021-11-01T12:00:00+00:00",
+            "synopsis": "CVE-2022-0023",
+            "clusters_exposed": 3,
+            "images_exposed": 4
+        },
+        {
+            "cvss2_score": null,
+            "cvss3_score": "7.200",
+            "description": "A flaw was found in the way the \"flags\" member of the new pipe buffer structure was lacking proper initialization in copy_page_to_iter_pipe and push_pipe functions in the Linux kernel and could thus contain stale values. An unprivileged local user could use this flaw to write to pages in the page cache backed by read only files and as such escalate their privileges on the system.",
+            "severity": "Low",
+            "publish_date": "2022-04-07T12:00:00+00:00",
+            "synopsis": "CVE-2022-0024",
+            "clusters_exposed": 3,
+            "images_exposed": 4
+        },
+        {
+            "cvss2_score": null,
+            "cvss3_score": "5.800",
+            "description": "A flaw was found in the way the \"flags\" member of the new pipe buffer structure was lacking proper initialization in copy_page_to_iter_pipe and push_pipe functions in the Linux kernel and could thus contain stale values. An unprivileged local user could use this flaw to write to pages in the page cache backed by read only files and as such escalate their privileges on the system.",
+            "severity": "Low",
+            "publish_date": "2022-03-01:00:00+00:00",
+            "synopsis": "CVE-2022-0025",
+            "clusters_exposed": 8,
+            "images_exposed": 10
+        },
+        {
+            "cvss2_score": null,
+            "cvss3_score": "6.900",
+            "description": "A flaw was found in the way the \"flags\" member of the new pipe buffer structure was lacking proper initialization in copy_page_to_iter_pipe and push_pipe functions in the Linux kernel and could thus contain stale values. An unprivileged local user could use this flaw to write to pages in the page cache backed by read only files and as such escalate their privileges on the system.",
+            "severity": "Critical",
+            "publish_date": "2021-02-26T12:00:00+00:00",
+            "synopsis": "CVE-2022-0026",
+            "clusters_exposed": 3,
+            "images_exposed": 8
+        },
+        {
+            "cvss2_score": null,
+            "cvss3_score": "9.800",
+            "description": "A flaw was found in the way the \"flags\" member of the new pipe buffer structure was lacking proper initialization in copy_page_to_iter_pipe and push_pipe functions in the Linux kernel and could thus contain stale values. An unprivileged local user could use this flaw to write to pages in the page cache backed by read only files and as such escalate their privileges on the system.",
+            "severity": "Important",
+            "publish_date": "2022-03-07T12:00:00+00:00",
+            "synopsis": "CVE-2022-0027",
+            "clusters_exposed": 1,
+            "images_exposed": 1
+        },
+        {
+            "cvss2_score": null,
+            "cvss3_score": "7.800",
+            "description": "A flaw was found in the way the \"flags\" member of the new pipe buffer structure was lacking proper initialization in copy_page_to_iter_pipe and push_pipe functions in the Linux kernel and could thus contain stale values. An unprivileged local user could use this flaw to write to pages in the page cache backed by read only files and as such escalate their privileges on the system.",
+            "severity": "Critical",
+            "publish_date": "2022-03-07T12:00:00+00:00",
+            "synopsis": "CVE-2022-0028",
+            "clusters_exposed": 3,
+            "images_exposed": 7
+        },
+        {
+            "cvss2_score": null,
+            "cvss3_score": "7.200",
+            "description": "A flaw was found in the way the \"flags\" member of the new pipe buffer structure was lacking proper initialization in copy_page_to_iter_pipe and push_pipe functions in the Linux kernel and could thus contain stale values. An unprivileged local user could use this flaw to write to pages in the page cache backed by read only files and as such escalate their privileges on the system.",
+            "severity": "Low",
+            "publish_date": "2022-03-07T12:00:00+00:00",
+            "synopsis": "CVE-2022-0029",
+            "clusters_exposed": 3,
+            "images_exposed": 4
+        },
+        {
+            "cvss2_score": null,
+            "cvss3_score": "5.800",
+            "description": "A flaw was found in the way the \"flags\" member of the new pipe buffer structure was lacking proper initialization in copy_page_to_iter_pipe and push_pipe functions in the Linux kernel and could thus contain stale values. An unprivileged local user could use this flaw to write to pages in the page cache backed by read only files and as such escalate their privileges on the system.",
+            "severity": "Low",
+            "publish_date": "2022-03-07T12:00:00+00:00",
+            "synopsis": "CVE-2022-0030",
+            "clusters_exposed": 8,
+            "images_exposed": 10
+        },
+        {
+            "cvss2_score": null,
+            "cvss3_score": "7.800",
+            "description": "A flaw was found in the way the \"flags\" member of the new pipe buffer structure was lacking proper initialization in copy_page_to_iter_pipe and push_pipe functions in the Linux kernel and could thus contain stale values. An unprivileged local user could use this flaw to write to pages in the page cache backed by read only files and as such escalate their privileges on the system.",
+            "severity": "Critical",
+            "publish_date": "2022-03-07T12:00:00+00:00",
+            "synopsis": "CVE-2022-0031",
+            "clusters_exposed": 3,
+            "images_exposed": 9
+        },
+        {
+            "cvss2_score": null,
+            "cvss3_score": "9.800",
+            "description": "A flaw was found in the way the \"flags\" member of the new pipe buffer structure was lacking proper initialization in copy_page_to_iter_pipe and push_pipe functions in the Linux kernel and could thus contain stale values. An unprivileged local user could use this flaw to write to pages in the page cache backed by read only files and as such escalate their privileges on the system.",
+            "severity": "Important",
+            "publish_date": "2022-03-07T12:00:00+00:00",
+            "synopsis": "CVE-2022-0032",
+            "clusters_exposed": 1,
+            "images_exposed": 1
+        },
+        {
+            "cvss2_score": null,
+            "cvss3_score": "7.800",
+            "description": "A flaw was found in the way the \"flags\" member of the new pipe buffer structure was lacking proper initialization in copy_page_to_iter_pipe and push_pipe functions in the Linux kernel and could thus contain stale values. An unprivileged local user could use this flaw to write to pages in the page cache backed by read only files and as such escalate their privileges on the system.",
+            "severity": "Critical",
+            "publish_date": "2022-03-07T12:00:00+00:00",
+            "synopsis": "CVE-2022-0033",
+            "clusters_exposed": 3,
+            "images_exposed": 20
+        },
+        {
+            "cvss2_score": null,
+            "cvss3_score": "7.200",
+            "description": "A flaw was found in the way the \"flags\" member of the new pipe buffer structure was lacking proper initialization in copy_page_to_iter_pipe and push_pipe functions in the Linux kernel and could thus contain stale values. An unprivileged local user could use this flaw to write to pages in the page cache backed by read only files and as such escalate their privileges on the system.",
+            "severity": "Low",
+            "publish_date": "2022-03-07T12:00:00+00:00",
+            "synopsis": "CVE-2022-0034",
+            "clusters_exposed": 3,
+            "images_exposed": 4
+        },
+        {
+            "cvss2_score": null,
+            "cvss3_score": "5.800",
+            "description": "A flaw was found in the way the \"flags\" member of the new pipe buffer structure was lacking proper initialization in copy_page_to_iter_pipe and push_pipe functions in the Linux kernel and could thus contain stale values. An unprivileged local user could use this flaw to write to pages in the page cache backed by read only files and as such escalate their privileges on the system.",
+            "severity": "Low",
+            "publish_date": "2022-03-07T12:00:00+00:00",
+            "synopsis": "CVE-2022-0035",
+            "clusters_exposed": 8,
+            "images_exposed": 10
+        },
+        {
+            "cvss2_score": null,
+            "cvss3_score": "7.800",
+            "description": "A flaw was found in the way the \"flags\" member of the new pipe buffer structure was lacking proper initialization in copy_page_to_iter_pipe and push_pipe functions in the Linux kernel and could thus contain stale values. An unprivileged local user could use this flaw to write to pages in the page cache backed by read only files and as such escalate their privileges on the system.",
+            "severity": "Critical",
+            "publish_date": "2022-03-07T12:00:00+00:00",
+            "synopsis": "CVE-2022-0036",
+            "clusters_exposed": 3,
+            "images_exposed": 27
+        },
+        {
+            "cvss2_score": null,
+            "cvss3_score": "9.800",
+            "description": "A flaw was found in the way the \"flags\" member of the new pipe buffer structure was lacking proper initialization in copy_page_to_iter_pipe and push_pipe functions in the Linux kernel and could thus contain stale values. An unprivileged local user could use this flaw to write to pages in the page cache backed by read only files and as such escalate their privileges on the system.",
+            "severity": "Important",
+            "publish_date": "2022-03-07T12:00:00+00:00",
+            "synopsis": "CVE-2022-0037",
+            "clusters_exposed": 9,
+            "images_exposed": 11
+        },
+        {
+            "cvss2_score": null,
+            "cvss3_score": "7.800",
+            "description": "A flaw was found in the way the \"flags\" member of the new pipe buffer structure was lacking proper initialization in copy_page_to_iter_pipe and push_pipe functions in the Linux kernel and could thus contain stale values. An unprivileged local user could use this flaw to write to pages in the page cache backed by read only files and as such escalate their privileges on the system.",
+            "severity": "Critical",
+            "publish_date": "2022-03-07T12:00:00+00:00",
+            "synopsis": "CVE-2022-0038",
+            "clusters_exposed": 3,
+            "images_exposed": 2
+        },
+        {
+            "cvss2_score": null,
+            "cvss3_score": "7.200",
+            "description": "A flaw was found in the way the \"flags\" member of the new pipe buffer structure was lacking proper initialization in copy_page_to_iter_pipe and push_pipe functions in the Linux kernel and could thus contain stale values. An unprivileged local user could use this flaw to write to pages in the page cache backed by read only files and as such escalate their privileges on the system.",
+            "severity": "Low",
+            "publish_date": "2022-03-07T12:00:00+00:00",
+            "synopsis": "CVE-2022-0039",
+            "clusters_exposed": 3,
+            "images_exposed": 4
+        },
+        {
+            "cvss2_score": null,
+            "cvss3_score": "5.800",
+            "description": "A flaw was found in the way the \"flags\" member of the new pipe buffer structure was lacking proper initialization in copy_page_to_iter_pipe and push_pipe functions in the Linux kernel and could thus contain stale values. An unprivileged local user could use this flaw to write to pages in the page cache backed by read only files and as such escalate their privileges on the system.",
+            "severity": "Low",
+            "publish_date": "2022-03-07T12:00:00+00:00",
+            "synopsis": "CVE-2022-0040",
+            "clusters_exposed": 8,
+            "images_exposed": 10
         }
     ],
     "meta": {
         "data_format": "json",
-        "total_items": 20,
+        "total_items": 40,
         "limit": 20,
         "offset": 0,
         "sort": "-publish_date",
         "filters": {
             "cvss_from": 1,
-            "cvss_to": 9,
+            "cvss_to": 10,
             "search": "CVE-2022-",
             "severity": "important,critical,low",
             "published_from": "20210331T000000+0100",
