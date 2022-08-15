@@ -12,6 +12,7 @@ import {
 } from '@patternfly/react-table';
 import SkeletonTable from '@redhat-cloud-services/frontend-components/SkeletonTable/SkeletonTable';
 import { TableVariant } from '@patternfly/react-table';
+import { DEFAULT_LIMIT } from '../../../Helpers/constants';
 
 const BaseTableBody = ({
   isLoading,
@@ -78,7 +79,7 @@ const BaseTableBody = ({
   return isLoading ? (
     <SkeletonTable
       colSize={columns.length}
-      rowSize={perPage || 20}
+      rowSize={perPage || DEFAULT_LIMIT}
       variant={TableVariant.compact}
     />
   ) : (

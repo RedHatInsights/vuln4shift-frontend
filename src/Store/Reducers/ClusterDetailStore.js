@@ -1,4 +1,7 @@
-import { CLUSTER_DETAIL_DEFAULT_FILTERS } from '../../Helpers/constants';
+import {
+  CLUSTER_DETAIL_DEFAULT_FILTERS,
+  DEFAULT_LIMIT,
+} from '../../Helpers/constants';
 import { deepFreeze } from '../../Helpers/miscHelper';
 import * as ActionTypes from '../ActionTypes';
 
@@ -8,7 +11,7 @@ const initialState = deepFreeze({
   isDetailLoading: true,
   isTableLoading: true,
   meta: {
-    limit: 20,
+    limit: DEFAULT_LIMIT,
     offset: 0,
     total_items: 0,
     sort: '-publish_date',

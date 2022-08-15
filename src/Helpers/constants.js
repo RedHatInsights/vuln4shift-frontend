@@ -10,6 +10,8 @@ import { subtractDays, subtractYears } from './miscHelper';
 
 export const HEADER_ALERT_DISMISSED_KEY = 'vuln4shift:header-alert-dismissed';
 
+export const DEFAULT_LIMIT = 20;
+
 /* FILTER OPTIONS */
 
 export const PUBLISHED_OPTIONS = [

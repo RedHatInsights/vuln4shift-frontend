@@ -24,7 +24,7 @@ const ErrorHandler = ({ code }) => {
 };
 
 ErrorHandler.propTypes = {
-  code: propTypes.oneOf([propTypes.number, propTypes.string]),
+  code: propTypes.oneOfType([propTypes.number, propTypes.string]),
 };
 
 export default ErrorHandler;
