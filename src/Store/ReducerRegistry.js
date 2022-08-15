@@ -12,7 +12,7 @@ let registry;
 export function init(...middleware) {
   registry = getRegistry({}, [
     promiseMiddleware,
-    notificationsMiddleware({ errorDescriptionKey: ['detail', 'stack'] }),
+    notificationsMiddleware({ errorDescriptionKey: 'detail' }),
     ...middleware,
   ]);
 
