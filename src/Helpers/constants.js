@@ -241,7 +241,7 @@ export const CLUSTER_LIST_TABLE_MAPPER = (row) => ({
     <Link to={'/clusters/' + row.id} key={row.id}>
       {row.display_name}
     </Link>,
-    row.status_text,
+    row.status,
     row.type,
     row.version,
     <ShieldSet
@@ -260,7 +260,7 @@ export const CVE_DETAIL_TABLE_MAPPER = (row) => ({
     <Link to={'/clusters/' + row.id} key={row.id}>
       {row.display_name}
     </Link>,
-    row.status_text,
+    row.status,
     row.type,
     row.version,
     row.provider,
