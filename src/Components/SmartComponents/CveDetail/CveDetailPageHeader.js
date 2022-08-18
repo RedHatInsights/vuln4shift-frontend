@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Fragment } from 'react';
+import React, { useEffect, Fragment } from 'react';
 import {
   PageHeader,
   PageHeaderTitle,
@@ -6,7 +6,6 @@ import {
 import {
   Breadcrumb,
   BreadcrumbItem,
-  Checkbox,
   Grid,
   GridItem,
   Stack,
@@ -48,7 +47,7 @@ const CveDetailPageHeader = () => {
     cvss3_metrics,
   } = cve;
 
-  const [hasMetadata, setHasMetadata] = useState(true);
+  const hasMetadata = description !== 'unknown';
 
   useEffect(() => {
     dispatch(fetchCveDetails(match.params.cveId));
@@ -165,15 +164,6 @@ const CveDetailPageHeader = () => {
                 cvss2Vector={cvss2_metrics}
                 cvss3Vector={cvss3_metrics}
                 hasMetadata={hasMetadata}
-              />
-            </StackItem>
-            <StackItem>
-              {/* TODO: Remove following component after no metadata state is handled */}
-              <Checkbox
-                id="temporary-has-metadata-checkbox"
-                isChecked={hasMetadata}
-                onChange={(checked) => setHasMetadata(checked)}
-                label="Has metadata"
               />
             </StackItem>
           </Stack>
