@@ -1,8 +1,9 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import propTypes from 'prop-types';
 import BaseTableBody from '../Generic/BaseTableBody';
 import BaseToolbar from '../Generic/BaseToolbar';
 import BottomPagination from '../../PresentationalComponents/BottomPagination';
+import ErrorHandler from '../../PresentationalComponents/ErrorHandler';
 
 const BaseTable = ({
   isLoading,
@@ -12,6 +13,7 @@ const BaseTable = ({
   filterConfig = [],
   activeFiltersConfig = [],
   meta,
+  error,
   emptyState,
   apply,
   onExport,
@@ -19,7 +21,7 @@ const BaseTable = ({
   const { offset, limit, total_items, sort } = meta;
 
   return (
-    <Fragment>
+    <ErrorHandler error={error}>
       <BaseToolbar
         page={offset / limit + 1}
         perPage={limit}
@@ -45,7 +47,7 @@ const BaseTable = ({
         itemCount={total_items}
         apply={apply}
       />
-    </Fragment>
+    </ErrorHandler>
   );
 };
 
@@ -75,6 +77,7 @@ BaseTable.propTypes = {
     total_items: propTypes.number,
     sort: propTypes.string,
   }),
+  error: propTypes.object,
   apply: propTypes.func,
   onExport: propTypes.func,
 };

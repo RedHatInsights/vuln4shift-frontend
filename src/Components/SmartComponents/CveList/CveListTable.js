@@ -29,7 +29,7 @@ import BaseTable from '../Generic/BaseTable';
 import { fetchCves } from '../../../Helpers/apiHelper';
 
 const CveListTable = () => {
-  const { cves, isLoading, meta } = useSelector(
+  const { cves, isLoading, meta, error } = useSelector(
     ({ CveListStore }) => CveListStore
   );
 
@@ -115,6 +115,7 @@ const CveListTable = () => {
       filterConfig={filterConfig}
       activeFiltersConfig={activeFiltersConfig}
       meta={meta}
+      error={error}
       emptyState={
         areAnyFiltersApplied ? <NoMatchingCves /> : <NoCves multipleClusters />
       }

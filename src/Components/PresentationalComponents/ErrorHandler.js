@@ -5,8 +5,14 @@ import { Unavailable } from '@redhat-cloud-services/frontend-components/Unavaila
 import { ErrorState } from '@redhat-cloud-services/frontend-components/ErrorState';
 import { NotAuthorized } from '@redhat-cloud-services/frontend-components/NotAuthorized';
 
-const ErrorHandler = ({ code }) => {
-  switch (parseInt(code)) {
+const ErrorHandler = ({ error, children }) => {
+  if (!error) {
+    return children;
+  }
+
+  const parsedCode = parseInt(error?.status);
+
+  switch (parsedCode) {
     case 403:
       return <NotAuthorized />;
 
@@ -24,7 +30,10 @@ const ErrorHandler = ({ code }) => {
 };
 
 ErrorHandler.propTypes = {
-  code: propTypes.oneOfType([propTypes.number, propTypes.string]),
+  error: propTypes.shape({
+    status: propTypes.oneOfType([propTypes.number, propTypes.string]),
+  }),
+  children: propTypes.node,
 };
 
 export default ErrorHandler;

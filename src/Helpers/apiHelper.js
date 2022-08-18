@@ -2,9 +2,9 @@ import axios from 'axios';
 
 const instance = axios.create();
 
-const errorInterceptor = (response) => {
-  if (!axios.isCancel(response) && response?.response?.data?.error) {
-    throw response?.response?.data.error;
+const errorInterceptor = ({ response }) => {
+  if (!axios.isCancel(response) && response?.data?.error) {
+    throw response?.data.error;
   }
 
   return response;

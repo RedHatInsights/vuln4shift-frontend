@@ -25,6 +25,7 @@ const ClusterDetailStore = (state = initialState, action) => {
       return {
         ...state,
         isTableLoading: true,
+        error: undefined,
       };
     }
 
@@ -37,6 +38,16 @@ const ClusterDetailStore = (state = initialState, action) => {
           total_items: action.payload.data.meta.total_items,
         },
         isTableLoading: false,
+      };
+    }
+
+    case `${ActionTypes.FETCH_CLUSTER_DETAIL_TABLE}_REJECTED`: {
+      return {
+        ...state,
+        isTableLoading: false,
+        error: {
+          ...action.payload,
+        },
       };
     }
 
@@ -56,6 +67,7 @@ const ClusterDetailStore = (state = initialState, action) => {
       return {
         ...state,
         isDetailLoading: true,
+        error: undefined,
       };
     }
 
@@ -64,6 +76,16 @@ const ClusterDetailStore = (state = initialState, action) => {
         ...state,
         cluster: action.payload.data.data,
         isDetailLoading: false,
+      };
+    }
+
+    case `${ActionTypes.FETCH_CLUSTER_DETAILS}_REJECTED`: {
+      return {
+        ...state,
+        isDetailLoading: false,
+        error: {
+          ...action.payload,
+        },
       };
     }
   }

@@ -23,6 +23,7 @@ const ClusterListStore = (state = initialState, action) => {
       return {
         ...state,
         isLoading: true,
+        error: undefined,
       };
     }
 
@@ -35,6 +36,16 @@ const ClusterListStore = (state = initialState, action) => {
           total_items: action.payload.data.meta.total_items,
         },
         isLoading: false,
+      };
+    }
+
+    case `${ActionTypes.FETCH_CLUSTER_LIST_TABLE}_REJECTED`: {
+      return {
+        ...state,
+        isLoading: false,
+        error: {
+          ...action.payload,
+        },
       };
     }
 

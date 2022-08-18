@@ -23,6 +23,7 @@ const CveListStore = (state = initialState, action) => {
       return {
         ...state,
         isLoading: true,
+        error: undefined,
       };
     }
 
@@ -35,6 +36,16 @@ const CveListStore = (state = initialState, action) => {
           total_items: action.payload.data.meta.total_items,
         },
         isLoading: false,
+      };
+    }
+
+    case `${ActionTypes.FETCH_CVE_LIST_TABLE}_REJECTED`: {
+      return {
+        ...state,
+        isLoading: false,
+        error: {
+          ...action.payload,
+        },
       };
     }
 

@@ -9,10 +9,25 @@ import ClusterDetailStore from './Reducers/ClusterDetailStore';
 
 let registry;
 
+const notificationsFilterMiddleware = () => (next) => (action) => {
+  const matchRejected = (type) => type.match(new RegExp(`_REJECTED$`));
+
+  if (matchRejected(action.type) && action.meta?.noNotificationOnError) {
+    action.meta = { ...action.meta, noError: true };
+  }
+
+  next(action);
+};
+
 export function init(...middleware) {
   registry = getRegistry({}, [
     promiseMiddleware,
-    notificationsMiddleware({ errorDescriptionKey: 'detail' }),
+    notificationsFilterMiddleware,
+    notificationsMiddleware({
+      errorDescriptionKey: 'detail',
+      // TODO: for some reason this does not work
+      autoDismiss: false,
+    }),
     ...middleware,
   ]);
 

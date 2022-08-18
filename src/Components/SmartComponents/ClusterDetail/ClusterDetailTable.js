@@ -31,7 +31,7 @@ import { fetchClusterCves } from '../../../Helpers/apiHelper';
 const ClusterDetailTable = () => {
   const match = useRouteMatch();
 
-  const { cves, isTableLoading, meta } = useSelector(
+  const { cves, isTableLoading, meta, error } = useSelector(
     ({ ClusterDetailStore }) => ClusterDetailStore
   );
 
@@ -113,6 +113,7 @@ const ClusterDetailTable = () => {
       filterConfig={filterConfig}
       activeFiltersConfig={activeFiltersConfig}
       meta={meta}
+      error={error}
       emptyState={areAnyFiltersApplied ? <NoMatchingCves /> : <NoCves />}
       apply={apply}
       onExport={(format) => onExport(format, meta)}

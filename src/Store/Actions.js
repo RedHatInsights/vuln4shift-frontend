@@ -32,6 +32,7 @@ export const fetchCveDetails = (cveId, params) => ({
   type: ActionTypes.FETCH_CVE_DETAILS,
   meta: {
     timestamp: new Date(),
+    noNotificationOnError: true,
   },
   payload: () => api.fetchCveDetails(cveId, params),
 });
@@ -48,6 +49,7 @@ export const fetchClusterDetails = (clusterId, params) => ({
   type: ActionTypes.FETCH_CLUSTER_DETAILS,
   meta: {
     timestamp: new Date(),
+    noNotificationOnError: true,
   },
   payload: () => api.fetchClusterDetails(clusterId, params),
 });

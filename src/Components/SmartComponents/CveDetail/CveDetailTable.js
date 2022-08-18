@@ -23,7 +23,7 @@ import { fetchExposedClusters } from '../../../Helpers/apiHelper';
 const CveDetailTable = () => {
   const match = useRouteMatch();
 
-  const { clusters, isTableLoading, meta } = useSelector(
+  const { clusters, isTableLoading, meta, error } = useSelector(
     ({ CveDetailStore }) => CveDetailStore
   );
 
@@ -65,6 +65,7 @@ const CveDetailTable = () => {
       filterConfig={filterConfig}
       activeFiltersConfig={activeFiltersConfig}
       meta={meta}
+      error={error}
       emptyState={
         areAnyFiltersApplied ? <NoMatchingClusters /> : <NoExposedClusters />
       }

@@ -1,12 +1,16 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Main } from '@redhat-cloud-services/frontend-components/Main';
 import { Text, TextContent, TextVariants } from '@patternfly/react-core';
 import ClusterDetailTable from './ClusterDetailTable';
 import ClusterDetailPageHeader from './ClusterDetailPageHeader';
+import { useSelector } from 'react-redux';
+import ErrorHandler from '../../PresentationalComponents/ErrorHandler';
 
 const ClusterDetailPage = () => {
+  const { error } = useSelector(({ ClusterDetailStore }) => ClusterDetailStore);
+
   return (
-    <Fragment>
+    <ErrorHandler error={error}>
       <ClusterDetailPageHeader />
       <Main>
         <TextContent>
@@ -16,7 +20,7 @@ const ClusterDetailPage = () => {
         </TextContent>
         <ClusterDetailTable />
       </Main>
-    </Fragment>
+    </ErrorHandler>
   );
 };
 

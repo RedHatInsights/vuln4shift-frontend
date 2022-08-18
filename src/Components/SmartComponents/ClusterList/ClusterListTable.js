@@ -20,7 +20,7 @@ import NoMatchingClusters from '../../PresentationalComponents/EmptyStates/NoMat
 import { fetchClusters } from '../../../Helpers/apiHelper';
 
 const ClusterDetailTable = () => {
-  const { clusters, isLoading, meta } = useSelector(
+  const { clusters, isLoading, meta, error } = useSelector(
     ({ ClusterListStore }) => ClusterListStore
   );
 
@@ -57,6 +57,7 @@ const ClusterDetailTable = () => {
       filterConfig={filterConfig}
       activeFiltersConfig={activeFiltersConfig}
       meta={meta}
+      error={error}
       emptyState={
         areAnyFiltersApplied ? <NoMatchingClusters /> : <NoClusters />
       }
