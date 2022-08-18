@@ -81,6 +81,7 @@ const BaseTableBody = ({
       colSize={columns.length}
       rowSize={perPage || DEFAULT_LIMIT}
       variant={TableVariant.compact}
+      columns={columns}
     />
   ) : (
     <TableComposable variant={TableVariant.compact} isStickyHeader>
@@ -108,44 +109,44 @@ const BaseTableBody = ({
           ))}
         </Tr>
       </Thead>
-      <Tbody>
-        {rows.length === 0 ? (
+      {rows.length === 0 ? (
+        <Tbody>
           <Tr>
             <Td colSpan={100}>{emptyState}</Td>
           </Tr>
-        ) : (
-          rows.map((row, rowIndex) => (
-            <Fragment key={rowIndex}>
-              <Tr>
-                {isExpandable && (
-                  <Td
-                    expand={{
-                      rowIndex,
-                      isExpanded: isRowExpanded(row.key),
-                      onToggle: () =>
-                        onExpandRow(row.key, !isRowExpanded(row.key)),
-                    }}
-                  />
-                )}
-                {row.cells.map((cell, cellIndex) => (
-                  <Td key={cellIndex} dataLabel={columns[cellIndex].title}>
-                    {cell}
-                  </Td>
-                ))}
-              </Tr>
+        </Tbody>
+      ) : (
+        rows.map((row, rowIndex) => (
+          <Tbody key={rowIndex} isExpanded={isRowExpanded(row.key)}>
+            <Tr>
               {isExpandable && (
-                <Tr isExpanded={isRowExpanded(row.key)}>
-                  <Td colSpan={100}>
-                    <ExpandableRowContent>
-                      {row.expandableContent}
-                    </ExpandableRowContent>
-                  </Td>
-                </Tr>
+                <Td
+                  expand={{
+                    rowIndex,
+                    isExpanded: isRowExpanded(row.key),
+                    onToggle: () =>
+                      onExpandRow(row.key, !isRowExpanded(row.key)),
+                  }}
+                />
               )}
-            </Fragment>
-          ))
-        )}
-      </Tbody>
+              {row.cells.map((cell, cellIndex) => (
+                <Td key={cellIndex} dataLabel={columns[cellIndex].title}>
+                  {cell}
+                </Td>
+              ))}
+            </Tr>
+            {isExpandable && (
+              <Tr isExpanded={isRowExpanded(row.key)}>
+                <Td colSpan={100}>
+                  <ExpandableRowContent>
+                    {row.expandableContent}
+                  </ExpandableRowContent>
+                </Td>
+              </Tr>
+            )}
+          </Tbody>
+        ))
+      )}
     </TableComposable>
   );
 };
