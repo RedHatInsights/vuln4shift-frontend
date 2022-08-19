@@ -113,11 +113,11 @@ export const CVE_LIST_TABLE_COLUMNS = [
     sortParam: 'cvss_score',
   },
   {
-    title: 'Clusters exposed',
+    title: 'Exposed clusters',
     sortParam: 'clusters_exposed',
   },
   {
-    title: 'Images exposed',
+    title: 'Exposed images',
     sortParam: 'images_exposed',
   },
 ];
@@ -197,7 +197,7 @@ export const CLUSTER_DETAIL_TABLE_COLUMNS = [
     sortParam: 'cvss_score',
   },
   {
-    title: 'Images exposed',
+    title: 'Exposed images',
     sortParam: 'images_exposed',
   },
 ];
