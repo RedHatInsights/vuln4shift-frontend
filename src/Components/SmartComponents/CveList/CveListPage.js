@@ -4,8 +4,6 @@ import {
   AlertActionCloseButton,
   AlertVariant,
   Popover,
-  Split,
-  SplitItem,
 } from '@patternfly/react-core';
 import {
   OutlinedQuestionCircleIcon,

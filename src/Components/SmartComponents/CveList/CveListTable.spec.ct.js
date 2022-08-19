@@ -8,30 +8,30 @@ import cves from '../../../../cypress/fixtures/cvelist.json';
 import { initialState } from '../../../Store/Reducers/CveListStore';
 import { CVE_LIST_EXPORT_PREFIX } from '../../../Helpers/constants';
 
-beforeEach(() => {
-  cy.intercept('GET', '**/api/ocp-vulnerability/v1/cves**', {
-    ...initialState,
-    ...cves,
-    meta: {
-      ...initialState.meta,
-      ...cves.meta,
-    },
+describe('CveListTable with items', () => {
+  beforeEach(() => {
+    cy.intercept('GET', '**/api/ocp-vulnerability/v1/cves**', {
+      ...initialState,
+      ...cves,
+      meta: {
+        ...initialState.meta,
+        ...cves.meta,
+      },
+    });
+    mount(
+      <Router>
+        <Provider store={init().getStore()}>
+          <CveListTable />
+        </Provider>
+      </Router>
+    );
   });
-  mount(
-    <Router>
-      <Provider store={init().getStore()}>
-        <CveListTable />
-      </Provider>
-    </Router>
-  );
-});
 
-describe('CveListTable', () => {
   it('exists', () => {
     cy.get('table');
   });
 
-  it('has data', () => {
+  it('has items', () => {
     cy.get('[data-label="CVE ID"]').should('have.length', 5);
   });
 
@@ -41,16 +41,14 @@ describe('CveListTable', () => {
       'Publish date'
     );
   });
-});
 
-describe('CveListTable toolbar', () => {
   it('should have Exposed Clusters filter active by default', () => {
     cy.get('.pf-c-chip-group__label').should('have.text', 'Exposed clusters');
     cy.get('.pf-c-chip-group__main ul').should('have.text', '1 or more');
   });
 
-  it('should have "Reset filters" button hidden by default', () => {
-    cy.get('.ins-c-chip-filters > .pf-c-button').should('not.exist');
+  it('should have "Reset filter" button hidden by default', () => {
+    cy.contains('Reset filter').should('not.exist');
   });
 
   it('should export data to file', () => {
@@ -74,9 +72,7 @@ describe('CveListTable toolbar', () => {
       .should('exist')
       .should('deep.equal', cves.data);
   });
-});
 
-describe('CveListTable items', () => {
   it('should have items collapsed by default', () => {
     cy.get('.pf-c-table__expandable-row.pf-m-expanded > td').should(
       'have.length',
@@ -133,5 +129,60 @@ describe('CveListTable items', () => {
       'aria-expanded',
       'false'
     );
+  });
+});
+
+describe('CveListTable without items', () => {
+  beforeEach(() => {
+    cy.intercept('GET', '**/api/ocp-vulnerability/v1/cves**', {
+      ...initialState,
+      data: [],
+      meta: {
+        ...initialState.meta,
+        total_items: 0,
+      },
+    });
+    mount(
+      <Router>
+        <Provider store={init().getStore()}>
+          <CveListTable />
+        </Provider>
+      </Router>
+    );
+  });
+
+  it('exists', () => {
+    cy.get('table');
+  });
+
+  it('has no items', () => {
+    cy.get('[data-label="CVE ID"]').should('have.length', 0);
+  });
+
+  it('does not show sorting indicator', () => {
+    cy.get('.pf-m-selected > .pf-c-table__button').should('have.length', 0);
+  });
+
+  it('has export button and paginations disabled and has no bulk expand', () => {
+    cy.get('[data-ouia-component-id=Export] button').should('be.disabled');
+
+    cy.get('[data-ouia-component-id=pagination-top] button').should(
+      'be.disabled'
+    );
+
+    cy.get('[data-ouia-component-id=pagination-bottom] button').should(
+      'be.disabled'
+    );
+
+    cy.get('thead [id^=expand-toggle]').should('have.length', 0);
+  });
+
+  it('shows correct empty state depending on whether filters are applied or not', () => {
+    cy.contains('No CVEs').should('exist');
+
+    cy.get('.ins-c-chip-filters .pf-c-chip button').click();
+
+    cy.contains('No matching CVEs found').should('exist');
+    cy.contains('Reset filter').should('exist');
   });
 });
