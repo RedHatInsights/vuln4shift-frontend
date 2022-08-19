@@ -45,25 +45,30 @@ const BaseTableBody = ({
 
   const isRowExpanded = (row) => expandedRows.includes(row);
 
-  const createSortBy = (columns, sortParam) => {
-    if (rows.length === 0) {
+  const createSortBy = (columns, columnIndex, sortParam) => {
+    if (rows.length === 0 || !sortParam) {
       return {};
     }
 
     const direction =
       sortParam[0] === '-' ? SortByDirection.desc : SortByDirection.asc;
+
     sortParam = sortParam.replace(/^(-|\+)/, '').split(',')[0];
-    const index = columns.findIndex((item) => item.sortParam === sortParam);
+
+    const selectedColumnIndex = columns.findIndex(
+      (item) => item.sortParam === sortParam
+    );
 
     return {
-      index,
+      index: selectedColumnIndex,
       direction,
-      defaultDirection: SortByDirection.desc,
+      defaultDirection:
+        columns[columnIndex].sortDefaultDirection ?? SortByDirection.desc,
     };
   };
 
   const getSortParams = (columnIndex) => ({
-    sortBy: createSortBy(columns, sortParam),
+    sortBy: createSortBy(columns, columnIndex, sortParam),
     onSort: (event, index, direction) => {
       let columnName = columns[columnIndex].sortParam;
 
@@ -157,6 +162,7 @@ BaseTableBody.propTypes = {
     propTypes.shape({
       title: propTypes.node.isRequired,
       sortParam: propTypes.string,
+      sortDefaultDirection: propTypes.oneOf([undefined, 'asc', 'desc']),
     })
   ).isRequired,
   rows: propTypes.arrayOf(

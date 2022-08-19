@@ -125,7 +125,8 @@ export const CVE_LIST_TABLE_COLUMNS = [
 export const CLUSTER_LIST_TABLE_COLUMNS = [
   {
     title: 'Name',
-    /* TODO: Readd after endpoint integration: sortParam: 'display_name', */
+    sortParam: 'display_name',
+    sortDefaultDirection: 'asc',
   },
   {
     title: 'Status',
@@ -154,7 +155,8 @@ export const CLUSTER_LIST_TABLE_COLUMNS = [
 export const CVE_DETAIL_TABLE_COLUMNS = [
   {
     title: 'Name',
-    /* TODO: Readd after endpoint integration: sortParam: 'display_name', */
+    sortParam: 'display_name',
+    sortDefaultDirection: 'asc',
   },
   {
     title: 'Status',

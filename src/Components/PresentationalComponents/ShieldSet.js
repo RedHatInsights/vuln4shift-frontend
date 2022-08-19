@@ -5,7 +5,6 @@ import { SecurityIcon } from '@patternfly/react-icons';
 import { Link } from 'react-router-dom';
 import { Tooltip } from '@patternfly/react-core';
 
-// TODO: Setup link to navigate to Cluster detail page with severity filter applied
 const ShieldSet = ({ count, linkTo }) => {
   const DISABLED_COLOR = 'var(--pf-global--disabled-color--200)';
 
