@@ -39,25 +39,12 @@ const CveListPage = () => {
           The Vulnerability service identifies CVEs with errata that may affect
           your Insights-connected OpenShift clusters. Vulnerability information
           applies for OCP4.8+ version only.
-          <br />
-          <br />
-          To access comprehensive Kubernetes security solution, go to&nbsp;
-          <a>Red Hat Advanced Cluster Security for Kubernetes</a>.
         </Fragment>
       }
       footerContent={
-        <Split hasGutter>
-          <SplitItem>
-            <a href={PRODUCT_DOC} target="__blank" rel="noopener noreferrer">
-              Learn more <ExternalLinkAltIcon />
-            </a>
-          </SplitItem>
-          <SplitItem>
-            <a href={PRODUCT_DOC} target="__blank" rel="noopener noreferrer">
-              Learn about ACS <ExternalLinkAltIcon />
-            </a>
-          </SplitItem>
-        </Split>
+        <a href={PRODUCT_DOC} target="__blank" rel="noopener noreferrer">
+          Learn more <ExternalLinkAltIcon />
+        </a>
       }
     >
       <span>
