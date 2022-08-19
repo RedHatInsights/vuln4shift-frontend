@@ -6,6 +6,7 @@ module.exports = {
     '@babel/react',
   ],
   plugins: [
+    'babel-plugin-istanbul',
     // Put _extends helpers in their own file
     '@babel/plugin-transform-runtime',
     // Support for {...props} via Object.assign({}, props)
