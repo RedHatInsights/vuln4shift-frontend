@@ -185,7 +185,8 @@ export const useExport = (filenamePrefix, fetchAction, fetchActionParam) => {
       fetchActionParam
     );
 
-    let data = format === 'json' ? JSON.stringify(payload) : payload;
+    let data =
+      format === 'json' ? JSON.stringify(payload.data.data) : payload.data.data;
 
     downloadFile(data, filenamePrefix + formattedDate, format);
 
