@@ -9,6 +9,7 @@ import {
   Td,
   ExpandableRowContent,
   SortByDirection,
+  sortable,
 } from '@patternfly/react-table';
 import SkeletonTable from '@redhat-cloud-services/frontend-components/SkeletonTable/SkeletonTable';
 import { TableVariant } from '@patternfly/react-table';
@@ -45,7 +46,7 @@ const BaseTableBody = ({
 
   const isRowExpanded = (row) => expandedRows.includes(row);
 
-  const createSortBy = (columns, columnIndex, sortParam) => {
+  const createSortBy = (columns, sortParam, columnIndex) => {
     if (rows.length === 0 || !sortParam) {
       return {};
     }
@@ -63,12 +64,12 @@ const BaseTableBody = ({
       index: selectedColumnIndex,
       direction,
       defaultDirection:
-        columns[columnIndex].sortDefaultDirection ?? SortByDirection.desc,
+        columns[columnIndex]?.sortDefaultDirection ?? SortByDirection.desc,
     };
   };
 
   const getSortParams = (columnIndex) => ({
-    sortBy: createSortBy(columns, columnIndex, sortParam),
+    sortBy: createSortBy(columns, sortParam, columnIndex),
     onSort: (event, index, direction) => {
       let columnName = columns[columnIndex].sortParam;
 
@@ -86,7 +87,10 @@ const BaseTableBody = ({
       colSize={columns.length}
       rowSize={perPage || DEFAULT_LIMIT}
       variant={TableVariant.compact}
-      columns={columns}
+      columns={columns.map((column) =>
+        column.sortParam ? { ...column, transforms: [sortable] } : column
+      )}
+      sortBy={createSortBy(columns, sortParam)}
     />
   ) : (
     <TableComposable variant={TableVariant.compact} isStickyHeader>
