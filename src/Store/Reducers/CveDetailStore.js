@@ -5,7 +5,7 @@ import {
 import { deepFreeze } from '../../Helpers/miscHelper';
 import * as ActionTypes from '../ActionTypes';
 
-const initialState = deepFreeze({
+export const initialState = deepFreeze({
   cve: {},
   clusters: [],
   isDetailLoading: true,

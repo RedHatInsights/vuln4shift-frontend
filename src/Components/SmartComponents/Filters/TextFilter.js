@@ -25,7 +25,7 @@ const useTextFilter = ({
     key: urlParam,
     filterValues: {
       'aria-label': 'search-field',
-      id: `search-${label.id}`,
+      id: `text-filter-${urlParam}`,
       onChange: (event, value) => {
         setSearchValue(value);
         handleSearch(value);
