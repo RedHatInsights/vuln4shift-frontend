@@ -72,7 +72,7 @@ export const setupFilters = (filters, meta, defaultFilters, apply) => {
     filters: [],
     onDelete: (_, categories, isReset) =>
       isReset
-        ? apply({ ...defaultFilters, offset: 0 }, true)
+        ? apply({ ...defaultFilters, offset: 0, limit: meta.limit }, true)
         : categories.forEach((category) => category.onDelete(category.chips)),
     deleteTitle: 'Reset filter',
     showDeleteButton,

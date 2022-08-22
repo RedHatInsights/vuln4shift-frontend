@@ -120,6 +120,12 @@ export const useUrlBoundParams = ({
   const [getUrlParams, setUrlParams] = useUrlParams(allowedParams);
 
   useEffect(() => {
+    if (window.location.search === '') {
+      apply({ ...initialParams });
+    }
+  }, [window.location.search]);
+
+  useEffect(() => {
     const initialUrlParams = getUrlParams();
 
     apply({ ...initialParams, ...initialUrlParams });
