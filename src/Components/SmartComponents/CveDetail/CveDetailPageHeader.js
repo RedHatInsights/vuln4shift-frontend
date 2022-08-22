@@ -10,6 +10,9 @@ import {
   GridItem,
   Stack,
   StackItem,
+  Tab,
+  Tabs,
+  TabTitleText,
   Text,
   TextContent,
   TextVariants,
@@ -54,7 +57,7 @@ const CveDetailPageHeader = () => {
   }, []);
 
   return (
-    <PageHeader>
+    <PageHeader style={{ paddingBottom: 0 }}>
       <Breadcrumb className="pf-u-mb-md">
         <BreadcrumbItem>
           <Link to="/">Vulnerability</Link>
@@ -169,6 +172,12 @@ const CveDetailPageHeader = () => {
           </Stack>
         </GridItem>
       </Grid>
+      <Tabs activeKey={0} hasBorderBottom={false}>
+        <Tab
+          eventKey={0}
+          title={<TabTitleText>Exposed clusters</TabTitleText>}
+        />
+      </Tabs>
     </PageHeader>
   );
 };
