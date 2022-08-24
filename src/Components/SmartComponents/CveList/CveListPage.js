@@ -19,8 +19,8 @@ import { useLocalStorage } from '../../../Helpers/hooks';
 import { HEADER_ALERT_DISMISSED_KEY } from '../../../Helpers/constants';
 
 const CveListPage = () => {
-  // TODO: Add correct link
-  const PRODUCT_DOC = 'https://access.redhat.com/';
+  const PRODUCT_DOC =
+    'https://access.redhat.com/documentation/en-us/openshift_cluster_manager/2022';
 
   const [wasHeaderAlertDismissed, setHeaderAlertDismissed] = useLocalStorage(
     HEADER_ALERT_DISMISSED_KEY
