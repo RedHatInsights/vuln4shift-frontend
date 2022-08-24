@@ -187,6 +187,7 @@ export const useExport = (filenamePrefix, fetchAction, fetchActionParam) => {
       {
         ...transformUrlParamsBeforeFetching(params),
         ...DEFAULT_PARAMS,
+        data_format: format,
       },
       fetchActionParam
     );
