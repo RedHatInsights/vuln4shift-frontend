@@ -106,6 +106,7 @@ const BaseTableBody = ({
                 // looks like Patternfly has this condition reversed
                 areAllExpanded: !areAllRowsExpanded,
               }}
+              ouiaId="expand-all"
             />
           )}
           {columns.map((column, index) => (

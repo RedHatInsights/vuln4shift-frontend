@@ -58,27 +58,32 @@ const ClusterDetailPageHeader = () => {
         </BreadcrumbItem>
       </Breadcrumb>
       <PageHeaderTitle title={pageTitle} className="pf-u-mb-sm" />
-      UUID:&nbsp;
-      <WithLoader
-        variant={LoaderType.inlineSkeleton}
-        width="300px"
-        fontSize="sm"
-        isLoading={isDetailLoading}
-        style={{ verticalAlign: -4 }}
-      >
-        {match.params.clusterId}
-      </WithLoader>
-      <br />
-      Last seen:&nbsp;
-      <WithLoader
-        variant={LoaderType.inlineSkeleton}
-        width="200px"
-        fontSize="sm"
-        isLoading={isDetailLoading}
-        style={{ verticalAlign: -4 }}
-      >
-        <DateFormat date={cluster.last_seen} type="exact" />
-      </WithLoader>
+      <div>
+        UUID:&nbsp;
+        <WithLoader
+          variant={LoaderType.inlineSkeleton}
+          width="300px"
+          fontSize="sm"
+          isLoading={isDetailLoading}
+          style={{ verticalAlign: -4 }}
+        >
+          <span ouiaId="cluster-detail-id">{match.params.clusterId}</span>
+        </WithLoader>
+      </div>
+      <div>
+        Last seen:&nbsp;
+        <WithLoader
+          variant={LoaderType.inlineSkeleton}
+          width="200px"
+          fontSize="sm"
+          isLoading={isDetailLoading}
+          style={{ verticalAlign: -4 }}
+        >
+          <span ouiaId="cluster-detail-last-seen">
+            <DateFormat date={cluster.last_seen} type="exact" />
+          </span>
+        </WithLoader>
+      </div>
     </PageHeader>
   );
 };

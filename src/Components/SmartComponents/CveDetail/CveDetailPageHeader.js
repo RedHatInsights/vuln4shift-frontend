@@ -94,7 +94,9 @@ const CveDetailPageHeader = () => {
                   fontSize="sm"
                   style={{ verticalAlign: -4 }}
                 >
-                  {processDate(publish_date)}
+                  <span ouiaId="cve-detail-publish-date">
+                    {processDate(publish_date)}
+                  </span>
                 </WithLoader>
               </StackItem>
             )}
@@ -105,7 +107,10 @@ const CveDetailPageHeader = () => {
                 style={{ height: '132px', width: '100%' }}
               >
                 {hasMetadata ? (
-                  <TextContent style={{ textAlign: 'justify' }}>
+                  <TextContent
+                    style={{ textAlign: 'justify' }}
+                    ouiaId="cve-detail-description"
+                  >
                     <Text component={TextVariants.p}>{description}</Text>
                   </TextContent>
                 ) : (
@@ -155,6 +160,7 @@ const CveDetailPageHeader = () => {
                           (option) => option.label === severity
                         )?.textColor,
                     }}
+                    ouiaId="cve-detail-severity"
                   >
                     <Shield
                       impact={hasMetadata ? severity : 'Unknown'}

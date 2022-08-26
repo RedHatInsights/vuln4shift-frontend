@@ -43,7 +43,7 @@
       {
           "cvss2_score": 0,
           "cvss3_score": 3.3,
-          "description": "Test 5",
+          "description": "unknown",
           "severity": "Low",
           "publish_date": "2022-09-05T00:00:00Z",
           "synopsis": "CVE-2022-0004",

@@ -92,8 +92,10 @@ const CvssVector = ({
         variant={LoaderType.inlineSkeleton}
         width="360px"
       >
-        <span className="pf-u-mr-md">{score}</span>
-        <span id="cvss-vector-content">
+        <span className="pf-u-mr-md" ouiaId="cve-detail-cvss-score">
+          {score}
+        </span>
+        <span id="cvss-vector-content" ouiaId="cve-detail-cvss-score-breakdown">
           Vector:
           {' ' + cvssVector?.substring(cvssVector.indexOf('/') + 1) || 'N/A'}
         </span>
@@ -104,7 +106,7 @@ const CvssVector = ({
       <Text component={TextVariants.h6} className="pf-u-mb-xs">
         CVSS base score
       </Text>
-      Unknown
+      <span ouiaId="cve-detail-cvss-score">Unknown</span>
     </TextContent>
   );
 };

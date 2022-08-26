@@ -130,6 +130,12 @@ describe('CveListTable with items', () => {
       'false'
     );
   });
+
+  it('should show missing metadata empty state when CVE description is "unknown"', () => {
+    cy.get('tbody [id^=expand-toggle]').last().click();
+
+    cy.contains('No description available');
+  });
 });
 
 describe('CveListTable without items', () => {

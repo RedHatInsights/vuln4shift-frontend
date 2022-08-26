@@ -8,7 +8,7 @@ import cves from '../../../../cypress/fixtures/clusterdetaillist.json';
 import { initialState } from '../../../Store/Reducers/ClusterDetailStore';
 import { CLUSTER_DETAIL_EXPORT_PREFIX } from '../../../Helpers/constants';
 
-// TODO: Mock URL cveId param
+// TODO: Mock URL clusterId param
 const mountComponent = () => {
   mount(
     <Router>
@@ -134,6 +134,12 @@ describe('ClusterDetailTable with items', () => {
       'aria-expanded',
       'false'
     );
+  });
+
+  it('should show missing metadata empty state when CVE description is "unknown"', () => {
+    cy.get('tbody [id^=expand-toggle]').last().click();
+
+    cy.contains('No description available');
   });
 });
 
