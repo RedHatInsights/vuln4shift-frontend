@@ -16,6 +16,7 @@ import {
   Text,
   TextContent,
   TextVariants,
+  EmptyStateVariant,
 } from '@patternfly/react-core';
 import { Link } from 'react-router-dom';
 import { Shield } from '@redhat-cloud-services/frontend-components/Shield';
@@ -108,7 +109,10 @@ const CveDetailPageHeader = () => {
                     <Text component={TextVariants.p}>{description}</Text>
                   </TextContent>
                 ) : (
-                  <MissingMetadata />
+                  <MissingMetadata
+                    variant={EmptyStateVariant.full}
+                    style={{ maxWidth: 800, padding: 16 }}
+                  />
                 )}
               </WithLoader>
             </StackItem>

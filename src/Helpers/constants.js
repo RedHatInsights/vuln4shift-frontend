@@ -4,7 +4,12 @@ import { processDate } from '@redhat-cloud-services/frontend-components-utilitie
 import parseCvssScore from '@redhat-cloud-services/frontend-components-utilities/parseCvssScore';
 import { Shield } from '@redhat-cloud-services/frontend-components/Shield';
 import ShieldSet from '../Components/PresentationalComponents/ShieldSet';
-import { Text, TextContent, TextVariants } from '@patternfly/react-core';
+import {
+  Text,
+  TextContent,
+  TextVariants,
+  EmptyStateVariant,
+} from '@patternfly/react-core';
 import { DateFormat } from '@redhat-cloud-services/frontend-components/DateFormat';
 import { subtractDays, subtractYears } from './miscHelper';
 import MissingMetadata from '../Components/PresentationalComponents/EmptyStates/MissingMetadata';
@@ -204,25 +209,29 @@ export const CLUSTER_DETAIL_TABLE_COLUMNS = [
 
 /* TABLE ROW MAPPERS */
 
-const createCveDescription = (row) =>
-  row.description === 'unknown' ? (
-    <MissingMetadata />
-  ) : (
-    <Fragment>
+const createCveDescription = (row) => (
+  <Fragment>
+    {row.description === 'unknown' ? (
+      <MissingMetadata
+        variant={EmptyStateVariant.large}
+        style={{ padding: 0 }}
+      />
+    ) : (
       <TextContent>
         <Text component={TextVariants.h6} style={{ fontSize: 14 }}>
           CVE description
         </Text>
+        {row.description}
       </TextContent>
-      {row.description}
-      <Link
-        to={'/cves/' + row.synopsis}
-        className="pf-u-mt-md pf-u-display-block"
-      >
-        View more information about this CVE
-      </Link>
-    </Fragment>
-  );
+    )}
+    <Link
+      to={'/cves/' + row.synopsis}
+      className="pf-u-mt-md pf-u-display-block"
+    >
+      View more information about this CVE
+    </Link>
+  </Fragment>
+);
 
 export const CVE_LIST_TABLE_MAPPER = (row) => ({
   key: row.synopsis,

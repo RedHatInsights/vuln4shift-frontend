@@ -1,15 +1,16 @@
 import React from 'react';
+import propTypes from 'prop-types';
 import {
   EmptyState,
   EmptyStateBody,
   Bullseye,
-  EmptyStateVariant,
   Text,
+  EmptyStateVariant,
 } from '@patternfly/react-core';
 
-const MissingMetadata = () => (
+const MissingMetadata = ({ ...props }) => (
   <Bullseye>
-    <EmptyState variant={EmptyStateVariant.large} style={{ padding: 0 }}>
+    <EmptyState variant={EmptyStateVariant.large} {...props}>
       <Text>
         <strong>No description available</strong>
       </Text>
@@ -21,5 +22,9 @@ const MissingMetadata = () => (
     </EmptyState>
   </Bullseye>
 );
+
+MissingMetadata.propTypes = {
+  props: propTypes.object,
+};
 
 export default MissingMetadata;
