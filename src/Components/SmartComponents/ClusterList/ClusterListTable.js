@@ -5,6 +5,7 @@ import {
   CLUSTER_LIST_EXPORT_PREFIX,
   CLUSTER_LIST_TABLE_COLUMNS,
   CLUSTER_LIST_TABLE_MAPPER,
+  SEVERITY_OPTIONS,
 } from '../../../Helpers/constants';
 import { useSelector } from 'react-redux';
 import {
@@ -18,6 +19,7 @@ import BaseTable from '../Generic/BaseTable';
 import { setupFilters } from '../../../Helpers/miscHelper';
 import NoMatchingClusters from '../../PresentationalComponents/EmptyStates/NoMatchingClusters';
 import { fetchClusters } from '../../../Helpers/apiHelper';
+import checkboxFilter from '../Filters/CheckboxFilter';
 
 const ClusterDetailTable = () => {
   const { clusters, isLoading, meta, error } = useSelector(
@@ -31,7 +33,7 @@ const ClusterDetailTable = () => {
     changeParamsAction: changeClusterListTableParams,
   });
 
-  const { search } = meta;
+  const { search, cluster_severity } = meta;
 
   const onExport = useExport(CLUSTER_LIST_EXPORT_PREFIX, fetchClusters);
 
@@ -43,6 +45,15 @@ const ClusterDetailTable = () => {
       value: search,
       apply,
       chipLabel: 'Search term',
+    }),
+    checkboxFilter({
+      urlParam: 'cluster_severity',
+      label: 'CVEs severity',
+      value: cluster_severity,
+      items: SEVERITY_OPTIONS.filter((option) => option.value !== 'none'),
+      placeholder: 'Filter by CVEs severity',
+      apply,
+      chipLabel: 'CVEs severity',
     }),
   ];
 

@@ -21,7 +21,7 @@
     "start:proxy": "PROXY=true npm start",
     "start:proxy:beta": "BETA=true PROXY=true npm start",
     "test": "jest --passWithNoTests",
-    "test:ct": "cypress run-ct; npx nyc report",
+    "test:ct": "cypress run-ct && npx nyc report",
     "test:coverage": "npx nyc report",
     "verify": "npm-run-all build lint test"
   },

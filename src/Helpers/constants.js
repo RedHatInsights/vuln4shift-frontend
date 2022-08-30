@@ -313,7 +313,7 @@ export const CVE_LIST_ALLOWED_PARAMS = [
 export const CLUSTER_LIST_ALLOWED_PARAMS = [
   ...GENERIC_ALLOWED_PARAMS,
   'search',
-  'cve_severity',
+  'cluster_severity',
 ];
 
 export const CVE_DETAIL_ALLOWED_PARAMS = [...GENERIC_ALLOWED_PARAMS, 'search'];
