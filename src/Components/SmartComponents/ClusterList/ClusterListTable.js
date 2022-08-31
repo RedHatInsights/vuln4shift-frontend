@@ -5,6 +5,7 @@ import {
   CLUSTER_LIST_EXPORT_PREFIX,
   CLUSTER_LIST_TABLE_COLUMNS,
   CLUSTER_LIST_TABLE_MAPPER,
+  CLUSTER_STATUS_OPTIONS,
   SEVERITY_OPTIONS,
 } from '../../../Helpers/constants';
 import { useSelector } from 'react-redux';
@@ -33,7 +34,7 @@ const ClusterDetailTable = () => {
     changeParamsAction: changeClusterListTableParams,
   });
 
-  const { search, cluster_severity } = meta;
+  const { search, status, cluster_severity, dynamic_status_options } = meta;
 
   const onExport = useExport(CLUSTER_LIST_EXPORT_PREFIX, fetchClusters);
 
@@ -45,6 +46,20 @@ const ClusterDetailTable = () => {
       value: search,
       apply,
       chipLabel: 'Search term',
+    }),
+    checkboxFilter({
+      urlParam: 'status',
+      label: 'Status',
+      value: status,
+      items: CLUSTER_STATUS_OPTIONS.concat(
+        (dynamic_status_options ?? []).map((status) => ({
+          label: status,
+          value: status,
+        }))
+      ),
+      placeholder: 'Filter by status',
+      apply,
+      chipLabel: 'Status',
     }),
     checkboxFilter({
       urlParam: 'cluster_severity',

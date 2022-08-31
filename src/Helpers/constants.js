@@ -98,6 +98,25 @@ export const EXPOSED_CLUSTERS_OPTIONS = [
   },
 ];
 
+export const CLUSTER_STATUS_OPTIONS = [
+  {
+    value: 'Connected',
+    label: 'Connected',
+  },
+  {
+    value: 'Disconnected',
+    label: 'Disconnected',
+  },
+  {
+    value: 'Stale',
+    label: 'Stale',
+  },
+  {
+    value: 'N/A',
+    label: 'Unknown',
+  },
+];
+
 /* TABLE COLUMNS */
 
 export const CVE_LIST_TABLE_COLUMNS = [
@@ -313,7 +332,10 @@ export const CVE_LIST_ALLOWED_PARAMS = [
 export const CLUSTER_LIST_ALLOWED_PARAMS = [
   ...GENERIC_ALLOWED_PARAMS,
   'search',
+  'status',
+  'version',
   'cluster_severity',
+  'provider',
 ];
 
 export const CVE_DETAIL_ALLOWED_PARAMS = [...GENERIC_ALLOWED_PARAMS, 'search'];
