@@ -7,6 +7,7 @@ import {
   CLUSTER_LIST_TABLE_MAPPER,
   CLUSTER_STATUS_OPTIONS,
   CLUSTER_VERSION_OPTIONS,
+  CLUSTER_PROVIDER_OPTIONS,
   SEVERITY_OPTIONS,
 } from '../../../Helpers/constants';
 import { useSelector } from 'react-redux';
@@ -43,6 +44,8 @@ const ClusterDetailTable = () => {
     version,
     dynamic_version_options,
     cluster_severity,
+    provider,
+    dynamic_provider_options,
   } = meta;
 
   const onExport = useExport(CLUSTER_LIST_EXPORT_PREFIX, fetchClusters);
@@ -98,6 +101,23 @@ const ClusterDetailTable = () => {
       placeholder: 'Filter by CVEs severity',
       apply,
       chipLabel: 'CVEs severity',
+    }),
+    checkboxFilter({
+      urlParam: 'provider',
+      label: 'Provider',
+      value: provider,
+      items: uniqBy(
+        CLUSTER_PROVIDER_OPTIONS.concat(
+          (dynamic_provider_options ?? []).map((provider) => ({
+            label: provider,
+            value: provider,
+          }))
+        ),
+        'value'
+      ),
+      placeholder: 'Filter by provider',
+      apply,
+      chipLabel: 'Provider',
     }),
   ];
 
