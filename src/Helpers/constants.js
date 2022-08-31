@@ -179,6 +179,7 @@ export const CLUSTER_LIST_TABLE_COLUMNS = [
   },
   {
     title: 'CVEs severity',
+    sortParam: 'cluster_severity',
   },
   {
     title: 'Provider',
