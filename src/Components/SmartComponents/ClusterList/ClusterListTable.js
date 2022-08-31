@@ -21,6 +21,7 @@ import { setupFilters } from '../../../Helpers/miscHelper';
 import NoMatchingClusters from '../../PresentationalComponents/EmptyStates/NoMatchingClusters';
 import { fetchClusters } from '../../../Helpers/apiHelper';
 import checkboxFilter from '../Filters/CheckboxFilter';
+import { uniqBy } from 'lodash';
 
 const ClusterDetailTable = () => {
   const { clusters, isLoading, meta, error } = useSelector(
@@ -51,11 +52,14 @@ const ClusterDetailTable = () => {
       urlParam: 'status',
       label: 'Status',
       value: status,
-      items: CLUSTER_STATUS_OPTIONS.concat(
-        (dynamic_status_options ?? []).map((status) => ({
-          label: status,
-          value: status,
-        }))
+      items: uniqBy(
+        CLUSTER_STATUS_OPTIONS.concat(
+          (dynamic_status_options ?? []).map((status) => ({
+            label: status,
+            value: status,
+          }))
+        ),
+        'value'
       ),
       placeholder: 'Filter by status',
       apply,
