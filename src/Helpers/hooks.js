@@ -166,9 +166,7 @@ export const useExport = (filenamePrefix, fetchAction, fetchActionParam) => {
   const dispatch = useDispatch();
 
   const DEFAULT_PARAMS = {
-    offset: 0,
-    // TODO: Change this to Number.MAX_SAFE_INTEGER once backend starts supporting it
-    limit: 100,
+    report: true,
   };
 
   const onExport = async (format, params) => {
@@ -202,9 +200,7 @@ export const useExport = (filenamePrefix, fetchAction, fetchActionParam) => {
     dispatch(
       addNotification({
         variant: 'success',
-        title: 'Downloading export.',
-        description:
-          'Temporary message to QA: Report currently contains only at most 100 items.',
+        title: 'Downloading export',
       })
     );
   };
