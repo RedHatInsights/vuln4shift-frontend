@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from '@cypress/react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { MemoryRouter, Route } from 'react-router-dom';
 import ClusterDetailTable from './ClusterDetailTable';
 import { Provider } from 'react-redux';
 import { init } from '../../../Store/ReducerRegistry';
@@ -16,14 +16,17 @@ import {
   itIsSortedBy,
 } from '../../../../cypress/utils/table';
 
-// TODO: Mock URL clusterId param
 const mountComponent = () => {
   mount(
-    <Router>
-      <Provider store={init().getStore()}>
-        <ClusterDetailTable />
-      </Provider>
-    </Router>
+    <MemoryRouter
+      initialEntries={['/clusters/e45c0b54-3083-4ae0-9cbc-f7d7a302e7dd']}
+    >
+      <Route path="/clusters/:clusterId">
+        <Provider store={init().getStore()}>
+          <ClusterDetailTable />
+        </Provider>
+      </Route>
+    </MemoryRouter>
   );
 };
 
@@ -31,7 +34,7 @@ describe('ClusterDetailTable with items', () => {
   beforeEach(() => {
     cy.intercept(
       'GET',
-      '**/api/ocp-vulnerability/v1/clusters/undefined/cves**',
+      '**/api/ocp-vulnerability/v1/clusters/e45c0b54-3083-4ae0-9cbc-f7d7a302e7dd/cves**',
       {
         ...initialState,
         ...cves,
@@ -73,7 +76,7 @@ describe('CveListTable without items', () => {
   beforeEach(() => {
     cy.intercept(
       'GET',
-      '**/api/ocp-vulnerability/v1/clusters/undefined/cves**',
+      '**/api/ocp-vulnerability/v1/clusters/e45c0b54-3083-4ae0-9cbc-f7d7a302e7dd/cves**',
       {
         ...initialState,
         data: [],

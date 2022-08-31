@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from '@cypress/react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { MemoryRouter, Route } from 'react-router-dom';
 import CveDetailTable from './CveDetailTable';
 import { Provider } from 'react-redux';
 import { init } from '../../../Store/ReducerRegistry';
@@ -16,14 +16,15 @@ import {
   itIsSortedBy,
 } from '../../../../cypress/utils/table';
 
-// TODO: Mock URL cveId param
 const mountComponent = () => {
   mount(
-    <Router>
-      <Provider store={init().getStore()}>
-        <CveDetailTable />
-      </Provider>
-    </Router>
+    <MemoryRouter initialEntries={['/cves/CVE-2022-12345']}>
+      <Route path="/cves/:cveId">
+        <Provider store={init().getStore()}>
+          <CveDetailTable />
+        </Provider>
+      </Route>
+    </MemoryRouter>
   );
 };
 
@@ -31,7 +32,7 @@ describe('CveDetailTable with items', () => {
   beforeEach(() => {
     cy.intercept(
       'GET',
-      '**/api/ocp-vulnerability/v1/cves/undefined/exposed_clusters**',
+      '**/api/ocp-vulnerability/v1/cves/CVE-2022-12345/exposed_clusters**',
       {
         ...initialState,
         ...clusters,
@@ -67,7 +68,7 @@ describe('CveDetailTable without items', () => {
   beforeEach(() => {
     cy.intercept(
       'GET',
-      '**/api/ocp-vulnerability/v1/cves/undefined/exposed_clusters**',
+      '**/api/ocp-vulnerability/v1/cves/CVE-2022-12345/exposed_clusters**',
       {
         ...initialState,
         data: [],

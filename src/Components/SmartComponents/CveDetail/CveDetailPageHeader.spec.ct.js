@@ -1,25 +1,26 @@
 import React from 'react';
 import { mount } from '@cypress/react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { MemoryRouter, Route } from 'react-router-dom';
 import CveDetailPageHeader from './CveDetailPageHeader';
 import { Provider } from 'react-redux';
 import { init } from '../../../Store/ReducerRegistry';
 import cveDetail from '../../../../cypress/fixtures/cvedetail.json';
 
-// TODO: Mock URL cveId param
 const mountComponent = () => {
   mount(
-    <Router>
-      <Provider store={init().getStore()}>
-        <CveDetailPageHeader />
-      </Provider>
-    </Router>
+    <MemoryRouter initialEntries={['/cves/CVE-2022-12345']}>
+      <Route path="/cves/:cveId">
+        <Provider store={init().getStore()}>
+          <CveDetailPageHeader />
+        </Provider>
+      </Route>
+    </MemoryRouter>
   );
 };
 
 describe('CveDetailPageHeader', () => {
   beforeEach(() => {
-    cy.intercept('GET', '**/api/ocp-vulnerability/v1/cves/undefined**', {
+    cy.intercept('GET', '**/api/ocp-vulnerability/v1/cves/CVE-2022-12345**', {
       data: {
         ...cveDetail.data,
         description: 'unknown',
