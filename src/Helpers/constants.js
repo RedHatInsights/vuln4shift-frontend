@@ -117,6 +117,13 @@ export const CLUSTER_STATUS_OPTIONS = [
   },
 ];
 
+export const CLUSTER_VERSION_OPTIONS = [
+  {
+    value: 'N/A',
+    label: 'Unknown',
+  },
+];
+
 /* TABLE COLUMNS */
 
 export const CVE_LIST_TABLE_COLUMNS = [

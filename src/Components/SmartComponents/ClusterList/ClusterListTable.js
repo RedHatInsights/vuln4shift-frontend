@@ -6,6 +6,7 @@ import {
   CLUSTER_LIST_TABLE_COLUMNS,
   CLUSTER_LIST_TABLE_MAPPER,
   CLUSTER_STATUS_OPTIONS,
+  CLUSTER_VERSION_OPTIONS,
   SEVERITY_OPTIONS,
 } from '../../../Helpers/constants';
 import { useSelector } from 'react-redux';
@@ -35,7 +36,14 @@ const ClusterDetailTable = () => {
     changeParamsAction: changeClusterListTableParams,
   });
 
-  const { search, status, cluster_severity, dynamic_status_options } = meta;
+  const {
+    search,
+    status,
+    dynamic_status_options,
+    version,
+    dynamic_version_options,
+    cluster_severity,
+  } = meta;
 
   const onExport = useExport(CLUSTER_LIST_EXPORT_PREFIX, fetchClusters);
 
@@ -64,6 +72,23 @@ const ClusterDetailTable = () => {
       placeholder: 'Filter by status',
       apply,
       chipLabel: 'Status',
+    }),
+    checkboxFilter({
+      urlParam: 'version',
+      label: 'Version',
+      value: version,
+      items: uniqBy(
+        CLUSTER_VERSION_OPTIONS.concat(
+          (dynamic_version_options ?? []).map((version) => ({
+            label: version,
+            value: version,
+          }))
+        ),
+        'value'
+      ),
+      placeholder: 'Filter by version',
+      apply,
+      chipLabel: 'Version',
     }),
     checkboxFilter({
       urlParam: 'cluster_severity',
