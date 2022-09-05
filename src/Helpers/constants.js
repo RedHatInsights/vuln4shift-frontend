@@ -169,6 +169,7 @@ export const CLUSTER_LIST_TABLE_COLUMNS = [
   {
     title: 'Status',
     sortParam: 'status',
+    sortDefaultDirection: 'asc',
   },
   {
     title: 'Type',
@@ -184,6 +185,7 @@ export const CLUSTER_LIST_TABLE_COLUMNS = [
   {
     title: 'Provider',
     sortParam: 'provider',
+    sortDefaultDirection: 'asc',
   },
   {
     title: 'Last seen',
@@ -200,6 +202,7 @@ export const CVE_DETAIL_TABLE_COLUMNS = [
   {
     title: 'Status',
     sortParam: 'status',
+    sortDefaultDirection: 'asc',
   },
   {
     title: 'Type',
@@ -211,6 +214,7 @@ export const CVE_DETAIL_TABLE_COLUMNS = [
   {
     title: 'Provider',
     sortParam: 'provider',
+    sortDefaultDirection: 'asc',
   },
   {
     title: 'Last seen',
