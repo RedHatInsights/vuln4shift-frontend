@@ -1,5 +1,5 @@
 // ***********************************************************
-// This example support/index.js is processed and
+// This example support/component.js is processed and
 // loaded automatically before your test files.
 //
 // This is a great place to put global configuration and
@@ -16,10 +16,13 @@
 // Import commands.js using ES2015 syntax:
 import './commands';
 import '@cypress/code-coverage/support';
-// enable PF4 CSS styling
-import '@patternfly/patternfly/patternfly.scss';
-
-import '@frsource/cypress-plugin-visual-regression-diff';
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+import '@patternfly/patternfly/patternfly.scss';
+import { mount } from 'cypress/react';
+
+Cypress.Commands.add('mount', mount);
+
+// Example use:
+// cy.mount(<MyComponent />)

@@ -14,12 +14,18 @@ Red Hat Vulnerability for OpenShift service is used to assess and monitor the st
 3. Local version of the app will be available at https://stage.foo.redhat.com:1337/beta/openshift/insights/vulnerability/
 
 ## Testing
-[Jest](https://jestjs.io/) is used as the testing framework
-- ```npm run test``` - run all tests
+[Jest](https://jestjs.io/) and [Cypress](https://cypress.io/) are used as the testing frameworks
+- ```npm run test:ct``` - run all Cypress tests
+- ```npx cypress open --component``` - open Cypress in the component testing mode.
+- ```npm run test``` - run all Jest tests
 - ```npm run test -- testName``` - run tests for all components matching `testName`
 - ```npm run lint``` - run linter
 - ```npm run test -- -u``` - run all tests and update snapshots
 - ```npm run test -- --watch``` - run tests in watch mode
+
+## Code Coverage
+1. Make sure ```npm run test``` and ```npm run test:ct``` are ran before the coverage
+2. Run ```npm run coverage```
 
 ## Deploying
 Any push to the following branches will trigger a build in [vuln4shift-frontend-build repository](https://github.com/RedHatInsights/vuln4shift-frontend-build) which will deploy to corresponding environment. Travis is used to deploy the application.
