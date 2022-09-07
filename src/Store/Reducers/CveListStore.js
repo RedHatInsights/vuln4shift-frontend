@@ -2,12 +2,13 @@ import {
   CVE_LIST_DEFAULT_FILTERS,
   DEFAULT_LIMIT,
 } from '../../Helpers/constants';
-import { deepFreeze } from '../../Helpers/miscHelper';
+import { deepFreeze, isTimestampValid } from '../../Helpers/miscHelper';
 import * as ActionTypes from '../ActionTypes';
 
 export const initialState = deepFreeze({
   cves: [],
   isLoading: true,
+  timestamp: new Date(),
   meta: {
     limit: DEFAULT_LIMIT,
     offset: 0,
@@ -24,19 +25,24 @@ const CveListStore = (state = initialState, action) => {
         ...state,
         isLoading: true,
         error: undefined,
+        timestamp: action.meta.timestamp,
       };
     }
 
     case `${ActionTypes.FETCH_CVE_LIST_TABLE}_FULFILLED`: {
-      return {
-        ...state,
-        cves: action.payload.data.data,
-        meta: {
-          ...state.meta,
-          total_items: action.payload.data.meta.total_items,
-        },
-        isLoading: false,
-      };
+      if (isTimestampValid(state.timestamp, action.meta.timestamp)) {
+        return {
+          ...state,
+          cves: action.payload.data.data,
+          meta: {
+            ...state.meta,
+            total_items: action.payload.data.meta.total_items,
+          },
+          isLoading: false,
+        };
+      } else {
+        return state;
+      }
     }
 
     case `${ActionTypes.FETCH_CVE_LIST_TABLE}_REJECTED`: {

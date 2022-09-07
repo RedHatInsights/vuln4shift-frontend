@@ -87,3 +87,6 @@ export const setupFilters = (filters, meta, defaultFilters, apply) => {
 
   return [filterConfig, activeFiltersConfig, showDeleteButton];
 };
+
+export const isTimestampValid = (stateTimestamp, actionTimestamp) =>
+  actionTimestamp >= stateTimestamp;

@@ -2,12 +2,13 @@ import {
   CLUSTER_LIST_DEFAULT_FILTERS,
   DEFAULT_LIMIT,
 } from '../../Helpers/constants';
-import { deepFreeze } from '../../Helpers/miscHelper';
+import { deepFreeze, isTimestampValid } from '../../Helpers/miscHelper';
 import * as ActionTypes from '../ActionTypes';
 
 export const initialState = deepFreeze({
   clusters: [],
   isLoading: true,
+  timestamp: new Date(),
   meta: {
     limit: DEFAULT_LIMIT,
     offset: 0,
@@ -24,24 +25,29 @@ const ClusterListStore = (state = initialState, action) => {
         ...state,
         isLoading: true,
         error: undefined,
+        timestamp: action.meta.timestamp,
       };
     }
 
     case `${ActionTypes.FETCH_CLUSTER_LIST_TABLE}_FULFILLED`: {
       const { data, meta } = action.payload.data;
 
-      return {
-        ...state,
-        clusters: data,
-        meta: {
-          ...state.meta,
-          total_items: meta.total_items,
-          dynamic_provider_options: meta.cluster_providers_all,
-          dynamic_status_options: meta.cluster_statuses_all,
-          dynamic_version_options: meta.cluster_versions_all,
-        },
-        isLoading: false,
-      };
+      if (isTimestampValid(state.timestamp, action.meta.timestamp)) {
+        return {
+          ...state,
+          clusters: data,
+          meta: {
+            ...state.meta,
+            total_items: meta.total_items,
+            dynamic_provider_options: meta.cluster_providers_all,
+            dynamic_status_options: meta.cluster_statuses_all,
+            dynamic_version_options: meta.cluster_versions_all,
+          },
+          isLoading: false,
+        };
+      } else {
+        return state;
+      }
     }
 
     case `${ActionTypes.FETCH_CLUSTER_LIST_TABLE}_REJECTED`: {
