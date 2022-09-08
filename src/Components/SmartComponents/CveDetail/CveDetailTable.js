@@ -1,5 +1,8 @@
 import React from 'react';
 import {
+  CLUSTER_PROVIDER_OPTIONS,
+  CLUSTER_STATUS_OPTIONS,
+  CLUSTER_VERSION_OPTIONS,
   CVE_DETAIL_ALLOWED_PARAMS,
   CVE_DETAIL_DEFAULT_FILTERS,
   CVE_DETAIL_EXPORT_PREFIX,
@@ -19,6 +22,8 @@ import {
 import useTextFilter from '../Filters/TextFilter';
 import { setupFilters } from '../../../Helpers/miscHelper';
 import { fetchExposedClusters } from '../../../Helpers/apiHelper';
+import checkboxFilter from '../Filters/CheckboxFilter';
+import { uniqBy } from 'lodash';
 
 const CveDetailTable = () => {
   const match = useRouteMatch();
@@ -35,7 +40,15 @@ const CveDetailTable = () => {
     changeParamsAction: changeCveDetailsTableParams,
   });
 
-  const { search } = meta;
+  const {
+    search,
+    status,
+    dynamic_status_options,
+    version,
+    dynamic_version_options,
+    provider,
+    dynamic_provider_options,
+  } = meta;
 
   const onExport = useExport(
     CVE_DETAIL_EXPORT_PREFIX,
@@ -51,6 +64,57 @@ const CveDetailTable = () => {
       value: search,
       apply,
       chipLabel: 'Search term',
+    }),
+    checkboxFilter({
+      urlParam: 'status',
+      label: 'Status',
+      value: status,
+      items: uniqBy(
+        CLUSTER_STATUS_OPTIONS.concat(
+          (dynamic_status_options ?? []).map((status) => ({
+            label: status,
+            value: status,
+          }))
+        ),
+        'value'
+      ),
+      placeholder: 'Filter by status',
+      apply,
+      chipLabel: 'Status',
+    }),
+    checkboxFilter({
+      urlParam: 'version',
+      label: 'Version',
+      value: version,
+      items: uniqBy(
+        CLUSTER_VERSION_OPTIONS.concat(
+          (dynamic_version_options ?? []).map((version) => ({
+            label: version,
+            value: version,
+          }))
+        ),
+        'value'
+      ),
+      placeholder: 'Filter by version',
+      apply,
+      chipLabel: 'Version',
+    }),
+    checkboxFilter({
+      urlParam: 'provider',
+      label: 'Provider',
+      value: provider,
+      items: uniqBy(
+        CLUSTER_PROVIDER_OPTIONS.concat(
+          (dynamic_provider_options ?? []).map((provider) => ({
+            label: provider,
+            value: provider,
+          }))
+        ),
+        'value'
+      ),
+      placeholder: 'Filter by provider',
+      apply,
+      chipLabel: 'Provider',
     }),
   ];
 

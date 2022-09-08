@@ -33,12 +33,17 @@ const CveDetailStore = (state = initialState, action) => {
 
     case `${ActionTypes.FETCH_CVE_DETAIL_TABLE}_FULFILLED`: {
       if (isTimestampValid(state.timestamp, action.meta.timestamp)) {
+        const { data, meta } = action.payload.data;
+
         return {
           ...state,
-          clusters: action.payload.data.data,
+          clusters: data,
           meta: {
             ...state.meta,
-            total_items: action.payload.data.meta.total_items,
+            total_items: meta.total_items,
+            dynamic_provider_options: meta.cluster_providers_all,
+            dynamic_status_options: meta.cluster_statuses_all,
+            dynamic_version_options: meta.cluster_versions_all,
           },
           isTableLoading: false,
         };
@@ -64,6 +69,9 @@ const CveDetailStore = (state = initialState, action) => {
           total_items: state.meta.total_items,
           sort: state.meta.sort,
           limit: state.meta.limit,
+          dynamic_provider_options: state.meta.dynamic_provider_options,
+          dynamic_status_options: state.meta.dynamic_status_options,
+          dynamic_version_options: state.meta.dynamic_version_options,
           ...action.payload,
         },
       };

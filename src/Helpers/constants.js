@@ -357,7 +357,13 @@ export const CLUSTER_LIST_ALLOWED_PARAMS = [
   'provider',
 ];
 
-export const CVE_DETAIL_ALLOWED_PARAMS = [...GENERIC_ALLOWED_PARAMS, 'search'];
+export const CVE_DETAIL_ALLOWED_PARAMS = [
+  ...GENERIC_ALLOWED_PARAMS,
+  'search',
+  'status',
+  'version',
+  'provider',
+];
 
 export const CLUSTER_DETAIL_ALLOWED_PARAMS = [
   ...GENERIC_ALLOWED_PARAMS,
