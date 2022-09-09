@@ -14,7 +14,6 @@ import {
   fetchCveListTable,
   changeCveListTableParams,
 } from '../../../Store/Actions';
-import NoCves from '../../PresentationalComponents/EmptyStates/NoCves';
 import NoMatchingCves from '../../PresentationalComponents/EmptyStates/NoMatchingCves';
 import { useUrlBoundParams, useExport } from '../../../Helpers/hooks';
 import useTextFilter from '../Filters/TextFilter';
@@ -103,8 +102,12 @@ const CveListTable = () => {
     }),
   ];
 
-  const [filterConfig, activeFiltersConfig, areAnyFiltersApplied] =
-    setupFilters(filters, meta, CVE_LIST_DEFAULT_FILTERS, apply);
+  const [filterConfig, activeFiltersConfig] = setupFilters(
+    filters,
+    meta,
+    CVE_LIST_DEFAULT_FILTERS,
+    apply
+  );
 
   return (
     <BaseTable
@@ -116,9 +119,7 @@ const CveListTable = () => {
       activeFiltersConfig={activeFiltersConfig}
       meta={meta}
       error={error}
-      emptyState={
-        areAnyFiltersApplied ? <NoMatchingCves /> : <NoCves multipleClusters />
-      }
+      emptyState={<NoMatchingCves />}
       apply={apply}
       onExport={(format) => onExport(format, meta)}
     />

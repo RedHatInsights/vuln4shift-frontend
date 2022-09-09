@@ -13,7 +13,6 @@ import {
   changeClusterDetailsTableParams,
   fetchClusterDetailTable,
 } from '../../../Store/Actions';
-import NoCves from '../../PresentationalComponents/EmptyStates/NoCves';
 import { useRouteMatch } from 'react-router-dom';
 import { useExport, useUrlBoundParams } from '../../../Helpers/hooks';
 import {
@@ -101,8 +100,12 @@ const ClusterDetailTable = () => {
     }),
   ];
 
-  const [filterConfig, activeFiltersConfig, areAnyFiltersApplied] =
-    setupFilters(filters, meta, CLUSTER_DETAIL_DEFAULT_FILTERS, apply);
+  const [filterConfig, activeFiltersConfig] = setupFilters(
+    filters,
+    meta,
+    CLUSTER_DETAIL_DEFAULT_FILTERS,
+    apply
+  );
 
   return (
     <BaseTable
@@ -114,7 +117,7 @@ const ClusterDetailTable = () => {
       activeFiltersConfig={activeFiltersConfig}
       meta={meta}
       error={error}
-      emptyState={areAnyFiltersApplied ? <NoMatchingCves /> : <NoCves />}
+      emptyState={<NoMatchingCves />}
       apply={apply}
       onExport={(format) => onExport(format, meta)}
     />
