@@ -69,11 +69,24 @@ const transformExposedClustersParam = (urlParams) => {
   return urlParams;
 };
 
+const transformClusterSeverityParam = (urlParams) => {
+  if (urlParams.cluster_severity) {
+    if (urlParams.cluster_severity.split(',').includes('any')) {
+      urlParams.cluster_severity = undefined;
+    }
+  } else {
+    urlParams.cluster_severity = 'low,moderate,important,critical';
+  }
+
+  return urlParams;
+};
+
 // when creating additional transformer in the future
 // create a new function for it and then add the function to this array
 const URL_TRANSFORMERS = [
   transformPublishedParam,
   transformExposedClustersParam,
+  transformClusterSeverityParam,
 ];
 
 const transformUrlParamsBeforeFetching = (urlParams) => {

@@ -8,7 +8,7 @@ import {
   CLUSTER_STATUS_OPTIONS,
   CLUSTER_VERSION_OPTIONS,
   CLUSTER_PROVIDER_OPTIONS,
-  SEVERITY_OPTIONS,
+  CLUSTER_SEVERITY_OPTIONS,
 } from '../../../Helpers/constants';
 import { useSelector } from 'react-redux';
 import {
@@ -97,7 +97,7 @@ const ClusterDetailTable = () => {
       urlParam: 'cluster_severity',
       label: 'CVEs severity',
       value: cluster_severity,
-      items: SEVERITY_OPTIONS.filter((option) => option.value !== 'none'),
+      items: CLUSTER_SEVERITY_OPTIONS,
       placeholder: 'Filter by CVEs severity',
       apply,
       chipLabel: 'CVEs severity',

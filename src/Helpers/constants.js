@@ -87,6 +87,29 @@ export const SEVERITY_OPTIONS = [
   },
 ];
 
+export const CLUSTER_SEVERITY_OPTIONS = [
+  {
+    value: 'any',
+    label: 'All clusters',
+  },
+  {
+    value: 'critical',
+    label: 'Critical',
+  },
+  {
+    value: 'important',
+    label: 'Important',
+  },
+  {
+    value: 'moderate',
+    label: 'Moderate',
+  },
+  {
+    value: 'low',
+    label: 'Low',
+  },
+];
+
 export const EXPOSED_CLUSTERS_OPTIONS = [
   {
     value: 'oneOrMore',
@@ -380,7 +403,9 @@ export const CVE_LIST_DEFAULT_FILTERS = {
   affected_clusters: 'oneOrMore',
 };
 
-export const CLUSTER_LIST_DEFAULT_FILTERS = {};
+export const CLUSTER_LIST_DEFAULT_FILTERS = {
+  cluster_severity: 'any',
+};
 
 export const CVE_DETAIL_DEFAULT_FILTERS = {};
 
