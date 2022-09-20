@@ -94,7 +94,7 @@ describe('CveDetailTable without items', () => {
   itHasTableFunctionsDisabled();
 
   it('shows correct empty state depending on whether filters are applied or not', () => {
-    cy.contains('No clusters found').should('exist');
+    cy.contains('No matching clusters found').should('exist');
 
     cy.get('#text-filter-search').type('example search term');
 

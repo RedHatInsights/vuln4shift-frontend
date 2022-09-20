@@ -9,7 +9,7 @@ import { initialState } from '../../../Store/Reducers/ClusterListStore';
 import { CLUSTER_LIST_EXPORT_PREFIX } from '../../../Helpers/constants';
 import {
   itExportsDataToFile,
-  itHasNoActiveFilter,
+  itHasActiveFilter,
   itHasTableFunctionsDisabled,
   itIsNotExpandable,
   itIsNotSorted,
@@ -52,7 +52,7 @@ describe('ClusterListTable with items', () => {
     cy.contains('Reset filter').should('not.exist');
   });
 
-  itHasNoActiveFilter();
+  itHasActiveFilter('CVEs severity', 'All clusters');
   itIsSortedBy('Last seen');
   itExportsDataToFile(clusters.data, CLUSTER_LIST_EXPORT_PREFIX);
   itIsNotExpandable();

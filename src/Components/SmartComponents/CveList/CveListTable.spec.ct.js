@@ -90,7 +90,7 @@ describe('CveListTable without items', () => {
   itHasTableFunctionsDisabled();
 
   it('shows correct empty state depending on whether filters are applied or not', () => {
-    cy.contains('No CVEs').should('exist');
+    cy.contains('No matching CVEs found').should('exist');
 
     cy.get('.ins-c-chip-filters .pf-c-chip button').click();
 
