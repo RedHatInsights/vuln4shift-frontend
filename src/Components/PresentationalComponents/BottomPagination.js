@@ -1,9 +1,17 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import { Pagination, PaginationVariant } from '@patternfly/react-core';
+import {
+  Pagination,
+  PaginationVariant,
+  Skeleton,
+} from '@patternfly/react-core';
 
-const BottomPagination = ({ page, perPage, itemCount, apply }) => {
-  return (
+const BottomPagination = ({ isLoading, page, perPage, itemCount, apply }) => {
+  return isLoading ? (
+    <div className="pf-c-pagination pf-m-bottom">
+      <Skeleton fontSize="xl" width="350px" style={{ margin: 10 }} />
+    </div>
+  ) : (
     <Pagination
       page={page}
       itemCount={itemCount}
@@ -18,6 +26,7 @@ const BottomPagination = ({ page, perPage, itemCount, apply }) => {
 };
 
 BottomPagination.propTypes = {
+  isLoading: propTypes.bool,
   page: propTypes.number,
   perPage: propTypes.number,
   itemCount: propTypes.number,

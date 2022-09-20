@@ -23,6 +23,7 @@ const BaseTable = ({
   return (
     <ErrorHandler error={error}>
       <BaseToolbar
+        isLoading={isLoading}
         page={offset / limit + 1}
         perPage={limit}
         itemCount={total_items}
@@ -42,6 +43,7 @@ const BaseTable = ({
         apply={apply}
       />
       <BottomPagination
+        isLoading={isLoading}
         page={offset / limit + 1}
         perPage={limit}
         itemCount={total_items}
