@@ -26,6 +26,10 @@ const CveListPage = () => {
     HEADER_ALERT_DISMISSED_KEY
   );
 
+  insights.chrome.updateDocumentTitle(
+    'CVEs - OCP Vulnerability | Red Hat Insights | console.redhat.com'
+  );
+
   const HeaderTitle = (
     <Popover
       hasAutoWidth

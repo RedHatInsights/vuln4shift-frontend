@@ -18,6 +18,10 @@ const ClusterListPage = () => {
     HEADER_ALERT_DISMISSED_KEY
   );
 
+  insights.chrome.updateDocumentTitle(
+    'Clusters - OCP Vulnerability | Red Hat Insights | console.redhat.com'
+  );
+
   return (
     <Fragment>
       <PageHeader>

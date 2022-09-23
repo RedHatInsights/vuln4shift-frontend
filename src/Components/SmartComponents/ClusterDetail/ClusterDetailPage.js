@@ -7,7 +7,14 @@ import { useSelector } from 'react-redux';
 import ErrorHandler from '../../PresentationalComponents/ErrorHandler';
 
 const ClusterDetailPage = () => {
-  const { error } = useSelector(({ ClusterDetailStore }) => ClusterDetailStore);
+  const { error, cluster } = useSelector(
+    ({ ClusterDetailStore }) => ClusterDetailStore
+  );
+
+  cluster.display_name &&
+    insights.chrome.updateDocumentTitle(
+      `${cluster.display_name} - Clusters - OCP Vulnerability | Red Hat Insights | console.redhat.com`
+    );
 
   return (
     <ErrorHandler error={error}>
