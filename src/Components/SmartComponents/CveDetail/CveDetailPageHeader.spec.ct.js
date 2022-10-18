@@ -31,6 +31,10 @@ describe('CveDetailPageHeader', () => {
     mountComponent();
   });
 
+  it('matches screenshot', () => {
+    cy.get('body').matchImage();
+  });
+
   it('shows missing metadata empty state when CVE description is "unknown"', () => {
     cy.contains('No description available');
 

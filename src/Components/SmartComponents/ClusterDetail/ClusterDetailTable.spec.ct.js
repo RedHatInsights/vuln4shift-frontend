@@ -48,8 +48,10 @@ describe('ClusterDetailTable with items', () => {
     mountComponent();
   });
 
-  it('exists', () => {
+  it('exists and matches screenshot', () => {
     cy.get('table');
+
+    cy.get('body').matchImage();
   });
 
   it('has items', () => {
@@ -90,8 +92,10 @@ describe('CveListTable without items', () => {
     mountComponent();
   });
 
-  it('exists', () => {
+  it('exists and matches screenshot', () => {
     cy.get('table');
+
+    cy.get('body').matchImage();
   });
 
   it('has no items', () => {
