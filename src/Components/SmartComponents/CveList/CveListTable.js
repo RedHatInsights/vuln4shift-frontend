@@ -43,7 +43,11 @@ const CveListTable = () => {
 
   const [cvss_score_min, cvss_score_max] = getCvssScoreFromUrlParam(cvss_score);
 
-  const onExport = useExport(CVE_LIST_EXPORT_PREFIX, fetchCves);
+  const onExport = useExport({
+    filenamePrefix: CVE_LIST_EXPORT_PREFIX,
+    fetchAction: fetchCves,
+    allowedParams: CVE_LIST_ALLOWED_PARAMS,
+  });
 
   const filters = [
     useTextFilter({

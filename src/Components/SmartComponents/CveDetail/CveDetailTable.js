@@ -49,11 +49,12 @@ const CveDetailTable = () => {
     dynamic_provider_options,
   } = meta;
 
-  const onExport = useExport(
-    CVE_DETAIL_EXPORT_PREFIX,
-    fetchExposedClusters,
-    match.params.cveId
-  );
+  const onExport = useExport({
+    filenamePrefix: CVE_DETAIL_EXPORT_PREFIX,
+    fetchAction: fetchExposedClusters,
+    fetchActionParam: match.params.cveId,
+    allowedParams: CVE_DETAIL_ALLOWED_PARAMS,
+  });
 
   const filters = [
     useTextFilter({

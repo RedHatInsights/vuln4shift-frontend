@@ -46,11 +46,12 @@ const ClusterDetailTable = () => {
 
   const [cvss_score_min, cvss_score_max] = getCvssScoreFromUrlParam(cvss_score);
 
-  const onExport = useExport(
-    CLUSTER_DETAIL_EXPORT_PREFIX,
-    fetchClusterCves,
-    match.params.clusterId
-  );
+  const onExport = useExport({
+    filenamePrefix: CLUSTER_DETAIL_EXPORT_PREFIX,
+    fetchAction: fetchClusterCves,
+    fetchActionParam: match.params.clusterId,
+    allowedParams: CLUSTER_DETAIL_ALLOWED_PARAMS,
+  });
 
   const filters = [
     useTextFilter({
