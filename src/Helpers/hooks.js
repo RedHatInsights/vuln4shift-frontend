@@ -175,7 +175,12 @@ export const useUrlBoundParams = ({
   return apply;
 };
 
-export const useExport = (filenamePrefix, fetchAction, fetchActionParam) => {
+export const useExport = ({
+  filenamePrefix,
+  fetchAction,
+  fetchActionParam,
+  allowedParams,
+}) => {
   const dispatch = useDispatch();
 
   const DEFAULT_PARAMS = {
@@ -194,9 +199,11 @@ export const useExport = (filenamePrefix, fetchAction, fetchActionParam) => {
     const formattedDate =
       new Date().toISOString().replace(/[T:]/g, '-').split('.')[0] + '-utc';
 
+    const filteredParams = filterParams(params, allowedParams);
+
     const payload = await fetchAction(
       {
-        ...transformUrlParamsBeforeFetching(params),
+        ...transformUrlParamsBeforeFetching(filteredParams),
         ...DEFAULT_PARAMS,
         data_format: format,
       },

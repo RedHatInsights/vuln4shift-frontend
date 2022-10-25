@@ -48,7 +48,11 @@ const ClusterDetailTable = () => {
     dynamic_provider_options,
   } = meta;
 
-  const onExport = useExport(CLUSTER_LIST_EXPORT_PREFIX, fetchClusters);
+  const onExport = useExport({
+    filenamePrefix: CLUSTER_LIST_EXPORT_PREFIX,
+    fetchAction: fetchClusters,
+    allowedParams: CLUSTER_LIST_ALLOWED_PARAMS,
+  });
 
   const filters = [
     useTextFilter({
