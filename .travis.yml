@@ -14,8 +14,6 @@ jobs:
   - stage: Verify
     name: Lint
   - script: npm run lint
-    name: Tests
-    script: npm run test:ct && npx codecov
   - stage: Deploy
     script: npm run deploy && curl -sSL https://raw.githubusercontent.com/RedHatInsights/insights-frontend-builder-common/master/src/bootstrap.sh | bash -s
 env:
