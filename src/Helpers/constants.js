@@ -177,10 +177,6 @@ export const CVE_LIST_TABLE_COLUMNS = [
     title: 'Exposed clusters',
     sortParam: 'clusters_exposed',
   },
-  {
-    title: 'Exposed images',
-    sortParam: 'images_exposed',
-  },
 ];
 
 export const CLUSTER_LIST_TABLE_COLUMNS = [
@@ -262,10 +258,6 @@ export const CLUSTER_DETAIL_TABLE_COLUMNS = [
     title: 'CVSS base score',
     sortParam: 'cvss_score',
   },
-  {
-    title: 'Exposed images',
-    sortParam: 'images_exposed',
-  },
 ];
 
 /* TABLE ROW MAPPERS */
@@ -306,7 +298,6 @@ export const CVE_LIST_TABLE_MAPPER = (row) => ({
     <Link to={'/cves/' + row.synopsis} key={row.synopsis}>
       {row.clusters_exposed}
     </Link>,
-    row.images_exposed,
   ],
   expandableContent: createCveDescription(row),
 });
@@ -353,7 +344,6 @@ export const CLUSTER_DETAIL_TABLE_MAPPER = (row) => ({
     processDate(row.publish_date),
     <Shield hasLabel impact={row.severity} key={row.synopsis} />,
     parseCvssScore(row.cvss2_score, row.cvss3_score, true),
-    row.images_exposed,
   ],
   expandableContent: createCveDescription(row),
 });
@@ -394,7 +384,6 @@ export const CLUSTER_DETAIL_ALLOWED_PARAMS = [
   'published',
   'severity',
   'cvss_score',
-  'images_exposed',
 ];
 
 /* DEFAULT FILTERS */
