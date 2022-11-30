@@ -103,7 +103,7 @@ describe('CveListTable with items', () => {
     });
   });
 
-  describe('Sorting CveListTable with items', () => {
+  describe.only('Sorting CveListTable with items', () => {
     beforeEach(() => {
       cy.intercept('GET', '**/api/ocp-vulnerability/v1/cves**', {
         ...initialState,
@@ -134,7 +134,6 @@ describe('CveListTable with items', () => {
         'severity',
         'cvss_score',
         'clusters_exposed',
-        'images_exposed',
       ],
       [
         'CVE ID',
@@ -142,7 +141,6 @@ describe('CveListTable with items', () => {
         'Severity',
         'CVSS base score',
         'Exposed clusters',
-        'Exposed images',
       ]
     ).forEach(([category, label], index) => {
       let sortingParameter = category;
