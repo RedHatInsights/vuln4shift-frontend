@@ -8,9 +8,7 @@ const {
 module.exports = defineConfig({
   env: {
     pluginVisualRegressionUpdateImages: true,
-    pluginVisualRegressionDiffConfig: {
-      threshold: 0.01,
-    },
+    pluginVisualRegressionMaxDiffThreshold: 0.05,
   },
   viewportWidth: 1000,
   viewportHeight: 660,
