@@ -15,6 +15,7 @@ import {
   itIsNotSorted,
   itHasTableFunctionsDisabled,
 } from '../../../../cypress/utils/table';
+import _ from 'lodash';
 
 const mountComponent = () => {
   mount(
@@ -64,41 +65,88 @@ describe('CveListTable with items', () => {
 
     cy.contains('No description available');
   });
-});
 
-describe('CveListTable without items', () => {
-  beforeEach(() => {
-    cy.intercept('GET', '**/api/ocp-vulnerability/v1/cves**', {
-      ...initialState,
-      data: [],
-      meta: {
-        ...initialState.meta,
-        total_items: 0,
-      },
+  describe('CveListTable without items', () => {
+    beforeEach(() => {
+      cy.intercept('GET', '**/api/ocp-vulnerability/v1/cves**', {
+        ...initialState,
+        data: [],
+        meta: {
+          ...initialState.meta,
+          total_items: 0,
+        },
+      });
+
+      mountComponent();
     });
 
-    mountComponent();
+    it('exists and matches screenshot', () => {
+      cy.get('table');
+
+      cy.get('body').matchImage();
+    });
+
+    it('has no items', () => {
+      cy.get('[data-label="CVE ID"]').should('have.length', 0);
+    });
+
+    itIsNotSorted();
+    itHasTableFunctionsDisabled();
+
+    it('shows correct empty state depending on whether filters are applied or not', () => {
+      cy.contains('No matching CVEs found').should('exist');
+
+      cy.get('.ins-c-chip-filters .pf-c-chip button').click();
+
+      cy.contains('No matching CVEs found').should('exist');
+      cy.contains('Reset filter').should('exist');
+    });
   });
 
-  it('exists and matches screenshot', () => {
-    cy.get('table');
+  describe.only('Sorting CveListTable with items', () => {
+    beforeEach(() => {
+      cy.intercept('GET', '**/api/ocp-vulnerability/v1/cves**', {
+        ...initialState,
+        ...cves,
+        meta: {
+          sort: null,
+          ...initialState.meta,
+          ...cves.meta,
+        },
+      }).as('call');
 
-    cy.get('body').matchImage();
-  });
+      mountComponent();
+    });
 
-  it('has no items', () => {
-    cy.get('[data-label="CVE ID"]').should('have.length', 0);
-  });
-
-  itIsNotSorted();
-  itHasTableFunctionsDisabled();
-
-  it('shows correct empty state depending on whether filters are applied or not', () => {
-    cy.contains('No matching CVEs found').should('exist');
-
-    cy.get('.ins-c-chip-filters .pf-c-chip button').click();
-
-    cy.contains('No matching CVEs found').should('exist');
-    cy.contains('Reset filter').should('exist');
+    const checkSortingUrl = (sortingParameter, index) => {
+      // get appropriate locators
+      const tableHeaders = 'tr[data-ouia-component-type="PF4/TableRow"]';
+      // sort by column and verify URL
+      cy.get(tableHeaders).children().eq(index).click();
+      cy.url().should('include', `sort=-${sortingParameter}`);
+      cy.get(tableHeaders).children().eq(index).click();
+      cy.url().should('include', `sort=${sortingParameter}`);
+    };
+    _.zip(
+      [
+        'synopsis',
+        'publish_date',
+        'severity',
+        'cvss_score',
+        'clusters_exposed',
+      ],
+      [
+        'CVE ID',
+        'Publish date',
+        'Severity',
+        'CVSS base score',
+        'Exposed clusters',
+      ]
+    ).forEach(([category, label], index) => {
+      let sortingParameter = category;
+      it(`Sorted by ${label}`, () => {
+        checkSortingUrl(sortingParameter, index + 1);
+      });
+    });
   });
 });
