@@ -56,3 +56,9 @@
 #cvss-vector-content {
     font-size: var(--pf-global--FontSize--sm);
 }
+
+#cves-severity-question-mark {
+    color: var(--pf-global--secondary-color--100);
+    vertical-align: -0.2em;
+    margin-left: 16px;
+}
