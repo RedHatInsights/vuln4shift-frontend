@@ -32,6 +32,7 @@ export COMPONENT_NAME="vuln4shift-frontend"
 IQE_PLUGINS="ocp-vulnerability"
 IQE_MARKER_EXPRESSION="smoke_ui"
 IQE_FILTER_EXPRESSION=""
+IQE_IMAGE_TAG="ocp-vulnerability"
 
 # Run smoke tests
 # shellcheck source=/dev/null
