@@ -6,3 +6,5 @@ globals:
   shallow: readonly
   render: 'readonly'
   mount: 'readonly'
+rules:
+  "react/no-unknown-property": ['error', { ignore: ['ouiaId'] }]
