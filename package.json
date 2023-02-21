@@ -28,8 +28,8 @@
     "coverage": "bash coverage.sh && npm run coverage:clean"
   },
   "dependencies": {
-    "@patternfly/react-core": "^4.221.3",
-    "@patternfly/react-table": "^4.90.3",
+    "@patternfly/react-core": "^4.276.6",
+    "@patternfly/react-table": "^4.112.39",
     "@redhat-cloud-services/frontend-components": "^3.9.3",
     "@redhat-cloud-services/frontend-components-notifications": "^3.2.7",
     "@redhat-cloud-services/frontend-components-utilities": "^3.2.17",
@@ -58,7 +58,7 @@
     "@cypress/react": "6.2.0",
     "@cypress/webpack-dev-server": "2.3.0",
     "@frsource/cypress-plugin-visual-regression-diff": "3.1.5",
-    "@patternfly/patternfly": "4.202.1",
+    "@patternfly/patternfly": "^4.224.2",
     "@redhat-cloud-services/eslint-config-redhat-cloud-services": "^1.2.6",
     "@redhat-cloud-services/frontend-components-config": "^4.6.34",
     "@testing-library/jest-dom": "^5.16.4",
