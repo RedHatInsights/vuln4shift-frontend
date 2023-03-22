@@ -5,14 +5,17 @@ import ClusterDetailTable from './ClusterDetailTable';
 import ClusterDetailPageHeader from './ClusterDetailPageHeader';
 import { useSelector } from 'react-redux';
 import ErrorHandler from '../../PresentationalComponents/ErrorHandler';
+import useChrome from '@redhat-cloud-services/frontend-components/useChrome';
 
 const ClusterDetailPage = () => {
+  const chrome = useChrome();
+
   const { error, cluster } = useSelector(
     ({ ClusterDetailStore }) => ClusterDetailStore
   );
 
   cluster.display_name &&
-    insights.chrome.updateDocumentTitle(
+    chrome.updateDocumentTitle(
       `${cluster.display_name} - Clusters - OCP Vulnerability | Red Hat Insights | console.redhat.com`
     );
 

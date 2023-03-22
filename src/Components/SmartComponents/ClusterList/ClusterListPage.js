@@ -12,13 +12,16 @@ import {
 import ClusterListTable from './ClusterListTable';
 import { HEADER_ALERT_DISMISSED_KEY } from '../../../Helpers/constants';
 import { useLocalStorage } from '../../../Helpers/hooks';
+import useChrome from '@redhat-cloud-services/frontend-components/useChrome';
 
 const ClusterListPage = () => {
+  const chrome = useChrome();
+
   const [wasHeaderAlertDismissed, setHeaderAlertDismissed] = useLocalStorage(
     HEADER_ALERT_DISMISSED_KEY
   );
 
-  insights.chrome.updateDocumentTitle(
+  chrome.updateDocumentTitle(
     'Clusters - OCP Vulnerability | Red Hat Insights | console.redhat.com'
   );
 
