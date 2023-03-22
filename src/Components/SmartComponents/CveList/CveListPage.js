@@ -17,8 +17,11 @@ import {
 import CveListTable from './CveListTable';
 import { useLocalStorage } from '../../../Helpers/hooks';
 import { HEADER_ALERT_DISMISSED_KEY } from '../../../Helpers/constants';
+import useChrome from '@redhat-cloud-services/frontend-components/useChrome';
 
 const CveListPage = () => {
+  const chrome = useChrome();
+
   const PRODUCT_DOC =
     'https://access.redhat.com/documentation/en-us/openshift_cluster_manager/2022';
 
@@ -26,7 +29,7 @@ const CveListPage = () => {
     HEADER_ALERT_DISMISSED_KEY
   );
 
-  insights.chrome.updateDocumentTitle(
+  chrome.updateDocumentTitle(
     'CVEs - OCP Vulnerability | Red Hat Insights | console.redhat.com'
   );
 
