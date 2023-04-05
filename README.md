@@ -11,7 +11,7 @@ Red Hat Vulnerability for OpenShift service is used to assess and monitor the st
 ## Running locally
 1. Install dependencies with `npm install`
 2. Run development server with `npm run start:proxy:beta`
-3. Local version of the app will be available at https://stage.foo.redhat.com:1337/beta/openshift/insights/vulnerability/
+3. Local version of the app will be available at https://stage.foo.redhat.com:1337/preview/openshift/insights/vulnerability/
 
 ## Testing
 [Cypress](https://cypress.io/) is used as the testing framework
@@ -28,9 +28,9 @@ Any push to the following branches will trigger a build in [vuln4shift-frontend-
 
 | Push to branch in this repo  | Updated branch in build repo  | Environment       | Available at
 | :--------------------------- | :---------------------------- | :---------------- | :-----------
-| master                       | stage-beta                    | stage beta        | https://console.stage.redhat.com/beta
+| master                       | stage-beta                    | stage beta        | https://console.stage.redhat.com/preview
 | stage-stable                 | stage-stable                  | stage stable      | https://console.stage.redhat.com
-| prod-beta                    | prod-beta                     | production beta   | https://console.redhat.com/beta 
+| prod-beta                    | prod-beta                     | production beta   | https://console.redhat.com/preview
 | prod-stable                  | prod-stable                   | production stable | https://console.redhat.com
 
 ## Design System
