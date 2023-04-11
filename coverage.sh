@@ -1,9 +1,10 @@
 #!/bin/sh -ex
 
-# Merge coverage reports from cypress and jest tests
+# Merge coverage reports
+# Currently Cypress coverage doesn't merge with anything
+# Keeping this for future expansion
 mkdir -p reports
 cp cypress-coverage/coverage-final.json reports/from-cypress.json
-cp coverage/coverage-final.json reports/from-jest.json
 
 npx nyc merge reports .nyc_output/out.json
 npx nyc report --reporter json --report-dir coverage
