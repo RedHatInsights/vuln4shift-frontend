@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Main } from '@redhat-cloud-services/frontend-components/Main';
 import CveDetailPageHeader from './CveDetailPageHeader';
 import CveDetailTable from './CveDetailTable';
@@ -11,10 +11,12 @@ const CveDetailPage = () => {
 
   const { error, cve } = useSelector(({ CveDetailStore }) => CveDetailStore);
 
-  cve.synopsis &&
-    chrome.updateDocumentTitle(
-      `${cve.synopsis} - CVEs - OCP Vulnerability | Red Hat Insights | console.redhat.com`
-    );
+  useEffect(() => {
+    cve.synopsis &&
+      chrome.updateDocumentTitle(
+        `${cve.synopsis} - CVEs - OCP Vulnerability | Red Hat Insights | console.redhat.com`
+      );
+  }, [cve.synopsis]);
 
   return (
     <ErrorHandler error={error}>

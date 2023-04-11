@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import {
   Alert,
   AlertActionCloseButton,
@@ -21,9 +21,11 @@ const ClusterListPage = () => {
     HEADER_ALERT_DISMISSED_KEY
   );
 
-  chrome.updateDocumentTitle(
-    'Clusters - OCP Vulnerability | Red Hat Insights | console.redhat.com'
-  );
+  useEffect(() => {
+    chrome.updateDocumentTitle(
+      'Clusters - OCP Vulnerability | Red Hat Insights | console.redhat.com'
+    );
+  }, []);
 
   return (
     <Fragment>

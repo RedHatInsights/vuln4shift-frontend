@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Main } from '@redhat-cloud-services/frontend-components/Main';
 import { Text, TextContent, TextVariants } from '@patternfly/react-core';
 import ClusterDetailTable from './ClusterDetailTable';
@@ -14,10 +14,12 @@ const ClusterDetailPage = () => {
     ({ ClusterDetailStore }) => ClusterDetailStore
   );
 
-  cluster.display_name &&
-    chrome.updateDocumentTitle(
-      `${cluster.display_name} - Clusters - OCP Vulnerability | Red Hat Insights | console.redhat.com`
-    );
+  useEffect(() => {
+    cluster.display_name &&
+      chrome.updateDocumentTitle(
+        `${cluster.display_name} - Clusters - OCP Vulnerability | Red Hat Insights | console.redhat.com`
+      );
+  }, [cluster.display_name]);
 
   return (
     <ErrorHandler error={error}>
