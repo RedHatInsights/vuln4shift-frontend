@@ -62,7 +62,7 @@
     "@testing-library/react": "^12.1.5",
     "babel-plugin-istanbul": "6.1.1",
     "babel-plugin-transform-imports": "^2.0.0",
-    "cypress": "10.8.0",
+    "cypress": "12.10.0",
     "eslint": "^8.34.0",
     "eslint-plugin-cypress": "2.12.1",
     "identity-obj-proxy": "3.0.0",
