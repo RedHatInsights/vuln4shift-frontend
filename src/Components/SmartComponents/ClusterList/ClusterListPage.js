@@ -23,7 +23,7 @@ const ClusterListPage = () => {
 
   useEffect(() => {
     chrome.updateDocumentTitle(
-      'Clusters - OCP Vulnerability | Red Hat Insights | console.redhat.com'
+      'Clusters - Vulnerability Dashboard | Red Hat Insights | console.redhat.com'
     );
   }, []);
 

@@ -31,7 +31,7 @@ const CveListPage = () => {
 
   useEffect(() => {
     chrome.updateDocumentTitle(
-      'CVEs - OCP Vulnerability | Red Hat Insights | console.redhat.com'
+      'CVEs - Vulnerability Dashboard | Red Hat Insights | console.redhat.com'
     );
   }, []);
 
