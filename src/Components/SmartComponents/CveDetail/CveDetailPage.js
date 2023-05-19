@@ -14,7 +14,7 @@ const CveDetailPage = () => {
   useEffect(() => {
     cve.synopsis &&
       chrome.updateDocumentTitle(
-        `${cve.synopsis} - CVEs - OCP Vulnerability | Red Hat Insights | console.redhat.com`
+        `${cve.synopsis} - CVEs - Vulnerability Dashboard | Red Hat Insights | console.redhat.com`
       );
   }, [cve.synopsis]);
 
