@@ -107,7 +107,7 @@ describe('CveListTable with items', () => {
     });
   });
 
-  describe.only('Filtering', () => {
+  describe('Filtering', () => {
     beforeEach(() => {
       cy.intercept('GET', '**/api/ocp-vulnerability/v1/cves**', {
         ...initialState,
