@@ -142,3 +142,7 @@ export const itIsNotExpandable = () => {
     cy.get('thead [id^=expand-toggle]').should('not.exist');
   });
 };
+
+export const removeFilter = (chipText) => {
+  cy.get(`.pf-c-chip-group__main:contains(${chipText}) button`).click();
+};
