@@ -6,7 +6,12 @@ import { Provider } from 'react-redux';
 import { init } from '../../../Store/ReducerRegistry';
 import cves from '../../../../cypress/fixtures/clusterdetaillist.json';
 import { initialState } from '../../../Store/Reducers/ClusterDetailStore';
-import { CLUSTER_DETAIL_EXPORT_PREFIX } from '../../../Helpers/constants';
+import {
+  CLUSTER_DETAIL_EXPORT_PREFIX,
+  CLUSTER_DETAIL_TABLE_COLUMNS,
+  PUBLISHED_OPTIONS,
+  SEVERITY_OPTIONS,
+} from '../../../Helpers/constants';
 import {
   itExportsDataToFile,
   itHasNoActiveFilter,
@@ -14,6 +19,9 @@ import {
   itIsExpandable,
   itIsNotSorted,
   itIsSortedBy,
+  testFilters,
+  testPagination,
+  testSorting,
 } from '../../../../cypress/utils/table';
 
 const mountComponent = () => {
@@ -71,6 +79,65 @@ describe('ClusterDetailTable with items', () => {
     cy.get('tbody [id^=expand-toggle]').last().click();
 
     cy.contains('No description available');
+  });
+
+  describe('Sorting', () => {
+    testSorting(CLUSTER_DETAIL_TABLE_COLUMNS);
+  });
+
+  describe('Filtering', () => {
+    const filters = [
+      {
+        urlParam: 'search',
+        type: 'text',
+        selector: '.ins-c-conditional-filter input[type="text"]',
+        chipText: 'Search term',
+      },
+      {
+        urlParam: 'published',
+        type: 'radio',
+        selector: '.ins-c-conditional-filter .pf-m-fill button',
+        items: PUBLISHED_OPTIONS,
+        chipText: 'Publish date',
+      },
+      {
+        urlParam: 'severity',
+        type: 'checkbox',
+        selector: '.ins-c-conditional-filter .pf-m-fill button',
+        items: SEVERITY_OPTIONS,
+        chipText: 'Severity',
+      },
+      {
+        urlParam: 'cvss_score',
+        type: 'range',
+        selector: '.ins-c-conditional-filter .pf-m-fill button',
+        chipText: 'CVSS base score',
+      },
+    ];
+
+    testFilters(filters);
+  });
+
+  describe('Pagination', () => {
+    beforeEach(() => {
+      cy.intercept(
+        'GET',
+        '**/api/ocp-vulnerability/v1/clusters/e45c0b54-3083-4ae0-9cbc-f7d7a302e7dd/cves**',
+        {
+          ...initialState,
+          ...cves,
+          meta: {
+            ...initialState.meta,
+            ...cves.meta,
+            total_items: 15, // faking total items to enable next page button
+          },
+        }
+      );
+
+      mountComponent();
+    });
+
+    testPagination();
   });
 });
 

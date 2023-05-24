@@ -19,7 +19,9 @@ import {
   itHasActiveFilter,
   itIsNotSorted,
   itHasTableFunctionsDisabled,
-  removeFilter,
+  testFilters,
+  testPagination,
+  testSorting,
 } from '../../../../cypress/utils/table';
 import { CVE_LIST_TABLE_COLUMNS } from '../../../Helpers/constants';
 
@@ -73,54 +75,10 @@ describe('CveListTable with items', () => {
   });
 
   describe('Sorting', () => {
-    beforeEach(() => {
-      cy.intercept('GET', '**/api/ocp-vulnerability/v1/cves**', {
-        ...initialState,
-        ...cves,
-        meta: {
-          ...initialState.meta,
-          ...cves.meta,
-        },
-      });
-
-      mountComponent();
-    });
-
-    const checkSortingUrl = (sortingParameter, index) => {
-      // get appropriate locators
-      const tableHeaders = 'tr[data-ouia-component-type="PF4/TableRow"]';
-      // sort by column and verify URL
-      cy.get(tableHeaders).children().eq(index).click();
-      cy.url().should('include', `sort=-${sortingParameter}`);
-      cy.get(tableHeaders).children().eq(index).click();
-      cy.url().should('include', `sort=${sortingParameter}`);
-    };
-
-    CVE_LIST_TABLE_COLUMNS.map((column) => [
-      column.sortParam,
-      column.title,
-    ]).forEach(([category, label], index) => {
-      let sortingParameter = category;
-      it(`is sorted by ${label}`, () => {
-        checkSortingUrl(sortingParameter, index + 1);
-      });
-    });
+    testSorting(CVE_LIST_TABLE_COLUMNS);
   });
 
   describe('Filtering', () => {
-    beforeEach(() => {
-      cy.intercept('GET', '**/api/ocp-vulnerability/v1/cves**', {
-        ...initialState,
-        ...cves,
-        meta: {
-          ...initialState.meta,
-          ...cves.meta,
-        },
-      });
-
-      mountComponent();
-    });
-
     const filters = [
       {
         urlParam: 'search',
@@ -158,136 +116,25 @@ describe('CveListTable with items', () => {
       },
     ];
 
-    // TODO: Refactor this into a utility function
-    filters.forEach((filter, index) => {
-      it(`filters by ${filter.urlParam}`, () => {
-        cy.get('button[data-ouia-component-id="ConditionalFilter"]').click();
-        cy.get('.pf-c-dropdown__menu').children().eq(index).click();
+    testFilters(filters);
+  });
 
-        switch (filter.type) {
-          case 'text': {
-            cy.get(filter.selector).type('test');
-            cy.url().should('include', `${filter.urlParam}=test`);
-            cy.contains('Reset filter');
-            itHasActiveFilter(filter.chipText, 'test');
-
-            removeFilter(filter.chipText);
-            cy.url().should('not.include', `${filter.urlParam}`);
-
-            break;
-          }
-
-          case 'radio': {
-            cy.get(filter.selector).click();
-
-            cy.get('.pf-c-select__menu')
-              .children()
-              .each((child, index) => {
-                if (index === 0) {
-                  cy.contains('Reset filter').should('not.exist');
-                } else {
-                  const option = filter.items[index];
-
-                  cy.get(child).click();
-
-                  cy.url().should(
-                    'include',
-                    `${filter.urlParam}=${option.value}`
-                  );
-
-                  cy.contains('Reset filter');
-                  itHasActiveFilter(filter.chipText, option.label);
-                }
-              });
-
-            // close the dropdown so it does not obstruct remove chip button
-            cy.get(filter.selector).eq(0).click();
-            removeFilter(filter.chipText);
-            cy.url().should('not.include', `${filter.urlParam}`);
-
-            break;
-          }
-
-          case 'checkbox': {
-            cy.get(filter.selector).click();
-
-            // uncheck all possible values selected by default
-            if (filter.activeByDefault) {
-              cy.get('.pf-c-select__menu input[type="checkbox"]').uncheck({
-                multiple: true,
-              });
-            }
-
-            let selectedValues = [];
-
-            cy.get('.pf-c-select__menu')
-              .children()
-              .each((child, index) => {
-                const option = filter.items[index];
-
-                cy.get(child).click();
-
-                selectedValues.push(option.value);
-
-                cy.url().should(
-                  'include',
-                  `${filter.urlParam}=${encodeURIComponent(
-                    selectedValues.join(',')
-                  )}`
-                );
-
-                if (!filter.activeByDefault) {
-                  cy.contains('Reset filter');
-                }
-                itHasActiveFilter(filter.chipText, option.label);
-              });
-
-            // close the dropdown so it does not obstruct remove chip button
-            cy.get(filter.selector).eq(0).click();
-            cy.contains('Reset filter').click();
-
-            if (!filter.activeByDefault) {
-              cy.url().should('not.include', `${filter.urlParam}`);
-            }
-
-            break;
-          }
-
-          case 'range': {
-            cy.get(filter.selector).click();
-
-            cy.get('#range-filter-input-min').clear();
-            cy.get('#range-filter-input-min').type('1');
-
-            cy.get('#range-filter-input-max').clear();
-            cy.get('#range-filter-input-max').type('9.555');
-
-            cy.contains('Reset filter');
-            itHasActiveFilter(filter.chipText, '1.0 - 9.5');
-            cy.url().should(
-              'include',
-              `${filter.urlParam}=${encodeURIComponent('1,9.5')}`
-            );
-
-            // if value is out of range, the filter should not get applied
-            cy.get('#range-filter-input-min').clear();
-            cy.get('#range-filter-input-min').type('-1');
-
-            cy.get('#range-filter-input-min[aria-invalid="true"]');
-
-            itHasActiveFilter(filter.chipText, '1,9.5');
-
-            // if min > max, the filter should not get applied
-            cy.get('#range-filter-input-max').clear();
-            cy.get('#range-filter-input-max').type('0.5');
-
-            itHasActiveFilter(filter.chipText, '1,9.5');
-
-            break;
-          }
-        }
+  describe('Pagination', () => {
+    beforeEach(() => {
+      cy.intercept('GET', '**/api/ocp-vulnerability/v1/cves**', {
+        ...initialState,
+        ...cves,
+        meta: {
+          ...initialState.meta,
+          ...cves.meta,
+          total_items: 15, // faking total items to enable next page button
+        },
       });
+
+      mountComponent();
     });
+
+    testPagination();
   });
 });
 
