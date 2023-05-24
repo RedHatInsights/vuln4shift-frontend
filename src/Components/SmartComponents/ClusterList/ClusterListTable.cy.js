@@ -37,6 +37,10 @@ describe('ClusterListTable with items', () => {
       },
     });
 
+    // pin the date so the last seen column is not different on screenshots
+    const currentTime = new Date(2023, 4, 1).getTime();
+    cy.clock(currentTime);
+
     mountComponent();
   });
 

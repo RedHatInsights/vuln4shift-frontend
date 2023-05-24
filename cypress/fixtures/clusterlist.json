@@ -3,8 +3,7 @@
         {
             "display_name": "rhel-9.0-1",
             "insights_id": "20692751-4d45-4251-ac95-fd0e3e01119f",
-            "status_id": 0,
-            "status_text": "N/A",
+            "status": "Connected",
             "version": "4.9.12",
             "type": "OCP",
             "provider": "N/A",
@@ -14,13 +13,13 @@
                 "important": 10,
                 "critical": 2
             },
-            "id": "fc60b5ad-3874-4449-99b8-f3e7ea25c69b"
+            "id": "fc60b5ad-3874-4449-99b8-f3e7ea25c69b",
+            "last_seen": "2023-04-25T11:51:18.205401Z"
         },
         {
             "display_name": "rhel-9.0-2",
             "insights_id": "20692751-4d45-4251-ac95-fd0e3e01119g",
-            "status_id": 1,
-            "status_text": "Stale",
+            "status": "Stale",
             "version": "4.7.1",
             "type": "OCP",
             "provider": "AWS (us-east-2)",
@@ -30,13 +29,13 @@
                 "important": 11,
                 "critical": 3
             },
-            "id": "fc60b5ad-3874-4449-99b8-f3e7ea25c69c"
+            "id": "fc60b5ad-3874-4449-99b8-f3e7ea25c69c",
+            "last_seen": "2023-04-25T11:51:18.205401Z"
         },
         {
             "display_name": "rhel-9.0-3",
             "insights_id": "20692751-4d45-4251-ac95-fd0e3e01119h",
-            "status_id": 1,
-            "status_text": "Stale",
+            "status": "Stale",
             "version": "4.9.3",
             "type": "OCP",
             "provider": "N/A",
@@ -46,13 +45,13 @@
                 "important": 10,
                 "critical": 2
             },
-            "id": "fc60b5ad-3874-4449-99b8-f3e7ea25c69d"
+            "id": "fc60b5ad-3874-4449-99b8-f3e7ea25c69d",
+            "last_seen": "2023-04-25T11:51:18.205401Z"
         },
         {
             "display_name": "rhel-9.0-4",
             "insights_id": "20692751-4d45-4251-ac95-fd0e3e01119i",
-            "status_id": 0,
-            "status_text": "N/A",
+            "status": "Stale",
             "version": "4.9.12",
             "type": "OCP",
             "provider": "N/A",
@@ -62,13 +61,13 @@
                 "important": 3,
                 "critical": 8
             },
-            "id": "fc60b5ad-3874-4449-99b8-f3e7ea25c69e"
+            "id": "fc60b5ad-3874-4449-99b8-f3e7ea25c69e",
+            "last_seen": "2023-04-25T11:51:18.205401Z"
         },
         {
             "display_name": "rhel-9.0-5",
             "insights_id": "20692751-4d45-4251-ac95-fd0e3e01119j",
-            "status_id": 3,
-            "status_text": "Connected",
+            "status": "Disconnected",
             "version": "4.9.12",
             "type": "OCP",
             "provider": "N/A",
@@ -78,7 +77,8 @@
                 "important": 16,
                 "critical": 7
             },
-            "id": "fc60b5ad-3874-4449-99b8-f3e7ea25c69f"
+            "id": "fc60b5ad-3874-4449-99b8-f3e7ea25c69f",
+            "last_seen": "2023-04-25T11:51:18.205401Z"
         }
      ],
     "meta": {
