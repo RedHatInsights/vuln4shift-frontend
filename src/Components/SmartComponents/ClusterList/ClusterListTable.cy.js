@@ -6,7 +6,14 @@ import { Provider } from 'react-redux';
 import { init } from '../../../Store/ReducerRegistry';
 import clusters from '../../../../cypress/fixtures/clusterlist.json';
 import { initialState } from '../../../Store/Reducers/ClusterListStore';
-import { CLUSTER_LIST_EXPORT_PREFIX } from '../../../Helpers/constants';
+import {
+  CLUSTER_LIST_EXPORT_PREFIX,
+  CLUSTER_LIST_TABLE_COLUMNS,
+  CLUSTER_PROVIDER_OPTIONS,
+  CLUSTER_SEVERITY_OPTIONS,
+  CLUSTER_STATUS_OPTIONS,
+  CLUSTER_VERSION_OPTIONS,
+} from '../../../Helpers/constants';
 import {
   itExportsDataToFile,
   itHasActiveFilter,
@@ -14,6 +21,9 @@ import {
   itIsNotExpandable,
   itIsNotSorted,
   itIsSortedBy,
+  testFilters,
+  testPagination,
+  testSorting,
 } from '../../../../cypress/utils/table';
 
 const mountComponent = () => {
@@ -37,14 +47,14 @@ describe('ClusterListTable with items', () => {
       },
     });
 
-    // pin the date so the last seen column is not different on screenshots
-    const currentTime = new Date(2023, 4, 1).getTime();
-    cy.clock(currentTime);
-
     mountComponent();
   });
 
   it('exists and matches screenshot', () => {
+    // pin the date so the last seen column is not different on screenshots
+    const currentTime = new Date(2023, 4, 1).getTime();
+    cy.clock(currentTime);
+
     cy.get('table');
 
     cy.get('body').matchImage();
@@ -62,6 +72,70 @@ describe('ClusterListTable with items', () => {
   itIsSortedBy('Last seen');
   itExportsDataToFile(clusters.data, CLUSTER_LIST_EXPORT_PREFIX);
   itIsNotExpandable();
+
+  describe('Sorting', () => {
+    testSorting(CLUSTER_LIST_TABLE_COLUMNS);
+  });
+
+  describe('Filtering', () => {
+    const filters = [
+      {
+        urlParam: 'search',
+        type: 'text',
+        selector: '.ins-c-conditional-filter input[type="text"]',
+        chipText: 'Search term',
+      },
+      {
+        urlParam: 'status',
+        type: 'checkbox',
+        selector: '.ins-c-conditional-filter .pf-m-fill button',
+        items: CLUSTER_STATUS_OPTIONS,
+        chipText: 'Status',
+      },
+      {
+        urlParam: 'version',
+        type: 'checkbox',
+        selector: '.ins-c-conditional-filter .pf-m-fill button',
+        items: CLUSTER_VERSION_OPTIONS,
+        chipText: 'Version',
+      },
+      {
+        urlParam: 'cluster_severity',
+        type: 'checkbox',
+        selector: '.ins-c-conditional-filter .pf-m-fill button',
+        items: CLUSTER_SEVERITY_OPTIONS,
+        chipText: 'CVES severity',
+        activeByDefault: true,
+      },
+      {
+        urlParam: 'provider',
+        type: 'checkbox',
+        selector: '.ins-c-conditional-filter .pf-m-fill button',
+        items: CLUSTER_PROVIDER_OPTIONS,
+        chipText: 'Provider',
+      },
+    ];
+
+    testFilters(filters);
+  });
+
+  describe('Pagination', () => {
+    beforeEach(() => {
+      cy.intercept('GET', '**/api/ocp-vulnerability/v1/clusters**', {
+        ...initialState,
+        ...clusters,
+        meta: {
+          ...initialState.meta,
+          ...clusters.meta,
+          total_items: 15,
+        },
+      });
+
+      mountComponent();
+    });
+
+    testPagination();
+  });
 });
 
 describe('ClusterListTable without items', () => {
