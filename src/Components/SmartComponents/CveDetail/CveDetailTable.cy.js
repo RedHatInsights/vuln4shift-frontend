@@ -6,7 +6,13 @@ import { Provider } from 'react-redux';
 import { init } from '../../../Store/ReducerRegistry';
 import clusters from '../../../../cypress/fixtures/cvedetaillist.json';
 import { initialState } from '../../../Store/Reducers/CveDetailStore';
-import { CVE_DETAIL_EXPORT_PREFIX } from '../../../Helpers/constants';
+import {
+  CLUSTER_PROVIDER_OPTIONS,
+  CLUSTER_STATUS_OPTIONS,
+  CLUSTER_VERSION_OPTIONS,
+  CVE_DETAIL_EXPORT_PREFIX,
+  CVE_DETAIL_TABLE_COLUMNS,
+} from '../../../Helpers/constants';
 import {
   itExportsDataToFile,
   itHasNoActiveFilter,
@@ -14,6 +20,9 @@ import {
   itIsNotExpandable,
   itIsNotSorted,
   itIsSortedBy,
+  testFilters,
+  testPagination,
+  testSorting,
 } from '../../../../cypress/utils/table';
 
 const mountComponent = () => {
@@ -64,6 +73,66 @@ describe('CveDetailTable with items', () => {
   itHasNoActiveFilter();
   itExportsDataToFile(clusters.data, CVE_DETAIL_EXPORT_PREFIX);
   itIsNotExpandable();
+
+  describe('Sorting', () => {
+    testSorting(CVE_DETAIL_TABLE_COLUMNS);
+  });
+
+  describe('Filtering', () => {
+    const filters = [
+      {
+        urlParam: 'search',
+        type: 'text',
+        selector: '.ins-c-conditional-filter input[type="text"]',
+        chipText: 'Search term',
+      },
+      {
+        urlParam: 'status',
+        type: 'checkbox',
+        selector: '.ins-c-conditional-filter .pf-m-fill button',
+        items: CLUSTER_STATUS_OPTIONS,
+        chipText: 'Status',
+      },
+      {
+        urlParam: 'version',
+        type: 'checkbox',
+        selector: '.ins-c-conditional-filter .pf-m-fill button',
+        items: CLUSTER_VERSION_OPTIONS,
+        chipText: 'Version',
+      },
+      {
+        urlParam: 'provider',
+        type: 'checkbox',
+        selector: '.ins-c-conditional-filter .pf-m-fill button',
+        items: CLUSTER_PROVIDER_OPTIONS,
+        chipText: 'Provider',
+      },
+    ];
+
+    testFilters(filters);
+  });
+
+  describe('Pagination', () => {
+    beforeEach(() => {
+      cy.intercept(
+        'GET',
+        '**/api/ocp-vulnerability/v1/cves/CVE-2022-12345/exposed_clusters**',
+        {
+          ...initialState,
+          ...clusters,
+          meta: {
+            ...initialState.meta,
+            ...clusters.meta,
+            total_items: 15,
+          },
+        }
+      );
+
+      mountComponent();
+    });
+
+    testPagination();
+  });
 });
 
 describe('CveDetailTable without items', () => {
