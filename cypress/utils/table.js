@@ -299,6 +299,9 @@ export const testFilters = (filters) => {
           cy.get('#range-filter-input-max').type('0.5');
 
           itHasActiveFilter(filter.chipText, '1,9.5');
+
+          // close the dropdown so it does not obstruct remove chip button
+          cy.get(filter.selector).eq(0).click();
           cy.contains('Reset filter').click();
 
           break;
