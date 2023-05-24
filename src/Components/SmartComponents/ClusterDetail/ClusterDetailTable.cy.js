@@ -82,7 +82,7 @@ describe('ClusterDetailTable with items', () => {
   });
 
   describe('Sorting', () => {
-    testSorting(CLUSTER_DETAIL_TABLE_COLUMNS);
+    testSorting(CLUSTER_DETAIL_TABLE_COLUMNS, true);
   });
 
   describe('Filtering', () => {

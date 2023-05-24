@@ -75,7 +75,7 @@ describe('CveListTable with items', () => {
   });
 
   describe('Sorting', () => {
-    testSorting(CVE_LIST_TABLE_COLUMNS);
+    testSorting(CVE_LIST_TABLE_COLUMNS, true);
   });
 
   describe('Filtering', () => {

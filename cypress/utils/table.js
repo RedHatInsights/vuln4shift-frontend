@@ -147,23 +147,31 @@ export const removeFilter = (chipText) => {
   cy.get(`.pf-c-chip-group__main:contains(${chipText}) button`).click();
 };
 
-export const testSorting = (columns) => {
-  columns.map((column, index) =>
-    it(`is sorted by ${column.title}`, () => {
-      const tableHeaders = 'tr[data-ouia-component-type="PF4/TableRow"]';
+export const testSorting = (columns, isTableExpandable = false) => {
+  columns.map(
+    (column, index) =>
+      column.sortParam &&
+      it(`is sorted by ${column.title}`, () => {
+        const tableHeaders = 'thead tr';
 
-      cy.get(tableHeaders)
-        .children()
-        .eq(index + 1)
-        .click();
-      cy.url().should('include', `sort=-${column.sortParam}`);
+        cy.get(tableHeaders)
+          .children()
+          .eq(index + (isTableExpandable ? 1 : 0))
+          .click();
 
-      cy.get(tableHeaders)
-        .children()
-        .eq(index + 1)
-        .click();
-      cy.url().should('include', `sort=${column.sortParam}`);
-    })
+        column.sortDefaultDirection === 'asc'
+          ? cy.url().should('include', `sort=${column.sortParam}`)
+          : cy.url().should('include', `sort=-${column.sortParam}`);
+
+        cy.get(tableHeaders)
+          .children()
+          .eq(index + (isTableExpandable ? 1 : 0))
+          .click();
+
+        column.sortDefaultDirection === 'asc'
+          ? cy.url().should('include', `sort=-${column.sortParam}`)
+          : cy.url().should('include', `sort=${column.sortParam}`);
+      })
   );
 };
 
