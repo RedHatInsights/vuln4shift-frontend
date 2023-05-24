@@ -4,7 +4,7 @@
 Red Hat Vulnerability for OpenShift service is used to assess and monitor the status of security vulnerabilities on OpenShift clusters, understand the level of exposure of infrastructure, and plan a course of action. This is the front-end repository for this service.
 
 ## First time setup
-1. Make sure you have [`Node.js`](https://nodejs.org/en/) version >= 16 installed
+1. Make sure you have [`Node.js`](https://nodejs.org/en/) version >= 20 installed
 2. Run [script to patch your `/etc/hosts`](https://github.com/RedHatInsights/insights-proxy/blob/master/scripts/patch-etc-hosts.sh)
 3. Make sure you are using [Red Hat proxy](http://hdn.corp.redhat.com/proxy.pac)
 
