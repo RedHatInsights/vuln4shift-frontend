@@ -53,11 +53,12 @@ describe('ClusterListTable with items', () => {
   it('exists and matches screenshot', () => {
     // pin the date so the last seen column is not different on screenshots
     const currentTime = new Date(2023, 4, 1).getTime();
-    cy.clock(currentTime);
+    cy.clock(currentTime, (clock) => {
+      cy.get('table');
+      cy.get('body').matchImage();
 
-    cy.get('table');
-
-    cy.get('body').matchImage();
+      clock.restore();
+    });
   });
 
   it('has items', () => {
