@@ -18,7 +18,31 @@ const mountComponent = () => {
   );
 };
 
-describe('CveDetailPageHeader', () => {
+describe('CveDetailPageHeader with metadata', () => {
+  beforeEach(() => {
+    cy.intercept('GET', '**/api/ocp-vulnerability/v1/cves/CVE-2022-12345**', {
+      data: {
+        ...cveDetail.data,
+      },
+      meta: cveDetail.meta,
+    });
+
+    mountComponent();
+  });
+
+  it('matches screenshot', () => {
+    cy.get('body').matchImage();
+  });
+
+  describe('CVSS vector breakdown', () => {
+    it('matches screenshot', () => {
+      cy.get('h6 svg').click();
+      cy.get('.pf-c-popover').matchImage();
+    });
+  });
+});
+
+describe('CveDetailPageHeader without metadata', () => {
   beforeEach(() => {
     cy.intercept('GET', '**/api/ocp-vulnerability/v1/cves/CVE-2022-12345**', {
       data: {

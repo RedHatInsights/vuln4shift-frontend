@@ -299,6 +299,7 @@ export const testFilters = (filters) => {
           cy.get('#range-filter-input-max').type('0.5');
 
           itHasActiveFilter(filter.chipText, '1,9.5');
+          cy.contains('Reset filter').click();
 
           break;
         }
