@@ -61,7 +61,7 @@
     "@redhat-cloud-services/frontend-components-config": "^4.7.3",
     "babel-plugin-istanbul": "6.1.1",
     "babel-plugin-transform-imports": "^2.0.0",
-    "cypress": "10.8.0",
+    "cypress": "12.13.0",
     "eslint": "^8.41.0",
     "eslint-plugin-cypress": "^2.13.3",
     "identity-obj-proxy": "3.0.0",
