@@ -91,6 +91,7 @@ describe('CveDetailTable with items', () => {
         type: 'checkbox',
         selector: '.ins-c-conditional-filter .pf-m-fill button',
         items: CLUSTER_STATUS_OPTIONS,
+        dynamicItems: clusters.meta.cluster_statuses_all,
         chipText: 'Status',
       },
       {
@@ -98,6 +99,7 @@ describe('CveDetailTable with items', () => {
         type: 'checkbox',
         selector: '.ins-c-conditional-filter .pf-m-fill button',
         items: CLUSTER_VERSION_OPTIONS,
+        dynamicItems: clusters.meta.cluster_versions_all,
         chipText: 'Version',
       },
       {
@@ -105,6 +107,7 @@ describe('CveDetailTable with items', () => {
         type: 'checkbox',
         selector: '.ins-c-conditional-filter .pf-m-fill button',
         items: CLUSTER_PROVIDER_OPTIONS,
+        dynamicItems: clusters.meta.cluster_providers_all,
         chipText: 'Provider',
       },
     ];
