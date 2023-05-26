@@ -200,6 +200,7 @@ export const CLUSTER_LIST_TABLE_COLUMNS = [
     sortParam: 'version',
   },
   {
+    stringTitle: 'CVEs severity',
     title: (
       <span>
         CVEs severity

@@ -1,3 +1,6 @@
+import { uniqBy } from 'lodash';
+import strictUriEncode from 'strict-uri-encode';
+
 export const itIsSortedBy = (param) => {
   it(`is be sorted by ${param}`, () => {
     cy.get('.pf-m-selected > .pf-c-table__button').should('have.text', param);
@@ -151,7 +154,7 @@ export const testSorting = (columns, isTableExpandable = false) => {
   columns.map(
     (column, index) =>
       column.sortParam &&
-      it(`is sorted by ${column.title}`, () => {
+      it(`is sorted by ${column.stringTitle ?? column.title}`, () => {
         const tableHeaders = 'thead tr';
 
         cy.get(tableHeaders)
@@ -240,7 +243,17 @@ export const testFilters = (filters) => {
           cy.get('.pf-c-select__menu')
             .children()
             .each((child, index) => {
-              const option = filter.items[index];
+              const allItems = uniqBy(
+                filter.items.concat(
+                  (filter.dynamicItems ?? []).map((item) => ({
+                    label: item,
+                    value: item,
+                  }))
+                ),
+                'value'
+              );
+
+              const option = allItems[index];
 
               cy.get(child).click();
 
@@ -248,7 +261,7 @@ export const testFilters = (filters) => {
 
               cy.url().should(
                 'include',
-                `${filter.urlParam}=${encodeURIComponent(
+                `${filter.urlParam}=${strictUriEncode(
                   selectedValues.join(',')
                 )}`
               );
@@ -283,7 +296,7 @@ export const testFilters = (filters) => {
           itHasActiveFilter(filter.chipText, '1.0 - 9.5');
           cy.url().should(
             'include',
-            `${filter.urlParam}=${encodeURIComponent('1,9.5')}`
+            `${filter.urlParam}=${strictUriEncode('1,9.5')}`
           );
 
           // if value is out of range, the filter should not get applied

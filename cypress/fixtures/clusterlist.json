@@ -48,7 +48,7 @@
         {
             "display_name": "rhel-9.0-4",
             "insights_id": "20692751-4d45-4251-ac95-fd0e3e01119i",
-            "status": "Stale",
+            "status": "Active",
             "version": "4.9.12",
             "type": "OCP",
             "provider": "N/A",
@@ -64,7 +64,7 @@
             "display_name": "rhel-9.0-5",
             "insights_id": "20692751-4d45-4251-ac95-fd0e3e01119j",
             "status": "Disconnected",
-            "version": "4.9.12",
+            "version": "N/A",
             "type": "OCP",
             "provider": "N/A",
             "cves_severity": {
@@ -75,8 +75,22 @@
             },
             "id": "fc60b5ad-3874-4449-99b8-f3e7ea25c69f"
         }
-     ],
+    ],
     "meta": {
+        "cluster_providers_all": [
+            "N/A",
+            "AWS (us-east-2)"
+        ],
+        "cluster_statuses_all": [
+            "Active",
+            "Stale"
+        ],
+        "cluster_versions_all": [
+            "4.7.1",
+            "4.9.3",
+            "4.9.12",
+            "N/A"
+        ],
         "total_items": 5
     }
 }
