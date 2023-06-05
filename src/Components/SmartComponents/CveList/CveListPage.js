@@ -97,7 +97,7 @@ const CveListPage = () => {
             target="_blank"
             rel="noopener noreferrer"
             href={`${
-              chrome.isBeta() ? '/beta' : ''
+              chrome.isBeta() ? '/preview' : ''
             }/application-services/acs/overview`}
           >
             Visit Red Hat Advanced Cluster Security Cloud Service (RHACSCS)
