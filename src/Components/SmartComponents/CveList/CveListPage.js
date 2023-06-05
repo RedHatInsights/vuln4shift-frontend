@@ -84,6 +84,26 @@ const CveListPage = () => {
         )}
       </PageHeader>
       <Main>
+        <Alert
+          variant={AlertVariant.info}
+          isInline
+          title="Check out Red Hat's fully managed Kubernetes-native security platform"
+        >
+          Performs in-depth vulnerability analysis and protects containerized
+          applications across the full application life cycle.
+          <br />
+          <br />
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href={`${
+              chrome.isBeta() ? '/preview' : ''
+            }/application-services/acs/overview`}
+          >
+            Visit Red Hat Advanced Cluster Security Cloud Service (RHACSCS)
+            <ExternalLinkAltIcon className="pf-u-ml-sm" />
+          </a>
+        </Alert>
         <CveListTable />
       </Main>
     </Fragment>
