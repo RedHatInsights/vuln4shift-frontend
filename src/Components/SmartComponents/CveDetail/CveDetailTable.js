@@ -11,7 +11,7 @@ import {
 } from '../../../Helpers/constants';
 import { useSelector } from 'react-redux';
 import NoMatchingClusters from '../../PresentationalComponents/EmptyStates/NoMatchingClusters';
-import { useRouteMatch } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import BaseTable from '../Generic/BaseTable';
 import { useExport, useUrlBoundParams } from '../../../Helpers/hooks';
 import {
@@ -25,7 +25,7 @@ import checkboxFilter from '../Filters/CheckboxFilter';
 import { uniqBy } from 'lodash';
 
 const CveDetailTable = () => {
-  const match = useRouteMatch();
+  const params = useParams();
 
   const { clusters, isTableLoading, meta, error } = useSelector(
     ({ CveDetailStore }) => CveDetailStore
@@ -34,7 +34,7 @@ const CveDetailTable = () => {
   const apply = useUrlBoundParams({
     allowedParams: CVE_DETAIL_ALLOWED_PARAMS,
     initialParams: meta,
-    additionalParam: match.params.cveId,
+    additionalParam: params.cveId,
     fetchAction: fetchCveDetailTable,
     changeParamsAction: changeCveDetailsTableParams,
   });
@@ -52,7 +52,7 @@ const CveDetailTable = () => {
   const onExport = useExport({
     filenamePrefix: CVE_DETAIL_EXPORT_PREFIX,
     fetchAction: fetchExposedClusters,
-    fetchActionParam: match.params.cveId,
+    fetchActionParam: params.cveId,
     allowedParams: CVE_DETAIL_ALLOWED_PARAMS,
   });
 

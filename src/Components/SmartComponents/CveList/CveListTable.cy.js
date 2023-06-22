@@ -27,11 +27,11 @@ import { CVE_LIST_TABLE_COLUMNS } from '../../../Helpers/constants';
 
 const mountComponent = () => {
   mount(
-    <Router>
-      <Provider store={init().getStore()}>
+    <Provider store={init().getStore()}>
+      <Router>
         <CveListTable />
-      </Provider>
-    </Router>
+      </Router>
+    </Provider>
   );
 };
 

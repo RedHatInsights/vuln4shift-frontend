@@ -5,7 +5,7 @@ import {
 } from '@redhat-cloud-services/frontend-components/PageHeader';
 import { Breadcrumb, BreadcrumbItem } from '@patternfly/react-core';
 import DateFormat from '@redhat-cloud-services/frontend-components/DateFormat/DateFormat';
-import { Link, useRouteMatch } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import WithLoader, {
   LoaderType,
@@ -13,7 +13,7 @@ import WithLoader, {
 import { fetchClusterDetails } from '../../../Store/Actions';
 
 const ClusterDetailPageHeader = () => {
-  const match = useRouteMatch();
+  const params = useParams();
   const dispatch = useDispatch();
 
   const { cluster, isDetailLoading } = useSelector(
@@ -21,7 +21,7 @@ const ClusterDetailPageHeader = () => {
   );
 
   useEffect(() => {
-    dispatch(fetchClusterDetails(match.params.clusterId));
+    dispatch(fetchClusterDetails(params.clusterId));
   }, []);
 
   const pageTitle = (
@@ -40,10 +40,10 @@ const ClusterDetailPageHeader = () => {
     <PageHeader>
       <Breadcrumb className="pf-u-mb-md">
         <BreadcrumbItem>
-          <Link to="/">Vulnerability</Link>
+          <Link to="../">Vulnerability</Link>
         </BreadcrumbItem>
         <BreadcrumbItem>
-          <Link to="/clusters">Clusters</Link>
+          <Link to="../clusters">Clusters</Link>
         </BreadcrumbItem>
         <BreadcrumbItem>
           <WithLoader
@@ -67,7 +67,7 @@ const ClusterDetailPageHeader = () => {
           isLoading={isDetailLoading}
           style={{ verticalAlign: -4 }}
         >
-          <span ouiaId="cluster-detail-id">{match.params.clusterId}</span>
+          <span ouiaId="cluster-detail-id">{params.clusterId}</span>
         </WithLoader>
       </div>
       <div>

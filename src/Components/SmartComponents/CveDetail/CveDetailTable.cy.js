@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from '@cypress/react';
-import { MemoryRouter, Route } from 'react-router-dom';
+import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import CveDetailTable from './CveDetailTable';
 import { Provider } from 'react-redux';
 import { init } from '../../../Store/ReducerRegistry';
@@ -27,13 +27,13 @@ import {
 
 const mountComponent = () => {
   mount(
-    <MemoryRouter initialEntries={['/cves/CVE-2022-12345']}>
-      <Route path="/cves/:cveId">
-        <Provider store={init().getStore()}>
-          <CveDetailTable />
-        </Provider>
-      </Route>
-    </MemoryRouter>
+    <Provider store={init().getStore()}>
+      <MemoryRouter initialEntries={['/cves/CVE-2022-12345']}>
+        <Routes>
+          <Route path="/cves/:cveId" element={<CveDetailTable />} />
+        </Routes>
+      </MemoryRouter>
+    </Provider>
   );
 };
 

@@ -21,7 +21,7 @@ import {
 import { Link } from 'react-router-dom';
 import { Shield } from '@redhat-cloud-services/frontend-components/Shield';
 import CvssVector from '../../PresentationalComponents/CvssVector';
-import { useRouteMatch } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import WithLoader, {
   LoaderType,
 } from '../../PresentationalComponents/WithLoader';
@@ -34,7 +34,7 @@ import parseCvssScore from '@redhat-cloud-services/frontend-components-utilities
 import { SEVERITY_OPTIONS } from '../../../Helpers/constants';
 
 const CveDetailPageHeader = () => {
-  const match = useRouteMatch();
+  const params = useParams();
   const dispatch = useDispatch();
 
   const { cve, isDetailLoading } = useSelector(
@@ -54,24 +54,24 @@ const CveDetailPageHeader = () => {
   const hasMetadata = description !== 'unknown';
 
   useEffect(() => {
-    dispatch(fetchCveDetails(match.params.cveId));
+    dispatch(fetchCveDetails(params.cveId));
   }, []);
 
   return (
     <PageHeader style={{ paddingBottom: 0 }}>
       <Breadcrumb className="pf-u-mb-md">
         <BreadcrumbItem>
-          <Link to="/">Vulnerability</Link>
+          <Link to="../">Vulnerability</Link>
         </BreadcrumbItem>
         <BreadcrumbItem>
-          <Link to="/cves">CVEs</Link>
+          <Link to="../cves">CVEs</Link>
         </BreadcrumbItem>
-        <BreadcrumbItem>{match.params.cveId}</BreadcrumbItem>
+        <BreadcrumbItem>{params.cveId}</BreadcrumbItem>
       </Breadcrumb>
       <PageHeaderTitle
         title={
           <Fragment>
-            <span className="pf-u-mr-md">{match.params.cveId}</span>
+            <span className="pf-u-mr-md">{params.cveId}</span>
             {/* TODO: Implement after backend starts providing known exploit param
             hasKnownExploit && <KnownExploitLabel
               labelProps={{ style: { verticalAlign: 4, fontWeight: 300 } }}
@@ -123,7 +123,7 @@ const CveDetailPageHeader = () => {
             </StackItem>
             <StackItem className="pf-u-mt-sm pf-u-mb-md">
               <a
-                href={`https://access.redhat.com/security/cve/${match.params.cveId}`}
+                href={`https://access.redhat.com/security/cve/${params.cveId}`}
                 target="__blank"
                 rel="noopener noreferrer"
               >

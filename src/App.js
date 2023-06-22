@@ -1,28 +1,13 @@
-import React, { Fragment, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
-import { Routes } from './Routes';
+import React, { Fragment } from 'react';
 import NotificationsPortal from '@redhat-cloud-services/frontend-components-notifications/NotificationPortal';
-import { useChrome } from '@redhat-cloud-services/frontend-components/useChrome';
 import './App.scss';
+import { Router } from './Router';
 
 const App = (props) => {
-  const history = useHistory();
-  const chrome = useChrome();
-
-  useEffect(() => {
-    const unregister = chrome.on('APP_NAVIGATION', (event) =>
-      history.push(`/${event.navId}`)
-    );
-
-    return () => {
-      unregister();
-    };
-  }, []);
-
   return (
     <Fragment>
       <NotificationsPortal />
-      <Routes childProps={props} />
+      <Router childProps={props} />
     </Fragment>
   );
 };

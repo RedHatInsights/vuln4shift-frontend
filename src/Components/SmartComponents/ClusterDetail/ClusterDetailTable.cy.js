@@ -1,6 +1,6 @@
 import React from 'react';
 import { mount } from '@cypress/react';
-import { MemoryRouter, Route } from 'react-router-dom';
+import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import ClusterDetailTable from './ClusterDetailTable';
 import { Provider } from 'react-redux';
 import { init } from '../../../Store/ReducerRegistry';
@@ -26,15 +26,15 @@ import {
 
 const mountComponent = () => {
   mount(
-    <MemoryRouter
-      initialEntries={['/clusters/e45c0b54-3083-4ae0-9cbc-f7d7a302e7dd']}
-    >
-      <Route path="/clusters/:clusterId">
-        <Provider store={init().getStore()}>
-          <ClusterDetailTable />
-        </Provider>
-      </Route>
-    </MemoryRouter>
+    <Provider store={init().getStore()}>
+      <MemoryRouter
+        initialEntries={['/clusters/e45c0b54-3083-4ae0-9cbc-f7d7a302e7dd']}
+      >
+        <Routes>
+          <Route path="/clusters/:clusterId" element={<ClusterDetailTable />} />
+        </Routes>
+      </MemoryRouter>
+    </Provider>
   );
 };
 

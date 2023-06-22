@@ -28,11 +28,11 @@ import {
 
 const mountComponent = () => {
   mount(
-    <Router>
-      <Provider store={init().getStore()}>
+    <Provider store={init().getStore()}>
+      <Router>
         <ClusterListTable />
-      </Provider>
-    </Router>
+      </Router>
+    </Provider>
   );
 };
 

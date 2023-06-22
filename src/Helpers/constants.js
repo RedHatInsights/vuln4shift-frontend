@@ -288,7 +288,7 @@ const createCveDescription = (row) => (
       </TextContent>
     )}
     <Link
-      to={'/cves/' + row.synopsis}
+      to={'../cves/' + row.synopsis}
       className="pf-u-mt-md pf-u-display-block"
     >
       View more information about this CVE
@@ -299,13 +299,13 @@ const createCveDescription = (row) => (
 export const CVE_LIST_TABLE_MAPPER = (row) => ({
   key: row.synopsis,
   cells: [
-    <Link to={'/cves/' + row.synopsis} key={row.synopsis}>
+    <Link to={'../cves/' + row.synopsis} key={row.synopsis}>
       {row.synopsis}
     </Link>,
     processDate(row.publish_date),
     <Shield hasLabel impact={row.severity} key={row.synopsis} />,
     parseCvssScore(row.cvss2_score, row.cvss3_score, true),
-    <Link to={'/cves/' + row.synopsis} key={row.synopsis}>
+    <Link to={'../cves/' + row.synopsis} key={row.synopsis}>
       {row.clusters_exposed}
     </Link>,
   ],
@@ -315,7 +315,7 @@ export const CVE_LIST_TABLE_MAPPER = (row) => ({
 export const CLUSTER_LIST_TABLE_MAPPER = (row) => ({
   key: row.id,
   cells: [
-    <Link to={'/clusters/' + row.id} key={row.id}>
+    <Link to={'../clusters/' + row.id} key={row.id}>
       {row.display_name}
     </Link>,
     row.status,
@@ -324,7 +324,7 @@ export const CLUSTER_LIST_TABLE_MAPPER = (row) => ({
     <ShieldSet
       key={row.id}
       count={{ ...row.cves_severity }}
-      linkTo={`/clusters/${row.id}`}
+      linkTo={`../clusters/${row.id}`}
     />,
     row.provider,
     <DateFormat key={row.id} date={row.last_seen} type="relative" />,
@@ -334,7 +334,7 @@ export const CLUSTER_LIST_TABLE_MAPPER = (row) => ({
 export const CVE_DETAIL_TABLE_MAPPER = (row) => ({
   key: row.id,
   cells: [
-    <Link to={'/clusters/' + row.id} key={row.id}>
+    <Link to={'../clusters/' + row.id} key={row.id}>
       {row.display_name}
     </Link>,
     row.status,
@@ -348,7 +348,7 @@ export const CVE_DETAIL_TABLE_MAPPER = (row) => ({
 export const CLUSTER_DETAIL_TABLE_MAPPER = (row) => ({
   key: row.synopsis,
   cells: [
-    <Link to={'/cves/' + row.synopsis} key={row.synopsis}>
+    <Link to={'../cves/' + row.synopsis} key={row.synopsis}>
       {row.synopsis}
     </Link>,
     processDate(row.publish_date),
