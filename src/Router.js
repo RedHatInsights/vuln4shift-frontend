@@ -1,6 +1,6 @@
 import React, { Suspense, lazy } from 'react';
-import { Redirect, Route, Switch } from 'react-router-dom';
-
+import { Navigate, Route, Routes } from 'react-router-dom';
+import propTypes from 'prop-types';
 import { Bullseye, Spinner } from '@patternfly/react-core';
 
 const CveListPage = lazy(() =>
@@ -27,7 +27,7 @@ const ClusterDetailPage = lazy(() =>
   )
 );
 
-export const Routes = () => (
+const InsightsElement = ({ element: Element }) => (
   <Suspense
     fallback={
       <Bullseye>
@@ -35,14 +35,32 @@ export const Routes = () => (
       </Bullseye>
     }
   >
-    <Switch>
-      <Route path="/cves/:cveId" component={CveDetailPage} />
-      <Route path="/clusters/:clusterId" component={ClusterDetailPage} />
-      <Route path="/cves" component={CveListPage} />
-      <Route path="/clusters" component={ClusterListPage} />
-      <Route>
-        <Redirect to="/cves" />
-      </Route>
-    </Switch>
+    {Element}
   </Suspense>
+);
+
+InsightsElement.propTypes = {
+  element: propTypes.element.isRequired,
+};
+
+export const Router = () => (
+  <Routes>
+    <Route
+      path="/cves/:cveId"
+      element={<InsightsElement element={<CveDetailPage />} />}
+    />
+    <Route
+      path="/clusters/:clusterId"
+      element={<InsightsElement element={<ClusterDetailPage />} />}
+    />
+    <Route
+      path="/cves"
+      element={<InsightsElement element={<CveListPage />} />}
+    />
+    <Route
+      path="/clusters"
+      element={<InsightsElement element={<ClusterListPage />} />}
+    />
+    <Route path="*" element={<Navigate to="cves" replace />} />
+  </Routes>
 );

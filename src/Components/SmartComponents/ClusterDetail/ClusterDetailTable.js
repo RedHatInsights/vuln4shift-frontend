@@ -13,7 +13,7 @@ import {
   changeClusterDetailsTableParams,
   fetchClusterDetailTable,
 } from '../../../Store/Actions';
-import { useRouteMatch } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useExport, useUrlBoundParams } from '../../../Helpers/hooks';
 import {
   getCvssScoreFromUrlParam,
@@ -28,7 +28,7 @@ import NoMatchingCves from '../../PresentationalComponents/EmptyStates/NoMatchin
 import { fetchClusterCves } from '../../../Helpers/apiHelper';
 
 const ClusterDetailTable = () => {
-  const match = useRouteMatch();
+  const params = useParams();
 
   const { cves, isTableLoading, meta, error } = useSelector(
     ({ ClusterDetailStore }) => ClusterDetailStore
@@ -37,7 +37,7 @@ const ClusterDetailTable = () => {
   const apply = useUrlBoundParams({
     allowedParams: CLUSTER_DETAIL_ALLOWED_PARAMS,
     initialParams: meta,
-    additionalParam: match.params.clusterId,
+    additionalParam: params.clusterId,
     fetchAction: fetchClusterDetailTable,
     changeParamsAction: changeClusterDetailsTableParams,
   });
@@ -49,7 +49,7 @@ const ClusterDetailTable = () => {
   const onExport = useExport({
     filenamePrefix: CLUSTER_DETAIL_EXPORT_PREFIX,
     fetchAction: fetchClusterCves,
-    fetchActionParam: match.params.clusterId,
+    fetchActionParam: params.clusterId,
     allowedParams: CLUSTER_DETAIL_ALLOWED_PARAMS,
   });
 
