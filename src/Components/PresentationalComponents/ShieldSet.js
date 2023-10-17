@@ -24,7 +24,7 @@ const ShieldSet = ({ count, linkTo }) => {
             ) : (
               <Link
                 key={severityOption.value}
-                to={`../${linkTo}?severity=${severityOption.value}`}
+                to={`${linkTo}?severity=${severityOption.value}`}
                 className="nowrap"
               >
                 <SecurityIcon style={{ color: severityOption.iconColor }} />
