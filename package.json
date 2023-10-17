@@ -28,7 +28,7 @@
     "coverage": "bash coverage.sh && npm run coverage:clean"
   },
   "dependencies": {
-    "@patternfly/react-core": "^4.276.8",
+    "@patternfly/react-core": "^4.278.0",
     "@patternfly/react-table": "^4.113.0",
     "@redhat-cloud-services/frontend-components": "^3.10.0",
     "@redhat-cloud-services/frontend-components-notifications": "^3.2.14",
