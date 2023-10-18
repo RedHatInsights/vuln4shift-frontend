@@ -3,6 +3,7 @@ import {
   Alert,
   AlertActionCloseButton,
   AlertVariant,
+  Icon,
   Popover,
 } from '@patternfly/react-core';
 import {
@@ -56,11 +57,15 @@ const CveListPage = () => {
     >
       <span>
         CVEs
-        <OutlinedQuestionCircleIcon
-          color="var(--pf-global--secondary-color--100)"
+        <Icon
           className="pf-u-ml-sm pointer cves-header-questionmark"
-          style={{ verticalAlign: '0' }}
-        />
+          style={{
+            verticalAlign: '0',
+            color: 'var(--pf-global--secondary-color--100)'
+          }}
+        >
+          <OutlinedQuestionCircleIcon />
+        </Icon>
       </span>
     </Popover>
   );

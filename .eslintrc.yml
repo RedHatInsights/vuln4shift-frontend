@@ -7,4 +7,5 @@ globals:
   render: 'readonly'
   mount: 'readonly'
 rules:
-  "react/no-unknown-property": ['error', { ignore: ['ouiaId'] }]
+  react/no-unknown-property: ['error', { ignore: ['ouiaId'] }]
+  rulesdir/forbid-pf-relative-imports: off

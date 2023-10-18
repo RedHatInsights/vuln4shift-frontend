@@ -8,7 +8,6 @@ import {
   Text,
   TextContent,
   TextVariants,
-  EmptyStateVariant,
   Tooltip,
 } from '@patternfly/react-core';
 import { DateFormat } from '@redhat-cloud-services/frontend-components/DateFormat';
@@ -275,10 +274,7 @@ export const CLUSTER_DETAIL_TABLE_COLUMNS = [
 const createCveDescription = (row) => (
   <Fragment>
     {row.description === 'unknown' ? (
-      <MissingMetadata
-        variant={EmptyStateVariant.large}
-        style={{ padding: 0 }}
-      />
+      <MissingMetadata variant="large" style={{ padding: 0 }} />
     ) : (
       <TextContent>
         <Text component={TextVariants.h6} style={{ fontSize: 14 }}>

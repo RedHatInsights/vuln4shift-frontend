@@ -5,12 +5,11 @@ import {
   EmptyStateBody,
   Bullseye,
   Text,
-  EmptyStateVariant,
 } from '@patternfly/react-core';
 
 const MissingMetadata = ({ ...props }) => (
   <Bullseye>
-    <EmptyState variant={EmptyStateVariant.large} {...props}>
+    <EmptyState variant="lg" {...props}>
       <Text>
         <strong>No description available</strong>
       </Text>
