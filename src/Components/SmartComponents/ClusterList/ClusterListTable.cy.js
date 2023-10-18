@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount } from '@cypress/react';
+import { mount } from '@cypress/react18';
 import { BrowserRouter as Router } from 'react-router-dom';
 import ClusterListTable from './ClusterListTable';
 import { Provider } from 'react-redux';

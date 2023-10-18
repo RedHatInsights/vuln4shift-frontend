@@ -1,5 +1,5 @@
 import React from 'react';
-import { mount } from '@cypress/react';
+import { mount } from '@cypress/react18';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import ClusterDetailTable from './ClusterDetailTable';
 import { Provider } from 'react-redux';
