@@ -151,7 +151,7 @@ export const removeFilter = (chipText) => {
 };
 
 export const testSorting = (columns, isTableExpandable = false) => {
-  columns.map(
+  columns.forEach(
     (column, index) =>
       column.sortParam &&
       it(`is sorted by ${column.stringTitle ?? column.title}`, () => {
