@@ -61,7 +61,7 @@ const CveListPage = () => {
           className="pf-u-ml-sm pointer cves-header-questionmark"
           style={{
             verticalAlign: '0',
-            color: 'var(--pf-global--secondary-color--100)'
+            color: 'var(--pf-global--secondary-color--100)',
           }}
         >
           <OutlinedQuestionCircleIcon />
