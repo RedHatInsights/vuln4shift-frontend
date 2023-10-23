@@ -4,16 +4,10 @@ import { processDate } from '@redhat-cloud-services/frontend-components-utilitie
 import parseCvssScore from '@redhat-cloud-services/frontend-components-utilities/parseCvssScore';
 import { Shield } from '@redhat-cloud-services/frontend-components/Shield';
 import ShieldSet from '../Components/PresentationalComponents/ShieldSet';
-import {
-  Text,
-  TextContent,
-  TextVariants,
-  Tooltip,
-} from '@patternfly/react-core';
+import { Text, TextContent, TextVariants } from '@patternfly/react-core';
 import { DateFormat } from '@redhat-cloud-services/frontend-components/DateFormat';
 import { subtractDays, subtractYears } from './miscHelper';
 import MissingMetadata from '../Components/PresentationalComponents/EmptyStates/MissingMetadata';
-import { OutlinedQuestionCircleIcon } from '@patternfly/react-icons';
 
 export const HEADER_ALERT_DISMISSED_KEY = 'vuln4shift:header-alert-dismissed';
 
@@ -199,15 +193,7 @@ export const CLUSTER_LIST_TABLE_COLUMNS = [
     sortParam: 'version',
   },
   {
-    stringTitle: 'CVEs severity',
-    title: (
-      <span>
-        CVEs severity
-        <Tooltip content="Sort clusters by Critical or Low severity. The filters applied do not affect the organization of this column.">
-          <OutlinedQuestionCircleIcon id="cves-severity-question-mark" />
-        </Tooltip>
-      </span>
-    ),
+    title: 'CVEs severity',
     sortParam: 'cluster_severity',
   },
   {

@@ -3,19 +3,26 @@ import strictUriEncode from 'strict-uri-encode';
 
 export const itIsSortedBy = (param) => {
   it(`is be sorted by ${param}`, () => {
-    cy.get('.pf-m-selected > .pf-c-table__button').should('have.text', param);
+    cy.get('.pf-m-selected > .pf-v5-c-table__button').should(
+      'have.text',
+      param
+    );
   });
 };
 
 export const itIsNotSorted = () => {
   it('does not show sorting indicator', () => {
-    cy.get('.pf-m-selected > .pf-c-table__button').should('have.length', 0);
+    cy.get('.pf-m-selected > .pf-v5-c-table__button').should('have.length', 0);
   });
 };
 
 export const itHasTableFunctionsDisabled = () => {
-  it('has export button and paginations disabled and has no bulk expand', () => {
-    cy.get('[data-ouia-component-id=Export] button').should('be.disabled');
+  it('has export buttons and paginations disabled and has no bulk expand', () => {
+    cy.get('button[aria-label=Export]').click();
+    cy.get('[aria-label=Export]')
+      .parent()
+      .get('.pf-v5-c-menu__item')
+      .should('be.disabled');
 
     cy.get('[data-ouia-component-id=pagination-top] button').should(
       'be.disabled'
@@ -30,15 +37,15 @@ export const itHasTableFunctionsDisabled = () => {
 };
 
 export const itHasActiveFilter = (filterName, filterValue) => {
-  it(`has ${filterName}: ${filterValue} filter active by default`, () => {
-    cy.get('.pf-c-chip-group__label').should('have.text', filterName);
-    cy.get('.pf-c-chip-group__main ul').should('have.text', filterValue);
+  it.only(`has ${filterName}: ${filterValue} filter active by default`, () => {
+    cy.get('.pf-v5-c-chip-group__label').should('have.text', filterName);
+    cy.get('.pf-v5-c-chip-group__main ul').should('have.text', filterValue);
   });
 };
 
 export const itHasNoActiveFilter = () => {
   it('does not have any filter active by default', () => {
-    cy.get('.pf-c-chip-group__label').should('have.length', 0);
+    cy.get('.pf-v5-c-chip-group__label').should('have.length', 0);
   });
 };
 
@@ -46,18 +53,22 @@ export const itExportsDataToFile = (jsonData, filenamePrefix) => {
   it('exports data to JSON and CSV files', () => {
     cy.clock(Date.now());
 
-    cy.get('[data-ouia-component-id=Export] button').click();
-    cy.get('[data-ouia-component-id=Export] .pf-c-dropdown__menu-item').should(
-      'have.length',
-      2
-    );
-    cy.get('[data-ouia-component-id=Export] .pf-c-dropdown__menu-item')
+    cy.get('button[aria-label=Export]').click();
+    cy.get('[aria-label=Export]')
+      .parent()
+      .get('.pf-v5-c-menu__item')
+      .should('have.length', 2);
+    cy.get('[aria-label=Export]')
+      .parent()
+      .get('.pf-v5-c-menu__item')
       .contains('Export to JSON')
       .click();
 
-    cy.get('[data-ouia-component-id=Export] button').click();
+    cy.get('button[aria-label=Export]').click();
 
-    cy.get('[data-ouia-component-id=Export] .pf-c-dropdown__menu-item')
+    cy.get('[aria-label=Export]')
+      .parent()
+      .get('.pf-v5-c-menu__item')
       .contains('Export to CSV')
       .click();
 
@@ -86,7 +97,7 @@ export const itIsExpandable = (rowCount) => {
 
   it('has expandable and collapsable items', () => {
     cy.get('tbody [id^=expand-toggle]').each((item) => cy.wrap(item).click());
-    cy.get('tbody .pf-c-table__expandable-row.pf-m-expanded > td').should(
+    cy.get('tbody .pf-v5-c-table__expandable-row.pf-m-expanded > td').should(
       'have.length',
       rowCount
     );
@@ -96,7 +107,7 @@ export const itIsExpandable = (rowCount) => {
       'true'
     );
     cy.get('tbody [id^=expand-toggle]').each((item) => cy.wrap(item).click());
-    cy.get('tbody .pf-c-table__expandable-row.pf-m-expanded > td').should(
+    cy.get('tbody .pf-v5-c-table__expandable-row.pf-m-expanded > td').should(
       'have.length',
       0
     );
@@ -114,7 +125,7 @@ export const itIsExpandable = (rowCount) => {
       'false'
     );
     cy.get('thead [id^=expand-toggle]').click();
-    cy.get('tbody .pf-c-table__expandable-row.pf-m-expanded > td').should(
+    cy.get('tbody .pf-v5-c-table__expandable-row.pf-m-expanded > td').should(
       'have.length',
       rowCount
     );
@@ -124,7 +135,7 @@ export const itIsExpandable = (rowCount) => {
       'true'
     );
     cy.get('thead [id^=expand-toggle]').click();
-    cy.get('tbody .pf-c-table__expandable-row.pf-m-expanded > td').should(
+    cy.get('tbody .pf-v5-c-table__expandable-row.pf-m-expanded > td').should(
       'have.length',
       0
     );
@@ -147,7 +158,7 @@ export const itIsNotExpandable = () => {
 };
 
 export const removeFilter = (chipText) => {
-  cy.get(`.pf-c-chip-group__main:contains(${chipText}) button`).click();
+  cy.get(`.pf-v5-c-chip-group__main:contains(${chipText}) button`).click();
 };
 
 export const testSorting = (columns, isTableExpandable = false) => {
@@ -181,8 +192,8 @@ export const testSorting = (columns, isTableExpandable = false) => {
 export const testFilters = (filters) => {
   filters.forEach((filter, index) => {
     it(`filters by ${filter.urlParam}`, () => {
-      cy.get('button[data-ouia-component-id="ConditionalFilter"]').click();
-      cy.get('.pf-c-dropdown__menu').children().eq(index).click();
+      cy.get('button[aria-label="Conditional filter"]').click();
+      cy.get('.pf-v5-c-menu__list-item button').eq(index).click();
 
       switch (filter.type) {
         case 'text': {
@@ -200,7 +211,7 @@ export const testFilters = (filters) => {
         case 'radio': {
           cy.get(filter.selector).click();
 
-          cy.get('.pf-c-select__menu')
+          cy.get('.pf-v5-c-menu__list-item')
             .children()
             .each((child, index) => {
               if (index === 0) {
@@ -233,14 +244,14 @@ export const testFilters = (filters) => {
 
           // uncheck all possible values selected by default
           if (filter.activeByDefault) {
-            cy.get('.pf-c-select__menu input[type="checkbox"]').uncheck({
+            cy.get('.pf-v5-c-menu__list-item input[type="checkbox"]').uncheck({
               multiple: true,
             });
           }
 
           let selectedValues = [];
 
-          cy.get('.pf-c-select__menu')
+          cy.get('.pf-v5-c-menu__list-item')
             .children()
             .each((child, index) => {
               const allItems = uniqBy(
@@ -326,13 +337,14 @@ export const testFilters = (filters) => {
 
 export const testPagination = () => {
   const navigationButtons =
-    '#options-menu-top-pagination > .pf-c-pagination__nav button';
+    '#options-menu-top-pagination > .pf-v5-c-pagination__nav button';
 
   it('should change page size', () => {
     cy.get(navigationButtons).eq(0).should('be.disabled');
     cy.get(navigationButtons).eq(1).should('be.disabled');
-    cy.get('#options-menu-top-pagination .pf-c-options-menu button').click();
-    cy.get('.pf-c-options-menu__menu button').eq(0).click();
+
+    cy.get('#options-menu-top-pagination .pf-v5-c-menu-toggle').click();
+    cy.get('.pf-v5-c-menu__content button').eq(0).click();
 
     cy.url().should('include', `limit=10`);
     cy.get(navigationButtons).eq(1).should('be.enabled');

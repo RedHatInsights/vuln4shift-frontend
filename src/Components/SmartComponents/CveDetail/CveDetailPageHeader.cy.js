@@ -37,7 +37,7 @@ describe('CveDetailPageHeader with metadata', () => {
   describe('CVSS vector breakdown', () => {
     it('matches screenshot', () => {
       cy.get('h6 svg').click();
-      cy.get('.pf-c-popover').matchImage();
+      cy.get('.pf-v5-c-popover').matchImage();
     });
   });
 });
