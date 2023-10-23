@@ -17,7 +17,7 @@
     "patch:hosts": "fec patch-etc-hosts",
     "start": "fec dev",
     "test": "npm run test:ct",
-    "test:ct": "BABEL_ENV=component cypress run --component && npx nyc report",
+    "test:ct": "BABEL_ENV=component cypress run --component",
     "test:coverage": "npx nyc report",
     "verify": "npm-run-all build lint test",
     "coverage:clean": "rm -rf .nyc_output coverage reports",
