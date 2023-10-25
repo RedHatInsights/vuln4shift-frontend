@@ -16,7 +16,6 @@ import {
   Text,
   TextContent,
   TextVariants,
-  EmptyStateVariant,
 } from '@patternfly/react-core';
 import { Link } from 'react-router-dom';
 import { Shield } from '@redhat-cloud-services/frontend-components/Shield';
@@ -115,7 +114,7 @@ const CveDetailPageHeader = () => {
                   </TextContent>
                 ) : (
                   <MissingMetadata
-                    variant={EmptyStateVariant.full}
+                    variant="full"
                     style={{ maxWidth: 800, padding: 16 }}
                   />
                 )}
@@ -182,7 +181,7 @@ const CveDetailPageHeader = () => {
           </Stack>
         </GridItem>
       </Grid>
-      <Tabs activeKey={0} hasBorderBottom={false}>
+      <Tabs activeKey={0} hasNoBorderBottom>
         <Tab
           eventKey={0}
           title={<TabTitleText>Exposed clusters</TabTitleText>}

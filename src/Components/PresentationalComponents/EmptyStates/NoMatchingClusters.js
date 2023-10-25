@@ -3,16 +3,16 @@ import {
   EmptyState,
   EmptyStateBody,
   Bullseye,
-  EmptyStateVariant,
-  Title,
+  EmptyStateHeader,
 } from '@patternfly/react-core';
 
 const NoMatchingClusters = () => (
   <Bullseye>
-    <EmptyState variant={EmptyStateVariant.large}>
-      <Title headingLevel="h5" size="lg">
-        No matching clusters found
-      </Title>
+    <EmptyState variant="lg">
+      <EmptyStateHeader
+        titleText="No matching clusters found"
+        headingLevel="h5"
+      />
       <EmptyStateBody>
         To continue, edit your filter settings and search again.
       </EmptyStateBody>

@@ -16,7 +16,7 @@
 
 .shield-set {
     span {
-        vertical-align: 3px;
+        vertical-align: 2px;
         margin-left: 4px;
         margin-right: 16px;
     }
@@ -55,10 +55,4 @@
 
 #cvss-vector-content {
     font-size: var(--pf-global--FontSize--sm);
-}
-
-#cves-severity-question-mark {
-    color: var(--pf-global--secondary-color--100);
-    vertical-align: -0.2em;
-    margin-left: 16px;
 }

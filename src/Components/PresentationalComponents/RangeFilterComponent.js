@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import propTypes from 'prop-types';
-import { Split, SplitItem, TextInput, Select } from '@patternfly/react-core';
+import { Split, SplitItem, TextInput } from '@patternfly/react-core';
+import { Select } from '@patternfly/react-core/deprecated';
 
 const RangeFilterComponent = ({
   setValues,
@@ -48,7 +49,7 @@ const RangeFilterComponent = ({
         <br />
         <TextInput
           type="number"
-          onChange={(value) => handleInputChange(value, 'min')}
+          onChange={(_event, value) => handleInputChange(value, 'min')}
           validated={areValuesValid(inputValue, 'min') ? 'default' : 'error'}
           className="range-filter-input"
           id="range-filter-input-min"
@@ -66,7 +67,7 @@ const RangeFilterComponent = ({
         <br />
         <TextInput
           type="number"
-          onChange={(value) => handleInputChange(value, 'max')}
+          onChange={(_event, value) => handleInputChange(value, 'max')}
           validated={areValuesValid(inputValue, 'max') ? 'default' : 'error'}
           className="range-filter-input"
           id="range-filter-input-max"

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import propTypes from 'prop-types';
 import {
-  TableComposable,
+  Table,
   Thead,
   Tr,
   Th,
@@ -9,7 +9,6 @@ import {
   Td,
   ExpandableRowContent,
   SortByDirection,
-  sortable,
 } from '@patternfly/react-table';
 import SkeletonTable from '@redhat-cloud-services/frontend-components/SkeletonTable/SkeletonTable';
 import { TableVariant } from '@patternfly/react-table';
@@ -84,16 +83,13 @@ const BaseTableBody = ({
 
   return isLoading ? (
     <SkeletonTable
-      colSize={columns.length}
-      rowSize={perPage || DEFAULT_LIMIT}
       variant={TableVariant.compact}
-      columns={columns.map((column) =>
-        column.sortParam ? { ...column, transforms: [sortable] } : column
-      )}
+      rows={perPage || DEFAULT_LIMIT}
+      columns={columns.map((column) => column.title)}
       sortBy={createSortBy(columns, sortParam)}
     />
   ) : (
-    <TableComposable variant={TableVariant.compact} isStickyHeader>
+    <Table variant={TableVariant.compact} isStickyHeader>
       <Thead>
         <Tr>
           {isExpandable && rows.length > 0 && (
@@ -157,7 +153,7 @@ const BaseTableBody = ({
           </Tbody>
         ))
       )}
-    </TableComposable>
+    </Table>
   );
 };
 

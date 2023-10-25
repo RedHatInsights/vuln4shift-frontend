@@ -3,14 +3,15 @@ import {
   TextContent,
   Text,
   TextVariants,
+  Icon,
 } from '@patternfly/react-core';
 import { OutlinedQuestionCircleIcon } from '@patternfly/react-icons';
+import { TableVariant } from '@patternfly/react-table';
 import {
   Table,
   TableBody,
   TableHeader,
-  TableVariant,
-} from '@patternfly/react-table';
+} from '@patternfly/react-table/deprecated';
 import propTypes from 'prop-types';
 import React from 'react';
 import WithLoader, { LoaderType } from './WithLoader';
@@ -58,8 +59,8 @@ const CvssVector = ({
         bodyContent={
           <WithLoader
             isLoading={isLoading}
-            colSize={2}
-            rowSize={8}
+            columns={['Metric', 'Value']}
+            rows={8}
             variant={LoaderType.compactTable}
           >
             {cvssVector ? (
@@ -81,10 +82,12 @@ const CvssVector = ({
       >
         <Text component={TextVariants.h6} className="pointer pf-u-mb-xs">
           {cvssVersion} base score
-          <OutlinedQuestionCircleIcon
-            color="var(--pf-global--secondary-color--100)"
+          <Icon
+            style={{ color: 'var(--pf-global--secondary-color--100)' }}
             className="pf-u-ml-xs"
-          />
+          >
+            <OutlinedQuestionCircleIcon />
+          </Icon>
         </Text>
       </Popover>
       <WithLoader
