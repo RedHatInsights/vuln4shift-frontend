@@ -70,7 +70,7 @@
     "strict-uri-encode": "^2.0.0",
     "style-loader": "^3.3.3",
     "stylelint": "^15.11.0",
-    "stylelint-config-recommended-scss": "^13.0.0",
+    "stylelint-config-recommended-scss": "^13.1.0",
     "stylelint-scss": "^5.2.1",
     "ts-patch": "^3.0.2",
     "typescript": "^5.2.2",
