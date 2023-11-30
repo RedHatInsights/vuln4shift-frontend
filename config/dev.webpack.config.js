@@ -5,7 +5,6 @@ const commonPlugins = require('./plugins');
 const { config: webpackConfig, plugins } = config({
   rootFolder: resolve(__dirname, '../'),
   debug: true,
-  deployment: process.env.BETA ? 'beta/apps' : 'apps',
   useProxy: true,
   appUrl: process.env.BETA
     ? '/beta/openshift/insights/vulnerability'
