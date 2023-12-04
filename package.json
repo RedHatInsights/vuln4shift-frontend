@@ -74,7 +74,7 @@
     "stylelint-scss": "^5.2.1",
     "ts-patch": "^3.0.2",
     "typescript": "^5.2.2",
-    "webpack-bundle-analyzer": "^4.9.1"
+    "webpack-bundle-analyzer": "^4.10.1"
   },
   "insights": {
     "appname": "ocp-vulnerability"
