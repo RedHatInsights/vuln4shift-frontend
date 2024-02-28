@@ -172,6 +172,10 @@ export const CVE_LIST_TABLE_COLUMNS = [
     title: 'Exposed clusters',
     sortParam: 'clusters_exposed',
   },
+  {
+    title: 'Exposed images',
+    sortParam: 'images_exposed',
+  },
 ];
 
 export const CLUSTER_LIST_TABLE_COLUMNS = [
@@ -289,6 +293,9 @@ export const CVE_LIST_TABLE_MAPPER = (row) => ({
     parseCvssScore(row.cvss2_score, row.cvss3_score, true),
     <Link to={'../cves/' + row.synopsis} key={row.synopsis}>
       {row.clusters_exposed}
+    </Link>,
+    <Link to={'../cves/' + row.synopsis} key={row.synopsis}>
+      {row.images_exposed}
     </Link>,
   ],
   expandableContent: createCveDescription(row),
