@@ -37,7 +37,7 @@ export const itHasTableFunctionsDisabled = () => {
 };
 
 export const itHasActiveFilter = (filterName, filterValue) => {
-  it.only(`has ${filterName}: ${filterValue} filter active by default`, () => {
+  it(`has ${filterName}: ${filterValue} filter active by default`, () => {
     cy.get('.pf-v5-c-chip-group__label').should('have.text', filterName);
     cy.get('.pf-v5-c-chip-group__main ul').should('have.text', filterValue);
   });
