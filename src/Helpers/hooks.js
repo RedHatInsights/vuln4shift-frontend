@@ -131,9 +131,13 @@ export const useUrlBoundParams = ({
   const dispatch = useDispatch();
 
   const [getUrlParams, setUrlParams] = useUrlParams(allowedParams);
+  const [isFirstLoad, setFirstLoad] = useState(true);
 
+  // if a user clicks on the currently loaded page in the navbar,
+  // page would not refresh, but the URL would clear; this useEffect
+  // solves this inconsistent state
   useEffect(() => {
-    if (window.location.search === '') {
+    if (!isFirstLoad && window.location.search === '') {
       apply({ ...initialParams });
     }
   }, [window.location.search]);
@@ -142,6 +146,7 @@ export const useUrlBoundParams = ({
     const initialUrlParams = getUrlParams();
 
     apply({ ...initialParams, ...initialUrlParams });
+    setFirstLoad(false);
   }, []);
 
   const apply = (newParams, isReset = false) => {
