@@ -9,9 +9,10 @@ Red Hat Vulnerability for OpenShift service is used to assess and monitor the st
 3. Make sure you are using [Red Hat proxy](http://hdn.corp.redhat.com/proxy.pac)
 
 ## Running locally
-1. Install dependencies with `npm install`
-2. Run development server with `npm run start:proxy:beta`
-3. Local version of the app will be available at https://stage.foo.redhat.com:1337/preview/openshift/insights/vulnerability/
+1. Make sure you are connected to the Red Hat VPN
+2. Install dependencies with `npm install`
+3. Run development server with `npm run start` and select desired environment (`stage-preview` is recommended)
+4. Local version of the app will be available at URL printed out to the console (https://stage.foo.redhat.com:1337/preview/openshift/insights/vulnerability/ if you selected `stage-preview`)
 
 ## Testing
 [Cypress](https://cypress.io/) is used as the testing framework
@@ -20,18 +21,18 @@ Red Hat Vulnerability for OpenShift service is used to assess and monitor the st
 - ```npm run lint``` - run linter
 
 ## Code Coverage
-1. Make sure ```npm run test``` and ```npm run test:ct``` are ran before the coverage
+1. Make sure ```npm run test``` are ran before the coverage
 2. Run ```npm run coverage```
 
 ## Deploying
-Any push to the following branches will trigger a build in [vuln4shift-frontend-build repository](https://github.com/RedHatInsights/vuln4shift-frontend-build) which will deploy to corresponding environment. Travis is used to deploy the application.
+The app uses containerized builds which are configured in [`app-interface`](https://gitlab.cee.redhat.com/service/app-interface/-/blob/master/data/services/insights/ocp-vulnerability/deploy.yml).
 
-| Push to branch in this repo  | Updated branch in build repo  | Environment       | Available at
-| :--------------------------- | :---------------------------- | :---------------- | :-----------
-| master                       | stage-beta                    | stage beta        | https://console.stage.redhat.com/preview
-| master                 | stage-stable                  | stage stable      | https://console.stage.redhat.com
-| prod-beta                    | prod-beta                     | production beta   | https://console.redhat.com/preview
-| prod-stable                  | prod-stable                   | production stable | https://console.redhat.com
+| Environment        | Available at                             | Deployed version
+| :----------------- | :--------------------------------------- | :----------
+| stage preview      | https://console.stage.redhat.com/preview | master branch
+| stage stable       | https://console.stage.redhat.com         | master branch
+| production preview | https://console.redhat.com/preview       | up to the commit configured in `app-interface`
+| production stable  | https://console.redhat.com               | up to the commit configured in `app-interface`
 
 ## Design System
 This project uses [Patternfly React](https://github.com/patternfly/patternfly-react).
