@@ -192,7 +192,7 @@ export const testSorting = (columns, isTableExpandable = false) => {
 export const testFilters = (filters) => {
   filters.forEach((filter, index) => {
     it(`filters by ${filter.urlParam}`, () => {
-      cy.get('button[aria-label="Conditional filter"]').click();
+      cy.get('button[aria-label="Conditional filter toggle"]').click();
       cy.get('.pf-v5-c-menu__list-item button').eq(index).click();
 
       switch (filter.type) {
