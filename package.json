@@ -50,7 +50,7 @@
     "@babel/plugin-transform-runtime": "^7.23.9",
     "@babel/preset-env": "^7.23.9",
     "@babel/preset-react": "^7.23.3",
-    "@cypress/code-coverage": "^3.12.26",
+    "@cypress/code-coverage": "^3.12.29",
     "@cypress/react18": "^2.0.0",
     "@cypress/webpack-dev-server": "^3.7.4",
     "@frsource/cypress-plugin-visual-regression-diff": "^3.3.1",
