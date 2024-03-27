@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Main } from '@redhat-cloud-services/frontend-components/Main';
 import { Text, TextContent, TextVariants } from '@patternfly/react-core';
-import ClusterDetailTable from './ClusterDetailTable';
+import ClusterCveTable from './ClusterCveTable';
 import ClusterDetailPageHeader from './ClusterDetailPageHeader';
 import { useSelector } from 'react-redux';
 import ErrorHandler from '../../PresentationalComponents/ErrorHandler';
@@ -30,7 +30,7 @@ const ClusterDetailPage = () => {
             CVEs
           </Text>
         </TextContent>
-        <ClusterDetailTable />
+        <ClusterCveTable />
       </Main>
     </ErrorHandler>
   );

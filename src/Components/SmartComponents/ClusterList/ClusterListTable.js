@@ -25,7 +25,7 @@ import { fetchClusters } from '../../../Helpers/apiHelper';
 import checkboxFilter from '../Filters/CheckboxFilter';
 import { uniqBy } from 'lodash';
 
-const ClusterDetailTable = () => {
+const ClusterCveTable = () => {
   const { clusters, isLoading, meta, error } = useSelector(
     ({ ClusterListStore }) => ClusterListStore
   );
@@ -146,4 +146,4 @@ const ClusterDetailTable = () => {
   );
 };
 
-export default ClusterDetailTable;
+export default ClusterCveTable;

@@ -11,7 +11,7 @@ import {
 import { useSelector } from 'react-redux';
 import {
   changeClusterDetailsTableParams,
-  fetchClusterDetailTable,
+  fetchClusterCveTable,
 } from '../../../Store/Actions';
 import { useParams } from 'react-router-dom';
 import { useExport, useUrlBoundParams } from '../../../Helpers/hooks';
@@ -27,7 +27,7 @@ import BaseTable from '../Generic/BaseTable';
 import NoMatchingCves from '../../PresentationalComponents/EmptyStates/NoMatchingCves';
 import { fetchClusterCves } from '../../../Helpers/apiHelper';
 
-const ClusterDetailTable = () => {
+const ClusterCveTable = () => {
   const params = useParams();
 
   const { cves, isTableLoading, meta, error } = useSelector(
@@ -38,7 +38,7 @@ const ClusterDetailTable = () => {
     allowedParams: CLUSTER_DETAIL_ALLOWED_PARAMS,
     initialParams: meta,
     additionalParam: params.clusterId,
-    fetchAction: fetchClusterDetailTable,
+    fetchAction: fetchClusterCveTable,
     changeParamsAction: changeClusterDetailsTableParams,
   });
 
@@ -125,4 +125,4 @@ const ClusterDetailTable = () => {
   );
 };
 
-export default ClusterDetailTable;
+export default ClusterCveTable;

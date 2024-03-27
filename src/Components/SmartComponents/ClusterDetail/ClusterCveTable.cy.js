@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from '@cypress/react18';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
-import ClusterDetailTable from './ClusterDetailTable';
+import ClusterCveTable from './ClusterCveTable';
 import { Provider } from 'react-redux';
 import { init } from '../../../Store/ReducerRegistry';
 import cves from '../../../../cypress/fixtures/clusterdetaillist.json';
@@ -31,14 +31,14 @@ const mountComponent = () => {
         initialEntries={['/clusters/e45c0b54-3083-4ae0-9cbc-f7d7a302e7dd']}
       >
         <Routes>
-          <Route path="/clusters/:clusterId" element={<ClusterDetailTable />} />
+          <Route path="/clusters/:clusterId" element={<ClusterCveTable />} />
         </Routes>
       </MemoryRouter>
     </Provider>
   );
 };
 
-describe('ClusterDetailTable with items', () => {
+describe('ClusterCveTable with items', () => {
   beforeEach(() => {
     cy.intercept(
       'GET',
