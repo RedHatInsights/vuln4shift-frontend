@@ -259,6 +259,22 @@ export const CLUSTER_DETAIL_TABLE_COLUMNS = [
   },
 ];
 
+export const CLUSTER_IMAGES_TABLE_COLUMNS = [
+  {
+    title: 'Name',
+    sortParam: 'display_name',
+    sortDefaultDirection: 'asc',
+  },
+  {
+    title: 'Registry name',
+    sortParam: 'registry',
+  },
+  {
+    title: 'Version',
+    sortParam: 'version',
+  },
+];
+
 /* TABLE ROW MAPPERS */
 
 const createCveDescription = (row) => (
@@ -347,6 +363,11 @@ export const CLUSTER_DETAIL_TABLE_MAPPER = (row) => ({
   expandableContent: createCveDescription(row),
 });
 
+export const CLUSTER_IMAGES_TABLE_MAPPER = (row) => ({
+  key: row.name,
+  cells: [row.name, row.registry, row.version],
+});
+
 /* ALLOWED PARAMETERS */
 
 export const GENERIC_ALLOWED_PARAMS = ['limit', 'offset', 'sort'];
@@ -385,6 +406,13 @@ export const CLUSTER_DETAIL_ALLOWED_PARAMS = [
   'cvss_score',
 ];
 
+export const CLUSTER_IMAGES_ALLOWED_PARAMS = [
+  ...GENERIC_ALLOWED_PARAMS,
+  'search',
+  'registry',
+  'version',
+];
+
 /* DEFAULT FILTERS */
 
 export const CVE_LIST_DEFAULT_FILTERS = {
@@ -397,10 +425,12 @@ export const CLUSTER_LIST_DEFAULT_FILTERS = {
 
 export const CVE_DETAIL_DEFAULT_FILTERS = {};
 
-export const CLUSTER_DETAIL_DEFAULT_FILTERS = {};
+
+export const CLUSTER_IMAGES_DEFAULT_FILTERS = {};
 
 /* EXPORTS */
 export const CVE_LIST_EXPORT_PREFIX = 'ocp-vulnerability_cves--';
 export const CLUSTER_LIST_EXPORT_PREFIX = 'ocp-vulnerability_clusters--';
 export const CVE_DETAIL_EXPORT_PREFIX = 'ocp-vulnerability_exposed-clusters--';
-export const CLUSTER_DETAIL_EXPORT_PREFIX = 'ocp-vulnerability_cluster-cves--';
+export const CLUSTER_IMAGES_EXPORT_PREFIX =
+  'ocp-vulnerability_cluster-images--';
