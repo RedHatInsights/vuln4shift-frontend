@@ -17,7 +17,7 @@ const ClusterDetailPage = ({ tab }) => {
   const location = useLocation();
 
   const { error, cluster } = useSelector(
-    ({ ClusterCvesStore }) => ClusterCvesStore
+    ({ ClusterDetailStore }) => ClusterDetailStore
   );
 
   useEffect(() => {

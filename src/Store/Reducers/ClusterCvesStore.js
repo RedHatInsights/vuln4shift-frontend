@@ -8,7 +8,6 @@ import * as ActionTypes from '../ActionTypes';
 export const initialState = deepFreeze({
   cluster: {},
   cves: [],
-  isDetailLoading: true,
   isTableLoading: true,
   timestamp: new Date(),
   meta: {
@@ -64,32 +63,6 @@ const ClusterCvesStore = (state = initialState, action) => {
           total_items: state.meta.total_items,
           sort: state.meta.sort,
           limit: state.meta.limit,
-          ...action.payload,
-        },
-      };
-    }
-
-    case `${ActionTypes.FETCH_CLUSTER_DETAILS}_PENDING`: {
-      return {
-        ...state,
-        isDetailLoading: true,
-        error: undefined,
-      };
-    }
-
-    case `${ActionTypes.FETCH_CLUSTER_DETAILS}_FULFILLED`: {
-      return {
-        ...state,
-        cluster: action.payload.data.data,
-        isDetailLoading: false,
-      };
-    }
-
-    case `${ActionTypes.FETCH_CLUSTER_DETAILS}_REJECTED`: {
-      return {
-        ...state,
-        isDetailLoading: false,
-        error: {
           ...action.payload,
         },
       };
