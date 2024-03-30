@@ -37,12 +37,20 @@ export const fetchCveDetails = (cveId, params) => ({
   payload: () => api.fetchCveDetails(cveId, params),
 });
 
-export const fetchClusterDetailTable = (clusterId, params) => ({
-  type: ActionTypes.FETCH_CLUSTER_DETAIL_TABLE,
+export const fetchClusterCveTable = (clusterId, params) => ({
+  type: ActionTypes.FETCH_CLUSTER_CVES_TABLE,
   meta: {
     timestamp: new Date(),
   },
   payload: () => api.fetchClusterCves(clusterId, params),
+});
+
+export const fetchClusterImagesTable = (clusterId, params) => ({
+  type: ActionTypes.FETCH_CLUSTER_IMAGES_TABLE,
+  meta: {
+    timestamp: new Date(),
+  },
+  payload: () => api.fetchClusterImages(clusterId, params),
 });
 
 export const fetchClusterDetails = (clusterId, params) => ({
@@ -79,8 +87,16 @@ export const changeCveDetailsTableParams = (params) => ({
   payload: () => params,
 });
 
-export const changeClusterDetailsTableParams = (params) => ({
-  type: ActionTypes.CHANGE_CLUSTER_DETAIL_TABLE_PARAMS,
+export const changeClusterCvesTableParams = (params) => ({
+  type: ActionTypes.CHANGE_CLUSTER_CVES_TABLE_PARAMS,
+  meta: {
+    timestamp: new Date(),
+  },
+  payload: () => params,
+});
+
+export const changeClusterImagesTableParams = (params) => ({
+  type: ActionTypes.CHANGE_CLUSTER_IMAGES_TABLE_PARAMS,
   meta: {
     timestamp: new Date(),
   },

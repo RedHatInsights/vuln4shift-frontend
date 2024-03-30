@@ -90,3 +90,8 @@ export const setupFilters = (filters, meta, defaultFilters, apply) => {
 
 export const isTimestampValid = (stateTimestamp, actionTimestamp) =>
   actionTimestamp >= stateTimestamp;
+
+export const urlChangeTab = (urlPath, newTab) => {
+  const lastSlashIndex = urlPath.lastIndexOf('/');
+  return urlPath.substring(0, lastSlashIndex + 1) + newTab;
+};

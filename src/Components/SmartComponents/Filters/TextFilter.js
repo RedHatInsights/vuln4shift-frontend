@@ -17,7 +17,7 @@ const useTextFilter = ({
     }, 400)
   );
 
-  useEffect(() => setSearchValue(value), [value]);
+  useEffect(() => setSearchValue(value ?? ''), [value]);
 
   const filterConfig = {
     type: conditionalFilterType.text,

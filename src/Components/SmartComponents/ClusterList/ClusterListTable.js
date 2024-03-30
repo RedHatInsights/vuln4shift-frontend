@@ -20,7 +20,7 @@ import useTextFilter from '../Filters/TextFilter';
 import { useExport, useUrlBoundParams } from '../../../Helpers/hooks';
 import BaseTable from '../Generic/BaseTable';
 import { setupFilters } from '../../../Helpers/miscHelper';
-import NoMatchingClusters from '../../PresentationalComponents/EmptyStates/NoMatchingClusters';
+import NoMatchingItems from '../../PresentationalComponents/EmptyStates/NoMatchingItems';
 import { fetchClusters } from '../../../Helpers/apiHelper';
 import checkboxFilter from '../Filters/CheckboxFilter';
 import { uniqBy } from 'lodash';
@@ -138,7 +138,11 @@ const ClusterCveTable = () => {
       meta={meta}
       error={error}
       emptyState={
-        areAnyFiltersApplied ? <NoMatchingClusters /> : <NoClusters />
+        areAnyFiltersApplied ? (
+          <NoMatchingItems items="clusters" />
+        ) : (
+          <NoClusters />
+        )
       }
       apply={apply}
       onExport={(format) => onExport(format, meta)}

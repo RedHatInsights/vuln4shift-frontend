@@ -1,5 +1,5 @@
 import {
-  CLUSTER_DETAIL_DEFAULT_FILTERS,
+  CLUSTER_CVES_DEFAULT_FILTERS,
   DEFAULT_LIMIT,
 } from '../../Helpers/constants';
 import { deepFreeze, isTimestampValid } from '../../Helpers/miscHelper';
@@ -16,13 +16,13 @@ export const initialState = deepFreeze({
     offset: 0,
     total_items: 0,
     sort: '-publish_date',
-    ...CLUSTER_DETAIL_DEFAULT_FILTERS,
+    ...CLUSTER_CVES_DEFAULT_FILTERS,
   },
 });
 
-const ClusterDetailStore = (state = initialState, action) => {
+const ClusterCvesStore = (state = initialState, action) => {
   switch (action.type) {
-    case `${ActionTypes.FETCH_CLUSTER_DETAIL_TABLE}_PENDING`: {
+    case `${ActionTypes.FETCH_CLUSTER_CVES_TABLE}_PENDING`: {
       return {
         ...state,
         isTableLoading: true,
@@ -31,7 +31,7 @@ const ClusterDetailStore = (state = initialState, action) => {
       };
     }
 
-    case `${ActionTypes.FETCH_CLUSTER_DETAIL_TABLE}_FULFILLED`: {
+    case `${ActionTypes.FETCH_CLUSTER_CVES_TABLE}_FULFILLED`: {
       if (isTimestampValid(state.timestamp, action.meta.timestamp)) {
         return {
           ...state,
@@ -47,7 +47,7 @@ const ClusterDetailStore = (state = initialState, action) => {
       }
     }
 
-    case `${ActionTypes.FETCH_CLUSTER_DETAIL_TABLE}_REJECTED`: {
+    case `${ActionTypes.FETCH_CLUSTER_CVES_TABLE}_REJECTED`: {
       return {
         ...state,
         isTableLoading: false,
@@ -57,7 +57,7 @@ const ClusterDetailStore = (state = initialState, action) => {
       };
     }
 
-    case `${ActionTypes.CHANGE_CLUSTER_DETAIL_TABLE_PARAMS}`: {
+    case `${ActionTypes.CHANGE_CLUSTER_CVES_TABLE_PARAMS}`: {
       return {
         ...state,
         meta: {
@@ -99,4 +99,4 @@ const ClusterDetailStore = (state = initialState, action) => {
   return state;
 };
 
-export default ClusterDetailStore;
+export default ClusterCvesStore;

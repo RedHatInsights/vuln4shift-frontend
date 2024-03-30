@@ -10,7 +10,7 @@ import {
   CVE_DETAIL_TABLE_MAPPER,
 } from '../../../Helpers/constants';
 import { useSelector } from 'react-redux';
-import NoMatchingClusters from '../../PresentationalComponents/EmptyStates/NoMatchingClusters';
+import NoMatchingItems from '../../PresentationalComponents/EmptyStates/NoMatchingItems';
 import { useParams } from 'react-router-dom';
 import BaseTable from '../Generic/BaseTable';
 import { useExport, useUrlBoundParams } from '../../../Helpers/hooks';
@@ -134,7 +134,7 @@ const CveDetailTable = () => {
       activeFiltersConfig={activeFiltersConfig}
       meta={meta}
       error={error}
-      emptyState={<NoMatchingClusters />}
+      emptyState={<NoMatchingItems items="clusters" />}
       apply={apply}
       onExport={(format) => onExport(format, meta)}
     />

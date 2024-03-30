@@ -5,7 +5,8 @@ import { notificationsReducer } from '@redhat-cloud-services/frontend-components
 import CveListStore from './Reducers/CveListStore';
 import ClusterListStore from './Reducers/ClusterListStore';
 import CveDetailStore from './Reducers/CveDetailStore';
-import ClusterDetailStore from './Reducers/ClusterDetailStore';
+import ClusterCvesStore from './Reducers/ClusterCvesStore';
+import ClusterImagesStore from './Reducers/ClusterImagesStore';
 
 let registry;
 
@@ -36,7 +37,8 @@ export function init(...middleware) {
   registry.register({ CveListStore });
   registry.register({ ClusterListStore });
   registry.register({ CveDetailStore });
-  registry.register({ ClusterDetailStore });
+  registry.register({ ClusterCvesStore });
+  registry.register({ ClusterImagesStore });
 
   return registry;
 }

@@ -13,6 +13,11 @@ export const HEADER_ALERT_DISMISSED_KEY = 'vuln4shift:header-alert-dismissed';
 
 export const DEFAULT_LIMIT = 20;
 
+export const CLUSTER_DETAIL_TABS = {
+  cves: 'cves',
+  images: 'images',
+};
+
 /* FILTER OPTIONS */
 
 export const PUBLISHED_OPTIONS = [
@@ -240,7 +245,7 @@ export const CVE_DETAIL_TABLE_COLUMNS = [
   },
 ];
 
-export const CLUSTER_DETAIL_TABLE_COLUMNS = [
+export const CLUSTER_CVES_TABLE_COLUMNS = [
   {
     title: 'CVE ID',
     sortParam: 'synopsis',
@@ -262,7 +267,7 @@ export const CLUSTER_DETAIL_TABLE_COLUMNS = [
 export const CLUSTER_IMAGES_TABLE_COLUMNS = [
   {
     title: 'Name',
-    sortParam: 'display_name',
+    sortParam: 'name',
     sortDefaultDirection: 'asc',
   },
   {
@@ -271,7 +276,6 @@ export const CLUSTER_IMAGES_TABLE_COLUMNS = [
   },
   {
     title: 'Version',
-    sortParam: 'version',
   },
 ];
 
@@ -320,7 +324,7 @@ export const CVE_LIST_TABLE_MAPPER = (row) => ({
 export const CLUSTER_LIST_TABLE_MAPPER = (row) => ({
   key: row.id,
   cells: [
-    <Link to={'../clusters/' + row.id} key={row.id}>
+    <Link to={'../clusters/' + row.id + '/cves'} key={row.id}>
       {row.display_name}
     </Link>,
     row.status,
@@ -339,7 +343,7 @@ export const CLUSTER_LIST_TABLE_MAPPER = (row) => ({
 export const CVE_DETAIL_TABLE_MAPPER = (row) => ({
   key: row.id,
   cells: [
-    <Link to={'../clusters/' + row.id} key={row.id}>
+    <Link to={'../clusters/' + row.id + '/cves'} key={row.id}>
       {row.display_name}
     </Link>,
     row.status,
@@ -350,7 +354,7 @@ export const CVE_DETAIL_TABLE_MAPPER = (row) => ({
   ],
 });
 
-export const CLUSTER_DETAIL_TABLE_MAPPER = (row) => ({
+export const CLUSTER_CVES_TABLE_MAPPER = (row) => ({
   key: row.synopsis,
   cells: [
     <Link to={'../cves/' + row.synopsis} key={row.synopsis}>
@@ -398,7 +402,7 @@ export const CVE_DETAIL_ALLOWED_PARAMS = [
   'provider',
 ];
 
-export const CLUSTER_DETAIL_ALLOWED_PARAMS = [
+export const CLUSTER_CVES_ALLOWED_PARAMS = [
   ...GENERIC_ALLOWED_PARAMS,
   'search',
   'published',
@@ -425,6 +429,7 @@ export const CLUSTER_LIST_DEFAULT_FILTERS = {
 
 export const CVE_DETAIL_DEFAULT_FILTERS = {};
 
+export const CLUSTER_CVES_DEFAULT_FILTERS = {};
 
 export const CLUSTER_IMAGES_DEFAULT_FILTERS = {};
 
@@ -432,5 +437,6 @@ export const CLUSTER_IMAGES_DEFAULT_FILTERS = {};
 export const CVE_LIST_EXPORT_PREFIX = 'ocp-vulnerability_cves--';
 export const CLUSTER_LIST_EXPORT_PREFIX = 'ocp-vulnerability_clusters--';
 export const CVE_DETAIL_EXPORT_PREFIX = 'ocp-vulnerability_exposed-clusters--';
+export const CLUSTER_CVES_EXPORT_PREFIX = 'ocp-vulnerability_cluster-cves--';
 export const CLUSTER_IMAGES_EXPORT_PREFIX =
   'ocp-vulnerability_cluster-images--';

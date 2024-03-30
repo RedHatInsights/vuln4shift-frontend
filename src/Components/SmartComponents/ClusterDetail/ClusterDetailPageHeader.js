@@ -17,7 +17,7 @@ const ClusterDetailPageHeader = () => {
   const dispatch = useDispatch();
 
   const { cluster, isDetailLoading } = useSelector(
-    ({ ClusterDetailStore }) => ClusterDetailStore
+    ({ ClusterCvesStore }) => ClusterCvesStore
   );
 
   useEffect(() => {

@@ -1,16 +1,16 @@
 import React from 'react';
 import {
-  CLUSTER_DETAIL_ALLOWED_PARAMS,
-  CLUSTER_DETAIL_DEFAULT_FILTERS,
-  CLUSTER_DETAIL_EXPORT_PREFIX,
-  CLUSTER_DETAIL_TABLE_COLUMNS,
-  CLUSTER_DETAIL_TABLE_MAPPER,
+  CLUSTER_CVES_ALLOWED_PARAMS,
+  CLUSTER_CVES_DEFAULT_FILTERS,
+  CLUSTER_CVES_EXPORT_PREFIX,
+  CLUSTER_CVES_TABLE_COLUMNS,
+  CLUSTER_CVES_TABLE_MAPPER,
   PUBLISHED_OPTIONS,
   SEVERITY_OPTIONS,
 } from '../../../Helpers/constants';
 import { useSelector } from 'react-redux';
 import {
-  changeClusterDetailsTableParams,
+  changeClusterCvesTableParams,
   fetchClusterCveTable,
 } from '../../../Store/Actions';
 import { useParams } from 'react-router-dom';
@@ -31,15 +31,15 @@ const ClusterCveTable = () => {
   const params = useParams();
 
   const { cves, isTableLoading, meta, error } = useSelector(
-    ({ ClusterDetailStore }) => ClusterDetailStore
+    ({ ClusterCvesStore }) => ClusterCvesStore
   );
 
   const apply = useUrlBoundParams({
-    allowedParams: CLUSTER_DETAIL_ALLOWED_PARAMS,
+    allowedParams: CLUSTER_CVES_ALLOWED_PARAMS,
     initialParams: meta,
     additionalParam: params.clusterId,
     fetchAction: fetchClusterCveTable,
-    changeParamsAction: changeClusterDetailsTableParams,
+    changeParamsAction: changeClusterCvesTableParams,
   });
 
   const { search, cvss_score, severity, published } = meta;
@@ -47,10 +47,10 @@ const ClusterCveTable = () => {
   const [cvss_score_min, cvss_score_max] = getCvssScoreFromUrlParam(cvss_score);
 
   const onExport = useExport({
-    filenamePrefix: CLUSTER_DETAIL_EXPORT_PREFIX,
+    filenamePrefix: CLUSTER_CVES_EXPORT_PREFIX,
     fetchAction: fetchClusterCves,
     fetchActionParam: params.clusterId,
-    allowedParams: CLUSTER_DETAIL_ALLOWED_PARAMS,
+    allowedParams: CLUSTER_CVES_ALLOWED_PARAMS,
   });
 
   const filters = [
@@ -104,7 +104,7 @@ const ClusterCveTable = () => {
   const [filterConfig, activeFiltersConfig] = setupFilters(
     filters,
     meta,
-    CLUSTER_DETAIL_DEFAULT_FILTERS,
+    CLUSTER_CVES_DEFAULT_FILTERS,
     apply
   );
 
@@ -112,8 +112,8 @@ const ClusterCveTable = () => {
     <BaseTable
       isLoading={isTableLoading}
       isExpandable
-      rows={cves.map((row) => CLUSTER_DETAIL_TABLE_MAPPER(row))}
-      columns={CLUSTER_DETAIL_TABLE_COLUMNS}
+      rows={cves.map((row) => CLUSTER_CVES_TABLE_MAPPER(row))}
+      columns={CLUSTER_CVES_TABLE_COLUMNS}
       filterConfig={filterConfig}
       activeFiltersConfig={activeFiltersConfig}
       meta={meta}

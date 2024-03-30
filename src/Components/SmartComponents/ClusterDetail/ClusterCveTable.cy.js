@@ -4,11 +4,11 @@ import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import ClusterCveTable from './ClusterCveTable';
 import { Provider } from 'react-redux';
 import { init } from '../../../Store/ReducerRegistry';
-import cves from '../../../../cypress/fixtures/clusterdetaillist.json';
-import { initialState } from '../../../Store/Reducers/ClusterDetailStore';
+import cves from '../../../../cypress/fixtures/clustercveslist.json';
+import { initialState } from '../../../Store/Reducers/ClusterCvesStore';
 import {
-  CLUSTER_DETAIL_EXPORT_PREFIX,
-  CLUSTER_DETAIL_TABLE_COLUMNS,
+  CLUSTER_CVES_EXPORT_PREFIX,
+  CLUSTER_CVES_TABLE_COLUMNS,
   PUBLISHED_OPTIONS,
   SEVERITY_OPTIONS,
 } from '../../../Helpers/constants';
@@ -72,7 +72,7 @@ describe('ClusterCveTable with items', () => {
 
   itIsSortedBy('Publish date');
   itHasNoActiveFilter();
-  itExportsDataToFile(cves.data, CLUSTER_DETAIL_EXPORT_PREFIX);
+  itExportsDataToFile(cves.data, CLUSTER_CVES_EXPORT_PREFIX);
   itIsExpandable(cves.data.length);
 
   it('shows missing metadata empty state when CVE description is "unknown"', () => {
@@ -82,7 +82,7 @@ describe('ClusterCveTable with items', () => {
   });
 
   describe('Sorting', () => {
-    testSorting(CLUSTER_DETAIL_TABLE_COLUMNS, true);
+    testSorting(CLUSTER_CVES_TABLE_COLUMNS, true);
   });
 
   describe('Filtering', () => {
@@ -141,7 +141,7 @@ describe('ClusterCveTable with items', () => {
   });
 });
 
-describe('CveListTable without items', () => {
+describe('ClusterCveTable without items', () => {
   beforeEach(() => {
     cy.intercept(
       'GET',

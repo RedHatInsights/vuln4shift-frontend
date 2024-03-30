@@ -1,4 +1,5 @@
 import React from 'react';
+import propTypes from 'prop-types';
 import {
   EmptyState,
   EmptyStateBody,
@@ -6,11 +7,11 @@ import {
   EmptyStateHeader,
 } from '@patternfly/react-core';
 
-const NoMatchingClusters = () => (
+const NoMatchingItems = ({ items = 'items' }) => (
   <Bullseye>
     <EmptyState variant="lg">
       <EmptyStateHeader
-        titleText="No matching clusters found"
+        titleText={`No matching ${items} found`}
         headingLevel="h5"
       />
       <EmptyStateBody>
@@ -20,4 +21,8 @@ const NoMatchingClusters = () => (
   </Bullseye>
 );
 
-export default NoMatchingClusters;
+NoMatchingItems.propTypes = {
+  items: propTypes.string,
+};
+
+export default NoMatchingItems;
