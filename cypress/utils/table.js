@@ -2,7 +2,7 @@ import { uniqBy } from 'lodash';
 import strictUriEncode from 'strict-uri-encode';
 
 export const itIsSortedBy = (param) => {
-  it(`is be sorted by ${param}`, () => {
+  it(`is sorted by ${param}`, () => {
     cy.get('.pf-m-selected > .pf-v5-c-table__button').should(
       'have.text',
       param
@@ -161,12 +161,28 @@ export const removeFilter = (chipText) => {
   cy.get(`.pf-v5-c-chip-group__main:contains(${chipText}) button`).click();
 };
 
-export const testSorting = (columns, isTableExpandable = false) => {
+export const testSorting = (
+  columns,
+  isTableExpandable = false,
+  defaultSort = undefined
+) => {
+  let isFirstSortableColumnProcessed = false;
+
   columns.forEach(
     (column, index) =>
       column.sortParam &&
-      it(`is sorted by ${column.stringTitle ?? column.title}`, () => {
+      it(`is sorted by ${column.title}`, () => {
         const tableHeaders = 'thead tr';
+
+        // handle first column already sorted by default
+        if (defaultSort == column.title && !isFirstSortableColumnProcessed) {
+          cy.get(tableHeaders)
+            .children()
+            .eq(index + (isTableExpandable ? 1 : 0))
+            .click();
+        }
+
+        isFirstSortableColumnProcessed = true;
 
         cy.get(tableHeaders)
           .children()
@@ -192,8 +208,10 @@ export const testSorting = (columns, isTableExpandable = false) => {
 export const testFilters = (filters) => {
   filters.forEach((filter, index) => {
     it(`filters by ${filter.urlParam}`, () => {
-      cy.get('button[aria-label="Conditional filter toggle"]').click();
-      cy.get('.pf-v5-c-menu__list-item button').eq(index).click();
+      if (filters.length > 1) {
+        cy.get('button[aria-label="Conditional filter toggle"]').click();
+        cy.get('.pf-v5-c-menu__list-item button').eq(index).click();
+      }
 
       switch (filter.type) {
         case 'text': {

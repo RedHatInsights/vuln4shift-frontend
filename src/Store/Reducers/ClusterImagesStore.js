@@ -8,7 +8,6 @@ import * as ActionTypes from '../ActionTypes';
 export const initialState = deepFreeze({
   cluster: {},
   exposed_images: [],
-  isDetailLoading: true,
   isTableLoading: true,
   timestamp: new Date(),
   meta: {
