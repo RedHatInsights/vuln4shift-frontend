@@ -54,7 +54,7 @@ export const Router = () => (
       path="/clusters/:clusterId/cves"
       element={
         <InsightsElement
-          element={<ClusterDetailPage tab={CLUSTER_DETAIL_TABS.cves} />}
+          element={<ClusterDetailPage activeTab={CLUSTER_DETAIL_TABS.cves} />}
         />
       }
     />
@@ -62,7 +62,7 @@ export const Router = () => (
       path="/clusters/:clusterId/images"
       element={
         <InsightsElement
-          element={<ClusterDetailPage tab={CLUSTER_DETAIL_TABS.images} />}
+          element={<ClusterDetailPage activeTab={CLUSTER_DETAIL_TABS.images} />}
         />
       }
     />

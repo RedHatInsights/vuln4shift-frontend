@@ -12,7 +12,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { urlChangeTab } from '../../../Helpers/miscHelper';
 import { CLUSTER_DETAIL_TABS } from '../../../Helpers/constants';
 
-const ClusterDetailPage = ({ tab }) => {
+const ClusterDetailPage = ({ activeTab }) => {
   const chrome = useChrome();
   const location = useLocation();
 
@@ -31,7 +31,7 @@ const ClusterDetailPage = ({ tab }) => {
     <ErrorHandler error={error}>
       <ClusterDetailPageHeader />
       <Main>
-        {tab == CLUSTER_DETAIL_TABS.cves ? (
+        {activeTab == CLUSTER_DETAIL_TABS.cves ? (
           <Tabs className="pf-m-light pf-v5-c-table" activeKey={0}>
             <Tab eventKey={0} title={<TabTitleText>CVEs</TabTitleText>}>
               <ClusterCveTable />
@@ -68,7 +68,7 @@ const ClusterDetailPage = ({ tab }) => {
 };
 
 ClusterDetailPage.propTypes = {
-  tab: propTypes.oneOf(Object.values(CLUSTER_DETAIL_TABS)),
+  activeTab: propTypes.oneOf(Object.values(CLUSTER_DETAIL_TABS)),
 };
 
 export default ClusterDetailPage;
