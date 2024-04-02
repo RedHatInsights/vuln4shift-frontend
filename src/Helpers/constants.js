@@ -324,7 +324,7 @@ export const CVE_LIST_TABLE_MAPPER = (row) => ({
 export const CLUSTER_LIST_TABLE_MAPPER = (row) => ({
   key: row.id,
   cells: [
-    <Link to={'../clusters/' + row.id + '/cves'} key={row.id}>
+    <Link to={`../clusters/${row.id}/cves`} key={row.id}>
       {row.display_name}
     </Link>,
     row.status,
@@ -343,7 +343,7 @@ export const CLUSTER_LIST_TABLE_MAPPER = (row) => ({
 export const CVE_DETAIL_TABLE_MAPPER = (row) => ({
   key: row.id,
   cells: [
-    <Link to={'../clusters/' + row.id + '/cves'} key={row.id}>
+    <Link to={`../clusters/${row.id}/cves`} key={row.id}>
       {row.display_name}
     </Link>,
     row.status,
