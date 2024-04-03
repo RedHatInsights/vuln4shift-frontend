@@ -31,7 +31,7 @@
     "@redhat-cloud-services/frontend-components": "^4.2.5",
     "@redhat-cloud-services/frontend-components-notifications": "^4.1.0",
     "@redhat-cloud-services/frontend-components-utilities": "^4.0.8",
-    "axios": "^1.6.7",
+    "axios": "^1.6.8",
     "lodash": "^4.17.21",
     "query-string": "^9.0.0",
     "react": "^18.2.0",
