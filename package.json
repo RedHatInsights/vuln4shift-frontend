@@ -25,9 +25,9 @@
     "postinstall": "ts-patch install"
   },
   "dependencies": {
-    "@patternfly/react-core": "^5.2.0",
+    "@patternfly/react-core": "^5.2.3",
     "@patternfly/react-icons": "^5.2.0",
-    "@patternfly/react-table": "^5.2.0",
+    "@patternfly/react-table": "^5.2.4",
     "@redhat-cloud-services/frontend-components": "^4.2.5",
     "@redhat-cloud-services/frontend-components-notifications": "^4.1.0",
     "@redhat-cloud-services/frontend-components-utilities": "^4.0.8",
@@ -54,7 +54,7 @@
     "@cypress/react18": "^2.0.0",
     "@cypress/webpack-dev-server": "^3.7.4",
     "@frsource/cypress-plugin-visual-regression-diff": "^3.3.1",
-    "@patternfly/patternfly": "^5.2.0",
+    "@patternfly/patternfly": "^5.2.1",
     "@redhat-cloud-services/eslint-config-redhat-cloud-services": "^2.0.4",
     "@redhat-cloud-services/frontend-components-config": "^6.0.11",
     "@redhat-cloud-services/tsc-transform-imports": "^1.0.7",
