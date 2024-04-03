@@ -1,13 +1,16 @@
 import React, { useEffect } from 'react';
+import propTypes from 'prop-types';
 import { Main } from '@redhat-cloud-services/frontend-components/Main';
-import { Text, TextContent, TextVariants } from '@patternfly/react-core';
-import ClusterDetailTable from './ClusterDetailTable';
+import ClusterCveTable from './ClusterCveTable';
 import ClusterDetailPageHeader from './ClusterDetailPageHeader';
 import { useSelector } from 'react-redux';
 import ErrorHandler from '../../PresentationalComponents/ErrorHandler';
 import useChrome from '@redhat-cloud-services/frontend-components/useChrome';
+import ClusterImagesTable from './ClusterImagesTable';
+import { CLUSTER_DETAIL_TABS } from '../../../Helpers/constants';
+import TableTabs from '../../PresentationalComponents/TableTabs';
 
-const ClusterDetailPage = () => {
+const ClusterDetailPage = ({ activeTab }) => {
   const chrome = useChrome();
 
   const { error, cluster } = useSelector(
@@ -25,15 +28,28 @@ const ClusterDetailPage = () => {
     <ErrorHandler error={error}>
       <ClusterDetailPageHeader />
       <Main>
-        <TextContent>
-          <Text component={TextVariants.h2} className="pf-u-mb-md">
-            CVEs
-          </Text>
-        </TextContent>
-        <ClusterDetailTable />
+        <TableTabs
+          activeTab={activeTab}
+          tabs={[
+            {
+              title: 'CVEs',
+              path: CLUSTER_DETAIL_TABS.cves,
+              Component: ClusterCveTable,
+            },
+            {
+              title: 'Exposed images',
+              path: CLUSTER_DETAIL_TABS.images,
+              Component: ClusterImagesTable,
+            },
+          ]}
+        />
       </Main>
     </ErrorHandler>
   );
+};
+
+ClusterDetailPage.propTypes = {
+  activeTab: propTypes.oneOf(Object.values(CLUSTER_DETAIL_TABS)).isRequired,
 };
 
 export default ClusterDetailPage;

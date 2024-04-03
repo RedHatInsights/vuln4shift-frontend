@@ -39,6 +39,15 @@ export const fetchClusterCves = async (params, clusterId) => {
   });
 };
 
+export const fetchClusterImages = async (params, clusterId) => {
+  return instance.get(
+    `/api/ocp-vulnerability/v1/clusters/${clusterId}/exposed_images`,
+    {
+      params,
+    }
+  );
+};
+
 export const fetchClusterDetails = async (clusterId) => {
   return instance.get(`/api/ocp-vulnerability/v1/clusters/${clusterId}`);
 };

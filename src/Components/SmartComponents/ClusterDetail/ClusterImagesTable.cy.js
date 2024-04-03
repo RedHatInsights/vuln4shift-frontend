@@ -1,22 +1,19 @@
 import React from 'react';
 import { mount } from '@cypress/react18';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
-import ClusterDetailTable from './ClusterDetailTable';
+import ClusterImagesTable from './ClusterImagesTable';
 import { Provider } from 'react-redux';
 import { init } from '../../../Store/ReducerRegistry';
-import cves from '../../../../cypress/fixtures/clusterdetaillist.json';
-import { initialState } from '../../../Store/Reducers/ClusterDetailStore';
+import images from '../../../../cypress/fixtures/clusterimageslist.json';
+import { initialState } from '../../../Store/Reducers/ClusterImagesStore';
 import {
-  CLUSTER_DETAIL_EXPORT_PREFIX,
-  CLUSTER_DETAIL_TABLE_COLUMNS,
-  PUBLISHED_OPTIONS,
-  SEVERITY_OPTIONS,
+  CLUSTER_IMAGES_EXPORT_PREFIX,
+  CLUSTER_IMAGES_TABLE_COLUMNS,
 } from '../../../Helpers/constants';
 import {
   itExportsDataToFile,
   itHasNoActiveFilter,
   itHasTableFunctionsDisabled,
-  itIsExpandable,
   itIsNotSorted,
   itIsSortedBy,
   testFilters,
@@ -28,27 +25,32 @@ const mountComponent = () => {
   mount(
     <Provider store={init().getStore()}>
       <MemoryRouter
-        initialEntries={['/clusters/e45c0b54-3083-4ae0-9cbc-f7d7a302e7dd']}
+        initialEntries={[
+          '/clusters/e45c0b54-3083-4ae0-9cbc-f7d7a302e7dd/images',
+        ]}
       >
         <Routes>
-          <Route path="/clusters/:clusterId" element={<ClusterDetailTable />} />
+          <Route
+            path="/clusters/:clusterId/images"
+            element={<ClusterImagesTable />}
+          />
         </Routes>
       </MemoryRouter>
     </Provider>
   );
 };
 
-describe('ClusterDetailTable with items', () => {
+describe('ClusterImagesTable with items', () => {
   beforeEach(() => {
     cy.intercept(
       'GET',
-      '**/api/ocp-vulnerability/v1/clusters/e45c0b54-3083-4ae0-9cbc-f7d7a302e7dd/cves**',
+      '**/api/ocp-vulnerability/v1/clusters/e45c0b54-3083-4ae0-9cbc-f7d7a302e7dd/exposed_images**',
       {
         ...initialState,
-        ...cves,
+        ...images,
         meta: {
           ...initialState.meta,
-          ...cves.meta,
+          ...images.meta,
         },
       }
     );
@@ -63,26 +65,19 @@ describe('ClusterDetailTable with items', () => {
   });
 
   it('has items', () => {
-    cy.get('[data-label="CVE ID"]').should('have.length', 5);
+    cy.get('[data-label="Name"]').should('have.length', 5);
   });
 
   it('has "Reset filter" button hidden by default', () => {
     cy.contains('Reset filter').should('not.exist');
   });
 
-  itIsSortedBy('Publish date');
+  itIsSortedBy('Name');
   itHasNoActiveFilter();
-  itExportsDataToFile(cves.data, CLUSTER_DETAIL_EXPORT_PREFIX);
-  itIsExpandable(cves.data.length);
-
-  it('shows missing metadata empty state when CVE description is "unknown"', () => {
-    cy.get('tbody [id^=expand-toggle]').last().click();
-
-    cy.contains('No description available');
-  });
+  itExportsDataToFile(images.data, CLUSTER_IMAGES_EXPORT_PREFIX);
 
   describe('Sorting', () => {
-    testSorting(CLUSTER_DETAIL_TABLE_COLUMNS, true);
+    testSorting(CLUSTER_IMAGES_TABLE_COLUMNS, false, 'Name');
   });
 
   describe('Filtering', () => {
@@ -93,26 +88,6 @@ describe('ClusterDetailTable with items', () => {
         selector: '.ins-c-conditional-filter input[type="text"]',
         chipText: 'Search term',
       },
-      {
-        urlParam: 'published',
-        type: 'radio',
-        selector: '.ins-c-conditional-filter .pf-m-fill button',
-        items: PUBLISHED_OPTIONS,
-        chipText: 'Publish date',
-      },
-      {
-        urlParam: 'severity',
-        type: 'checkbox',
-        selector: '.ins-c-conditional-filter .pf-m-fill button',
-        items: SEVERITY_OPTIONS,
-        chipText: 'Severity',
-      },
-      {
-        urlParam: 'cvss_score',
-        type: 'range',
-        selector: '.ins-c-conditional-filter .pf-m-fill button',
-        chipText: 'CVSS base score',
-      },
     ];
 
     testFilters(filters);
@@ -122,13 +97,13 @@ describe('ClusterDetailTable with items', () => {
     beforeEach(() => {
       cy.intercept(
         'GET',
-        '**/api/ocp-vulnerability/v1/clusters/e45c0b54-3083-4ae0-9cbc-f7d7a302e7dd/cves**',
+        '**/api/ocp-vulnerability/v1/clusters/e45c0b54-3083-4ae0-9cbc-f7d7a302e7dd/exposed_images**',
         {
           ...initialState,
-          ...cves,
+          ...images,
           meta: {
             ...initialState.meta,
-            ...cves.meta,
+            ...images.meta,
             total_items: 15, // faking total items to enable next page button
           },
         }
@@ -141,11 +116,11 @@ describe('ClusterDetailTable with items', () => {
   });
 });
 
-describe('CveListTable without items', () => {
+describe('ClusterImagesTable without items', () => {
   beforeEach(() => {
     cy.intercept(
       'GET',
-      '**/api/ocp-vulnerability/v1/clusters/e45c0b54-3083-4ae0-9cbc-f7d7a302e7dd/cves**',
+      '**/api/ocp-vulnerability/v1/clusters/e45c0b54-3083-4ae0-9cbc-f7d7a302e7dd/exposed_images**',
       {
         ...initialState,
         data: [],
@@ -166,18 +141,18 @@ describe('CveListTable without items', () => {
   });
 
   it('has no items', () => {
-    cy.get('[data-label="CVE ID"]').should('have.length', 0);
+    cy.get('[data-label="Name"]').should('have.length', 0);
   });
 
   itIsNotSorted();
   itHasTableFunctionsDisabled();
 
   it('shows correct empty state depending on whether filters are applied or not', () => {
-    cy.contains('No matching CVEs found').should('exist');
+    cy.contains('No matching images found').should('exist');
 
     cy.get('#text-filter-search').type('example search term');
 
-    cy.contains('No matching CVEs found').should('exist');
+    cy.contains('No matching images found').should('exist');
     cy.contains('Reset filter').should('exist');
   });
 });
