@@ -24,7 +24,7 @@ const CveListPage = () => {
   const chrome = useChrome();
 
   const PRODUCT_DOC =
-    'https://access.redhat.com/documentation/en-us/openshift_cluster_manager/2022';
+    'https://access.redhat.com/documentation/en-us/openshift_cluster_manager/1-latest';
 
   const [wasHeaderAlertDismissed, setHeaderAlertDismissed] = useLocalStorage(
     HEADER_ALERT_DISMISSED_KEY
