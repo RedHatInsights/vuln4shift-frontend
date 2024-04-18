@@ -2,7 +2,7 @@ import React, { Suspense, lazy } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import propTypes from 'prop-types';
 import { Bullseye, Spinner } from '@patternfly/react-core';
-import { CLUSTER_DETAIL_TABS } from './Helpers/constants';
+import { CLUSTER_DETAIL_TABS, CVE_DETAIL_TABS } from './Helpers/constants';
 
 const CveListPage = lazy(() =>
   import(
@@ -47,8 +47,12 @@ InsightsElement.propTypes = {
 export const Router = () => (
   <Routes>
     <Route
-      path="/cves/:cveId"
-      element={<InsightsElement element={<CveDetailPage />} />}
+      path="/cves/:cveId/clusters"
+      element={
+        <InsightsElement
+          element={<CveDetailPage activeTab={CVE_DETAIL_TABS.clusters} />}
+        />
+      }
     />
     <Route
       path="/clusters/:clusterId/cves"

@@ -13,6 +13,11 @@ export const HEADER_ALERT_DISMISSED_KEY = 'vuln4shift:header-alert-dismissed';
 
 export const DEFAULT_LIMIT = 20;
 
+export const CVE_DETAIL_TABS = {
+  clusters: 'clusters',
+  images: 'images',
+};
+
 export const CLUSTER_DETAIL_TABS = {
   cves: 'cves',
   images: 'images',
@@ -305,16 +310,16 @@ const createCveDescription = (row) => (
 export const CVE_LIST_TABLE_MAPPER = (row) => ({
   key: row.synopsis,
   cells: [
-    <Link to={'../cves/' + row.synopsis} key={row.synopsis}>
+    <Link to={`../cves/${row.synopsis}/clusters`} key={row.synopsis}>
       {row.synopsis}
     </Link>,
     processDate(row.publish_date),
     <Shield hasLabel impact={row.severity} key={row.synopsis} />,
     parseCvssScore(row.cvss2_score, row.cvss3_score, true),
-    <Link to={'../cves/' + row.synopsis} key={row.synopsis}>
+    <Link to={`../cves/${row.synopsis}/clusters`} key={row.synopsis}>
       {row.clusters_exposed}
     </Link>,
-    <Link to={'../cves/' + row.synopsis} key={row.synopsis}>
+    <Link to={`../cves/${row.synopsis}/clusters`} key={row.synopsis}>
       {row.images_exposed}
     </Link>,
   ],

@@ -10,9 +10,6 @@ import {
   GridItem,
   Stack,
   StackItem,
-  Tab,
-  Tabs,
-  TabTitleText,
   Text,
   TextContent,
   TextVariants,
@@ -181,12 +178,6 @@ const CveDetailPageHeader = () => {
           </Stack>
         </GridItem>
       </Grid>
-      <Tabs activeKey={0} hasNoBorderBottom>
-        <Tab
-          eventKey={0}
-          title={<TabTitleText>Exposed clusters</TabTitleText>}
-        />
-      </Tabs>
     </PageHeader>
   );
 };
