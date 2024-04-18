@@ -15,11 +15,7 @@ jobs:
     script: npm run lint
   - stage: Test
     script: npm run test
-  - stage: Deploy
-    script: npm run deploy && curl -sSL https://raw.githubusercontent.com/RedHatInsights/insights-frontend-builder-common/master/src/bootstrap.sh | bash -s
 env:
   global:
-  - REPO="git@github.com:RedHatInsights/vuln4shift-frontend-build"
-  - REPO_DIR="vuln4shift-frontend-build"
   - BRANCH=${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}
   - NODE_OPTIONS="--max-old-space-size=4096 --max_old_space_size=4096"

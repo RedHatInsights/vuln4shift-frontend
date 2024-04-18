@@ -8,12 +8,10 @@
   },
   "scripts": {
     "build": "fec build",
-    "deploy": "npm-run-all build lint test",
     "lint": "npm-run-all lint:*",
     "lint:js": "eslint config src",
     "lint:js:fix": "eslint config src --fix",
     "lint:sass": "stylelint 'src/**/*.scss' --config .stylelintrc.json",
-    "nightly": "npm run deploy",
     "patch:hosts": "fec patch-etc-hosts",
     "start": "fec dev",
     "test": "npm run test:ct",
