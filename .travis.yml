@@ -12,10 +12,11 @@ install:
 - npm ci
 jobs:
   include:
-  - stage: Lint
+  - stage: Verify
+    name: Lint
     script: npm run lint
-  - stage: Test
-    script: npm run test
+  - script: npm run test
+    name: Test
 env:
   global:
   - BRANCH=${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}
