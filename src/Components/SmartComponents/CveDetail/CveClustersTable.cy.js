@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount } from '@cypress/react18';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
-import CveDetailTable from './CveDetailTable';
+import CveClustersTable from './CveClustersTable';
 import { Provider } from 'react-redux';
 import { init } from '../../../Store/ReducerRegistry';
 import clusters from '../../../../cypress/fixtures/cvedetaillist.json';
@@ -10,8 +10,8 @@ import {
   CLUSTER_PROVIDER_OPTIONS,
   CLUSTER_STATUS_OPTIONS,
   CLUSTER_VERSION_OPTIONS,
-  CVE_DETAIL_EXPORT_PREFIX,
-  CVE_DETAIL_TABLE_COLUMNS,
+  CVE_CLUSTERS_EXPORT_PREFIX,
+  CVE_CLUSTERS_TABLE_COLUMNS,
 } from '../../../Helpers/constants';
 import {
   itExportsDataToFile,
@@ -30,7 +30,7 @@ const mountComponent = () => {
     <Provider store={init().getStore()}>
       <MemoryRouter initialEntries={['/cves/CVE-2022-12345']}>
         <Routes>
-          <Route path="/cves/:cveId" element={<CveDetailTable />} />
+          <Route path="/cves/:cveId" element={<CveClustersTable />} />
         </Routes>
       </MemoryRouter>
     </Provider>
@@ -71,11 +71,11 @@ describe('CveDetailTable with items', () => {
 
   itIsSortedBy('Last seen');
   itHasNoActiveFilter();
-  itExportsDataToFile(clusters.data, CVE_DETAIL_EXPORT_PREFIX);
+  itExportsDataToFile(clusters.data, CVE_CLUSTERS_EXPORT_PREFIX);
   itIsNotExpandable();
 
   describe('Sorting', () => {
-    testSorting(CVE_DETAIL_TABLE_COLUMNS);
+    testSorting(CVE_CLUSTERS_TABLE_COLUMNS);
   });
 
   describe('Filtering', () => {

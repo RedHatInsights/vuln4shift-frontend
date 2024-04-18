@@ -20,8 +20,8 @@ export const fetchClusterListTable = (params) => ({
   payload: () => api.fetchClusters(params),
 });
 
-export const fetchCveDetailTable = (cveId, params) => ({
-  type: ActionTypes.FETCH_CVE_DETAIL_TABLE,
+export const fetchCveClustersTable = (cveId, params) => ({
+  type: ActionTypes.FETCH_CVE_CLUSTERS_TABLE,
   meta: {
     timestamp: new Date(),
   },
@@ -80,7 +80,7 @@ export const changeClusterListTableParams = (params) => ({
 });
 
 export const changeCveDetailsTableParams = (params) => ({
-  type: ActionTypes.CHANGE_CVE_DETAIL_TABLE_PARAMS,
+  type: ActionTypes.CHANGE_CVE_CLUSTERS_TABLE_PARAMS,
   meta: {
     timestamp: new Date(),
   },
