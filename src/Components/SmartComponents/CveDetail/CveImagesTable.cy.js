@@ -1,17 +1,14 @@
 import React from 'react';
 import { mount } from '@cypress/react18';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
-import CveClustersTable from './CveClustersTable';
+import CveImagesTable from './CveImagesTable';
 import { Provider } from 'react-redux';
 import { init } from '../../../Store/ReducerRegistry';
-import clusters from '../../../../cypress/fixtures/cveclusterslist.json';
+import images from '../../../../cypress/fixtures/cveimageslist.json';
 import { initialState } from '../../../Store/Reducers/CveDetailStore';
 import {
-  CLUSTER_PROVIDER_OPTIONS,
-  CLUSTER_STATUS_OPTIONS,
-  CLUSTER_VERSION_OPTIONS,
-  CVE_CLUSTERS_EXPORT_PREFIX,
-  CVE_CLUSTERS_TABLE_COLUMNS,
+  CVE_IMAGES_EXPORT_PREFIX,
+  CVE_IMAGES_TABLE_COLUMNS,
 } from '../../../Helpers/constants';
 import {
   itExportsDataToFile,
@@ -30,24 +27,24 @@ const mountComponent = () => {
     <Provider store={init().getStore()}>
       <MemoryRouter initialEntries={['/cves/CVE-2022-12345']}>
         <Routes>
-          <Route path="/cves/:cveId" element={<CveClustersTable />} />
+          <Route path="/cves/:cveId" element={<CveImagesTable />} />
         </Routes>
       </MemoryRouter>
     </Provider>
   );
 };
 
-describe('CveClustersTable with items', () => {
+describe('CveImagesTable with items', () => {
   beforeEach(() => {
     cy.intercept(
       'GET',
-      '**/api/ocp-vulnerability/v1/cves/CVE-2022-12345/exposed_clusters**',
+      '**/api/ocp-vulnerability/v1/cves/CVE-2022-12345/exposed_images**',
       {
         ...initialState,
-        ...clusters,
+        ...images,
         meta: {
           ...initialState.meta,
-          ...clusters.meta,
+          ...images.meta,
         },
       }
     );
@@ -69,13 +66,13 @@ describe('CveClustersTable with items', () => {
     cy.contains('Reset filter').should('not.exist');
   });
 
-  itIsSortedBy('Last seen');
+  itIsSortedBy('Name');
   itHasNoActiveFilter();
-  itExportsDataToFile(clusters.data, CVE_CLUSTERS_EXPORT_PREFIX);
+  itExportsDataToFile(images.data, CVE_IMAGES_EXPORT_PREFIX);
   itIsNotExpandable();
 
   describe('Sorting', () => {
-    testSorting(CVE_CLUSTERS_TABLE_COLUMNS);
+    testSorting(CVE_IMAGES_TABLE_COLUMNS);
   });
 
   describe('Filtering', () => {
@@ -86,30 +83,6 @@ describe('CveClustersTable with items', () => {
         selector: '.ins-c-conditional-filter input[type="text"]',
         chipText: 'Search term',
       },
-      {
-        urlParam: 'status',
-        type: 'checkbox',
-        selector: '.ins-c-conditional-filter .pf-m-fill button',
-        items: CLUSTER_STATUS_OPTIONS,
-        dynamicItems: clusters.meta.cluster_statuses_all,
-        chipText: 'Status',
-      },
-      {
-        urlParam: 'version',
-        type: 'checkbox',
-        selector: '.ins-c-conditional-filter .pf-m-fill button',
-        items: CLUSTER_VERSION_OPTIONS,
-        dynamicItems: clusters.meta.cluster_versions_all,
-        chipText: 'Version',
-      },
-      {
-        urlParam: 'provider',
-        type: 'checkbox',
-        selector: '.ins-c-conditional-filter .pf-m-fill button',
-        items: CLUSTER_PROVIDER_OPTIONS,
-        dynamicItems: clusters.meta.cluster_providers_all,
-        chipText: 'Provider',
-      },
     ];
 
     testFilters(filters);
@@ -119,13 +92,13 @@ describe('CveClustersTable with items', () => {
     beforeEach(() => {
       cy.intercept(
         'GET',
-        '**/api/ocp-vulnerability/v1/cves/CVE-2022-12345/exposed_clusters**',
+        '**/api/ocp-vulnerability/v1/cves/CVE-2022-12345/exposed_images**',
         {
           ...initialState,
-          ...clusters,
+          ...images,
           meta: {
             ...initialState.meta,
-            ...clusters.meta,
+            ...images.meta,
             total_items: 15,
           },
         }
@@ -138,11 +111,11 @@ describe('CveClustersTable with items', () => {
   });
 });
 
-describe('CveClustersTable without items', () => {
+describe('CveImagesTable without items', () => {
   beforeEach(() => {
     cy.intercept(
       'GET',
-      '**/api/ocp-vulnerability/v1/cves/CVE-2022-12345/exposed_clusters**',
+      '**/api/ocp-vulnerability/v1/cves/CVE-2022-12345/exposed_images**',
       {
         ...initialState,
         data: [],
@@ -170,11 +143,11 @@ describe('CveClustersTable without items', () => {
   itHasTableFunctionsDisabled();
 
   it('shows correct empty state depending on whether filters are applied or not', () => {
-    cy.contains('No matching clusters found').should('exist');
+    cy.contains('No matching images found').should('exist');
 
     cy.get('#text-filter-search').type('example search term');
 
-    cy.contains('No matching clusters found').should('exist');
+    cy.contains('No matching images found').should('exist');
     cy.contains('Reset filter').should('exist');
   });
 });
