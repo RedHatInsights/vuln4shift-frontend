@@ -109,6 +109,7 @@ const BaseTableBody = ({
             <Th
               key={column.title}
               sort={column.sortParam && getSortParams(index)}
+              width={column.width}
             >
               {column.title}
             </Th>

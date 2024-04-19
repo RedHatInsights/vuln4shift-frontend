@@ -28,6 +28,14 @@ export const fetchCveClustersTable = (cveId, params) => ({
   payload: () => api.fetchExposedClusters(cveId, params),
 });
 
+export const fetchCveImagesTable = (cveId, params) => ({
+  type: ActionTypes.FETCH_CVE_IMAGES_TABLE,
+  meta: {
+    timestamp: new Date(),
+  },
+  payload: () => api.fetchExposedImages(cveId, params),
+});
+
 export const fetchCveDetails = (cveId, params) => ({
   type: ActionTypes.FETCH_CVE_DETAILS,
   meta: {
@@ -79,8 +87,16 @@ export const changeClusterListTableParams = (params) => ({
   payload: () => params,
 });
 
-export const changeCveDetailsTableParams = (params) => ({
+export const changeCveClustersTableParams = (params) => ({
   type: ActionTypes.CHANGE_CVE_CLUSTERS_TABLE_PARAMS,
+  meta: {
+    timestamp: new Date(),
+  },
+  payload: () => params,
+});
+
+export const changeCveImagesTableParams = (params) => ({
+  type: ActionTypes.CHANGE_CVE_IMAGES_TABLE_PARAMS,
   meta: {
     timestamp: new Date(),
   },

@@ -3,6 +3,7 @@ import propTypes from 'prop-types';
 import { Main } from '@redhat-cloud-services/frontend-components/Main';
 import CveDetailPageHeader from './CveDetailPageHeader';
 import CveClustersTable from './CveClustersTable';
+import CveImagesTable from './CveImagesTable';
 import { useSelector } from 'react-redux';
 import ErrorHandler from '../../PresentationalComponents/ErrorHandler';
 import useChrome from '@redhat-cloud-services/frontend-components/useChrome';
@@ -32,6 +33,11 @@ const CveDetailPage = ({ activeTab }) => {
               title: 'Exposed clusters',
               path: CVE_DETAIL_TABS.clusters,
               Component: CveClustersTable,
+            },
+            {
+              title: 'Exposed images',
+              path: CVE_DETAIL_TABS.images,
+              Component: CveImagesTable,
             },
           ]}
         />

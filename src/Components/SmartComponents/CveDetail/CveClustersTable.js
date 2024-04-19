@@ -15,7 +15,7 @@ import { useParams } from 'react-router-dom';
 import BaseTable from '../Generic/BaseTable';
 import { useExport, useUrlBoundParams } from '../../../Helpers/hooks';
 import {
-  changeCveDetailsTableParams,
+  changeCveClustersTableParams,
   fetchCveClustersTable,
 } from '../../../Store/Actions';
 import useTextFilter from '../Filters/TextFilter';
@@ -36,7 +36,7 @@ const CveClustersTable = () => {
     initialParams: meta,
     additionalParam: params.cveId,
     fetchAction: fetchCveClustersTable,
-    changeParamsAction: changeCveDetailsTableParams,
+    changeParamsAction: changeCveClustersTableParams,
   });
 
   const {
