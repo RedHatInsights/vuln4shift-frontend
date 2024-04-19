@@ -145,7 +145,7 @@ export const useUrlBoundParams = ({
   useEffect(() => {
     const initialUrlParams = getUrlParams();
 
-    apply({ ...initialParams, ...initialUrlParams });
+    apply({ ...initialParams, ...initialUrlParams, offset: 0 });
     setFirstLoad(false);
   }, []);
 
