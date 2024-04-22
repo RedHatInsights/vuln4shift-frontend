@@ -9,6 +9,8 @@ import { DateFormat } from '@redhat-cloud-services/frontend-components/DateForma
 import { subtractDays, subtractYears } from './miscHelper';
 import MissingMetadata from '../Components/PresentationalComponents/EmptyStates/MissingMetadata';
 
+export const EXPOSED_IMAGES_FEATURE_FLAG = 'vuln4shift.exposed_images';
+
 export const HEADER_ALERT_DISMISSED_KEY = 'vuln4shift:header-alert-dismissed';
 
 export const DEFAULT_LIMIT = 20;
@@ -327,7 +329,7 @@ const createCveDescription = (row) => (
   </Fragment>
 );
 
-export const CVE_LIST_TABLE_MAPPER = (row) => ({
+export const CVE_LIST_TABLE_MAPPER = (row, areExposedImagesEnabled) => ({
   key: row.synopsis,
   cells: [
     <Link to={`../cves/${row.synopsis}/clusters`} key={row.synopsis}>
@@ -339,7 +341,12 @@ export const CVE_LIST_TABLE_MAPPER = (row) => ({
     <Link to={`../cves/${row.synopsis}/clusters`} key={row.synopsis}>
       {row.clusters_exposed}
     </Link>,
-    <Link to={`../cves/${row.synopsis}/images`} key={row.synopsis}>
+    <Link
+      to={`../cves/${row.synopsis}/${
+        areExposedImagesEnabled ? 'images' : 'clusters'
+      }`}
+      key={row.synopsis}
+    >
       {row.images_exposed}
     </Link>,
   ],

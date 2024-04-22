@@ -8,10 +8,16 @@ import { useSelector } from 'react-redux';
 import ErrorHandler from '../../PresentationalComponents/ErrorHandler';
 import useChrome from '@redhat-cloud-services/frontend-components/useChrome';
 import TableTabs from '../../PresentationalComponents/TableTabs';
-import { CVE_DETAIL_TABS } from '../../../Helpers/constants';
+import {
+  CVE_DETAIL_TABS,
+  EXPOSED_IMAGES_FEATURE_FLAG,
+} from '../../../Helpers/constants';
+import { useFeatureFlag } from '../../../Helpers/hooks';
 
 const CveDetailPage = ({ activeTab }) => {
   const chrome = useChrome();
+
+  const areExposedImagesEnabled = useFeatureFlag(EXPOSED_IMAGES_FEATURE_FLAG);
 
   const { error, cve } = useSelector(({ CveDetailStore }) => CveDetailStore);
 
@@ -34,11 +40,15 @@ const CveDetailPage = ({ activeTab }) => {
               path: CVE_DETAIL_TABS.clusters,
               Component: CveClustersTable,
             },
-            {
-              title: 'Exposed images',
-              path: CVE_DETAIL_TABS.images,
-              Component: CveImagesTable,
-            },
+            ...(areExposedImagesEnabled
+              ? [
+                  {
+                    title: 'Exposed images',
+                    path: CVE_DETAIL_TABS.images,
+                    Component: CveImagesTable,
+                  },
+                ]
+              : []),
           ]}
         />
       </Main>

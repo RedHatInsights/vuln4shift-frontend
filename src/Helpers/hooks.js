@@ -7,6 +7,7 @@ import {
   clearNotifications,
 } from '@redhat-cloud-services/frontend-components-notifications/redux';
 import { downloadFile } from '@redhat-cloud-services/frontend-components-utilities/helpers';
+import { useFlag, useFlagsStatus } from '@unleash/proxy-client-react';
 
 // TODO: Consider moving some of these non-hook functions to constants.js or miscHelper.js
 
@@ -231,4 +232,11 @@ export const useExport = ({
   };
 
   return onExport;
+};
+
+export const useFeatureFlag = (flag) => {
+  const { flagsReady } = useFlagsStatus();
+  const isFlagEnabled = useFlag(flag);
+
+  return flagsReady ? isFlagEnabled : false;
 };

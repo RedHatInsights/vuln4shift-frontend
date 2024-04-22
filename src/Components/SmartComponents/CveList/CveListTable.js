@@ -8,6 +8,7 @@ import {
   PUBLISHED_OPTIONS,
   SEVERITY_OPTIONS,
   CVE_LIST_EXPORT_PREFIX,
+  EXPOSED_IMAGES_FEATURE_FLAG,
 } from '../../../Helpers/constants';
 import { useSelector } from 'react-redux';
 import {
@@ -15,7 +16,11 @@ import {
   changeCveListTableParams,
 } from '../../../Store/Actions';
 import NoMatchingCves from '../../PresentationalComponents/EmptyStates/NoMatchingCves';
-import { useUrlBoundParams, useExport } from '../../../Helpers/hooks';
+import {
+  useUrlBoundParams,
+  useExport,
+  useFeatureFlag,
+} from '../../../Helpers/hooks';
 import useTextFilter from '../Filters/TextFilter';
 import useRangeFilter from '../Filters/RangeFilter';
 import {
@@ -28,6 +33,8 @@ import BaseTable from '../Generic/BaseTable';
 import { fetchCves } from '../../../Helpers/apiHelper';
 
 const CveListTable = () => {
+  const areExposedImagesEnabled = useFeatureFlag(EXPOSED_IMAGES_FEATURE_FLAG);
+
   const { cves, isLoading, meta, error } = useSelector(
     ({ CveListStore }) => CveListStore
   );
@@ -117,7 +124,9 @@ const CveListTable = () => {
     <BaseTable
       isLoading={isLoading}
       isExpandable
-      rows={cves.map((row) => CVE_LIST_TABLE_MAPPER(row))}
+      rows={cves.map((row) =>
+        CVE_LIST_TABLE_MAPPER(row, areExposedImagesEnabled)
+      )}
       columns={CVE_LIST_TABLE_COLUMNS}
       filterConfig={filterConfig}
       activeFiltersConfig={activeFiltersConfig}
