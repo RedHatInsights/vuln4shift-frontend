@@ -9,6 +9,8 @@ import { DateFormat } from '@redhat-cloud-services/frontend-components/DateForma
 import { subtractDays, subtractYears } from './miscHelper';
 import MissingMetadata from '../Components/PresentationalComponents/EmptyStates/MissingMetadata';
 
+export const EXPOSED_IMAGES_FEATURE_FLAG = 'vuln4shift.exposed_images';
+
 export const HEADER_ALERT_DISMISSED_KEY = 'vuln4shift:header-alert-dismissed';
 
 export const DEFAULT_LIMIT = 20;
@@ -221,7 +223,7 @@ export const CLUSTER_LIST_TABLE_COLUMNS = [
   },
 ];
 
-export const CVE_DETAIL_TABLE_COLUMNS = [
+export const CVE_CLUSTERS_TABLE_COLUMNS = [
   {
     title: 'Name',
     sortParam: 'display_name',
@@ -247,6 +249,26 @@ export const CVE_DETAIL_TABLE_COLUMNS = [
   {
     title: 'Last seen',
     sortParam: 'last_seen',
+  },
+];
+
+export const CVE_IMAGES_TABLE_COLUMNS = [
+  {
+    title: 'Name',
+    sortParam: 'name',
+    sortDefaultDirection: 'asc',
+  },
+  {
+    title: 'Registry name',
+    sortParam: 'registry',
+    sortDefaultDirection: 'asc',
+  },
+  {
+    title: 'Version',
+  },
+  {
+    title: 'Exposed clusters',
+    width: 15,
   },
 ];
 
@@ -307,7 +329,7 @@ const createCveDescription = (row) => (
   </Fragment>
 );
 
-export const CVE_LIST_TABLE_MAPPER = (row) => ({
+export const CVE_LIST_TABLE_MAPPER = (row, areExposedImagesEnabled) => ({
   key: row.synopsis,
   cells: [
     <Link to={`../cves/${row.synopsis}/clusters`} key={row.synopsis}>
@@ -319,7 +341,12 @@ export const CVE_LIST_TABLE_MAPPER = (row) => ({
     <Link to={`../cves/${row.synopsis}/clusters`} key={row.synopsis}>
       {row.clusters_exposed}
     </Link>,
-    <Link to={`../cves/${row.synopsis}/clusters`} key={row.synopsis}>
+    <Link
+      to={`../cves/${row.synopsis}/${
+        areExposedImagesEnabled ? 'images' : 'clusters'
+      }`}
+      key={row.synopsis}
+    >
       {row.images_exposed}
     </Link>,
   ],
@@ -345,7 +372,7 @@ export const CLUSTER_LIST_TABLE_MAPPER = (row) => ({
   ],
 });
 
-export const CVE_DETAIL_TABLE_MAPPER = (row) => ({
+export const CVE_CLUSTERS_TABLE_MAPPER = (row) => ({
   key: row.id,
   cells: [
     <Link to={`../clusters/${row.id}/cves`} key={row.id}>
@@ -357,6 +384,11 @@ export const CVE_DETAIL_TABLE_MAPPER = (row) => ({
     row.provider,
     <DateFormat key={row.id} date={row.last_seen} type="relative" />,
   ],
+});
+
+export const CVE_IMAGES_TABLE_MAPPER = (row) => ({
+  key: row.id,
+  cells: [row.name, row.registry, row.version, row.exposed_clusters],
 });
 
 export const CLUSTER_CVES_TABLE_MAPPER = (row) => ({
@@ -399,13 +431,15 @@ export const CLUSTER_LIST_ALLOWED_PARAMS = [
   'provider',
 ];
 
-export const CVE_DETAIL_ALLOWED_PARAMS = [
+export const CVE_CLUSTERS_ALLOWED_PARAMS = [
   ...GENERIC_ALLOWED_PARAMS,
   'search',
   'status',
   'version',
   'provider',
 ];
+
+export const CVE_IMAGES_ALLOWED_PARAMS = [...GENERIC_ALLOWED_PARAMS, 'search'];
 
 export const CLUSTER_CVES_ALLOWED_PARAMS = [
   ...GENERIC_ALLOWED_PARAMS,
@@ -432,7 +466,9 @@ export const CLUSTER_LIST_DEFAULT_FILTERS = {
   cluster_severity: 'any',
 };
 
-export const CVE_DETAIL_DEFAULT_FILTERS = {};
+export const CVE_CLUSTERS_DEFAULT_FILTERS = {};
+
+export const CVE_IMAGES_DEFAULT_FILTERS = {};
 
 export const CLUSTER_CVES_DEFAULT_FILTERS = {};
 
@@ -441,7 +477,9 @@ export const CLUSTER_IMAGES_DEFAULT_FILTERS = {};
 /* EXPORTS */
 export const CVE_LIST_EXPORT_PREFIX = 'ocp-vulnerability_cves--';
 export const CLUSTER_LIST_EXPORT_PREFIX = 'ocp-vulnerability_clusters--';
-export const CVE_DETAIL_EXPORT_PREFIX = 'ocp-vulnerability_exposed-clusters--';
+export const CVE_CLUSTERS_EXPORT_PREFIX =
+  'ocp-vulnerability_exposed-clusters--';
+export const CVE_IMAGES_EXPORT_PREFIX = 'ocp-vulnerability_exposed-images--';
 export const CLUSTER_CVES_EXPORT_PREFIX = 'ocp-vulnerability_cluster-cves--';
 export const CLUSTER_IMAGES_EXPORT_PREFIX =
   'ocp-vulnerability_cluster-images--';

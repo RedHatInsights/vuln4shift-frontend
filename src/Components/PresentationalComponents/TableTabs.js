@@ -38,7 +38,7 @@ const TableTabs = ({ activeTab, tabs }) => {
 TableTabs.propTypes = {
   activeTab: propTypes.string,
   tabs: propTypes.arrayOf(
-    propTypes.objectOf({
+    propTypes.shape({
       title: propTypes.string.isRequired,
       path: propTypes.string.isRequired,
       Component: propTypes.elementType.isRequired,

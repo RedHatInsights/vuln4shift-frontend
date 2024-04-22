@@ -3,11 +3,11 @@ import {
   CLUSTER_PROVIDER_OPTIONS,
   CLUSTER_STATUS_OPTIONS,
   CLUSTER_VERSION_OPTIONS,
-  CVE_DETAIL_ALLOWED_PARAMS,
-  CVE_DETAIL_DEFAULT_FILTERS,
-  CVE_DETAIL_EXPORT_PREFIX,
-  CVE_DETAIL_TABLE_COLUMNS,
-  CVE_DETAIL_TABLE_MAPPER,
+  CVE_CLUSTERS_ALLOWED_PARAMS,
+  CVE_CLUSTERS_DEFAULT_FILTERS,
+  CVE_CLUSTERS_EXPORT_PREFIX,
+  CVE_CLUSTERS_TABLE_COLUMNS,
+  CVE_CLUSTERS_TABLE_MAPPER,
 } from '../../../Helpers/constants';
 import { useSelector } from 'react-redux';
 import NoMatchingItems from '../../PresentationalComponents/EmptyStates/NoMatchingItems';
@@ -15,8 +15,8 @@ import { useParams } from 'react-router-dom';
 import BaseTable from '../Generic/BaseTable';
 import { useExport, useUrlBoundParams } from '../../../Helpers/hooks';
 import {
-  changeCveDetailsTableParams,
-  fetchCveDetailTable,
+  changeCveClustersTableParams,
+  fetchCveClustersTable,
 } from '../../../Store/Actions';
 import useTextFilter from '../Filters/TextFilter';
 import { setupFilters } from '../../../Helpers/miscHelper';
@@ -24,19 +24,19 @@ import { fetchExposedClusters } from '../../../Helpers/apiHelper';
 import checkboxFilter from '../Filters/CheckboxFilter';
 import { uniqBy } from 'lodash';
 
-const CveDetailTable = () => {
+const CveClustersTable = () => {
   const params = useParams();
 
   const { clusters, isTableLoading, meta, error } = useSelector(
-    ({ CveDetailStore }) => CveDetailStore
+    ({ CveClustersStore }) => CveClustersStore
   );
 
   const apply = useUrlBoundParams({
-    allowedParams: CVE_DETAIL_ALLOWED_PARAMS,
+    allowedParams: CVE_CLUSTERS_ALLOWED_PARAMS,
     initialParams: meta,
     additionalParam: params.cveId,
-    fetchAction: fetchCveDetailTable,
-    changeParamsAction: changeCveDetailsTableParams,
+    fetchAction: fetchCveClustersTable,
+    changeParamsAction: changeCveClustersTableParams,
   });
 
   const {
@@ -50,10 +50,10 @@ const CveDetailTable = () => {
   } = meta;
 
   const onExport = useExport({
-    filenamePrefix: CVE_DETAIL_EXPORT_PREFIX,
+    filenamePrefix: CVE_CLUSTERS_EXPORT_PREFIX,
     fetchAction: fetchExposedClusters,
     fetchActionParam: params.cveId,
-    allowedParams: CVE_DETAIL_ALLOWED_PARAMS,
+    allowedParams: CVE_CLUSTERS_ALLOWED_PARAMS,
   });
 
   const filters = [
@@ -121,15 +121,15 @@ const CveDetailTable = () => {
   const [filterConfig, activeFiltersConfig] = setupFilters(
     filters,
     meta,
-    CVE_DETAIL_DEFAULT_FILTERS,
+    CVE_CLUSTERS_DEFAULT_FILTERS,
     apply
   );
 
   return (
     <BaseTable
       isLoading={isTableLoading}
-      rows={clusters.map((row) => CVE_DETAIL_TABLE_MAPPER(row))}
-      columns={CVE_DETAIL_TABLE_COLUMNS}
+      rows={clusters.map((row) => CVE_CLUSTERS_TABLE_MAPPER(row))}
+      columns={CVE_CLUSTERS_TABLE_COLUMNS}
       filterConfig={filterConfig}
       activeFiltersConfig={activeFiltersConfig}
       meta={meta}
@@ -141,4 +141,4 @@ const CveDetailTable = () => {
   );
 };
 
-export default CveDetailTable;
+export default CveClustersTable;

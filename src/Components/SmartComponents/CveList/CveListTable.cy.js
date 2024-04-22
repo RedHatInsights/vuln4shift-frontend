@@ -9,6 +9,7 @@ import { initialState } from '../../../Store/Reducers/CveListStore';
 import {
   CVE_LIST_EXPORT_PREFIX,
   EXPOSED_CLUSTERS_OPTIONS,
+  EXPOSED_IMAGES_FEATURE_FLAG,
   PUBLISHED_OPTIONS,
   SEVERITY_OPTIONS,
 } from '../../../Helpers/constants';
@@ -24,19 +25,40 @@ import {
   testSorting,
 } from '../../../../cypress/utils/table';
 import { CVE_LIST_TABLE_COLUMNS } from '../../../Helpers/constants';
+import FlagProvider from '@unleash/proxy-client-react';
 
 const mountComponent = () => {
   mount(
-    <Provider store={init().getStore()}>
-      <Router>
-        <CveListTable />
-      </Router>
-    </Provider>
+    <FlagProvider
+      config={{
+        url: 'http://localhost:8002/feature_flags',
+        clientKey: 'abc',
+        appName: 'abc',
+      }}
+    >
+      <Provider store={init().getStore()}>
+        <Router>
+          <CveListTable />
+        </Router>
+      </Provider>
+    </FlagProvider>
   );
 };
 
 describe('CveListTable with items', () => {
   beforeEach(() => {
+    cy.intercept('GET', '/feature_flags*', {
+      statusCode: 200,
+      body: {
+        toggles: [
+          {
+            name: EXPOSED_IMAGES_FEATURE_FLAG,
+            enabled: true,
+          },
+        ],
+      },
+    });
+
     cy.intercept('GET', '**/api/ocp-vulnerability/v1/cves**', {
       ...initialState,
       ...cves,

@@ -29,6 +29,7 @@
     "@redhat-cloud-services/frontend-components": "^4.2.6",
     "@redhat-cloud-services/frontend-components-notifications": "^4.1.0",
     "@redhat-cloud-services/frontend-components-utilities": "^4.0.10",
+    "@unleash/proxy-client-react": "^4.2.2",
     "axios": "^1.6.8",
     "lodash": "^4.17.21",
     "query-string": "^9.0.0",

@@ -29,6 +29,15 @@ export const fetchExposedClusters = async (params, cveId) => {
   );
 };
 
+export const fetchExposedImages = async (params, cveId) => {
+  return instance.get(
+    `/api/ocp-vulnerability/v1/cves/${cveId}/exposed_images`,
+    {
+      params,
+    }
+  );
+};
+
 export const fetchCveDetails = async (cveId) => {
   return instance.get(`/api/ocp-vulnerability/v1/cves/${cveId}`);
 };

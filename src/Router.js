@@ -55,6 +55,14 @@ export const Router = () => (
       }
     />
     <Route
+      path="/cves/:cveId/images"
+      element={
+        <InsightsElement
+          element={<CveDetailPage activeTab={CVE_DETAIL_TABS.images} />}
+        />
+      }
+    />
+    <Route
       path="/clusters/:clusterId/cves"
       element={
         <InsightsElement
