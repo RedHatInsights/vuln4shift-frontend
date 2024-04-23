@@ -1,31 +1,31 @@
 {
 	"data": [
 		{
-			"exposed_clusters": 11,
+			"clusters_exposed": 11,
 			"name": "openshift4/ose-cloud-event-proxy",
 			"registry": "registry.access.redhat.com",
 			"version": "v4.9.0-202112142229.p0.g6bb5cd3.assembly.stream"
 		},
 		{
-			"exposed_clusters": 12,
+			"clusters_exposed": 12,
 			"name": "openshift4/ose-cloud-event-proxy",
 			"registry": "registry.access.redhat.com",
 			"version": "v4.9.0-202112142229.p0.g6bb5cd3.assembly.stream"
 		},
 		{
-			"exposed_clusters": 13,
+			"clusters_exposed": 13,
 			"name": "openshift4/ose-cloud-event-proxy",
 			"registry": "registry.access.redhat.com",
 			"version": "v4.9.0-202112142229.p0.g6bb5cd3.assembly.stream"
 		},
 		{
-			"exposed_clusters": 14,
+			"clusters_exposed": 14,
 			"name": "openshift4/ose-cloud-event-proxy",
 			"registry": "registry.access.redhat.com",
 			"version": "v4.9.0-202112142229.p0.g6bb5cd3.assembly.stream"
 		},
 		{
-			"exposed_clusters": 15,
+			"clusters_exposed": 15,
 			"name": "openshift4/ose-cloud-event-proxy",
 			"registry": "registry.access.redhat.com",
 			"version": "v4.9.0-202112142229.p0.g6bb5cd3.assembly.stream"

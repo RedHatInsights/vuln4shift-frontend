@@ -268,6 +268,7 @@ export const CVE_IMAGES_TABLE_COLUMNS = [
   },
   {
     title: 'Exposed clusters',
+    sortParam: 'clusters_exposed',
     width: 15,
   },
 ];
@@ -388,7 +389,7 @@ export const CVE_CLUSTERS_TABLE_MAPPER = (row) => ({
 
 export const CVE_IMAGES_TABLE_MAPPER = (row) => ({
   key: row.id,
-  cells: [row.name, row.registry, row.version, row.exposed_clusters],
+  cells: [row.name, row.registry, row.version, row.clusters_exposed],
 });
 
 export const CLUSTER_CVES_TABLE_MAPPER = (row) => ({
