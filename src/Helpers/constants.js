@@ -395,7 +395,7 @@ export const CVE_IMAGES_TABLE_MAPPER = (row) => ({
 export const CLUSTER_CVES_TABLE_MAPPER = (row) => ({
   key: row.synopsis,
   cells: [
-    <Link to={'../cves/' + row.synopsis} key={row.synopsis}>
+    <Link to={`../cves/${row.synopsis}/clusters`} key={row.synopsis}>
       {row.synopsis}
     </Link>,
     processDate(row.publish_date),
