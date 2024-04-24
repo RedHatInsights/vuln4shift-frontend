@@ -66,7 +66,7 @@ describe('ClusterCveTable with items', () => {
   });
 
   it('has items', () => {
-    cy.get('[data-label="CVE ID"]').should('have.length', 5);
+    cy.get('[data-label="CVE ID"]').should('have.length', cves.data.length);
   });
 
   it('has "Reset filter" button hidden by default', () => {

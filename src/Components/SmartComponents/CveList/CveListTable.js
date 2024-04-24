@@ -127,7 +127,7 @@ const CveListTable = () => {
       rows={cves.map((row) =>
         CVE_LIST_TABLE_MAPPER(row, areExposedImagesEnabled)
       )}
-      columns={CVE_LIST_TABLE_COLUMNS}
+      columns={CVE_LIST_TABLE_COLUMNS(areExposedImagesEnabled)}
       filterConfig={filterConfig}
       activeFiltersConfig={activeFiltersConfig}
       meta={meta}

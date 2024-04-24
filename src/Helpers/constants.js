@@ -163,7 +163,7 @@ export const CLUSTER_PROVIDER_OPTIONS = [
 
 /* TABLE COLUMNS */
 
-export const CVE_LIST_TABLE_COLUMNS = [
+export const CVE_LIST_TABLE_COLUMNS = (areExposedImagesEnabled) => [
   {
     title: 'CVE ID',
     sortParam: 'synopsis',
@@ -184,10 +184,14 @@ export const CVE_LIST_TABLE_COLUMNS = [
     title: 'Exposed clusters',
     sortParam: 'clusters_exposed',
   },
-  {
-    title: 'Exposed images',
-    sortParam: 'images_exposed',
-  },
+  ...(areExposedImagesEnabled
+    ? [
+        {
+          title: 'Exposed images',
+          sortParam: 'images_exposed',
+        },
+      ]
+    : []),
 ];
 
 export const CLUSTER_LIST_TABLE_COLUMNS = [
@@ -342,14 +346,13 @@ export const CVE_LIST_TABLE_MAPPER = (row, areExposedImagesEnabled) => ({
     <Link to={`../cves/${row.synopsis}/clusters`} key={row.synopsis}>
       {row.clusters_exposed}
     </Link>,
-    <Link
-      to={`../cves/${row.synopsis}/${
-        areExposedImagesEnabled ? 'images' : 'clusters'
-      }`}
-      key={row.synopsis}
-    >
-      {row.images_exposed}
-    </Link>,
+    ...(areExposedImagesEnabled
+      ? [
+          <Link to={`../cves/${row.synopsis}/images`} key={row.synopsis}>
+            {row.images_exposed}
+          </Link>,
+        ]
+      : []),
   ],
   expandableContent: createCveDescription(row),
 });

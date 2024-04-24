@@ -28,6 +28,18 @@ import { CVE_LIST_TABLE_COLUMNS } from '../../../Helpers/constants';
 import FlagProvider from '@unleash/proxy-client-react';
 
 const mountComponent = () => {
+  cy.intercept('GET', '/feature_flags*', {
+    statusCode: 200,
+    body: {
+      toggles: [
+        {
+          name: EXPOSED_IMAGES_FEATURE_FLAG,
+          enabled: true,
+        },
+      ],
+    },
+  });
+
   mount(
     <FlagProvider
       config={{
@@ -47,18 +59,6 @@ const mountComponent = () => {
 
 describe('CveListTable with items', () => {
   beforeEach(() => {
-    cy.intercept('GET', '/feature_flags*', {
-      statusCode: 200,
-      body: {
-        toggles: [
-          {
-            name: EXPOSED_IMAGES_FEATURE_FLAG,
-            enabled: true,
-          },
-        ],
-      },
-    });
-
     cy.intercept('GET', '**/api/ocp-vulnerability/v1/cves**', {
       ...initialState,
       ...cves,
@@ -78,7 +78,7 @@ describe('CveListTable with items', () => {
   });
 
   it('has items', () => {
-    cy.get('[data-label="CVE ID"]').should('have.length', 5);
+    cy.get('[data-label="CVE ID"]').should('have.length', cves.data.length);
   });
 
   it('has "Reset filter" button hidden by default', () => {
@@ -97,7 +97,7 @@ describe('CveListTable with items', () => {
   });
 
   describe('Sorting', () => {
-    testSorting(CVE_LIST_TABLE_COLUMNS, true);
+    testSorting(CVE_LIST_TABLE_COLUMNS(true), true);
   });
 
   describe('Filtering', () => {

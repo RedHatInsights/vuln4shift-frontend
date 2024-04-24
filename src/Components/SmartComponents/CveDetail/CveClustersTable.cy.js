@@ -62,7 +62,7 @@ describe('CveClustersTable with items', () => {
   });
 
   it('has items', () => {
-    cy.get('[data-label="Name"]').should('have.length', 5);
+    cy.get('[data-label="Name"]').should('have.length', clusters.data.length);
   });
 
   it('has "Reset filter" button hidden by default', () => {
