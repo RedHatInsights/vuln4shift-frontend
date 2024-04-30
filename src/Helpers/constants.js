@@ -165,7 +165,7 @@ export const IMAGE_REGISTRY_OPTIONS = [];
 
 /* TABLE COLUMNS */
 
-export const CVE_LIST_TABLE_COLUMNS = (areExposedImagesEnabled) => [
+export const CVE_LIST_TABLE_COLUMNS = [
   {
     title: 'CVE ID',
     sortParam: 'synopsis',
@@ -197,16 +197,12 @@ export const CVE_LIST_TABLE_COLUMNS = (areExposedImagesEnabled) => [
     isShown: true,
     isShownByDefault: true,
   },
-  ...(areExposedImagesEnabled
-    ? [
-        {
-          title: 'Exposed images',
-          sortParam: 'images_exposed',
-          isShown: true,
-          isShownByDefault: true,
-        },
-      ]
-    : []),
+  {
+    title: 'Exposed images',
+    sortParam: 'images_exposed',
+    isShown: true,
+    isShownByDefault: true,
+  },
 ];
 
 export const CLUSTER_LIST_TABLE_COLUMNS = [

@@ -6,15 +6,15 @@ import {
   CVE_CLUSTERS_ALLOWED_PARAMS,
   CVE_CLUSTERS_DEFAULT_FILTERS,
   CVE_CLUSTERS_EXPORT_PREFIX,
-  CVE_CLUSTERS_TABLE_COLUMNS,
   CVE_CLUSTERS_TABLE_MAPPER,
 } from '../../../Helpers/constants';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import NoMatchingItems from '../../PresentationalComponents/EmptyStates/NoMatchingItems';
 import { useParams } from 'react-router-dom';
 import BaseTable from '../Generic/BaseTable';
 import { useExport, useUrlBoundParams } from '../../../Helpers/hooks';
 import {
+  changeCveClustersTableColumns,
   changeCveClustersTableParams,
   fetchCveClustersTable,
 } from '../../../Store/Actions';
@@ -25,9 +25,11 @@ import checkboxFilter from '../Filters/CheckboxFilter';
 import { uniqBy } from 'lodash';
 
 const CveClustersTable = () => {
+  const dispatch = useDispatch();
+
   const params = useParams();
 
-  const { clusters, isTableLoading, meta, error } = useSelector(
+  const { clusters, isTableLoading, meta, error, columns } = useSelector(
     ({ CveClustersStore }) => CveClustersStore
   );
 
@@ -129,7 +131,7 @@ const CveClustersTable = () => {
     <BaseTable
       isLoading={isTableLoading}
       rows={clusters.map((row) => CVE_CLUSTERS_TABLE_MAPPER(row))}
-      columns={CVE_CLUSTERS_TABLE_COLUMNS}
+      columns={columns}
       filterConfig={filterConfig}
       activeFiltersConfig={activeFiltersConfig}
       meta={meta}
@@ -137,6 +139,9 @@ const CveClustersTable = () => {
       emptyState={<NoMatchingItems items="clusters" />}
       apply={apply}
       onExport={(format) => onExport(format, meta)}
+      applyColumns={(columns) =>
+        dispatch(changeCveClustersTableColumns(columns))
+      }
     />
   );
 };

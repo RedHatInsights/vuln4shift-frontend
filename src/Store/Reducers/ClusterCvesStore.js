@@ -1,5 +1,6 @@
 import {
   CLUSTER_CVES_DEFAULT_FILTERS,
+  CLUSTER_CVES_TABLE_COLUMNS,
   DEFAULT_LIMIT,
 } from '../../Helpers/constants';
 import { deepFreeze, isTimestampValid } from '../../Helpers/miscHelper';
@@ -10,6 +11,7 @@ export const initialState = deepFreeze({
   cves: [],
   isTableLoading: true,
   timestamp: new Date(),
+  columns: CLUSTER_CVES_TABLE_COLUMNS,
   meta: {
     limit: DEFAULT_LIMIT,
     offset: 0,
@@ -65,6 +67,13 @@ const ClusterCvesStore = (state = initialState, action) => {
           limit: state.meta.limit,
           ...action.payload,
         },
+      };
+    }
+
+    case `${ActionTypes.CHANGE_CLUSTER_CVES_TABLE_COLUMNS}`: {
+      return {
+        ...state,
+        columns: action.payload,
       };
     }
   }

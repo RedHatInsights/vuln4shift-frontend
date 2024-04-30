@@ -1,5 +1,6 @@
 import {
   CVE_IMAGES_DEFAULT_FILTERS,
+  CVE_IMAGES_TABLE_COLUMNS,
   DEFAULT_LIMIT,
 } from '../../Helpers/constants';
 import { deepFreeze, isTimestampValid } from '../../Helpers/miscHelper';
@@ -9,6 +10,7 @@ export const initialState = deepFreeze({
   images: [],
   isTableLoading: true,
   timestamp: new Date(),
+  columns: CVE_IMAGES_TABLE_COLUMNS,
   meta: {
     limit: DEFAULT_LIMIT,
     offset: 0,
@@ -68,6 +70,13 @@ const CveImagesStore = (state = initialState, action) => {
           dynamic_registry_options: state.meta.dynamic_registry_options,
           ...action.payload,
         },
+      };
+    }
+
+    case `${ActionTypes.CHANGE_CVE_IMAGES_TABLE_COLUMNS}`: {
+      return {
+        ...state,
+        columns: action.payload,
       };
     }
   }

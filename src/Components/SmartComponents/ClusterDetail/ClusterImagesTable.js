@@ -3,12 +3,12 @@ import {
   CLUSTER_IMAGES_ALLOWED_PARAMS,
   CLUSTER_IMAGES_DEFAULT_FILTERS,
   CLUSTER_IMAGES_EXPORT_PREFIX,
-  CLUSTER_IMAGES_TABLE_COLUMNS,
   CLUSTER_IMAGES_TABLE_MAPPER,
   IMAGE_REGISTRY_OPTIONS,
 } from '../../../Helpers/constants';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
+  changeClusterImagesTableColumns,
   changeClusterImagesTableParams,
   fetchClusterImagesTable,
 } from '../../../Store/Actions';
@@ -23,9 +23,11 @@ import { uniqBy } from 'lodash';
 import checkboxFilter from '../Filters/CheckboxFilter';
 
 const ClusterImagesTable = () => {
+  const dispatch = useDispatch();
+
   const params = useParams();
 
-  const { exposed_images, isTableLoading, meta, error } = useSelector(
+  const { exposed_images, isTableLoading, meta, error, columns } = useSelector(
     ({ ClusterImagesStore }) => ClusterImagesStore
   );
 
@@ -85,7 +87,7 @@ const ClusterImagesTable = () => {
     <BaseTable
       isLoading={isTableLoading}
       rows={exposed_images.map((row) => CLUSTER_IMAGES_TABLE_MAPPER(row))}
-      columns={CLUSTER_IMAGES_TABLE_COLUMNS}
+      columns={columns}
       filterConfig={filterConfig}
       activeFiltersConfig={activeFiltersConfig}
       meta={meta}
@@ -93,6 +95,9 @@ const ClusterImagesTable = () => {
       emptyState={<NoMatchingItems items="images" />}
       apply={apply}
       onExport={(format) => onExport(format, meta)}
+      applyColumns={(columns) =>
+        dispatch(changeClusterImagesTableColumns(columns))
+      }
     />
   );
 };
