@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import propTypes from 'prop-types';
-import { Main } from '@redhat-cloud-services/frontend-components/Main';
 import CveDetailPageHeader from './CveDetailPageHeader';
 import CveClustersTable from './CveClustersTable';
 import CveImagesTable from './CveImagesTable';
@@ -31,7 +30,7 @@ const CveDetailPage = ({ activeTab }) => {
   return (
     <ErrorHandler error={error}>
       <CveDetailPageHeader />
-      <Main>
+      <section className="pf-v5-l-page__main-section pf-v5-c-page__main-section">
         <TableTabs
           activeTab={activeTab}
           tabs={[
@@ -51,7 +50,7 @@ const CveDetailPage = ({ activeTab }) => {
               : []),
           ]}
         />
-      </Main>
+      </section>
     </ErrorHandler>
   );
 };

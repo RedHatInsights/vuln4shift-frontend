@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import propTypes from 'prop-types';
-import { Main } from '@redhat-cloud-services/frontend-components/Main';
 import ClusterCveTable from './ClusterCveTable';
 import ClusterDetailPageHeader from './ClusterDetailPageHeader';
 import { useSelector } from 'react-redux';
@@ -33,7 +32,7 @@ const ClusterDetailPage = ({ activeTab }) => {
   return (
     <ErrorHandler error={error}>
       <ClusterDetailPageHeader />
-      <Main>
+      <section className="pf-v5-l-page__main-section pf-v5-c-page__main-section">
         <TableTabs
           activeTab={activeTab}
           tabs={[
@@ -53,7 +52,7 @@ const ClusterDetailPage = ({ activeTab }) => {
               : []),
           ]}
         />
-      </Main>
+      </section>
     </ErrorHandler>
   );
 };

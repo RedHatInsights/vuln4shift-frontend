@@ -10,7 +10,6 @@ import {
   OutlinedQuestionCircleIcon,
   ExternalLinkAltIcon,
 } from '@patternfly/react-icons';
-import { Main } from '@redhat-cloud-services/frontend-components/Main';
 import {
   PageHeader,
   PageHeaderTitle,
@@ -88,7 +87,7 @@ const CveListPage = () => {
           />
         )}
       </PageHeader>
-      <Main>
+      <section className="pf-v5-l-page__main-section pf-v5-c-page__main-section">
         <Alert
           variant={AlertVariant.info}
           isInline
@@ -110,7 +109,7 @@ const CveListPage = () => {
           </a>
         </Alert>
         <CveListTable />
-      </Main>
+      </section>
     </Fragment>
   );
 };
