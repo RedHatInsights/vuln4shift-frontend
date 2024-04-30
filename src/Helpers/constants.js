@@ -169,28 +169,41 @@ export const CVE_LIST_TABLE_COLUMNS = (areExposedImagesEnabled) => [
   {
     title: 'CVE ID',
     sortParam: 'synopsis',
+    isShown: true,
+    isShownByDefault: true,
+    isUntoggleable: true,
   },
   {
     title: 'Publish date',
     sortParam: 'publish_date',
+    isShown: true,
+    isShownByDefault: true,
   },
   {
     title: 'Severity',
     sortParam: 'severity',
+    isShown: true,
+    isShownByDefault: true,
   },
   {
     title: 'CVSS base score',
     sortParam: 'cvss_score',
+    isShown: true,
+    isShownByDefault: true,
   },
   {
     title: 'Exposed clusters',
     sortParam: 'clusters_exposed',
+    isShown: true,
+    isShownByDefault: true,
   },
   ...(areExposedImagesEnabled
     ? [
         {
           title: 'Exposed images',
           sortParam: 'images_exposed',
+          isShown: true,
+          isShownByDefault: true,
         },
       ]
     : []),
@@ -201,31 +214,46 @@ export const CLUSTER_LIST_TABLE_COLUMNS = [
     title: 'Name',
     sortParam: 'display_name',
     sortDefaultDirection: 'asc',
+    isShown: true,
+    isShownByDefault: true,
+    isUntoggleable: true,
   },
   {
     title: 'Status',
     sortParam: 'status',
     sortDefaultDirection: 'asc',
+    isShown: true,
+    isShownByDefault: true,
   },
   {
     title: 'Type',
+    isShown: true,
+    isShownByDefault: true,
   },
   {
     title: 'Version',
     sortParam: 'version',
+    isShown: true,
+    isShownByDefault: true,
   },
   {
     title: 'CVEs severity',
     sortParam: 'cluster_severity',
+    isShown: true,
+    isShownByDefault: true,
   },
   {
     title: 'Provider',
     sortParam: 'provider',
     sortDefaultDirection: 'asc',
+    isShown: true,
+    isShownByDefault: true,
   },
   {
     title: 'Last seen',
     sortParam: 'last_seen',
+    isShown: true,
+    isShownByDefault: true,
   },
 ];
 
@@ -234,27 +262,40 @@ export const CVE_CLUSTERS_TABLE_COLUMNS = [
     title: 'Name',
     sortParam: 'display_name',
     sortDefaultDirection: 'asc',
+    isShown: true,
+    isShownByDefault: true,
+    isUntoggleable: true,
   },
   {
     title: 'Status',
     sortParam: 'status',
     sortDefaultDirection: 'asc',
+    isShown: true,
+    isShownByDefault: true,
   },
   {
     title: 'Type',
+    isShown: true,
+    isShownByDefault: true,
   },
   {
     title: 'Version',
     sortParam: 'version',
+    isShown: true,
+    isShownByDefault: true,
   },
   {
     title: 'Provider',
     sortParam: 'provider',
     sortDefaultDirection: 'asc',
+    isShown: true,
+    isShownByDefault: true,
   },
   {
     title: 'Last seen',
     sortParam: 'last_seen',
+    isShown: true,
+    isShownByDefault: true,
   },
 ];
 
@@ -263,19 +304,28 @@ export const CVE_IMAGES_TABLE_COLUMNS = [
     title: 'Name',
     sortParam: 'name',
     sortDefaultDirection: 'asc',
+    isShown: true,
+    isShownByDefault: true,
+    isUntoggleable: true,
   },
   {
     title: 'Registry name',
     sortParam: 'registry',
     sortDefaultDirection: 'asc',
+    isShown: true,
+    isShownByDefault: true,
   },
   {
     title: 'Version',
     sortParam: 'version',
+    isShown: true,
+    isShownByDefault: true,
   },
   {
     title: 'Exposed clusters',
     sortParam: 'clusters_exposed',
+    isShown: true,
+    isShownByDefault: true,
     width: 15,
   },
 ];
@@ -284,18 +334,27 @@ export const CLUSTER_CVES_TABLE_COLUMNS = [
   {
     title: 'CVE ID',
     sortParam: 'synopsis',
+    isShown: true,
+    isShownByDefault: true,
+    isUntoggleable: true,
   },
   {
     title: 'Publish date',
     sortParam: 'publish_date',
+    isShown: true,
+    isShownByDefault: true,
   },
   {
     title: 'Severity',
     sortParam: 'severity',
+    isShown: true,
+    isShownByDefault: true,
   },
   {
     title: 'CVSS base score',
     sortParam: 'cvss_score',
+    isShown: true,
+    isShownByDefault: true,
   },
 ];
 
@@ -304,14 +363,21 @@ export const CLUSTER_IMAGES_TABLE_COLUMNS = [
     title: 'Name',
     sortParam: 'name',
     sortDefaultDirection: 'asc',
+    isShown: true,
+    isShownByDefault: true,
+    isUntoggleable: true,
   },
   {
     title: 'Registry name',
     sortParam: 'registry',
+    isShown: true,
+    isShownByDefault: true,
   },
   {
     title: 'Version',
     sortParam: 'version',
+    isShown: true,
+    isShownByDefault: true,
   },
 ];
 

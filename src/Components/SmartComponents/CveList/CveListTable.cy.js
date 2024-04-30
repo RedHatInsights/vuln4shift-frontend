@@ -34,7 +34,7 @@ const mountComponent = () => {
       toggles: [
         {
           name: EXPOSED_IMAGES_FEATURE_FLAG,
-          enabled: true,
+          enabled: false,
         },
       ],
     },
@@ -97,7 +97,7 @@ describe('CveListTable with items', () => {
   });
 
   describe('Sorting', () => {
-    testSorting(CVE_LIST_TABLE_COLUMNS(true), true);
+    testSorting(CVE_LIST_TABLE_COLUMNS(false), true);
   });
 
   describe('Filtering', () => {
