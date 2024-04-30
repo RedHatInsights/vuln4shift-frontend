@@ -90,7 +90,7 @@ const CveDetailPageHeader = () => {
                   fontSize="sm"
                   style={{ verticalAlign: -4 }}
                 >
-                  <span ouiaId="cve-detail-publish-date">
+                  <span data-ouia-component-id="cve-detail-publish-date">
                     {processDate(publish_date)}
                   </span>
                 </WithLoader>
@@ -156,7 +156,7 @@ const CveDetailPageHeader = () => {
                           (option) => option.label === severity
                         )?.textColor,
                     }}
-                    ouiaId="cve-detail-severity"
+                    data-ouia-component-id="cve-detail-severity"
                   >
                     <Shield
                       impact={hasMetadata ? severity : 'Unknown'}

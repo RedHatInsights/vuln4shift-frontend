@@ -62,7 +62,11 @@ describe('CveDetailPageHeader without metadata', () => {
   it('shows missing metadata empty state when CVE description is "unknown"', () => {
     cy.contains('No description available');
 
-    cy.get('[ouiaid="cve-detail-severity"]').contains('Unknown');
-    cy.get('[ouiaid="cve-detail-cvss-score"]').contains('Unknown');
+    cy.get('[data-ouia-component-id="cve-detail-severity"]').contains(
+      'Unknown'
+    );
+    cy.get('[data-ouia-component-id="cve-detail-cvss-score"]').contains(
+      'Unknown'
+    );
   });
 });
