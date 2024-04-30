@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import propTypes from 'prop-types';
 import BaseTableBody from '../Generic/BaseTableBody';
 import BaseToolbar from '../Generic/BaseToolbar';
 import BottomPagination from '../../PresentationalComponents/BottomPagination';
 import ErrorHandler from '../../PresentationalComponents/ErrorHandler';
+import { useColumnManagement } from '../../../Helpers/hooks';
+import { Button, ButtonVariant } from '@patternfly/react-core';
+import { ColumnsIcon } from '@patternfly/react-icons';
 
 const BaseTable = ({
   isLoading,
@@ -20,8 +23,16 @@ const BaseTable = ({
 }) => {
   const { offset, limit, total_items, sort } = meta;
 
+  const [currentColumns, setCurrentColumns] = useState(columns);
+
+  const [ColumnManagementModal, setColumnModalOpen] = useColumnManagement(
+    currentColumns,
+    (columns) => setCurrentColumns(columns)
+  );
+
   return (
     <ErrorHandler error={error}>
+      {ColumnManagementModal}
       <BaseToolbar
         isLoading={isLoading}
         page={offset / limit + 1}
@@ -31,11 +42,27 @@ const BaseTable = ({
         filterConfig={filterConfig}
         activeFiltersConfig={activeFiltersConfig}
         onExport={onExport}
+        actionsConfig={{
+          actions: [
+            <Button
+              onClick={() => setColumnModalOpen(true)}
+              variant={ButtonVariant.secondary}
+              icon={<ColumnsIcon />}
+              key="column-mgmt"
+              ouiaId="column-management-modal-open-button"
+            >
+              Manage columns
+            </Button>,
+          ],
+        }}
       />
       <BaseTableBody
         isLoading={isLoading}
-        columns={columns}
-        rows={rows}
+        columns={currentColumns.filter((column) => column.isShown)}
+        rows={rows.map((row) => ({
+          ...row,
+          cells: row.cells.filter((_, i) => currentColumns[i].isShown),
+        }))}
         isExpandable={isExpandable}
         emptyState={emptyState}
         sortParam={sort}

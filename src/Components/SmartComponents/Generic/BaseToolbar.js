@@ -12,6 +12,7 @@ const BaseToolbar = ({
   filterConfig,
   activeFiltersConfig,
   onExport,
+  actionsConfig,
 }) => {
   return (
     <PrimaryToolbar
@@ -38,6 +39,7 @@ const BaseToolbar = ({
           onSelect: (e, format) => onExport(format),
         }
       }
+      actionsConfig={actionsConfig}
     />
   );
 };
@@ -55,6 +57,7 @@ BaseToolbar.propTypes = {
     filters: propTypes.array,
   }),
   onExport: propTypes.func,
+  actionsConfig: propTypes.object,
 };
 
 export default BaseToolbar;
