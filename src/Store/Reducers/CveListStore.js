@@ -1,5 +1,6 @@
 import {
   CVE_LIST_DEFAULT_FILTERS,
+  CVE_LIST_TABLE_COLUMNS,
   DEFAULT_LIMIT,
 } from '../../Helpers/constants';
 import { deepFreeze, isTimestampValid } from '../../Helpers/miscHelper';
@@ -9,6 +10,7 @@ export const initialState = deepFreeze({
   cves: [],
   isLoading: true,
   timestamp: new Date(),
+  columns: CVE_LIST_TABLE_COLUMNS,
   meta: {
     limit: DEFAULT_LIMIT,
     offset: 0,
@@ -64,6 +66,13 @@ const CveListStore = (state = initialState, action) => {
           limit: state.meta.limit,
           ...action.payload,
         },
+      };
+    }
+
+    case `${ActionTypes.CHANGE_CVE_LIST_TABLE_COLUMNS}`: {
+      return {
+        ...state,
+        columns: action.payload,
       };
     }
   }

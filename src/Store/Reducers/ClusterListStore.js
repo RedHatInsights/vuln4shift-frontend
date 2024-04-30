@@ -1,5 +1,6 @@
 import {
   CLUSTER_LIST_DEFAULT_FILTERS,
+  CLUSTER_LIST_TABLE_COLUMNS,
   DEFAULT_LIMIT,
 } from '../../Helpers/constants';
 import { deepFreeze, isTimestampValid } from '../../Helpers/miscHelper';
@@ -9,6 +10,7 @@ export const initialState = deepFreeze({
   clusters: [],
   isLoading: true,
   timestamp: new Date(),
+  columns: CLUSTER_LIST_TABLE_COLUMNS,
   meta: {
     limit: DEFAULT_LIMIT,
     offset: 0,
@@ -72,6 +74,13 @@ const ClusterListStore = (state = initialState, action) => {
           dynamic_version_options: state.meta.dynamic_version_options,
           ...action.payload,
         },
+      };
+    }
+
+    case `${ActionTypes.CHANGE_CLUSTER_LIST_TABLE_COLUMNS}`: {
+      return {
+        ...state,
+        columns: action.payload,
       };
     }
   }

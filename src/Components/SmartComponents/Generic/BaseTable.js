@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import propTypes from 'prop-types';
 import BaseTableBody from '../Generic/BaseTableBody';
 import BaseToolbar from '../Generic/BaseToolbar';
@@ -20,14 +20,13 @@ const BaseTable = ({
   emptyState,
   apply,
   onExport,
+  applyColumns,
 }) => {
   const { offset, limit, total_items, sort } = meta;
 
-  const [currentColumns, setCurrentColumns] = useState(columns);
-
   const [ColumnManagementModal, setColumnModalOpen] = useColumnManagement(
-    currentColumns,
-    (columns) => setCurrentColumns(columns)
+    columns,
+    (columns) => applyColumns(columns)
   );
 
   return (
@@ -58,10 +57,10 @@ const BaseTable = ({
       />
       <BaseTableBody
         isLoading={isLoading}
-        columns={currentColumns.filter((column) => column.isShown)}
+        columns={columns.filter((column) => column.isShown)}
         rows={rows.map((row) => ({
           ...row,
-          cells: row.cells.filter((_, i) => currentColumns[i].isShown),
+          cells: row.cells.filter((_, i) => columns[i].isShown),
         }))}
         isExpandable={isExpandable}
         emptyState={emptyState}
@@ -86,6 +85,9 @@ BaseTable.propTypes = {
     propTypes.shape({
       title: propTypes.node.isRequired,
       sortParam: propTypes.string,
+      isShown: propTypes.bool.isRequired,
+      isShownByDefault: propTypes.bool.isRequired,
+      isUntoggleable: propTypes.bool,
     })
   ).isRequired,
   rows: propTypes.arrayOf(
@@ -109,6 +111,7 @@ BaseTable.propTypes = {
   error: propTypes.object,
   apply: propTypes.func,
   onExport: propTypes.func,
+  applyColumns: propTypes.func,
 };
 
 export default BaseTable;

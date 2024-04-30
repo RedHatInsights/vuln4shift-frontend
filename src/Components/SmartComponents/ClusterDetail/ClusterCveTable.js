@@ -3,13 +3,13 @@ import {
   CLUSTER_CVES_ALLOWED_PARAMS,
   CLUSTER_CVES_DEFAULT_FILTERS,
   CLUSTER_CVES_EXPORT_PREFIX,
-  CLUSTER_CVES_TABLE_COLUMNS,
   CLUSTER_CVES_TABLE_MAPPER,
   PUBLISHED_OPTIONS,
   SEVERITY_OPTIONS,
 } from '../../../Helpers/constants';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
+  changeClusterCvesTableColumns,
   changeClusterCvesTableParams,
   fetchClusterCveTable,
 } from '../../../Store/Actions';
@@ -28,9 +28,11 @@ import NoMatchingCves from '../../PresentationalComponents/EmptyStates/NoMatchin
 import { fetchClusterCves } from '../../../Helpers/apiHelper';
 
 const ClusterCveTable = () => {
+  const dispatch = useDispatch();
+
   const params = useParams();
 
-  const { cves, isTableLoading, meta, error } = useSelector(
+  const { cves, isTableLoading, meta, error, columns } = useSelector(
     ({ ClusterCvesStore }) => ClusterCvesStore
   );
 
@@ -113,7 +115,7 @@ const ClusterCveTable = () => {
       isLoading={isTableLoading}
       isExpandable
       rows={cves.map((row) => CLUSTER_CVES_TABLE_MAPPER(row))}
-      columns={CLUSTER_CVES_TABLE_COLUMNS}
+      columns={columns}
       filterConfig={filterConfig}
       activeFiltersConfig={activeFiltersConfig}
       meta={meta}
@@ -121,6 +123,9 @@ const ClusterCveTable = () => {
       emptyState={<NoMatchingCves />}
       apply={apply}
       onExport={(format) => onExport(format, meta)}
+      applyColumns={(columns) =>
+        dispatch(changeClusterCvesTableColumns(columns))
+      }
     />
   );
 };

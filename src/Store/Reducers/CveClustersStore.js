@@ -1,5 +1,6 @@
 import {
   CVE_CLUSTERS_DEFAULT_FILTERS,
+  CVE_CLUSTERS_TABLE_COLUMNS,
   DEFAULT_LIMIT,
 } from '../../Helpers/constants';
 import { deepFreeze, isTimestampValid } from '../../Helpers/miscHelper';
@@ -9,6 +10,7 @@ export const initialState = deepFreeze({
   clusters: [],
   isTableLoading: true,
   timestamp: new Date(),
+  columns: CVE_CLUSTERS_TABLE_COLUMNS,
   meta: {
     limit: DEFAULT_LIMIT,
     offset: 0,
@@ -72,6 +74,13 @@ const CveClustersStore = (state = initialState, action) => {
           dynamic_version_options: state.meta.dynamic_version_options,
           ...action.payload,
         },
+      };
+    }
+
+    case `${ActionTypes.CHANGE_CVE_CLUSTERS_TABLE_COLUMNS}`: {
+      return {
+        ...state,
+        columns: action.payload,
       };
     }
   }

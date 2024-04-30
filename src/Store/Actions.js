@@ -118,3 +118,52 @@ export const changeClusterImagesTableParams = (params) => ({
   },
   payload: () => params,
 });
+
+/* CHANGING TABLE COLUMNS */
+export const changeCveListTableColumns = (columns) => ({
+  type: ActionTypes.CHANGE_CVE_LIST_TABLE_COLUMNS,
+  meta: {
+    timestamp: new Date(),
+  },
+  payload: () => columns,
+});
+
+export const changeClusterListTableColumns = (columns) => ({
+  type: ActionTypes.CHANGE_CLUSTER_LIST_TABLE_COLUMNS,
+  meta: {
+    timestamp: new Date(),
+  },
+  payload: () => columns,
+});
+
+export const changeCveClustersTableColumns = (columns) => ({
+  type: ActionTypes.CHANGE_CVE_CLUSTERS_TABLE_COLUMNS,
+  meta: {
+    timestamp: new Date(),
+  },
+  payload: () => columns,
+});
+
+export const changeCveImagesTableColumns = (columns) => ({
+  type: ActionTypes.CHANGE_CVE_IMAGES_TABLE_COLUMNS,
+  meta: {
+    timestamp: new Date(),
+  },
+  payload: () => columns,
+});
+
+export const changeClusterCvesTableColumns = (columns) => ({
+  type: ActionTypes.CHANGE_CLUSTER_CVES_TABLE_COLUMNS,
+  meta: {
+    timestamp: new Date(),
+  },
+  payload: () => columns,
+});
+
+export const changeClusterImagesTableColumns = (columns) => ({
+  type: ActionTypes.CHANGE_CLUSTER_IMAGES_TABLE_COLUMNS,
+  meta: {
+    timestamp: new Date(),
+  },
+  payload: () => columns,
+});

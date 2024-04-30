@@ -2,7 +2,6 @@ import React from 'react';
 import {
   CVE_LIST_ALLOWED_PARAMS,
   CVE_LIST_DEFAULT_FILTERS,
-  CVE_LIST_TABLE_COLUMNS,
   CVE_LIST_TABLE_MAPPER,
   EXPOSED_CLUSTERS_OPTIONS,
   PUBLISHED_OPTIONS,
@@ -10,10 +9,11 @@ import {
   CVE_LIST_EXPORT_PREFIX,
   EXPOSED_IMAGES_FEATURE_FLAG,
 } from '../../../Helpers/constants';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   fetchCveListTable,
   changeCveListTableParams,
+  changeCveListTableColumns,
 } from '../../../Store/Actions';
 import NoMatchingCves from '../../PresentationalComponents/EmptyStates/NoMatchingCves';
 import {
@@ -33,9 +33,11 @@ import BaseTable from '../Generic/BaseTable';
 import { fetchCves } from '../../../Helpers/apiHelper';
 
 const CveListTable = () => {
+  const dispatch = useDispatch();
+
   const areExposedImagesEnabled = useFeatureFlag(EXPOSED_IMAGES_FEATURE_FLAG);
 
-  const { cves, isLoading, meta, error } = useSelector(
+  const { cves, isLoading, meta, error, columns } = useSelector(
     ({ CveListStore }) => CveListStore
   );
 
@@ -127,7 +129,10 @@ const CveListTable = () => {
       rows={cves.map((row) =>
         CVE_LIST_TABLE_MAPPER(row, areExposedImagesEnabled)
       )}
-      columns={CVE_LIST_TABLE_COLUMNS(areExposedImagesEnabled)}
+      columns={columns.filter(
+        (columns) =>
+          areExposedImagesEnabled || columns.title !== 'Exposed images'
+      )}
       filterConfig={filterConfig}
       activeFiltersConfig={activeFiltersConfig}
       meta={meta}
@@ -135,6 +140,7 @@ const CveListTable = () => {
       emptyState={<NoMatchingCves />}
       apply={apply}
       onExport={(format) => onExport(format, meta)}
+      applyColumns={(columns) => dispatch(changeCveListTableColumns(columns))}
     />
   );
 };

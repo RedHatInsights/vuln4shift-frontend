@@ -3,15 +3,15 @@ import {
   CLUSTER_LIST_ALLOWED_PARAMS,
   CLUSTER_LIST_DEFAULT_FILTERS,
   CLUSTER_LIST_EXPORT_PREFIX,
-  CLUSTER_LIST_TABLE_COLUMNS,
   CLUSTER_LIST_TABLE_MAPPER,
   CLUSTER_STATUS_OPTIONS,
   CLUSTER_VERSION_OPTIONS,
   CLUSTER_PROVIDER_OPTIONS,
   CLUSTER_SEVERITY_OPTIONS,
 } from '../../../Helpers/constants';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
+  changeClusterListTableColumns,
   changeClusterListTableParams,
   fetchClusterListTable,
 } from '../../../Store/Actions';
@@ -26,7 +26,9 @@ import checkboxFilter from '../Filters/CheckboxFilter';
 import { uniqBy } from 'lodash';
 
 const ClusterCveTable = () => {
-  const { clusters, isLoading, meta, error } = useSelector(
+  const dispatch = useDispatch();
+
+  const { clusters, isLoading, meta, error, columns } = useSelector(
     ({ ClusterListStore }) => ClusterListStore
   );
 
@@ -132,7 +134,7 @@ const ClusterCveTable = () => {
     <BaseTable
       isLoading={isLoading}
       rows={clusters.map((row) => CLUSTER_LIST_TABLE_MAPPER(row))}
-      columns={CLUSTER_LIST_TABLE_COLUMNS}
+      columns={columns}
       filterConfig={filterConfig}
       activeFiltersConfig={activeFiltersConfig}
       meta={meta}
@@ -146,6 +148,9 @@ const ClusterCveTable = () => {
       }
       apply={apply}
       onExport={(format) => onExport(format, meta)}
+      applyColumns={(columns) =>
+        dispatch(changeClusterListTableColumns(columns))
+      }
     />
   );
 };
