@@ -4,7 +4,6 @@ import {
   AlertActionCloseButton,
   AlertVariant,
 } from '@patternfly/react-core';
-import { Main } from '@redhat-cloud-services/frontend-components/Main';
 import {
   PageHeader,
   PageHeaderTitle,
@@ -45,9 +44,9 @@ const ClusterListPage = () => {
           />
         )}
       </PageHeader>
-      <Main>
+      <section className="pf-v5-l-page__main-section pf-v5-c-page__main-section">
         <ClusterListTable />
-      </Main>
+      </section>
     </Fragment>
   );
 };
