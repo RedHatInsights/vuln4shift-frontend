@@ -67,7 +67,9 @@ const ClusterDetailPageHeader = () => {
           isLoading={isDetailLoading}
           style={{ verticalAlign: -4 }}
         >
-          <span ouiaId="cluster-detail-id">{params.clusterId}</span>
+          <span data-ouia-component-id="cluster-detail-id">
+            {params.clusterId}
+          </span>
         </WithLoader>
       </div>
       <div>
@@ -79,7 +81,7 @@ const ClusterDetailPageHeader = () => {
           isLoading={isDetailLoading}
           style={{ verticalAlign: -4 }}
         >
-          <span ouiaId="cluster-detail-last-seen">
+          <span data-ouia-component-id="cluster-detail-last-seen">
             <DateFormat date={cluster.last_seen} type="exact" />
           </span>
         </WithLoader>
