@@ -269,6 +269,7 @@ export const CVE_IMAGES_TABLE_COLUMNS = [
   },
   {
     title: 'Version',
+    sortParam: 'version',
   },
   {
     title: 'Exposed clusters',
@@ -308,6 +309,7 @@ export const CLUSTER_IMAGES_TABLE_COLUMNS = [
   },
   {
     title: 'Version',
+    sortParam: 'version',
   },
 ];
 
