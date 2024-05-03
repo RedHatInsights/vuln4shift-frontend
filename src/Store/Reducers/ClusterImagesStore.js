@@ -31,13 +31,16 @@ const ClusterImagesStore = (state = initialState, action) => {
     }
 
     case `${ActionTypes.FETCH_CLUSTER_IMAGES_TABLE}_FULFILLED`: {
+      const { data, meta } = action.payload.data;
+
       if (isTimestampValid(state.timestamp, action.meta.timestamp)) {
         return {
           ...state,
-          exposed_images: action.payload.data.data,
+          exposed_images: data,
           meta: {
             ...state.meta,
-            total_items: action.payload.data.meta.total_items,
+            total_items: meta.total_items,
+            dynamic_registry_options: meta.image_registries_all,
           },
           isTableLoading: false,
         };
@@ -63,6 +66,7 @@ const ClusterImagesStore = (state = initialState, action) => {
           total_items: state.meta.total_items,
           sort: state.meta.sort,
           limit: state.meta.limit,
+          dynamic_registry_options: state.meta.dynamic_registry_options,
           ...action.payload,
         },
       };

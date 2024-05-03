@@ -161,6 +161,8 @@ export const CLUSTER_PROVIDER_OPTIONS = [
   },
 ];
 
+export const IMAGE_REGISTRY_OPTIONS = [];
+
 /* TABLE COLUMNS */
 
 export const CVE_LIST_TABLE_COLUMNS = (areExposedImagesEnabled) => [
@@ -445,7 +447,11 @@ export const CVE_CLUSTERS_ALLOWED_PARAMS = [
   'provider',
 ];
 
-export const CVE_IMAGES_ALLOWED_PARAMS = [...GENERIC_ALLOWED_PARAMS, 'search'];
+export const CVE_IMAGES_ALLOWED_PARAMS = [
+  ...GENERIC_ALLOWED_PARAMS,
+  'search',
+  'registry',
+];
 
 export const CLUSTER_CVES_ALLOWED_PARAMS = [
   ...GENERIC_ALLOWED_PARAMS,
@@ -459,7 +465,6 @@ export const CLUSTER_IMAGES_ALLOWED_PARAMS = [
   ...GENERIC_ALLOWED_PARAMS,
   'search',
   'registry',
-  'version',
 ];
 
 /* DEFAULT FILTERS */

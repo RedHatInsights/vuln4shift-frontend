@@ -39,6 +39,7 @@ const CveImagesStore = (state = initialState, action) => {
           meta: {
             ...state.meta,
             total_items: meta.total_items,
+            dynamic_registry_options: meta.image_registries_all,
           },
           isTableLoading: false,
         };
@@ -64,6 +65,7 @@ const CveImagesStore = (state = initialState, action) => {
           total_items: state.meta.total_items,
           sort: state.meta.sort,
           limit: state.meta.limit,
+          dynamic_registry_options: state.meta.dynamic_registry_options,
           ...action.payload,
         },
       };
