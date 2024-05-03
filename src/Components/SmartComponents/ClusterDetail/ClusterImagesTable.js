@@ -5,6 +5,7 @@ import {
   CLUSTER_IMAGES_EXPORT_PREFIX,
   CLUSTER_IMAGES_TABLE_COLUMNS,
   CLUSTER_IMAGES_TABLE_MAPPER,
+  IMAGE_REGISTRY_OPTIONS,
 } from '../../../Helpers/constants';
 import { useSelector } from 'react-redux';
 import {
@@ -18,6 +19,8 @@ import useTextFilter from '../Filters/TextFilter';
 import BaseTable from '../Generic/BaseTable';
 import NoMatchingItems from '../../PresentationalComponents/EmptyStates/NoMatchingItems';
 import { fetchClusterImages } from '../../../Helpers/apiHelper';
+import { uniqBy } from 'lodash';
+import checkboxFilter from '../Filters/CheckboxFilter';
 
 const ClusterImagesTable = () => {
   const params = useParams();
@@ -34,7 +37,7 @@ const ClusterImagesTable = () => {
     changeParamsAction: changeClusterImagesTableParams,
   });
 
-  const { search } = meta;
+  const { search, registry, dynamic_registry_options } = meta;
 
   const onExport = useExport({
     filenamePrefix: CLUSTER_IMAGES_EXPORT_PREFIX,
@@ -51,6 +54,23 @@ const ClusterImagesTable = () => {
       value: search,
       apply,
       chipLabel: 'Search term',
+    }),
+    checkboxFilter({
+      urlParam: 'registry',
+      label: 'Registry',
+      value: registry,
+      items: uniqBy(
+        IMAGE_REGISTRY_OPTIONS.concat(
+          (dynamic_registry_options ?? []).map((registry) => ({
+            label: registry,
+            value: registry,
+          }))
+        ),
+        'value'
+      ),
+      placeholder: 'Filter by registry',
+      apply,
+      chipLabel: 'Registry',
     }),
   ];
 
