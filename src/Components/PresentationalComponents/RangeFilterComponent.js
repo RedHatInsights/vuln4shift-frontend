@@ -13,7 +13,7 @@ const RangeFilterComponent = ({
 }) => {
   const [isOpen, setOpen] = useState(false);
 
-  const areValuesValid = (currentValues, inputName) => {
+  const areValuesValid = (currentValues = {}, inputName) => {
     const numberValue = {
       min: Number(currentValues.min),
       max: Number(currentValues.max),
@@ -53,7 +53,7 @@ const RangeFilterComponent = ({
           validated={areValuesValid(inputValue, 'min') ? 'default' : 'error'}
           className="range-filter-input"
           id="range-filter-input-min"
-          value={inputValue.min}
+          value={inputValue?.min}
         />
       </SplitItem>
       <SplitItem>
@@ -71,7 +71,7 @@ const RangeFilterComponent = ({
           validated={areValuesValid(inputValue, 'max') ? 'default' : 'error'}
           className="range-filter-input"
           id="range-filter-input-max"
-          value={inputValue.max}
+          value={inputValue?.max}
         />
       </SplitItem>
     </Split>

@@ -16,7 +16,7 @@ const useRangeFilter = ({
   chipDecimalPlaces = 1,
 }) => {
   const [handleSearch] = useState(() =>
-    debounce((newValue) => {
+    debounce((newValue = {}) => {
       if (
         newValue.min >= range.min &&
         newValue.max <= range.max &&
