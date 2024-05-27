@@ -6,6 +6,7 @@ import { initialState } from '../../../Store/Reducers/ClusterImagesStore';
 import {
   CLUSTER_IMAGES_EXPORT_PREFIX,
   CLUSTER_IMAGES_TABLE_COLUMNS,
+  COLUMN_MANAGEMENT_FEATURE_FLAG,
 } from '../../../Helpers/constants';
 import {
   itExportsDataToFile,
@@ -17,8 +18,11 @@ import {
   testPagination,
   testSorting,
 } from '../../../../cypress/utils/table';
+import { mockEnableFeatureFlags } from '../../../../cypress/utils/featureFlags';
 
 const mountComponent = () => {
+  mockEnableFeatureFlags([COLUMN_MANAGEMENT_FEATURE_FLAG]);
+
   cy.mountWithProviders(
     <MemoryRouter
       initialEntries={['/clusters/e45c0b54-3083-4ae0-9cbc-f7d7a302e7dd/images']}

@@ -7,6 +7,7 @@ import {
   CLUSTER_PROVIDER_OPTIONS,
   CLUSTER_STATUS_OPTIONS,
   CLUSTER_VERSION_OPTIONS,
+  COLUMN_MANAGEMENT_FEATURE_FLAG,
   CVE_CLUSTERS_EXPORT_PREFIX,
   CVE_CLUSTERS_TABLE_COLUMNS,
 } from '../../../Helpers/constants';
@@ -21,8 +22,11 @@ import {
   testPagination,
   testSorting,
 } from '../../../../cypress/utils/table';
+import { mockEnableFeatureFlags } from '../../../../cypress/utils/featureFlags';
 
 const mountComponent = () => {
+  mockEnableFeatureFlags([COLUMN_MANAGEMENT_FEATURE_FLAG]);
+
   cy.mountWithProviders(
     <MemoryRouter initialEntries={['/cves/CVE-2022-12345']}>
       <Routes>

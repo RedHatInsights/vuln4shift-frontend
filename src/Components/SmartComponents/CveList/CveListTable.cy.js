@@ -4,6 +4,7 @@ import CveListTable from './CveListTable';
 import cves from '../../../../cypress/fixtures/cvelist.json';
 import { initialState } from '../../../Store/Reducers/CveListStore';
 import {
+  COLUMN_MANAGEMENT_FEATURE_FLAG,
   CVE_LIST_EXPORT_PREFIX,
   EXPOSED_CLUSTERS_OPTIONS,
   EXPOSED_IMAGES_FEATURE_FLAG,
@@ -25,7 +26,10 @@ import { mockEnableFeatureFlags } from '../../../../cypress/utils/featureFlags';
 import { CVE_LIST_TABLE_COLUMNS } from '../../../Helpers/constants';
 
 const mountComponent = () => {
-  mockEnableFeatureFlags([EXPOSED_IMAGES_FEATURE_FLAG]);
+  mockEnableFeatureFlags([
+    EXPOSED_IMAGES_FEATURE_FLAG,
+    COLUMN_MANAGEMENT_FEATURE_FLAG,
+  ]);
 
   cy.mountWithProviders(
     <Router>

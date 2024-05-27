@@ -10,6 +10,7 @@ import {
   CLUSTER_SEVERITY_OPTIONS,
   CLUSTER_STATUS_OPTIONS,
   CLUSTER_VERSION_OPTIONS,
+  COLUMN_MANAGEMENT_FEATURE_FLAG,
 } from '../../../Helpers/constants';
 import {
   itExportsDataToFile,
@@ -22,8 +23,11 @@ import {
   testPagination,
   testSorting,
 } from '../../../../cypress/utils/table';
+import { mockEnableFeatureFlags } from '../../../../cypress/utils/featureFlags';
 
 const mountComponent = () => {
+  mockEnableFeatureFlags([COLUMN_MANAGEMENT_FEATURE_FLAG]);
+
   cy.mountWithProviders(
     <Router>
       <ClusterListTable />

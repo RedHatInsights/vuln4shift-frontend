@@ -4,9 +4,10 @@ import BaseTableBody from '../Table/BaseTableBody';
 import BaseTableToolbar from '../Table/BaseTableToolbar';
 import BaseTableFooter from './BaseTableFooter';
 import ErrorHandler from '../../PresentationalComponents/ErrorHandler';
-import { useColumnManagement } from '../../../Helpers/hooks';
+import { useColumnManagement, useFeatureFlag } from '../../../Helpers/hooks';
 import { Button, ButtonVariant } from '@patternfly/react-core';
 import { ColumnsIcon } from '@patternfly/react-icons';
+import { COLUMN_MANAGEMENT_FEATURE_FLAG } from '../../../Helpers/constants';
 
 const BaseTable = ({
   isLoading,
@@ -29,6 +30,10 @@ const BaseTable = ({
     (columns) => applyColumns(columns)
   );
 
+  const isColumnManagementEnabled = useFeatureFlag(
+    COLUMN_MANAGEMENT_FEATURE_FLAG
+  );
+
   return (
     <ErrorHandler error={error}>
       {ColumnManagementModal}
@@ -41,19 +46,23 @@ const BaseTable = ({
         filterConfig={filterConfig}
         activeFiltersConfig={activeFiltersConfig}
         onExport={onExport}
-        actionsConfig={{
-          actions: [
-            <Button
-              onClick={() => setColumnModalOpen(true)}
-              variant={ButtonVariant.secondary}
-              icon={<ColumnsIcon />}
-              key="column-mgmt"
-              ouiaId="column-management-modal-open-button"
-            >
-              Manage columns
-            </Button>,
-          ],
-        }}
+        actionsConfig={
+          isColumnManagementEnabled
+            ? {
+                actions: [
+                  <Button
+                    onClick={() => setColumnModalOpen(true)}
+                    variant={ButtonVariant.secondary}
+                    icon={<ColumnsIcon />}
+                    key="column-mgmt"
+                    ouiaId="column-management-modal-open-button"
+                  >
+                    Manage columns
+                  </Button>,
+                ],
+              }
+            : undefined
+        }
       />
       <BaseTableBody
         isLoading={isLoading}
