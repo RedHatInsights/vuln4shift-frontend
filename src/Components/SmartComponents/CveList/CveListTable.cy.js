@@ -1,9 +1,6 @@
 import React from 'react';
-import { mount } from '@cypress/react18';
 import { BrowserRouter as Router } from 'react-router-dom';
 import CveListTable from './CveListTable';
-import { Provider } from 'react-redux';
-import { init } from '../../../Store/ReducerRegistry';
 import cves from '../../../../cypress/fixtures/cvelist.json';
 import { initialState } from '../../../Store/Reducers/CveListStore';
 import {
@@ -24,23 +21,16 @@ import {
   testPagination,
   testSorting,
 } from '../../../../cypress/utils/table';
-import {
-  ConfiguredFlagProvider,
-  mockEnableFeatureFlags,
-} from '../../../../cypress/utils/featureFlags';
+import { mockEnableFeatureFlags } from '../../../../cypress/utils/featureFlags';
 import { CVE_LIST_TABLE_COLUMNS } from '../../../Helpers/constants';
 
 const mountComponent = () => {
   mockEnableFeatureFlags([EXPOSED_IMAGES_FEATURE_FLAG]);
 
-  mount(
-    <ConfiguredFlagProvider>
-      <Provider store={init().getStore()}>
-        <Router>
-          <CveListTable />
-        </Router>
-      </Provider>
-    </ConfiguredFlagProvider>
+  cy.mountWithProviders(
+    <Router>
+      <CveListTable />
+    </Router>
   );
 };
 

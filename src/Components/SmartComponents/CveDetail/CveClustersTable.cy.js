@@ -1,9 +1,6 @@
 import React from 'react';
-import { mount } from '@cypress/react18';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import CveClustersTable from './CveClustersTable';
-import { Provider } from 'react-redux';
-import { init } from '../../../Store/ReducerRegistry';
 import clusters from '../../../../cypress/fixtures/cveclusterslist.json';
 import { initialState } from '../../../Store/Reducers/CveDetailStore';
 import {
@@ -26,14 +23,12 @@ import {
 } from '../../../../cypress/utils/table';
 
 const mountComponent = () => {
-  mount(
-    <Provider store={init().getStore()}>
-      <MemoryRouter initialEntries={['/cves/CVE-2022-12345']}>
-        <Routes>
-          <Route path="/cves/:cveId" element={<CveClustersTable />} />
-        </Routes>
-      </MemoryRouter>
-    </Provider>
+  cy.mountWithProviders(
+    <MemoryRouter initialEntries={['/cves/CVE-2022-12345']}>
+      <Routes>
+        <Route path="/cves/:cveId" element={<CveClustersTable />} />
+      </Routes>
+    </MemoryRouter>
   );
 };
 
