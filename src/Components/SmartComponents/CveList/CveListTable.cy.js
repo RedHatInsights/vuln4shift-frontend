@@ -24,36 +24,23 @@ import {
   testPagination,
   testSorting,
 } from '../../../../cypress/utils/table';
+import {
+  ConfiguredFlagProvider,
+  mockEnableFeatureFlags,
+} from '../../../../cypress/utils/featureFlags';
 import { CVE_LIST_TABLE_COLUMNS } from '../../../Helpers/constants';
-import FlagProvider from '@unleash/proxy-client-react';
 
 const mountComponent = () => {
-  cy.intercept('GET', '/feature_flags*', {
-    statusCode: 200,
-    body: {
-      toggles: [
-        {
-          name: EXPOSED_IMAGES_FEATURE_FLAG,
-          enabled: true,
-        },
-      ],
-    },
-  });
+  mockEnableFeatureFlags([EXPOSED_IMAGES_FEATURE_FLAG]);
 
   mount(
-    <FlagProvider
-      config={{
-        url: 'http://localhost:8002/feature_flags',
-        clientKey: 'abc',
-        appName: 'abc',
-      }}
-    >
+    <ConfiguredFlagProvider>
       <Provider store={init().getStore()}>
         <Router>
           <CveListTable />
         </Router>
       </Provider>
-    </FlagProvider>
+    </ConfiguredFlagProvider>
   );
 };
 
