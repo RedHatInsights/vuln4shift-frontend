@@ -1,9 +1,6 @@
 import React from 'react';
-import { mount } from '@cypress/react18';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import ClusterImagesTable from './ClusterImagesTable';
-import { Provider } from 'react-redux';
-import { init } from '../../../Store/ReducerRegistry';
 import images from '../../../../cypress/fixtures/clusterimageslist.json';
 import { initialState } from '../../../Store/Reducers/ClusterImagesStore';
 import {
@@ -22,21 +19,17 @@ import {
 } from '../../../../cypress/utils/table';
 
 const mountComponent = () => {
-  mount(
-    <Provider store={init().getStore()}>
-      <MemoryRouter
-        initialEntries={[
-          '/clusters/e45c0b54-3083-4ae0-9cbc-f7d7a302e7dd/images',
-        ]}
-      >
-        <Routes>
-          <Route
-            path="/clusters/:clusterId/images"
-            element={<ClusterImagesTable />}
-          />
-        </Routes>
-      </MemoryRouter>
-    </Provider>
+  cy.mountWithProviders(
+    <MemoryRouter
+      initialEntries={['/clusters/e45c0b54-3083-4ae0-9cbc-f7d7a302e7dd/images']}
+    >
+      <Routes>
+        <Route
+          path="/clusters/:clusterId/images"
+          element={<ClusterImagesTable />}
+        />
+      </Routes>
+    </MemoryRouter>
   );
 };
 

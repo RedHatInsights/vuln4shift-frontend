@@ -1,20 +1,15 @@
 import React from 'react';
-import { mount } from '@cypress/react18';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import CveDetailPageHeader from './CveDetailPageHeader';
-import { Provider } from 'react-redux';
-import { init } from '../../../Store/ReducerRegistry';
 import cveDetail from '../../../../cypress/fixtures/cvedetail.json';
 
 const mountComponent = () => {
-  mount(
-    <Provider store={init().getStore()}>
-      <MemoryRouter initialEntries={['/cves/CVE-2022-12345']}>
-        <Routes>
-          <Route path="/cves/:cveId" element={<CveDetailPageHeader />} />
-        </Routes>
-      </MemoryRouter>
-    </Provider>
+  cy.mountWithProviders(
+    <MemoryRouter initialEntries={['/cves/CVE-2022-12345']}>
+      <Routes>
+        <Route path="/cves/:cveId" element={<CveDetailPageHeader />} />
+      </Routes>
+    </MemoryRouter>
   );
 };
 

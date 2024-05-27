@@ -1,9 +1,6 @@
 import React from 'react';
-import { mount } from '@cypress/react18';
 import { BrowserRouter as Router } from 'react-router-dom';
 import ClusterListTable from './ClusterListTable';
-import { Provider } from 'react-redux';
-import { init } from '../../../Store/ReducerRegistry';
 import clusters from '../../../../cypress/fixtures/clusterlist.json';
 import { initialState } from '../../../Store/Reducers/ClusterListStore';
 import {
@@ -27,12 +24,10 @@ import {
 } from '../../../../cypress/utils/table';
 
 const mountComponent = () => {
-  mount(
-    <Provider store={init().getStore()}>
-      <Router>
-        <ClusterListTable />
-      </Router>
-    </Provider>
+  cy.mountWithProviders(
+    <Router>
+      <ClusterListTable />
+    </Router>
   );
 };
 
