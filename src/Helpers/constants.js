@@ -10,6 +10,7 @@ import { subtractDays, subtractYears } from './miscHelper';
 import MissingMetadata from '../Components/PresentationalComponents/EmptyStates/MissingMetadata';
 
 export const EXPOSED_IMAGES_FEATURE_FLAG = 'vuln4shift.exposed_images';
+export const COLUMN_MANAGEMENT_FEATURE_FLAG = 'vuln4shift.column_management';
 
 export const HEADER_ALERT_DISMISSED_KEY = 'vuln4shift:header-alert-dismissed';
 

@@ -4,6 +4,7 @@ import CveImagesTable from './CveImagesTable';
 import images from '../../../../cypress/fixtures/cveimageslist.json';
 import { initialState } from '../../../Store/Reducers/CveDetailStore';
 import {
+  COLUMN_MANAGEMENT_FEATURE_FLAG,
   CVE_IMAGES_EXPORT_PREFIX,
   CVE_IMAGES_TABLE_COLUMNS,
 } from '../../../Helpers/constants';
@@ -18,8 +19,11 @@ import {
   testPagination,
   testSorting,
 } from '../../../../cypress/utils/table';
+import { mockEnableFeatureFlags } from '../../../../cypress/utils/featureFlags';
 
 const mountComponent = () => {
+  mockEnableFeatureFlags([COLUMN_MANAGEMENT_FEATURE_FLAG]);
+
   cy.mountWithProviders(
     <MemoryRouter initialEntries={['/cves/CVE-2022-12345']}>
       <Routes>
