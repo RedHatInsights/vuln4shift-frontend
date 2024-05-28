@@ -6,17 +6,11 @@ import { useSelector } from 'react-redux';
 import ErrorHandler from '../../PresentationalComponents/ErrorHandler';
 import useChrome from '@redhat-cloud-services/frontend-components/useChrome';
 import ClusterImagesTable from './ClusterImagesTable';
-import {
-  CLUSTER_DETAIL_TABS,
-  EXPOSED_IMAGES_FEATURE_FLAG,
-} from '../../../Helpers/constants';
+import { CLUSTER_DETAIL_TABS } from '../../../Helpers/constants';
 import TableTabs from '../../PresentationalComponents/TableTabs';
-import { useFeatureFlag } from '../../../Helpers/hooks';
 
 const ClusterDetailPage = ({ activeTab }) => {
   const chrome = useChrome();
-
-  const areExposedImagesEnabled = useFeatureFlag(EXPOSED_IMAGES_FEATURE_FLAG);
 
   const { error, cluster } = useSelector(
     ({ ClusterDetailStore }) => ClusterDetailStore
@@ -41,15 +35,11 @@ const ClusterDetailPage = ({ activeTab }) => {
               path: CLUSTER_DETAIL_TABS.cves,
               Component: ClusterCvesTable,
             },
-            ...(areExposedImagesEnabled
-              ? [
-                  {
-                    title: 'Exposed images',
-                    path: CLUSTER_DETAIL_TABS.images,
-                    Component: ClusterImagesTable,
-                  },
-                ]
-              : []),
+            {
+              title: 'Exposed images',
+              path: CLUSTER_DETAIL_TABS.images,
+              Component: ClusterImagesTable,
+            },
           ]}
         />
       </section>
