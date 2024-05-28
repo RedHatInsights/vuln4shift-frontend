@@ -7,7 +7,6 @@ import {
   COLUMN_MANAGEMENT_FEATURE_FLAG,
   CVE_LIST_EXPORT_PREFIX,
   EXPOSED_CLUSTERS_OPTIONS,
-  EXPOSED_IMAGES_FEATURE_FLAG,
   PUBLISHED_OPTIONS,
   SEVERITY_OPTIONS,
 } from '../../../Helpers/constants';
@@ -26,10 +25,7 @@ import { mockEnableFeatureFlags } from '../../../../cypress/utils/featureFlags';
 import { CVE_LIST_TABLE_COLUMNS } from '../../../Helpers/constants';
 
 const mountComponent = () => {
-  mockEnableFeatureFlags([
-    EXPOSED_IMAGES_FEATURE_FLAG,
-    COLUMN_MANAGEMENT_FEATURE_FLAG,
-  ]);
+  mockEnableFeatureFlags([COLUMN_MANAGEMENT_FEATURE_FLAG]);
 
   cy.mountWithProviders(
     <Router>

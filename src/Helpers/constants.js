@@ -401,7 +401,7 @@ const createCveDescription = (row) => (
   </Fragment>
 );
 
-export const CVE_LIST_TABLE_MAPPER = (row, areExposedImagesEnabled) => ({
+export const CVE_LIST_TABLE_MAPPER = (row) => ({
   key: row.synopsis,
   cells: [
     <Link to={`../cves/${row.synopsis}/clusters`} key={row.synopsis}>
@@ -413,13 +413,9 @@ export const CVE_LIST_TABLE_MAPPER = (row, areExposedImagesEnabled) => ({
     <Link to={`../cves/${row.synopsis}/clusters`} key={row.synopsis}>
       {row.clusters_exposed}
     </Link>,
-    ...(areExposedImagesEnabled
-      ? [
-          <Link to={`../cves/${row.synopsis}/images`} key={row.synopsis}>
-            {row.images_exposed}
-          </Link>,
-        ]
-      : []),
+    <Link to={`../cves/${row.synopsis}/images`} key={row.synopsis}>
+      {row.images_exposed}
+    </Link>,
   ],
   expandableContent: createCveDescription(row),
 });
