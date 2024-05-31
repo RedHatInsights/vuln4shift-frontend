@@ -435,7 +435,7 @@ export const CLUSTER_LIST_TABLE_MAPPER = (row) => ({
     <ShieldSet
       key={row.id}
       count={{ ...row.cves_severity }}
-      linkTo={`./${row.id}`}
+      linkTo={`./${row.id}/cves`}
     />,
     row.provider,
     <DateFormat key={row.id} date={row.last_seen} type="relative" />,
