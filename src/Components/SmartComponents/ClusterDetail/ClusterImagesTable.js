@@ -16,7 +16,7 @@ import { useParams } from 'react-router-dom';
 import { useExport, useUrlBoundParams } from '../../../Helpers/hooks';
 import { setupFilters } from '../../../Helpers/miscHelper';
 import useTextFilter from '../Filters/TextFilter';
-import BaseTable from '../Generic/BaseTable';
+import BaseTable from '../Table/BaseTable';
 import NoMatchingItems from '../../PresentationalComponents/EmptyStates/NoMatchingItems';
 import { fetchClusterImages } from '../../../Helpers/apiHelper';
 import { uniqBy } from 'lodash';

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import propTypes from 'prop-types';
-import ClusterCveTable from './ClusterCveTable';
+import ClusterCvesTable from './ClusterCvesTable';
 import ClusterDetailPageHeader from './ClusterDetailPageHeader';
 import { useSelector } from 'react-redux';
 import ErrorHandler from '../../PresentationalComponents/ErrorHandler';
@@ -39,7 +39,7 @@ const ClusterDetailPage = ({ activeTab }) => {
             {
               title: 'CVEs',
               path: CLUSTER_DETAIL_TABS.cves,
-              Component: ClusterCveTable,
+              Component: ClusterCvesTable,
             },
             ...(areExposedImagesEnabled
               ? [

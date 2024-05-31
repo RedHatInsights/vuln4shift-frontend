@@ -18,14 +18,14 @@ import {
 import NoClusters from '../../PresentationalComponents/EmptyStates/NoClusters';
 import useTextFilter from '../Filters/TextFilter';
 import { useExport, useUrlBoundParams } from '../../../Helpers/hooks';
-import BaseTable from '../Generic/BaseTable';
+import BaseTable from '../Table/BaseTable';
 import { setupFilters } from '../../../Helpers/miscHelper';
 import NoMatchingItems from '../../PresentationalComponents/EmptyStates/NoMatchingItems';
 import { fetchClusters } from '../../../Helpers/apiHelper';
 import checkboxFilter from '../Filters/CheckboxFilter';
 import { uniqBy } from 'lodash';
 
-const ClusterCveTable = () => {
+const ClusterCvesTable = () => {
   const dispatch = useDispatch();
 
   const { clusters, isLoading, meta, error, columns } = useSelector(
@@ -155,4 +155,4 @@ const ClusterCveTable = () => {
   );
 };
 
-export default ClusterCveTable;
+export default ClusterCvesTable;

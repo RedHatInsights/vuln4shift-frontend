@@ -1,8 +1,8 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import BaseTableBody from '../Generic/BaseTableBody';
-import BaseToolbar from '../Generic/BaseToolbar';
-import BottomPagination from '../../PresentationalComponents/BottomPagination';
+import BaseTableBody from '../Table/BaseTableBody';
+import BaseTableToolbar from '../Table/BaseTableToolbar';
+import BaseTableFooter from './BaseTableFooter';
 import ErrorHandler from '../../PresentationalComponents/ErrorHandler';
 import { useColumnManagement } from '../../../Helpers/hooks';
 import { Button, ButtonVariant } from '@patternfly/react-core';
@@ -32,7 +32,7 @@ const BaseTable = ({
   return (
     <ErrorHandler error={error}>
       {ColumnManagementModal}
-      <BaseToolbar
+      <BaseTableToolbar
         isLoading={isLoading}
         page={offset / limit + 1}
         perPage={limit}
@@ -68,7 +68,7 @@ const BaseTable = ({
         perPage={limit}
         apply={apply}
       />
-      <BottomPagination
+      <BaseTableFooter
         isLoading={isLoading}
         page={offset / limit + 1}
         perPage={limit}

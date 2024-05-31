@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   changeClusterCvesTableColumns,
   changeClusterCvesTableParams,
-  fetchClusterCveTable,
+  fetchClusterCvesTable,
 } from '../../../Store/Actions';
 import { useParams } from 'react-router-dom';
 import { useExport, useUrlBoundParams } from '../../../Helpers/hooks';
@@ -23,11 +23,11 @@ import useTextFilter from '../Filters/TextFilter';
 import useRangeFilter from '../Filters/RangeFilter';
 import checkboxFilter from '../Filters/CheckboxFilter';
 import radioFilter from '../Filters/RadioFilter';
-import BaseTable from '../Generic/BaseTable';
+import BaseTable from '../Table/BaseTable';
 import NoMatchingCves from '../../PresentationalComponents/EmptyStates/NoMatchingCves';
 import { fetchClusterCves } from '../../../Helpers/apiHelper';
 
-const ClusterCveTable = () => {
+const ClusterCvesTable = () => {
   const dispatch = useDispatch();
 
   const params = useParams();
@@ -40,7 +40,7 @@ const ClusterCveTable = () => {
     allowedParams: CLUSTER_CVES_ALLOWED_PARAMS,
     initialParams: meta,
     additionalParam: params.clusterId,
-    fetchAction: fetchClusterCveTable,
+    fetchAction: fetchClusterCvesTable,
     changeParamsAction: changeClusterCvesTableParams,
   });
 
@@ -130,4 +130,4 @@ const ClusterCveTable = () => {
   );
 };
 
-export default ClusterCveTable;
+export default ClusterCvesTable;
