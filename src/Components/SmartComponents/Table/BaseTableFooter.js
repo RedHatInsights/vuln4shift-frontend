@@ -6,7 +6,7 @@ import {
   Skeleton,
 } from '@patternfly/react-core';
 
-const BottomPagination = ({ isLoading, page, perPage, itemCount, apply }) => {
+const BaseTableFooter = ({ isLoading, page, perPage, itemCount, apply }) => {
   return isLoading ? (
     <div className="pf-c-pagination pf-m-bottom">
       <Skeleton fontSize="xl" width="350px" style={{ margin: 10 }} />
@@ -25,7 +25,7 @@ const BottomPagination = ({ isLoading, page, perPage, itemCount, apply }) => {
   );
 };
 
-BottomPagination.propTypes = {
+BaseTableFooter.propTypes = {
   isLoading: propTypes.bool,
   page: propTypes.number,
   perPage: propTypes.number,
@@ -33,4 +33,4 @@ BottomPagination.propTypes = {
   apply: propTypes.func,
 };
 
-export default BottomPagination;
+export default BaseTableFooter;

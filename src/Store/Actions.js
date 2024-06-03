@@ -45,7 +45,7 @@ export const fetchCveDetails = (cveId, params) => ({
   payload: () => api.fetchCveDetails(cveId, params),
 });
 
-export const fetchClusterCveTable = (clusterId, params) => ({
+export const fetchClusterCvesTable = (clusterId, params) => ({
   type: ActionTypes.FETCH_CLUSTER_CVES_TABLE,
   meta: {
     timestamp: new Date(),

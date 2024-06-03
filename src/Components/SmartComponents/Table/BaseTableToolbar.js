@@ -3,7 +3,7 @@ import propTypes from 'prop-types';
 import { PrimaryToolbar } from '@redhat-cloud-services/frontend-components/PrimaryToolbar';
 import { Skeleton } from '@patternfly/react-core';
 
-const BaseToolbar = ({
+const BaseTableToolbar = ({
   isLoading,
   page,
   perPage,
@@ -44,7 +44,7 @@ const BaseToolbar = ({
   );
 };
 
-BaseToolbar.propTypes = {
+BaseTableToolbar.propTypes = {
   isLoading: propTypes.bool,
   page: propTypes.number,
   perPage: propTypes.number,
@@ -60,4 +60,4 @@ BaseToolbar.propTypes = {
   actionsConfig: propTypes.object,
 };
 
-export default BaseToolbar;
+export default BaseTableToolbar;

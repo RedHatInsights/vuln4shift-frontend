@@ -11,7 +11,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import NoMatchingItems from '../../PresentationalComponents/EmptyStates/NoMatchingItems';
 import { useParams } from 'react-router-dom';
-import BaseTable from '../Generic/BaseTable';
+import BaseTable from '../Table/BaseTable';
 import { useExport, useUrlBoundParams } from '../../../Helpers/hooks';
 import {
   changeCveClustersTableColumns,

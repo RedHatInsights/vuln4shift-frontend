@@ -29,7 +29,7 @@ import {
 } from '../../../Helpers/miscHelper';
 import checkboxFilter from '../Filters/CheckboxFilter';
 import radioFilter from '../Filters/RadioFilter';
-import BaseTable from '../Generic/BaseTable';
+import BaseTable from '../Table/BaseTable';
 import { fetchCves } from '../../../Helpers/apiHelper';
 
 const CveListTable = () => {
