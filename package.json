@@ -24,7 +24,7 @@
     "postinstall": "ts-patch install"
   },
   "dependencies": {
-    "@patternfly/react-component-groups": "^5.2.0-prerelease.3",
+    "@patternfly/react-component-groups": "^5.2.0",
     "@patternfly/react-core": "^5.3.3",
     "@patternfly/react-icons": "^5.3.0",
     "@patternfly/react-table": "^5.3.3",
@@ -51,7 +51,6 @@
     "@babel/preset-env": "^7.24.7",
     "@babel/preset-react": "^7.24.7",
     "@cypress/code-coverage": "^3.12.36",
-    "@cypress/react18": "^2.0.0",
     "@cypress/webpack-dev-server": "^3.8.0",
     "@frsource/cypress-plugin-visual-regression-diff": "^3.3.1",
     "@patternfly/patternfly": "^5.3.1",

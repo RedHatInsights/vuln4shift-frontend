@@ -81,15 +81,26 @@ const BaseTableBody = ({
     columnIndex,
   });
 
+  const columnHeaders = columns.map((column, index) => (
+    <Th
+      key={column.title}
+      sort={column.sortParam && getSortParams(index)}
+      width={column.width}
+    >
+      {column.title}
+    </Th>
+  ));
+
   return isLoading ? (
     <SkeletonTable
       variant={TableVariant.compact}
       rows={perPage || DEFAULT_LIMIT}
-      columns={columns.map((column) => column.title)}
+      columns={columnHeaders}
       sortBy={createSortBy(columns, sortParam)}
+      isExpandable={isExpandable}
     />
   ) : (
-    <Table variant={TableVariant.compact} isStickyHeader>
+    <Table variant={TableVariant.compact}>
       <Thead>
         <Tr>
           {isExpandable && rows.length > 0 && (
@@ -105,15 +116,7 @@ const BaseTableBody = ({
               ouiaId="expand-all"
             />
           )}
-          {columns.map((column, index) => (
-            <Th
-              key={column.title}
-              sort={column.sortParam && getSortParams(index)}
-              width={column.width}
-            >
-              {column.title}
-            </Th>
-          ))}
+          {columnHeaders}
         </Tr>
       </Thead>
       {rows.length === 0 ? (
