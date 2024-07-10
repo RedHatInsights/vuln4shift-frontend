@@ -6,7 +6,7 @@ updates:
       interval: "weekly"
     labels:
       - "dependencies"
-    open-pull-requests-limit: 5
+    open-pull-requests-limit: 10
     commit-message:
       prefix: "chore(deps):"
     ignore:
@@ -46,3 +46,12 @@ updates:
       cypress:
         patterns:
           - "*cypress*"
+      react:
+        patterns:
+          - "react"
+          - "react-dom"
+          - "react-redux"
+      webpack:
+        patterns:
+          - "webpack"
+          - "webpack-bundle-analyzer"
