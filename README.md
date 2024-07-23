@@ -11,8 +11,8 @@ Red Hat Vulnerability for OpenShift service is used to assess and monitor the st
 ## Running locally
 1. Make sure you are connected to the Red Hat VPN
 2. Install dependencies with `npm install`
-3. Run development server with `npm run start` and select desired environment (`stage-preview` is recommended)
-4. Local version of the app will be available at URL printed out to the console (https://stage.foo.redhat.com:1337/preview/openshift/insights/vulnerability/ if you selected `stage-preview`)
+3. Run development server with `npm run start:proxy` and select desired environment (`stage` is recommended)
+4. Local version of the app will be available at URL printed out to the console (https://stage.foo.redhat.com:1337/openshift/insights/vulnerability/ if you selected `stage`)
 
 ## Testing
 [Cypress](https://cypress.io/) is used as the testing framework
@@ -27,12 +27,10 @@ Red Hat Vulnerability for OpenShift service is used to assess and monitor the st
 ## Deploying
 The app uses containerized builds which are configured in [`app-interface`](https://gitlab.cee.redhat.com/service/app-interface/-/blob/master/data/services/insights/ocp-vulnerability/deploy.yml).
 
-| Environment        | Available at                             | Deployed version
-| :----------------- | :--------------------------------------- | :----------
-| stage preview      | https://console.stage.redhat.com/preview | master branch
-| stage stable       | https://console.stage.redhat.com         | master branch
-| production preview | https://console.redhat.com/preview       | up to the commit configured in `app-interface`
-| production stable  | https://console.redhat.com               | up to the commit configured in `app-interface`
+| Environment | Available at                     | Deployed version
+| :---------- | :--------------------------------| :----------
+| stage       | https://console.stage.redhat.com | master branch
+| production  | https://console.redhat.com       | up to the commit configured in `app-interface`
 
 ## Design System
 This project uses [Patternfly React](https://github.com/patternfly/patternfly-react).
