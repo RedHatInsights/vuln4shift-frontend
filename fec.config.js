@@ -1,7 +1,7 @@
 module.exports = {
   appUrl: '/openshift/insights/vulnerability',
   debug: true,
-  useProxy: true,
+  useProxy: process.env.PROXY === 'true',
   proxyVerbose: true,
   sassPrefix: '.ocp-vulnerability, .ocpVulnerability',
   interceptChromeConfig: false,

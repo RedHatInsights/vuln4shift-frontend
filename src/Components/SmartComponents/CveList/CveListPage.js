@@ -100,9 +100,7 @@ const CveListPage = () => {
           <a
             target="_blank"
             rel="noopener noreferrer"
-            href={`${
-              chrome.isBeta() ? '/preview' : ''
-            }/application-services/acs/overview`}
+            href="/application-services/acs/overview"
           >
             Visit Red Hat Advanced Cluster Security Cloud Service (RHACSCS)
             <ExternalLinkAltIcon className="pf-u-ml-sm" />

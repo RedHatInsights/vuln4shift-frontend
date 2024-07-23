@@ -14,6 +14,7 @@
     "lint:sass": "stylelint 'src/**/*.scss' --config .stylelintrc.json",
     "patch:hosts": "fec patch-etc-hosts",
     "start": "fec dev",
+    "start:proxy": "PROXY=true fec dev",
     "test": "npm run test:ct",
     "test:ct": "BABEL_ENV=component TZ=UTC cypress run --component",
     "test:coverage": "npx nyc report",
