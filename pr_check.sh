@@ -34,7 +34,7 @@ IQE_MARKER_EXPRESSION="smoke_ui"
 IQE_FILTER_EXPRESSION=""
 IQE_IMAGE_TAG="ocp-vulnerability"
 
-# Run smoke tests
+# Run smoke tests test
 # shellcheck source=/dev/null
 source "${CICD_ROOT}/deploy_ephemeral_env.sh"
 # shellcheck source=/dev/null
