@@ -26,7 +26,7 @@ export IQE_ENV="ephemeral"
 export IQE_SELENIUM="true"
 export IQE_CJI_TIMEOUT="30m"
 export REF_ENV="insights-stage"
-export COMPONENTS_W_RESOURCES="vmaas"
+export COMPONENTS_W_RESOURCES="vuln4shift-backend"
 export COMPONENT_NAME="vuln4shift-frontend"
 
 IQE_PLUGINS="ocp-vulnerability"
