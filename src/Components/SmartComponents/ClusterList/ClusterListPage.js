@@ -21,9 +21,7 @@ const ClusterListPage = () => {
   );
 
   useEffect(() => {
-    chrome.updateDocumentTitle(
-      'Clusters - Vulnerability Dashboard | Red Hat Insights | console.redhat.com'
-    );
+    chrome.updateDocumentTitle('Clusters - Vulnerability | OpenShift');
   }, []);
 
   return (

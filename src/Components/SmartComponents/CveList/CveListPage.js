@@ -30,9 +30,7 @@ const CveListPage = () => {
   );
 
   useEffect(() => {
-    chrome.updateDocumentTitle(
-      'CVEs - Vulnerability Dashboard | Red Hat Insights | console.redhat.com'
-    );
+    chrome.updateDocumentTitle('CVEs - Vulnerability | OpenShift');
   }, []);
 
   const HeaderTitle = (
