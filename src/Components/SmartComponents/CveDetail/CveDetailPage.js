@@ -17,7 +17,7 @@ const CveDetailPage = ({ activeTab }) => {
   useEffect(() => {
     cve.synopsis &&
       chrome.updateDocumentTitle(
-        `${cve.synopsis} - CVEs - Vulnerability Dashboard | Red Hat Insights | console.redhat.com`
+        `${cve.synopsis} - CVEs - Vulnerability | OpenShift`
       );
   }, [cve.synopsis]);
 
