@@ -3,7 +3,7 @@ import '@cypress/code-coverage/support';
 
 import React from 'react';
 import '@patternfly/patternfly/patternfly.scss';
-import { mount } from 'cypress/react';
+import { mount } from 'cypress/react18';
 import { ConfiguredFlagProvider } from '../utils/featureFlags';
 import { Provider } from 'react-redux';
 import { init } from '../../src/Store/ReducerRegistry';

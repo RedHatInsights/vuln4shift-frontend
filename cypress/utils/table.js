@@ -96,7 +96,9 @@ export const itIsExpandable = (rowCount) => {
   });
 
   it('has expandable and collapsable items', () => {
-    cy.get('tbody [id^=expand-toggle]').each((item) => cy.wrap(item).click());
+    for (let i = 0; i < rowCount; i++) {
+      cy.get(`tbody #expand-toggle${i}`).click();
+    }
     cy.get('tbody .pf-v5-c-table__expandable-row.pf-m-expanded > td').should(
       'have.length',
       rowCount
@@ -106,7 +108,9 @@ export const itIsExpandable = (rowCount) => {
       'aria-expanded',
       'true'
     );
-    cy.get('tbody [id^=expand-toggle]').each((item) => cy.wrap(item).click());
+    for (let i = 0; i < rowCount; i++) {
+      cy.get(`tbody #expand-toggle${i}`).click();
+    }
     cy.get('tbody .pf-v5-c-table__expandable-row.pf-m-expanded > td').should(
       'have.length',
       0
