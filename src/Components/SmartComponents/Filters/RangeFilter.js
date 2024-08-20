@@ -49,7 +49,6 @@ const useRangeFilter = ({
         <RangeFilterComponent
           setValues={handleSearch}
           range={range}
-          className="pf-u-mb-0"
           selectProps={{ placeholderText: placeholder }}
           minMaxLabels={minMaxLabels}
           inputValue={inputValue}

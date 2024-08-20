@@ -80,11 +80,11 @@ const CvssVector = ({
           </WithLoader>
         }
       >
-        <Text component={TextVariants.h6} className="pointer pf-u-mb-xs">
+        <Text component={TextVariants.h6} className="pointer pf-v5-u-mb-xs">
           {cvssVersion} base score
           <Icon
-            style={{ color: 'var(--pf-global--secondary-color--100)' }}
-            className="pf-u-ml-xs"
+            style={{ color: 'var(--pf-v5-global--secondary-color--100)' }}
+            className="pf-v5-u-ml-xs"
           >
             <OutlinedQuestionCircleIcon />
           </Icon>
@@ -96,7 +96,7 @@ const CvssVector = ({
         width="360px"
       >
         <span
-          className="pf-u-mr-md"
+          className="pf-v5-u-mr-md"
           data-ouia-component-id="cve-detail-cvss-score"
         >
           {score}
@@ -112,7 +112,7 @@ const CvssVector = ({
     </TextContent>
   ) : (
     <TextContent>
-      <Text component={TextVariants.h6} className="pf-u-mb-xs">
+      <Text component={TextVariants.h6} className="pf-v5-u-mb-xs">
         CVSS base score
       </Text>
       <span data-ouia-component-id="cve-detail-cvss-score">Unknown</span>

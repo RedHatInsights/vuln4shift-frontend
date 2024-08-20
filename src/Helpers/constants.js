@@ -64,29 +64,29 @@ export const SEVERITY_OPTIONS = [
   {
     value: 'critical',
     label: 'Critical',
-    iconColor: 'var(--pf-global--danger-color--100)',
-    textColor: 'var(--pf-global--danger-color--100)',
+    iconColor: 'var(--pf-v5-global--danger-color--100)',
+    textColor: 'var(--pf-v5-global--danger-color--100)',
     hasIcon: true,
   },
   {
     value: 'important',
     label: 'Important',
-    iconColor: 'var(--pf-global--palette--orange-300)',
-    textColor: 'var(--pf-global--palette--orange-400)',
+    iconColor: 'var(--pf-v5-global--palette--orange-300)',
+    textColor: 'var(--pf-v5-global--palette--orange-400)',
     hasIcon: true,
   },
   {
     value: 'moderate',
     label: 'Moderate',
-    iconColor: 'var(--pf-global--warning-color--100)',
-    textColor: 'var(--pf-global--warning-color--200)',
+    iconColor: 'var(--pf-v5-global--warning-color--100)',
+    textColor: 'var(--pf-v5-global--warning-color--200)',
     hasIcon: true,
   },
   {
     value: 'low',
     label: 'Low',
-    iconColor: 'var(--pf-global--Color--200)',
-    textColor: 'var(--pf-global--default-color--300)',
+    iconColor: 'var(--pf-v5-global--Color--200)',
+    textColor: 'var(--pf-v5-global--default-color--300)',
     hasIcon: true,
   },
   {
@@ -394,7 +394,7 @@ const createCveDescription = (row) => (
     )}
     <Link
       to={'../cves/' + row.synopsis}
-      className="pf-u-mt-md pf-u-display-block"
+      className="pf-v5-u-mt-md pf-v5-u-display-block"
     >
       View more information about this CVE
     </Link>

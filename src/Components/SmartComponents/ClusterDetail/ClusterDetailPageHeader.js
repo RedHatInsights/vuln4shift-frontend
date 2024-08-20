@@ -38,7 +38,7 @@ const ClusterDetailPageHeader = () => {
 
   return (
     <PageHeader>
-      <Breadcrumb className="pf-u-mb-md">
+      <Breadcrumb className="pf-v5-u-mb-md">
         <BreadcrumbItem>
           <Link to="../">Vulnerability</Link>
         </BreadcrumbItem>
@@ -57,7 +57,7 @@ const ClusterDetailPageHeader = () => {
           </WithLoader>
         </BreadcrumbItem>
       </Breadcrumb>
-      <PageHeaderTitle title={pageTitle} className="pf-u-mb-sm" />
+      <PageHeaderTitle title={pageTitle} className="pf-v5-u-mb-sm" />
       <div>
         UUID:&nbsp;
         <WithLoader

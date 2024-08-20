@@ -55,7 +55,7 @@ const CveDetailPageHeader = () => {
 
   return (
     <PageHeader style={{ paddingBottom: 0 }}>
-      <Breadcrumb className="pf-u-mb-md">
+      <Breadcrumb className="pf-v5-u-mb-md">
         <BreadcrumbItem>
           <Link to="../">Vulnerability</Link>
         </BreadcrumbItem>
@@ -67,7 +67,7 @@ const CveDetailPageHeader = () => {
       <PageHeaderTitle
         title={
           <Fragment>
-            <span className="pf-u-mr-md">{params.cveId}</span>
+            <span className="pf-v5-u-mr-md">{params.cveId}</span>
             {/* TODO: Implement after backend starts providing known exploit param
             hasKnownExploit && <KnownExploitLabel
               labelProps={{ style: { verticalAlign: 4, fontWeight: 300 } }}
@@ -75,13 +75,13 @@ const CveDetailPageHeader = () => {
             */}
           </Fragment>
         }
-        className="pf-u-mb-sm"
+        className="pf-v5-u-mb-sm"
       />
       <Grid hasGutter>
         <GridItem md={8} sm={12}>
           <Stack hasGutter>
             {hasMetadata && (
-              <StackItem className="pf-u-mt-sm">
+              <StackItem className="pf-v5-u-mt-sm">
                 Publish date:&nbsp;
                 <WithLoader
                   isLoading={isDetailLoading}
@@ -117,7 +117,7 @@ const CveDetailPageHeader = () => {
                 )}
               </WithLoader>
             </StackItem>
-            <StackItem className="pf-u-mt-sm pf-u-mb-md">
+            <StackItem className="pf-v5-u-mt-sm pf-v5-u-mb-md">
               <a
                 href={`https://access.redhat.com/security/cve/${params.cveId}`}
                 target="__blank"
@@ -129,13 +129,13 @@ const CveDetailPageHeader = () => {
           </Stack>
         </GridItem>
 
-        <GridItem md={4} sm={12} className="pf-u-mt-sm pf-u-ml-sm">
+        <GridItem md={4} sm={12} className="pf-v5-u-mt-sm pf-v5-u-ml-sm">
           <Stack hasGutter>
             <StackItem>
               <TextContent>
                 <Text
                   component={TextVariants.h6}
-                  className="pointer pf-u-mb-xs"
+                  className="pointer pf-v5-u-mb-xs"
                 >
                   Severity
                 </Text>

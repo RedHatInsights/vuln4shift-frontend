@@ -16,7 +16,7 @@ const NoExposedClusters = () => (
         icon={
           <EmptyStateIcon
             icon={CheckCircleIcon}
-            color="var(--pf-global--success-color--100)"
+            color="var(--pf-v5-global--success-color--100)"
             size="sm"
           />
         }
