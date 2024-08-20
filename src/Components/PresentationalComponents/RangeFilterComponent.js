@@ -41,9 +41,9 @@ const RangeFilterComponent = ({
   };
 
   const filterContent = (
-    <Split className="pf-u-m-md">
+    <Split className="pf-v5-u-m-md">
       <SplitItem>
-        <span style={{ fontSize: 'var(--pf-global--FontSize--sm)' }}>
+        <span style={{ fontSize: 'var(--pf-v5-global--FontSize--sm)' }}>
           {minMaxLabels.min}
         </span>
         <br />
@@ -58,10 +58,10 @@ const RangeFilterComponent = ({
       </SplitItem>
       <SplitItem>
         <br />
-        <span className="pf-u-m-sm">-</span>
+        <span className="pf-v5-u-m-sm">-</span>
       </SplitItem>
       <SplitItem>
-        <span style={{ fontSize: 'var(--pf-global--FontSize--sm)' }}>
+        <span style={{ fontSize: 'var(--pf-v5-global--FontSize--sm)' }}>
           {minMaxLabels.max}
         </span>
         <br />

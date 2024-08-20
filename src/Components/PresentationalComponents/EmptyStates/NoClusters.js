@@ -37,7 +37,7 @@ const NoClusters = () => (
           component="a"
           href="https://console.redhat.com/openshift/register/"
           target="_blank"
-          className="pf-u-mt-md"
+          className="pf-v5-u-mt-md"
         >
           Register Cluster
         </Button>

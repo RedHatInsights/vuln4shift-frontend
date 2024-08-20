@@ -27,12 +27,12 @@ const ClusterListPage = () => {
   return (
     <Fragment>
       <PageHeader>
-        <PageHeaderTitle title="Vulnerable clusters" className="pf-u-mb-sm" />
+        <PageHeaderTitle title="Vulnerable clusters" />
         {!wasHeaderAlertDismissed && (
           <Alert
             variant={AlertVariant.info}
             isInline
-            className="pf-u-mt-md"
+            className="pf-v5-u-mt-sm"
             title="Vulnerability information applies to OCP4.8+ version only"
             actionClose={
               <AlertActionCloseButton

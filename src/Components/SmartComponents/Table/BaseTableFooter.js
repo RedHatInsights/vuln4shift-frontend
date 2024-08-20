@@ -8,7 +8,7 @@ import {
 
 const BaseTableFooter = ({ isLoading, page, perPage, itemCount, apply }) => {
   return isLoading ? (
-    <div className="pf-c-pagination pf-m-bottom">
+    <div className="pf-v5-c-pagination pf-m-bottom">
       <Skeleton fontSize="xl" width="350px" style={{ margin: 10 }} />
     </div>
   ) : (
