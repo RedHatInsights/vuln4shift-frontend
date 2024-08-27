@@ -10,9 +10,9 @@ import {
   ExpandableRowContent,
   SortByDirection,
 } from '@patternfly/react-table';
-import SkeletonTable from '@redhat-cloud-services/frontend-components/SkeletonTable/SkeletonTable';
 import { TableVariant } from '@patternfly/react-table';
 import { DEFAULT_LIMIT } from '../../../Helpers/constants';
+import { SkeletonTable } from '@patternfly/react-component-groups';
 
 const BaseTableBody = ({
   isLoading,
