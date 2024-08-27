@@ -87,7 +87,6 @@ const CveDetailPageHeader = () => {
                   isLoading={isDetailLoading}
                   variant={LoaderType.inlineSkeleton}
                   width="100px"
-                  fontSize="sm"
                   style={{ verticalAlign: -4 }}
                 >
                   <span data-ouia-component-id="cve-detail-publish-date">
@@ -144,7 +143,6 @@ const CveDetailPageHeader = () => {
                 isLoading={isDetailLoading}
                 variant={LoaderType.inlineSkeleton}
                 width="100px"
-                fontSize="sm"
                 style={{ verticalAlign: -4 }}
               >
                 <b>

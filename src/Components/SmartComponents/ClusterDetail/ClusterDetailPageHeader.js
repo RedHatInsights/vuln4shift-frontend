@@ -49,7 +49,6 @@ const ClusterDetailPageHeader = () => {
           <WithLoader
             variant={LoaderType.inlineSkeleton}
             width="200px"
-            fontSize="sm"
             isLoading={isDetailLoading}
             style={{ verticalAlign: -4 }}
           >
@@ -63,7 +62,6 @@ const ClusterDetailPageHeader = () => {
         <WithLoader
           variant={LoaderType.inlineSkeleton}
           width="300px"
-          fontSize="sm"
           isLoading={isDetailLoading}
           style={{ verticalAlign: -4 }}
         >
@@ -77,7 +75,6 @@ const ClusterDetailPageHeader = () => {
         <WithLoader
           variant={LoaderType.inlineSkeleton}
           width="200px"
-          fontSize="sm"
           isLoading={isDetailLoading}
           style={{ verticalAlign: -4 }}
         >
