@@ -30,7 +30,7 @@ const CveListPage = () => {
   );
 
   useEffect(() => {
-    chrome.updateDocumentTitle('CVEs - Vulnerability | OpenShift');
+    chrome.updateDocumentTitle('CVEs - Vulnerability Dashboard | OpenShift');
   }, []);
 
   const HeaderTitle = (

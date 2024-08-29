@@ -19,7 +19,7 @@ const ClusterDetailPage = ({ activeTab }) => {
   useEffect(() => {
     cluster.display_name &&
       chrome.updateDocumentTitle(
-        `${cluster.display_name} - Clusters - Vulnerability | OpenShift`
+        `${cluster.display_name} - Clusters - Vulnerability Dashboard | OpenShift`
       );
   }, [cluster.display_name]);
 
