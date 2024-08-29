@@ -21,7 +21,7 @@ const ClusterListPage = () => {
   );
 
   useEffect(() => {
-    chrome.updateDocumentTitle('Clusters - Vulnerability | OpenShift');
+    chrome.updateDocumentTitle('Clusters - Vulnerability Dashboard | OpenShift');
   }, []);
 
   return (

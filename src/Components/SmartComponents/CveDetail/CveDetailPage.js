@@ -17,7 +17,7 @@ const CveDetailPage = ({ activeTab }) => {
   useEffect(() => {
     cve.synopsis &&
       chrome.updateDocumentTitle(
-        `${cve.synopsis} - CVEs - Vulnerability | OpenShift`
+        `${cve.synopsis} - CVEs - Vulnerability Dashboard | OpenShift`
       );
   }, [cve.synopsis]);
 
