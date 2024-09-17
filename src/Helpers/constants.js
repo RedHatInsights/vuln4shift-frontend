@@ -393,7 +393,7 @@ const createCveDescription = (row) => (
       </TextContent>
     )}
     <Link
-      to={'../cves/' + row.synopsis}
+      to={`../cves/${row.synopsis}/clusters`}
       className="pf-v5-u-mt-md pf-v5-u-display-block"
     >
       View more information about this CVE
