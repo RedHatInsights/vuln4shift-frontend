@@ -45,4 +45,4 @@ parameters:
   - name: IMAGE_TAG
     required: true
   - name: IMAGE
-    value: quay.io/cloudservices/vuln4shift-frontend
+    value: quay.io/insights-management-tenant/insights-ocp-vulnerability/vuln4shift-frontend
