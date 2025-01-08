@@ -6,14 +6,11 @@ updates:
       interval: "weekly"
     labels:
       - "dependencies"
-    open-pull-requests-limit: 10
+    open-pull-requests-limit: 5
     commit-message:
       prefix: "chore(deps):"
-    ignore:
-      - dependency-name: "react-router-dom"
-        versions: ["6.x"]
     groups:
-      redhat-cloud-services:
+      fec:
         patterns:
           - "@redhat-cloud-services/*"
         exclude-patterns:
@@ -23,15 +20,13 @@ updates:
           - "@patternfly/*"
         exclude-patterns:
           - "@patternfly/react-charts"
+        update-types:
+          - "minor"
+          - "patch"
       babel:
         patterns:
           - "@babel/*"
           - "babel-*"
-      rollup:
-        patterns:
-          - "rollup"
-          - "@rollup/plugin*"
-          - "rollup-plugin*"
       lint:
         patterns:
           - "eslint"
@@ -50,7 +45,6 @@ updates:
         patterns:
           - "react"
           - "react-dom"
-          - "react-redux"
       webpack:
         patterns:
           - "webpack"
