@@ -45,11 +45,11 @@
     "use-deep-compare-effect": "^1.8.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.25.8",
+    "@babel/core": "^7.26.0",
     "@babel/plugin-proposal-object-rest-spread": "^7.20.7",
-    "@babel/plugin-transform-runtime": "^7.25.7",
-    "@babel/preset-env": "^7.25.8",
-    "@babel/preset-react": "^7.25.7",
+    "@babel/plugin-transform-runtime": "^7.25.9",
+    "@babel/preset-env": "^7.26.0",
+    "@babel/preset-react": "^7.26.3",
     "@cypress/code-coverage": "^3.13.1",
     "@cypress/react18": "^2.0.1",
     "@cypress/webpack-dev-server": "^3.11.0",
