@@ -15,8 +15,10 @@ jobs:
   - stage: Verify
     name: Lint
     script: npm run lint
-  - script: npm run test
-    name: Test
+  - stage: Test
+    script: npm run travis:verify
+  - stage: Build
+    script: npm run build
 env:
   global:
   - BRANCH=${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}

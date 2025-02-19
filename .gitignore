@@ -19,12 +19,15 @@ yarn-error.log*
 .DS_Store
 *coverage
 .nyc_output
-codecov*
 
 # cypress
 cypress/downloads
 cypress/screenshots
 cypress/videos
+
+codecov
+coverage/*
+coverage-*
 
 # cache
 .cache/
