@@ -15,7 +15,7 @@
     "patch:hosts": "fec patch-etc-hosts",
     "start": "fec dev",
     "start:proxy": "PROXY=true fec dev",
-    "test": "jest --passWithNoTests",
+    "test": "npm run test:ct",
     "test:coverage": "curl -sSL 'https://raw.githubusercontent.com/RedHatInsights/insights-interact-tools/refs/heads/main/scripts/coverage.sh' | bash",
     "test:ct": "BABEL_ENV=componentTest cypress run --component",
     "travis:verify": "npm run test:coverage",
