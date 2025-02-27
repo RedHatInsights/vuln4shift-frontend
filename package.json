@@ -16,12 +16,10 @@
     "start": "fec dev",
     "start:proxy": "PROXY=true fec dev",
     "test": "npm run test:ct",
-    "test:ct": "BABEL_ENV=component TZ=UTC cypress run --component",
-    "test:coverage": "npx nyc report",
-    "verify": "npm-run-all build lint test",
-    "coverage:clean": "rm -rf .nyc_output coverage reports",
-    "coverage": "bash coverage.sh && npm run coverage:clean",
-    "postinstall": "ts-patch install"
+    "test:coverage": "curl -sSL 'https://raw.githubusercontent.com/RedHatInsights/insights-interact-tools/refs/heads/main/scripts/coverage.sh' | bash",
+    "test:ct": "BABEL_ENV=componentTest cypress run --component",
+    "travis:verify": "npm run test:coverage",
+    "verify": "npm-run-all build lint test"
   },
   "dependencies": {
     "@patternfly/react-component-groups": "^5.2.0",
@@ -50,7 +48,8 @@
     "@babel/plugin-transform-runtime": "^7.25.9",
     "@babel/preset-env": "^7.26.0",
     "@babel/preset-react": "^7.26.3",
-    "@cypress/code-coverage": "^3.13.1",
+    "@babel/runtime": "^7.25.6",
+    "@cypress/code-coverage": "^3.13.11",
     "@cypress/react18": "^2.0.1",
     "@cypress/webpack-dev-server": "^3.11.0",
     "@frsource/cypress-plugin-visual-regression-diff": "^3.3.1",
@@ -77,13 +76,14 @@
     "appname": "ocp-vulnerability"
   },
   "nyc": {
-    "report-dir": "cypress-coverage",
+    "report-dir": "coverage-cypress",
     "include": [
-      "src/**/*.js"
+      "src/**/*.{js,jsx}"
     ],
     "exclude": [
       "src/**/*.spec.ct.js",
-      "src/**/*.test.js"
+      "src/**/*.test.js",
+      "src/**/*.cy.js"
     ],
     "all": true
   }
