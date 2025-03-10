@@ -19,7 +19,8 @@
     "test:coverage": "curl -sSL 'https://raw.githubusercontent.com/RedHatInsights/insights-interact-tools/refs/heads/main/scripts/coverage.sh' | bash",
     "test:ct": "BABEL_ENV=componentTest cypress run --component",
     "travis:verify": "npm run test:coverage",
-    "verify": "npm-run-all build lint test"
+    "verify": "npm-run-all build lint test",
+    "postinstall": "ts-patch install"
   },
   "dependencies": {
     "@patternfly/react-component-groups": "^5.2.0",
@@ -67,7 +68,7 @@
     "strict-uri-encode": "^2.0.0",
     "stylelint": "^16.15.0",
     "stylelint-config-recommended-scss": "^14.1.0",
-    "ts-patch": "^3.2.1",
+    "ts-patch": "^3.3.0",
     "typescript": "^5.6.2",
     "webpack": "^5.98.0",
     "webpack-bundle-analyzer": "^4.10.2"
