@@ -61,7 +61,6 @@ const ClusterCvesTable = () => {
       label: 'CVE',
       placeholder: 'Search ID or description',
       value: search,
-      apply,
       chipLabel: 'Search term',
     }),
     radioFilter({
@@ -70,7 +69,6 @@ const ClusterCvesTable = () => {
       value: published,
       items: PUBLISHED_OPTIONS,
       placeholder: 'Filter by publish date',
-      apply,
       chipLabel: 'Publish date',
     }),
     checkboxFilter({
@@ -79,7 +77,6 @@ const ClusterCvesTable = () => {
       value: severity,
       items: SEVERITY_OPTIONS,
       placeholder: 'Filter by severity',
-      apply,
       chipLabel: 'Severity',
     }),
     useRangeFilter({
@@ -98,7 +95,6 @@ const ClusterCvesTable = () => {
         max: cvss_score_max,
       },
       placeholder: 'Filter by CVSS score range',
-      apply,
       chipLabel: 'CVSS base score',
     }),
   ];

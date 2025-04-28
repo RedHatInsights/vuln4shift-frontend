@@ -64,7 +64,6 @@ const CveClustersTable = () => {
       label: 'Name',
       placeholder: 'Filter by name',
       value: search,
-      apply,
       chipLabel: 'Search term',
     }),
     checkboxFilter({
@@ -81,7 +80,6 @@ const CveClustersTable = () => {
         'value'
       ),
       placeholder: 'Filter by status',
-      apply,
       chipLabel: 'Status',
     }),
     checkboxFilter({
@@ -98,7 +96,6 @@ const CveClustersTable = () => {
         'value'
       ),
       placeholder: 'Filter by version',
-      apply,
       chipLabel: 'Version',
     }),
     checkboxFilter({
@@ -115,7 +112,6 @@ const CveClustersTable = () => {
         'value'
       ),
       placeholder: 'Filter by provider',
-      apply,
       chipLabel: 'Provider',
     }),
   ];
