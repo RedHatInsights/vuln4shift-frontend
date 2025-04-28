@@ -62,7 +62,6 @@ const ClusterCvesTable = () => {
       label: 'Name',
       placeholder: 'Filter by name',
       value: search,
-      apply,
       chipLabel: 'Search term',
     }),
     checkboxFilter({
@@ -79,7 +78,6 @@ const ClusterCvesTable = () => {
         'value'
       ),
       placeholder: 'Filter by status',
-      apply,
       chipLabel: 'Status',
     }),
     checkboxFilter({
@@ -96,7 +94,6 @@ const ClusterCvesTable = () => {
         'value'
       ),
       placeholder: 'Filter by version',
-      apply,
       chipLabel: 'Version',
     }),
     checkboxFilter({
@@ -105,7 +102,6 @@ const ClusterCvesTable = () => {
       value: cluster_severity,
       items: CLUSTER_SEVERITY_OPTIONS,
       placeholder: 'Filter by CVEs severity',
-      apply,
       chipLabel: 'CVEs severity',
     }),
     checkboxFilter({
@@ -122,7 +118,6 @@ const ClusterCvesTable = () => {
         'value'
       ),
       placeholder: 'Filter by provider',
-      apply,
       chipLabel: 'Provider',
     }),
   ];

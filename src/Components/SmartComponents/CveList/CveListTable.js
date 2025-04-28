@@ -57,7 +57,6 @@ const CveListTable = () => {
       label: 'CVE',
       placeholder: 'Search ID or description',
       value: search,
-      apply,
       chipLabel: 'Search term',
     }),
     radioFilter({
@@ -66,7 +65,6 @@ const CveListTable = () => {
       value: published,
       items: PUBLISHED_OPTIONS,
       placeholder: 'Filter by publish date',
-      apply,
       chipLabel: 'Publish date',
     }),
     checkboxFilter({
@@ -75,7 +73,6 @@ const CveListTable = () => {
       value: severity,
       items: SEVERITY_OPTIONS,
       placeholder: 'Filter by severity',
-      apply,
       chipLabel: 'Severity',
     }),
     useRangeFilter({
@@ -94,7 +91,6 @@ const CveListTable = () => {
         max: cvss_score_max,
       },
       placeholder: 'Filter by CVSS score range',
-      apply,
       chipLabel: 'CVSS base score',
     }),
     checkboxFilter({
@@ -103,7 +99,6 @@ const CveListTable = () => {
       value: affected_clusters,
       items: EXPOSED_CLUSTERS_OPTIONS,
       placeholder: 'Filter by exposed clusters',
-      apply,
       chipLabel: 'Exposed clusters',
     }),
   ];
