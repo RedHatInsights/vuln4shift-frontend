@@ -54,7 +54,6 @@ const CveImagesTable = () => {
       label: 'Name',
       placeholder: 'Filter by name',
       value: search,
-      apply,
       chipLabel: 'Search term',
     }),
     checkboxFilter({
@@ -71,7 +70,6 @@ const CveImagesTable = () => {
         'value'
       ),
       placeholder: 'Filter by registry',
-      apply,
       chipLabel: 'Registry',
     }),
   ];

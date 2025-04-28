@@ -54,7 +54,6 @@ const ClusterImagesTable = () => {
       label: 'Name',
       placeholder: 'Search image name',
       value: search,
-      apply,
       chipLabel: 'Search term',
     }),
     checkboxFilter({
@@ -71,7 +70,6 @@ const ClusterImagesTable = () => {
         'value'
       ),
       placeholder: 'Filter by registry',
-      apply,
       chipLabel: 'Registry',
     }),
   ];
