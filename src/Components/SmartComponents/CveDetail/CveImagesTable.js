@@ -4,7 +4,8 @@ import {
   CVE_IMAGES_EXPORT_PREFIX,
   CVE_IMAGES_TABLE_MAPPER,
   CVE_IMAGES_ALLOWED_PARAMS,
-  IMAGE_REGISTRY_OPTIONS,
+  imageTextFilter,
+  registryFilter,
 } from '../../../Helpers/constants';
 import { useDispatch, useSelector } from 'react-redux';
 import NoMatchingItems from '../../PresentationalComponents/EmptyStates/NoMatchingItems';
@@ -16,11 +17,8 @@ import {
   changeCveImagesTableParams,
   fetchCveImagesTable,
 } from '../../../Store/Actions';
-import useTextFilter from '../Filters/TextFilter';
 import { setupFilters } from '../../../Helpers/miscHelper';
 import { fetchExposedImages } from '../../../Helpers/apiHelper';
-import checkboxFilter from '../Filters/CheckboxFilter';
-import { uniqBy } from 'lodash';
 
 const CveImagesTable = () => {
   const dispatch = useDispatch();
@@ -49,29 +47,8 @@ const CveImagesTable = () => {
   });
 
   const filters = [
-    useTextFilter({
-      urlParam: 'search',
-      label: 'Name',
-      placeholder: 'Filter by name',
-      value: search,
-      chipLabel: 'Search term',
-    }),
-    checkboxFilter({
-      urlParam: 'registry',
-      label: 'Registry',
-      value: registry,
-      items: uniqBy(
-        IMAGE_REGISTRY_OPTIONS.concat(
-          (dynamic_registry_options ?? []).map((registry) => ({
-            label: registry,
-            value: registry,
-          }))
-        ),
-        'value'
-      ),
-      placeholder: 'Filter by registry',
-      chipLabel: 'Registry',
-    }),
+    imageTextFilter(search),
+    registryFilter(registry, dynamic_registry_options),
   ];
 
   const [filterConfig, activeFiltersConfig] = setupFilters(
