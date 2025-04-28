@@ -3,10 +3,12 @@ import {
   CVE_LIST_ALLOWED_PARAMS,
   CVE_LIST_DEFAULT_FILTERS,
   CVE_LIST_TABLE_MAPPER,
-  EXPOSED_CLUSTERS_OPTIONS,
-  PUBLISHED_OPTIONS,
-  SEVERITY_OPTIONS,
   CVE_LIST_EXPORT_PREFIX,
+  cveSeverityFilter,
+  publishedFilter,
+  cvssFilter,
+  cveTextFilter,
+  affectedFilter,
 } from '../../../Helpers/constants';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -16,14 +18,10 @@ import {
 } from '../../../Store/Actions';
 import NoMatchingCves from '../../PresentationalComponents/EmptyStates/NoMatchingCves';
 import { useUrlBoundParams, useExport } from '../../../Helpers/hooks';
-import useTextFilter from '../Filters/TextFilter';
-import useRangeFilter from '../Filters/RangeFilter';
 import {
   getCvssScoreFromUrlParam,
   setupFilters,
 } from '../../../Helpers/miscHelper';
-import checkboxFilter from '../Filters/CheckboxFilter';
-import radioFilter from '../Filters/RadioFilter';
 import BaseTable from '../Table/BaseTable';
 import { fetchCves } from '../../../Helpers/apiHelper';
 
@@ -52,55 +50,11 @@ const CveListTable = () => {
   });
 
   const filters = [
-    useTextFilter({
-      urlParam: 'search',
-      label: 'CVE',
-      placeholder: 'Search ID or description',
-      value: search,
-      chipLabel: 'Search term',
-    }),
-    radioFilter({
-      urlParam: 'published',
-      label: 'Publish date',
-      value: published,
-      items: PUBLISHED_OPTIONS,
-      placeholder: 'Filter by publish date',
-      chipLabel: 'Publish date',
-    }),
-    checkboxFilter({
-      urlParam: 'severity',
-      label: 'Severity',
-      value: severity,
-      items: SEVERITY_OPTIONS,
-      placeholder: 'Filter by severity',
-      chipLabel: 'Severity',
-    }),
-    useRangeFilter({
-      urlParam: 'cvss_score',
-      label: 'CVSS score',
-      minMaxLabels: {
-        min: 'Min CVSS',
-        max: 'Max CVSS',
-      },
-      range: {
-        min: 0,
-        max: 10,
-      },
-      value: {
-        min: cvss_score_min,
-        max: cvss_score_max,
-      },
-      placeholder: 'Filter by CVSS score range',
-      chipLabel: 'CVSS base score',
-    }),
-    checkboxFilter({
-      urlParam: 'affected_clusters',
-      label: 'Exposed clusters',
-      value: affected_clusters,
-      items: EXPOSED_CLUSTERS_OPTIONS,
-      placeholder: 'Filter by exposed clusters',
-      chipLabel: 'Exposed clusters',
-    }),
+    cveTextFilter(search),
+    publishedFilter(published),
+    cveSeverityFilter(severity),
+    cvssFilter(cvss_score_min, cvss_score_max),
+    affectedFilter(affected_clusters),
   ];
 
   const [filterConfig, activeFiltersConfig] = setupFilters(

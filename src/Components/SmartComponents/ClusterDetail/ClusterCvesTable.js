@@ -4,8 +4,10 @@ import {
   CLUSTER_CVES_DEFAULT_FILTERS,
   CLUSTER_CVES_EXPORT_PREFIX,
   CLUSTER_CVES_TABLE_MAPPER,
-  PUBLISHED_OPTIONS,
-  SEVERITY_OPTIONS,
+  cveTextFilter,
+  cvssFilter,
+  publishedFilter,
+  cveSeverityFilter,
 } from '../../../Helpers/constants';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -19,10 +21,6 @@ import {
   getCvssScoreFromUrlParam,
   setupFilters,
 } from '../../../Helpers/miscHelper';
-import useTextFilter from '../Filters/TextFilter';
-import useRangeFilter from '../Filters/RangeFilter';
-import checkboxFilter from '../Filters/CheckboxFilter';
-import radioFilter from '../Filters/RadioFilter';
 import BaseTable from '../Table/BaseTable';
 import NoMatchingCves from '../../PresentationalComponents/EmptyStates/NoMatchingCves';
 import { fetchClusterCves } from '../../../Helpers/apiHelper';
@@ -56,47 +54,10 @@ const ClusterCvesTable = () => {
   });
 
   const filters = [
-    useTextFilter({
-      urlParam: 'search',
-      label: 'CVE',
-      placeholder: 'Search ID or description',
-      value: search,
-      chipLabel: 'Search term',
-    }),
-    radioFilter({
-      urlParam: 'published',
-      label: 'Publish date',
-      value: published,
-      items: PUBLISHED_OPTIONS,
-      placeholder: 'Filter by publish date',
-      chipLabel: 'Publish date',
-    }),
-    checkboxFilter({
-      urlParam: 'severity',
-      label: 'Severity',
-      value: severity,
-      items: SEVERITY_OPTIONS,
-      placeholder: 'Filter by severity',
-      chipLabel: 'Severity',
-    }),
-    useRangeFilter({
-      urlParam: 'cvss_score',
-      label: 'CVSS score',
-      minMaxLabels: {
-        min: 'Min CVSS',
-        max: 'Max CVSS',
-      },
-      range: {
-        min: 0,
-        max: 10,
-      },
-      value: {
-        min: cvss_score_min,
-        max: cvss_score_max,
-      },
-      placeholder: 'Filter by CVSS score range',
-      chipLabel: 'CVSS base score',
-    }),
+    cveTextFilter(search),
+    publishedFilter(published),
+    cveSeverityFilter(severity),
+    cvssFilter(cvss_score_min, cvss_score_max),
   ];
 
   const [filterConfig, activeFiltersConfig] = setupFilters(

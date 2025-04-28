@@ -4,7 +4,8 @@ import {
   CLUSTER_IMAGES_DEFAULT_FILTERS,
   CLUSTER_IMAGES_EXPORT_PREFIX,
   CLUSTER_IMAGES_TABLE_MAPPER,
-  IMAGE_REGISTRY_OPTIONS,
+  imageTextFilter,
+  registryFilter,
 } from '../../../Helpers/constants';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -15,12 +16,9 @@ import {
 import { useParams } from 'react-router-dom';
 import { useExport, useUrlBoundParams } from '../../../Helpers/hooks';
 import { setupFilters } from '../../../Helpers/miscHelper';
-import useTextFilter from '../Filters/TextFilter';
 import BaseTable from '../Table/BaseTable';
 import NoMatchingItems from '../../PresentationalComponents/EmptyStates/NoMatchingItems';
 import { fetchClusterImages } from '../../../Helpers/apiHelper';
-import { uniqBy } from 'lodash';
-import checkboxFilter from '../Filters/CheckboxFilter';
 
 const ClusterImagesTable = () => {
   const dispatch = useDispatch();
@@ -49,29 +47,8 @@ const ClusterImagesTable = () => {
   });
 
   const filters = [
-    useTextFilter({
-      urlParam: 'search',
-      label: 'Name',
-      placeholder: 'Search image name',
-      value: search,
-      chipLabel: 'Search term',
-    }),
-    checkboxFilter({
-      urlParam: 'registry',
-      label: 'Registry',
-      value: registry,
-      items: uniqBy(
-        IMAGE_REGISTRY_OPTIONS.concat(
-          (dynamic_registry_options ?? []).map((registry) => ({
-            label: registry,
-            value: registry,
-          }))
-        ),
-        'value'
-      ),
-      placeholder: 'Filter by registry',
-      chipLabel: 'Registry',
-    }),
+    imageTextFilter(search),
+    registryFilter(registry, dynamic_registry_options),
   ];
 
   const [filterConfig, activeFiltersConfig] = setupFilters(
