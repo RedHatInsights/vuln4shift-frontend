@@ -1,4 +1,4 @@
-![travis](https://app.travis-ci.com/RedHatInsights/vuln4shift-frontend.svg?branch=master)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/RedhatInsights/vuln4shift-frontend/test.yml?branch=master)](https://github.com/RedHatInsights/vuln4shift-frontend/actions/workflows/test.yml) [![codecov](https://codecov.io/gh/RedHatInsights/vuln4shift-frontend/branch/master/graph/badge.svg)](https://codecov.io/gh/RedHatInsights/vuln4shift-frontend)
 
 # Vulnerability for OpenShift frontend
 Red Hat Vulnerability for OpenShift service is used to assess and monitor the status of security vulnerabilities on OpenShift clusters, understand the level of exposure of infrastructure, and plan a course of action. This is the front-end repository for this service.

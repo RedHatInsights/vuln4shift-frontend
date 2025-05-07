@@ -18,7 +18,7 @@
     "test": "npm run test:ct",
     "test:coverage": "curl -sSL 'https://raw.githubusercontent.com/RedHatInsights/insights-interact-tools/refs/heads/main/scripts/coverage.sh' | bash",
     "test:ct": "BABEL_ENV=componentTest cypress run --component",
-    "travis:verify": "npm run test:coverage",
+    "ci:verify": "npm run test:coverage",
     "verify": "npm-run-all build lint test"
   },
   "dependencies": {
@@ -49,6 +49,8 @@
     "@babel/preset-env": "^7.26.0",
     "@babel/preset-react": "^7.26.3",
     "@babel/runtime": "^7.25.6",
+    "@commitlint/cli": "^19.8.0",
+    "@commitlint/config-conventional": "^19.8.0",
     "@cypress/code-coverage": "^3.13.11",
     "@cypress/react18": "^2.0.1",
     "@cypress/webpack-dev-server": "^3.11.0",
