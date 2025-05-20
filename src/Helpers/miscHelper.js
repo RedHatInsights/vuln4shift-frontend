@@ -56,6 +56,8 @@ export const areAnyFiltersApplied = ({
 };
 
 export const setupFilters = (filters, meta, defaultFilters, apply) => {
+  filters = filters.map((filter) => filter(apply));
+
   if (filters.length === 0) {
     return [undefined, undefined];
   }
