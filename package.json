@@ -49,7 +49,7 @@
     "@babel/preset-env": "^7.27.2",
     "@babel/preset-react": "^7.27.1",
     "@babel/runtime": "^7.27.6",
-    "@commitlint/cli": "^19.8.0",
+    "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.0",
     "@cypress/code-coverage": "^3.13.11",
     "@cypress/react18": "^2.0.1",
