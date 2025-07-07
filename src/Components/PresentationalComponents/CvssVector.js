@@ -60,7 +60,7 @@ const CvssVector = ({
           <WithLoader
             isLoading={isLoading}
             columns={['Metric', 'Value']}
-            rows={8}
+            rowsCount={8}
             variant={LoaderType.compactTable}
           >
             {cvssVector ? (
