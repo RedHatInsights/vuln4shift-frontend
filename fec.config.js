@@ -1,3 +1,4 @@
+const { resolve } = require('path');
 const { sentryWebpackPlugin } = require('@sentry/webpack-plugin');
 
 module.exports = {
@@ -42,4 +43,5 @@ module.exports = {
       },
     ],
   },
+  frontendCRDPath: resolve(__dirname, './deploy/frontend.yml'),
 };
