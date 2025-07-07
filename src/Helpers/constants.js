@@ -397,12 +397,6 @@ const createCveDescription = (row) => (
         {row.description}
       </TextContent>
     )}
-    <Link
-      to={`../cves/${row.synopsis}/clusters`}
-      className="pf-v5-u-mt-md pf-v5-u-display-block"
-    >
-      View more information about this CVE
-    </Link>
   </Fragment>
 );
 
