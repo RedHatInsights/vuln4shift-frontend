@@ -3,9 +3,8 @@ import {
   PageHeader,
   PageHeaderTitle,
 } from '@redhat-cloud-services/frontend-components/PageHeader';
-import { Breadcrumb, BreadcrumbItem } from '@patternfly/react-core';
 import DateFormat from '@redhat-cloud-services/frontend-components/DateFormat/DateFormat';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import WithLoader, {
   LoaderType,
@@ -38,24 +37,6 @@ const ClusterDetailPageHeader = () => {
 
   return (
     <PageHeader>
-      <Breadcrumb className="pf-v5-u-mb-md">
-        <BreadcrumbItem>
-          <Link to="../">Vulnerability</Link>
-        </BreadcrumbItem>
-        <BreadcrumbItem>
-          <Link to="../clusters">Clusters</Link>
-        </BreadcrumbItem>
-        <BreadcrumbItem>
-          <WithLoader
-            variant={LoaderType.inlineSkeleton}
-            width="200px"
-            isLoading={isDetailLoading}
-            style={{ verticalAlign: -4 }}
-          >
-            {cluster.display_name}
-          </WithLoader>
-        </BreadcrumbItem>
-      </Breadcrumb>
       <PageHeaderTitle title={pageTitle} className="pf-v5-u-mb-sm" />
       <div>
         UUID:&nbsp;

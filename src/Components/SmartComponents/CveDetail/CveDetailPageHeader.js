@@ -4,8 +4,6 @@ import {
   PageHeaderTitle,
 } from '@redhat-cloud-services/frontend-components/PageHeader';
 import {
-  Breadcrumb,
-  BreadcrumbItem,
   Grid,
   GridItem,
   Stack,
@@ -14,7 +12,6 @@ import {
   TextContent,
   TextVariants,
 } from '@patternfly/react-core';
-import { Link } from 'react-router-dom';
 import { Shield } from '@redhat-cloud-services/frontend-components/Shield';
 import CvssVector from '../../PresentationalComponents/CvssVector';
 import { useParams } from 'react-router-dom';
@@ -55,15 +52,6 @@ const CveDetailPageHeader = () => {
 
   return (
     <PageHeader style={{ paddingBottom: 0 }}>
-      <Breadcrumb className="pf-v5-u-mb-md">
-        <BreadcrumbItem>
-          <Link to="../">Vulnerability</Link>
-        </BreadcrumbItem>
-        <BreadcrumbItem>
-          <Link to="../cves">CVEs</Link>
-        </BreadcrumbItem>
-        <BreadcrumbItem>{params.cveId}</BreadcrumbItem>
-      </Breadcrumb>
       <PageHeaderTitle
         title={
           <Fragment>
