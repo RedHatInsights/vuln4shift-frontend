@@ -1,5 +1,10 @@
 import React from 'react';
 import {
+  DeclarativeTable,
+  setupFilters,
+  decodeRangeFilter,
+} from 'declarative-table';
+import {
   CLUSTER_CVES_ALLOWED_PARAMS,
   CLUSTER_CVES_DEFAULT_FILTERS,
   CLUSTER_CVES_EXPORT_PREFIX,
@@ -17,11 +22,6 @@ import {
 } from '../../../Store/Actions';
 import { useParams } from 'react-router-dom';
 import { useExport, useUrlBoundParams } from '../../../Helpers/hooks';
-import {
-  getCvssScoreFromUrlParam,
-  setupFilters,
-} from '../../../Helpers/miscHelper';
-import BaseTable from '../Table/BaseTable';
 import NoMatchingCves from '../../PresentationalComponents/EmptyStates/NoMatchingCves';
 import { fetchClusterCves } from '../../../Helpers/apiHelper';
 
@@ -44,7 +44,7 @@ const ClusterCvesTable = () => {
 
   const { search, cvss_score, severity, published } = meta;
 
-  const [cvss_score_min, cvss_score_max] = getCvssScoreFromUrlParam(cvss_score);
+  const [cvss_score_min, cvss_score_max] = decodeRangeFilter(cvss_score);
 
   const onExport = useExport({
     filenamePrefix: CLUSTER_CVES_EXPORT_PREFIX,
@@ -54,10 +54,10 @@ const ClusterCvesTable = () => {
   });
 
   const filters = [
-    cveTextFilter(search),
-    publishedFilter(published),
-    cveSeverityFilter(severity),
-    cvssFilter(cvss_score_min, cvss_score_max),
+    cveTextFilter(search, apply),
+    publishedFilter(published, apply),
+    cveSeverityFilter(severity, apply),
+    cvssFilter(cvss_score_min, cvss_score_max, apply),
   ];
 
   const [filterConfig, activeFiltersConfig] = setupFilters(
@@ -68,7 +68,7 @@ const ClusterCvesTable = () => {
   );
 
   return (
-    <BaseTable
+    <DeclarativeTable
       isLoading={isTableLoading}
       isExpandable
       rows={cves.map((row) => CLUSTER_CVES_TABLE_MAPPER(row))}

@@ -1,4 +1,5 @@
 import React from 'react';
+import { DeclarativeTable, setupFilters } from 'declarative-table';
 import {
   CLUSTER_LIST_ALLOWED_PARAMS,
   CLUSTER_LIST_DEFAULT_FILTERS,
@@ -18,8 +19,6 @@ import {
 } from '../../../Store/Actions';
 import NoClusters from '../../PresentationalComponents/EmptyStates/NoClusters';
 import { useExport, useUrlBoundParams } from '../../../Helpers/hooks';
-import BaseTable from '../Table/BaseTable';
-import { setupFilters } from '../../../Helpers/miscHelper';
 import NoMatchingItems from '../../PresentationalComponents/EmptyStates/NoMatchingItems';
 import { fetchClusters } from '../../../Helpers/apiHelper';
 
@@ -55,18 +54,18 @@ const ClusterCvesTable = () => {
   });
 
   const filters = [
-    clusterTextFilter(search),
-    clusterStatusFilter(status, dynamic_status_options),
-    versionFilter(version, dynamic_version_options),
-    clusterSeverityFilter(cluster_severity),
-    providerFilter(provider, dynamic_provider_options),
+    clusterTextFilter(search, apply),
+    clusterStatusFilter(status, dynamic_status_options, apply),
+    versionFilter(version, dynamic_version_options, apply),
+    clusterSeverityFilter(cluster_severity, apply),
+    providerFilter(provider, dynamic_provider_options, apply),
   ];
 
   const [filterConfig, activeFiltersConfig, areAnyFiltersApplied] =
     setupFilters(filters, meta, CLUSTER_LIST_DEFAULT_FILTERS, apply);
 
   return (
-    <BaseTable
+    <DeclarativeTable
       isLoading={isLoading}
       rows={clusters.map((row) => CLUSTER_LIST_TABLE_MAPPER(row))}
       columns={columns}

@@ -33,6 +33,7 @@
     "@sentry/webpack-plugin": "^3.5.0",
     "@unleash/proxy-client-react": "^5.0.0",
     "axios": "^1.10.0",
+    "declarative-table": "^5.0.9",
     "lodash": "^4.17.21",
     "prop-types": "^15.8.1",
     "query-string": "^9.2.2",

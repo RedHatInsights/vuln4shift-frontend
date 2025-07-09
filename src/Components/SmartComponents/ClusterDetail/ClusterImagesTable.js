@@ -1,4 +1,5 @@
 import React from 'react';
+import { DeclarativeTable, setupFilters } from 'declarative-table';
 import {
   CLUSTER_IMAGES_ALLOWED_PARAMS,
   CLUSTER_IMAGES_DEFAULT_FILTERS,
@@ -15,8 +16,6 @@ import {
 } from '../../../Store/Actions';
 import { useParams } from 'react-router-dom';
 import { useExport, useUrlBoundParams } from '../../../Helpers/hooks';
-import { setupFilters } from '../../../Helpers/miscHelper';
-import BaseTable from '../Table/BaseTable';
 import NoMatchingItems from '../../PresentationalComponents/EmptyStates/NoMatchingItems';
 import { fetchClusterImages } from '../../../Helpers/apiHelper';
 
@@ -47,8 +46,8 @@ const ClusterImagesTable = () => {
   });
 
   const filters = [
-    imageTextFilter(search),
-    registryFilter(registry, dynamic_registry_options),
+    imageTextFilter(search, apply),
+    registryFilter(registry, dynamic_registry_options, apply),
   ];
 
   const [filterConfig, activeFiltersConfig] = setupFilters(
@@ -59,7 +58,7 @@ const ClusterImagesTable = () => {
   );
 
   return (
-    <BaseTable
+    <DeclarativeTable
       isLoading={isTableLoading}
       rows={exposed_images.map((row) => CLUSTER_IMAGES_TABLE_MAPPER(row))}
       columns={columns}

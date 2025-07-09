@@ -1,4 +1,5 @@
 import React from 'react';
+import { DeclarativeTable, setupFilters } from 'declarative-table';
 import {
   clusterStatusFilter,
   clusterTextFilter,
@@ -12,14 +13,12 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import NoMatchingItems from '../../PresentationalComponents/EmptyStates/NoMatchingItems';
 import { useParams } from 'react-router-dom';
-import BaseTable from '../Table/BaseTable';
 import { useExport, useUrlBoundParams } from '../../../Helpers/hooks';
 import {
   changeCveClustersTableColumns,
   changeCveClustersTableParams,
   fetchCveClustersTable,
 } from '../../../Store/Actions';
-import { setupFilters } from '../../../Helpers/miscHelper';
 import { fetchExposedClusters } from '../../../Helpers/apiHelper';
 
 const CveClustersTable = () => {
@@ -57,10 +56,10 @@ const CveClustersTable = () => {
   });
 
   const filters = [
-    clusterTextFilter(search),
-    clusterStatusFilter(status, dynamic_status_options),
-    versionFilter(version, dynamic_version_options),
-    providerFilter(provider, dynamic_provider_options),
+    clusterTextFilter(search, apply),
+    clusterStatusFilter(status, dynamic_status_options, apply),
+    versionFilter(version, dynamic_version_options, apply),
+    providerFilter(provider, dynamic_provider_options, apply),
   ];
 
   const [filterConfig, activeFiltersConfig] = setupFilters(
@@ -71,7 +70,7 @@ const CveClustersTable = () => {
   );
 
   return (
-    <BaseTable
+    <DeclarativeTable
       isLoading={isTableLoading}
       rows={clusters.map((row) => CVE_CLUSTERS_TABLE_MAPPER(row))}
       columns={columns}

@@ -8,10 +8,12 @@ import { Text, TextContent, TextVariants } from '@patternfly/react-core';
 import { DateFormat } from '@redhat-cloud-services/frontend-components/DateFormat';
 import { subtractDays, subtractYears } from './miscHelper';
 import MissingMetadata from '../Components/PresentationalComponents/EmptyStates/MissingMetadata';
-import checkboxFilter from '../Components/SmartComponents/Filters/CheckboxFilter';
-import radioFilter from '../Components/SmartComponents/Filters/RadioFilter';
-import useRangeFilter from '../Components/SmartComponents/Filters/RangeFilter';
-import useTextFilter from '../Components/SmartComponents/Filters/TextFilter';
+import {
+  checkboxFilter,
+  textFilter,
+  radioFilter,
+  rangeFilter,
+} from 'declarative-table';
 import { uniqBy } from 'lodash';
 
 export const EXPOSED_IMAGES_FEATURE_FLAG = 'vuln4shift.exposed_images';
@@ -554,7 +556,7 @@ export const CLUSTER_IMAGES_EXPORT_PREFIX =
   'ocp-vulnerability_cluster-images--';
 
 /* FILTERS */
-export const cveSeverityFilter = (value) =>
+export const cveSeverityFilter = (value, apply) =>
   checkboxFilter({
     urlParam: 'severity',
     label: 'Severity',
@@ -562,9 +564,10 @@ export const cveSeverityFilter = (value) =>
     items: SEVERITY_OPTIONS,
     placeholder: 'Filter by severity',
     chipLabel: 'Severity',
+    apply,
   });
 
-export const publishedFilter = (value) =>
+export const publishedFilter = (value, apply) =>
   radioFilter({
     urlParam: 'published',
     label: 'Publish date',
@@ -572,10 +575,11 @@ export const publishedFilter = (value) =>
     items: PUBLISHED_OPTIONS,
     placeholder: 'Filter by publish date',
     chipLabel: 'Publish date',
+    apply,
   });
 
-export const cvssFilter = (minValue, maxValue) =>
-  useRangeFilter({
+export const cvssFilter = (minValue, maxValue, apply) =>
+  rangeFilter({
     urlParam: 'cvss_score',
     label: 'CVSS score',
     minMaxLabels: {
@@ -592,36 +596,40 @@ export const cvssFilter = (minValue, maxValue) =>
     },
     placeholder: 'Filter by CVSS score range',
     chipLabel: 'CVSS base score',
+    apply,
   });
 
-export const cveTextFilter = (value) =>
-  useTextFilter({
+export const cveTextFilter = (value, apply) =>
+  textFilter({
     urlParam: 'search',
     label: 'CVE',
     placeholder: 'Search ID or description',
     value,
     chipLabel: 'Search term',
+    apply,
   });
 
-export const imageTextFilter = (value) =>
-  useTextFilter({
+export const imageTextFilter = (value, apply) =>
+  textFilter({
     urlParam: 'search',
     label: 'Name',
     placeholder: 'Search image name',
     value: value,
     chipLabel: 'Search term',
+    apply,
   });
 
-export const clusterTextFilter = (value) =>
-  useTextFilter({
+export const clusterTextFilter = (value, apply) =>
+  textFilter({
     urlParam: 'search',
     label: 'Name',
     placeholder: 'Search cluster name or ID',
     value: value,
     chipLabel: 'Search term',
+    apply,
   });
 
-export const affectedFilter = (value) =>
+export const affectedFilter = (value, apply) =>
   checkboxFilter({
     urlParam: 'affected_clusters',
     label: 'Exposed clusters',
@@ -629,9 +637,10 @@ export const affectedFilter = (value) =>
     items: EXPOSED_CLUSTERS_OPTIONS,
     placeholder: 'Filter by exposed clusters',
     chipLabel: 'Exposed clusters',
+    apply,
   });
 
-export const clusterStatusFilter = (value, dynamicOptions) =>
+export const clusterStatusFilter = (value, dynamicOptions, apply) =>
   checkboxFilter({
     urlParam: 'status',
     label: 'Status',
@@ -647,9 +656,10 @@ export const clusterStatusFilter = (value, dynamicOptions) =>
     ),
     placeholder: 'Filter by status',
     chipLabel: 'Status',
+    apply,
   });
 
-export const versionFilter = (value, dynamicOptions) =>
+export const versionFilter = (value, dynamicOptions, apply) =>
   checkboxFilter({
     urlParam: 'version',
     label: 'Version',
@@ -665,9 +675,10 @@ export const versionFilter = (value, dynamicOptions) =>
     ),
     placeholder: 'Filter by version',
     chipLabel: 'Version',
+    apply,
   });
 
-export const providerFilter = (value, dynamicOptions) =>
+export const providerFilter = (value, dynamicOptions, apply) =>
   checkboxFilter({
     urlParam: 'provider',
     label: 'Provider',
@@ -683,9 +694,10 @@ export const providerFilter = (value, dynamicOptions) =>
     ),
     placeholder: 'Filter by provider',
     chipLabel: 'Provider',
+    apply,
   });
 
-export const registryFilter = (value, dynamicOptions) =>
+export const registryFilter = (value, dynamicOptions, apply) =>
   checkboxFilter({
     urlParam: 'registry',
     label: 'Registry',
@@ -701,9 +713,10 @@ export const registryFilter = (value, dynamicOptions) =>
     ),
     placeholder: 'Filter by registry',
     chipLabel: 'Registry',
+    apply,
   });
 
-export const clusterSeverityFilter = (value) =>
+export const clusterSeverityFilter = (value, apply) =>
   checkboxFilter({
     urlParam: 'cluster_severity',
     label: 'CVEs severity',
@@ -711,4 +724,5 @@ export const clusterSeverityFilter = (value) =>
     items: CLUSTER_SEVERITY_OPTIONS,
     placeholder: 'Filter by CVEs severity',
     chipLabel: 'CVEs severity',
+    apply,
   });

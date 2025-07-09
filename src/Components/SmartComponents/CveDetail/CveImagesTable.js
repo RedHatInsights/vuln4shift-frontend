@@ -1,4 +1,5 @@
 import React from 'react';
+import { DeclarativeTable, setupFilters } from 'declarative-table';
 import {
   CVE_IMAGES_DEFAULT_FILTERS,
   CVE_IMAGES_EXPORT_PREFIX,
@@ -10,14 +11,12 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import NoMatchingItems from '../../PresentationalComponents/EmptyStates/NoMatchingItems';
 import { useParams } from 'react-router-dom';
-import BaseTable from '../Table/BaseTable';
 import { useExport, useUrlBoundParams } from '../../../Helpers/hooks';
 import {
   changeCveImagesTableColumns,
   changeCveImagesTableParams,
   fetchCveImagesTable,
 } from '../../../Store/Actions';
-import { setupFilters } from '../../../Helpers/miscHelper';
 import { fetchExposedImages } from '../../../Helpers/apiHelper';
 
 const CveImagesTable = () => {
@@ -47,8 +46,8 @@ const CveImagesTable = () => {
   });
 
   const filters = [
-    imageTextFilter(search),
-    registryFilter(registry, dynamic_registry_options),
+    imageTextFilter(search, apply),
+    registryFilter(registry, dynamic_registry_options, apply),
   ];
 
   const [filterConfig, activeFiltersConfig] = setupFilters(
@@ -59,7 +58,7 @@ const CveImagesTable = () => {
   );
 
   return (
-    <BaseTable
+    <DeclarativeTable
       isLoading={isTableLoading}
       rows={images.map((row) => CVE_IMAGES_TABLE_MAPPER(row))}
       columns={columns}
