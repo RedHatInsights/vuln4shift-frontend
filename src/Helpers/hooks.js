@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import qs from 'query-string';
 import { useDispatch } from 'react-redux';
 import { EXPOSED_CLUSTERS_OPTIONS, PUBLISHED_OPTIONS } from './constants';
@@ -8,7 +8,6 @@ import {
 } from '@redhat-cloud-services/frontend-components-notifications/redux';
 import { downloadFile } from '@redhat-cloud-services/frontend-components-utilities/helpers';
 import { useFlag, useFlagsStatus } from '@unleash/proxy-client-react';
-import { ColumnManagementModal } from '@patternfly/react-component-groups';
 
 // TODO: Consider moving some of these non-hook functions to constants.js or miscHelper.js
 
@@ -240,19 +239,4 @@ export const useFeatureFlag = (flag) => {
   const isFlagEnabled = useFlag(flag);
 
   return flagsReady ? isFlagEnabled : false;
-};
-
-export const useColumnManagement = (columns, onApply) => {
-  const [isModalOpen, setModalOpen] = useState(false);
-
-  return [
-    <ColumnManagementModal
-      appliedColumns={columns}
-      applyColumns={(newColumns) => onApply(newColumns)}
-      isOpen={isModalOpen}
-      onClose={() => setModalOpen(false)}
-      key="column-mgmt-modal"
-    />,
-    setModalOpen,
-  ];
 };
