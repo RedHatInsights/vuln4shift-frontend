@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import qs from 'query-string';
 import { useDispatch } from 'react-redux';
 import { EXPOSED_CLUSTERS_OPTIONS, PUBLISHED_OPTIONS } from './constants';
@@ -8,6 +8,8 @@ import {
 } from '@redhat-cloud-services/frontend-components-notifications/redux';
 import { downloadFile } from '@redhat-cloud-services/frontend-components-utilities/helpers';
 import { useFlag, useFlagsStatus } from '@unleash/proxy-client-react';
+import { PersistenceContext } from '../App';
+import { useSearchParams } from 'react-router-dom';
 
 // TODO: Consider moving some of these non-hook functions to constants.js or miscHelper.js
 
@@ -239,4 +241,69 @@ export const useFeatureFlag = (flag) => {
   const isFlagEnabled = useFlag(flag);
 
   return flagsReady ? isFlagEnabled : false;
+};
+
+// allows parameters to be remembered navigating between pages within the application
+export const usePersistentParams = (pageName) => {
+  const { persistentState, setPersistentState } =
+    useContext(PersistenceContext);
+
+  const apply = (newParams, replaceState) => {
+    setPersistentState((oldGlobalState) => {
+      const oldLocalState = oldGlobalState[pageName];
+
+      let mergedLocalState = {
+        offset: 0,
+        ...(replaceState
+          ? {
+              limit: oldLocalState.limit,
+              sort: oldLocalState.sort,
+            }
+          : oldLocalState),
+        ...newParams,
+      };
+
+      // remove entries with value of undefined from local state
+      mergedLocalState = Object.fromEntries(
+        Object.entries(mergedLocalState).filter(
+          ([_key, value]) => value !== undefined
+        )
+      );
+
+      const globalState = {
+        ...oldGlobalState,
+        [pageName]: mergedLocalState,
+      };
+
+      return globalState;
+    });
+  };
+
+  return [persistentState[pageName] ?? {}, apply];
+};
+
+// loads parameters from the URL path on page load and sets URL path when parameters change
+export const useUrlBoundParamsNew = (params, apply, defaultState) => {
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  useEffect(() => {
+    let urlParams = Object.fromEntries(searchParams.entries());
+
+    if (Object.keys(urlParams).length > 0) {
+      urlParams = { ...defaultState, ...urlParams };
+
+      urlParams.limit = Number(urlParams.limit);
+
+      apply(urlParams);
+    } else if (defaultState !== undefined && Object.keys(params).length === 0) {
+      apply(defaultState);
+    }
+  }, []);
+
+  useEffect(() => {
+    const paramsCopy = { ...params };
+    delete paramsCopy.offset;
+
+    setSearchParams({ ...paramsCopy });
+  }, [params]);
 };

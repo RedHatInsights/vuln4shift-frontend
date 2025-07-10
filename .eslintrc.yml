@@ -4,5 +4,10 @@ extends:
 rules:
   rulesdir/forbid-pf-relative-imports: off
   no-only-tests/no-only-tests: 'error'
+  no-unused-vars:
+    - error
+    - argsIgnorePattern: "^_"
+      varsIgnorePattern: "^_"
+      destructuredArrayIgnorePattern: "^_"
 plugins:
   - "no-only-tests"
