@@ -23,7 +23,7 @@
     "postinstall": "ts-patch install"
   },
   "dependencies": {
-    "@patternfly/react-component-groups": "^5.5.8",
+    "@patternfly/react-component-groups": "^6.2.1",
     "@patternfly/react-core": "^5.4.14",
     "@patternfly/react-icons": "^5.4.2",
     "@patternfly/react-table": "^5.4.16",
