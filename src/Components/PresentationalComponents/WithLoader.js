@@ -14,7 +14,7 @@ export const LoaderType = {
   skeleton: 'skeleton',
 };
 
-const WithLoader = ({ isLoading, variant, children, size, ...props }) => {
+const WithLoader = ({ isLoading, variant, children, ...props }) => {
   if (isLoading) {
     switch (variant) {
       case LoaderType.spinner:
@@ -46,7 +46,6 @@ WithLoader.propTypes = {
   variant: propTypes.oneOf(Object.keys(LoaderType)),
   style: propTypes.object,
   children: propTypes.node,
-  size: propTypes.string,
 };
 
 export default WithLoader;
