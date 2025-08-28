@@ -15,12 +15,13 @@ import {
   PageHeaderTitle,
 } from '@redhat-cloud-services/frontend-components/PageHeader';
 import CveListTable from './CveListTable';
-import { useLocalStorage } from '../../../Helpers/hooks';
+import { useFeatureFlag, useLocalStorage } from '../../../Helpers/hooks';
 import { HEADER_ALERT_DISMISSED_KEY } from '../../../Helpers/constants';
 import useChrome from '@redhat-cloud-services/frontend-components/useChrome';
 
 const CveListPage = () => {
   const chrome = useChrome();
+  const isLightspeedEnabled = useFeatureFlag('platform.lightspeed-rebrand');
 
   const PRODUCT_DOC =
     'https://access.redhat.com/documentation/en-us/openshift_cluster_manager/1-latest';
@@ -42,8 +43,9 @@ const CveListPage = () => {
       bodyContent={
         <Fragment>
           The Vulnerability service identifies CVEs with errata that may affect
-          your Insights-connected OpenShift clusters. Vulnerability information
-          applies for OCP4.8+ version only.
+          your {isLightspeedEnabled ? 'Lightspeed' : 'Insights'}-connected
+          OpenShift clusters. Vulnerability information applies for OCP4.8+
+          version only.
         </Fragment>
       }
       footerContent={
