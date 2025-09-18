@@ -167,7 +167,7 @@ describe('CveListTable without items', () => {
   it('shows correct empty state depending on whether filters are applied or not', () => {
     cy.contains('No matching CVEs found').should('exist');
 
-    cy.get('.ins-c-chip-filters .pf-v5-c-chip button').click();
+    cy.get('.ins-c-chip-filters .pf-v6-c-label button').click();
 
     cy.contains('No matching CVEs found').should('exist');
     cy.contains('Reset filter').should('exist');

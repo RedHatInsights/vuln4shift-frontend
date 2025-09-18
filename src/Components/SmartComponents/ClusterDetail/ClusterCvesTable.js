@@ -3,7 +3,7 @@ import {
   DeclarativeTable,
   setupFilters,
   decodeRangeFilter,
-} from 'declarative-table';
+} from '../../../DeclarativeTableFramework';
 import {
   CLUSTER_CVES_ALLOWED_PARAMS,
   CLUSTER_CVES_DEFAULT_FILTERS,

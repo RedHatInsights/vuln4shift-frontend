@@ -24,7 +24,7 @@ const TableTabs = ({ activeTab, tabs }) => {
 
   return (
     <Tabs
-      className="pf-v5-c-table"
+      className="pf-v6-c-table"
       activeKey={activeTab}
       onSelect={(e, newTab) =>
         navigate(urlChangeTab(location.pathname, newTab))
