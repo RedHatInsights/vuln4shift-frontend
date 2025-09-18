@@ -57,10 +57,12 @@ const CveListPage = () => {
       <span>
         CVEs
         <Icon
-          className="pf-v5-u-ml-sm pointer cves-header-questionmark"
+          className="pf-v6-u-ml-sm pointer cves-header-questionmark"
+          iconSize="lg"
           style={{
             verticalAlign: 0,
-            color: 'var(--pf-v5-global--secondary-color--100)',
+            '--pf-v6-c-icon__content--Color':
+              'var(--pf-t--global--text--color--subtle)',
           }}
         >
           <OutlinedQuestionCircleIcon />
@@ -77,7 +79,7 @@ const CveListPage = () => {
           <Alert
             variant={AlertVariant.info}
             isInline
-            className="pf-v5-u-mt-sm"
+            className="pf-v6-u-mt-sm"
             title="Vulnerability information applies to OCP4.8+ version only"
             actionClose={
               <AlertActionCloseButton
@@ -87,7 +89,7 @@ const CveListPage = () => {
           />
         )}
       </PageHeader>
-      <section className="pf-v5-l-page__main-section pf-v5-c-page__main-section">
+      <section className="pf-v6-l-page__main-section pf-v6-c-page__main-section">
         <Alert
           variant={AlertVariant.info}
           isInline
@@ -103,7 +105,7 @@ const CveListPage = () => {
             href="/application-services/acs/overview"
           >
             Visit Red Hat Advanced Cluster Security Cloud Service (RHACSCS)
-            <ExternalLinkAltIcon className="pf-v5-u-ml-sm" />
+            <ExternalLinkAltIcon className="pf-v6-u-ml-sm" />
           </a>
         </Alert>
         <CveListTable />

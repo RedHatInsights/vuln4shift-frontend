@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import propTypes from 'prop-types';
-import { Split, SplitItem, TextInput } from '@patternfly/react-core';
-import { Select } from '@patternfly/react-core/deprecated';
+import { Select, Split, SplitItem, TextInput } from '@patternfly/react-core';
 
 const RangeFilterComponent = ({
   setValues,
@@ -41,9 +40,9 @@ const RangeFilterComponent = ({
   };
 
   const filterContent = (
-    <Split className="pf-v5-u-m-md">
+    <Split className="pf-v6-u-m-md">
       <SplitItem>
-        <span style={{ fontSize: 'var(--pf-v5-global--FontSize--sm)' }}>
+        <span style={{ fontSize: 'var(--pf-t--global--font--size--sm)' }}>
           {minMaxLabels.min}
         </span>
         <br />
@@ -58,10 +57,10 @@ const RangeFilterComponent = ({
       </SplitItem>
       <SplitItem>
         <br />
-        <span className="pf-v5-u-m-sm">-</span>
+        <span className="pf-v6-u-m-sm">-</span>
       </SplitItem>
       <SplitItem>
-        <span style={{ fontSize: 'var(--pf-v5-global--FontSize--sm)' }}>
+        <span style={{ fontSize: 'var(--pf-t--global--font--size--sm)' }}>
           {minMaxLabels.max}
         </span>
         <br />

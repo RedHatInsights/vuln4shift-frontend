@@ -34,7 +34,7 @@ const ClusterListPage = () => {
           <Alert
             variant={AlertVariant.info}
             isInline
-            className="pf-v5-u-mt-sm"
+            className="pf-v6-u-mt-sm"
             title="Vulnerability information applies to OCP4.8+ version only"
             actionClose={
               <AlertActionCloseButton
@@ -44,7 +44,7 @@ const ClusterListPage = () => {
           />
         )}
       </PageHeader>
-      <section className="pf-v5-l-page__main-section pf-v5-c-page__main-section">
+      <section className="pf-v6-l-page__main-section pf-v6-c-page__main-section">
         <ClusterListTable />
       </section>
     </Fragment>

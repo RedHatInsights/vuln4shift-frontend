@@ -4,7 +4,7 @@ import { processDate } from '@redhat-cloud-services/frontend-components-utilitie
 import parseCvssScore from '@redhat-cloud-services/frontend-components-utilities/parseCvssScore';
 import { Shield } from '@redhat-cloud-services/frontend-components/Shield';
 import ShieldSet from '../Components/PresentationalComponents/ShieldSet';
-import { Text, TextContent, TextVariants } from '@patternfly/react-core';
+import { Content, ContentVariants } from '@patternfly/react-core';
 import { DateFormat } from '@redhat-cloud-services/frontend-components/DateFormat';
 import { subtractDays, subtractYears } from './miscHelper';
 import MissingMetadata from '../Components/PresentationalComponents/EmptyStates/MissingMetadata';
@@ -13,7 +13,7 @@ import {
   textFilter,
   radioFilter,
   rangeFilter,
-} from 'declarative-table';
+} from '../DeclarativeTableFramework';
 import { uniqBy } from 'lodash';
 
 export const EXPOSED_IMAGES_FEATURE_FLAG = 'vuln4shift.exposed_images';
@@ -71,29 +71,29 @@ export const SEVERITY_OPTIONS = [
   {
     value: 'critical',
     label: 'Critical',
-    iconColor: 'var(--pf-v5-global--danger-color--100)',
-    textColor: 'var(--pf-v5-global--danger-color--100)',
+    iconColor: 'var(--pf-t--global--icon--color--severity--critical--default)',
+    textColor: 'var(--pf-t--global--color--severity--critical--100)',
     hasIcon: true,
   },
   {
     value: 'important',
     label: 'Important',
-    iconColor: 'var(--pf-v5-global--palette--orange-300)',
-    textColor: 'var(--pf-v5-global--palette--orange-400)',
+    iconColor: 'var(--pf-t--global--icon--color--severity--important--default)',
+    textColor: 'var(--pf-t--global--color--severity--important--100)',
     hasIcon: true,
   },
   {
     value: 'moderate',
     label: 'Moderate',
-    iconColor: 'var(--pf-v5-global--warning-color--100)',
-    textColor: 'var(--pf-v5-global--warning-color--200)',
+    iconColor: 'var(--pf-t--global--icon--color--severity--moderate--default)',
+    textColor: 'var(--pf-t--global--color--severity--moderate--100)',
     hasIcon: true,
   },
   {
     value: 'low',
     label: 'Low',
-    iconColor: 'var(--pf-v5-global--Color--200)',
-    textColor: 'var(--pf-v5-global--default-color--300)',
+    iconColor: 'var(--pf-t--global--icon--color--severity--minor--default)',
+    textColor: 'var(--pf-t--global--icon--severity--minor--100)',
     hasIcon: true,
   },
   {
@@ -392,12 +392,12 @@ const createCveDescription = (row) => (
     {row.description === 'unknown' ? (
       <MissingMetadata variant="large" style={{ padding: 0 }} />
     ) : (
-      <TextContent>
-        <Text component={TextVariants.h6} style={{ fontSize: 14 }}>
+      <Content>
+        <Content component={ContentVariants.h6} style={{ fontSize: 14 }}>
           CVE description
-        </Text>
+        </Content>
         {row.description}
-      </TextContent>
+      </Content>
     )}
   </Fragment>
 );

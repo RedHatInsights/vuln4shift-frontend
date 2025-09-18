@@ -3,9 +3,9 @@ import qs from 'query-string';
 import { useDispatch } from 'react-redux';
 import { EXPOSED_CLUSTERS_OPTIONS, PUBLISHED_OPTIONS } from './constants';
 import {
-  addNotification,
-  clearNotifications,
-} from '@redhat-cloud-services/frontend-components-notifications/redux';
+  useAddNotification,
+  useClearNotifications,
+} from '@redhat-cloud-services/frontend-components-notifications/hooks/useNotifications';
 import { downloadFile } from '@redhat-cloud-services/frontend-components-utilities/helpers';
 import { useFlag, useFlagsStatus } from '@unleash/proxy-client-react';
 import { PersistenceContext } from '../App';
@@ -189,20 +189,19 @@ export const useExport = ({
   fetchActionParam,
   allowedParams,
 }) => {
-  const dispatch = useDispatch();
+  const addNotification = useAddNotification();
+  const clearNotifications = useClearNotifications();
 
   const DEFAULT_PARAMS = {
     report: true,
   };
 
   const onExport = async (format, params) => {
-    dispatch(
-      addNotification({
-        variant: 'info',
-        title:
-          'Preparing export. Once complete, your download will start automatically.',
-      })
-    );
+    addNotification({
+      variant: 'info',
+      title:
+        'Preparing export. Once complete, your download will start automatically.',
+    });
 
     const formattedDate =
       new Date().toISOString().replace(/[T:]/g, '-').split('.')[0] + '-utc';
@@ -223,14 +222,12 @@ export const useExport = ({
 
     downloadFile(data, filenamePrefix + formattedDate, format);
 
-    dispatch(clearNotifications());
+    clearNotifications();
 
-    dispatch(
-      addNotification({
-        variant: 'success',
-        title: 'Downloading export',
-      })
-    );
+    addNotification({
+      variant: 'success',
+      title: 'Downloading export',
+    });
   };
 
   return onExport;

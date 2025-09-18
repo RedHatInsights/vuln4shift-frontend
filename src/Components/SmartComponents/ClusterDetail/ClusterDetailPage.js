@@ -26,7 +26,7 @@ const ClusterDetailPage = ({ activeTab }) => {
   return (
     <ErrorHandler error={error}>
       <ClusterDetailPageHeader />
-      <section className="pf-v5-l-page__main-section pf-v5-c-page__main-section">
+      <section className="pf-v6-l-page__main-section pf-v6-c-page__main-section">
         <TableTabs
           activeTab={activeTab}
           tabs={[

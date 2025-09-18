@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import { SEVERITY_OPTIONS } from '../../Helpers/constants';
 import { SecurityIcon } from '@patternfly/react-icons';
 import { Link } from 'react-router-dom';
-import { Tooltip } from '@patternfly/react-core';
+import { Icon, Tooltip } from '@patternfly/react-core';
 
 const ShieldSet = ({ count, linkTo }) => {
-  const DISABLED_COLOR = 'var(--pf-v5-global--disabled-color--200)';
+  const DISABLED_COLOR =
+    'var(--pf-t--global--background--color--disabled--default)';
 
   return (
     <div className="shield-set">
@@ -18,7 +19,9 @@ const ShieldSet = ({ count, linkTo }) => {
           {severityOption.hasIcon &&
             (count[severityOption.value] === 0 ? (
               <a className="disabled-shield nowrap">
-                <SecurityIcon style={{ color: DISABLED_COLOR }} />
+                <Icon>
+                  <SecurityIcon style={{ color: DISABLED_COLOR }} />
+                </Icon>
                 <span>0</span>
               </a>
             ) : (
@@ -27,8 +30,12 @@ const ShieldSet = ({ count, linkTo }) => {
                 to={`${linkTo}?severity=${severityOption.value}`}
                 className="nowrap"
               >
-                <SecurityIcon style={{ color: severityOption.iconColor }} />
-                <span>{count[severityOption.value]}</span>
+                <Icon>
+                  <SecurityIcon style={{ color: severityOption.iconColor }} />
+                </Icon>
+                <span className="shield-set-severity-value">
+                  {count[severityOption.value]}
+                </span>
               </Link>
             ))}
         </Tooltip>
