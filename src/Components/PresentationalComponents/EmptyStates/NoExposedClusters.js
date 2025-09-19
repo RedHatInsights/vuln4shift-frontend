@@ -1,27 +1,15 @@
 import React from 'react';
-import {
-  EmptyState,
-  EmptyStateBody,
-  EmptyStateIcon,
-  Bullseye,
-  EmptyStateHeader,
-} from '@patternfly/react-core';
+import { EmptyState, EmptyStateBody, Bullseye } from '@patternfly/react-core';
 import { CheckCircleIcon } from '@patternfly/react-icons';
 
 const NoExposedClusters = () => (
   <Bullseye>
-    <EmptyState variant="lg">
-      <EmptyStateHeader
-        titleText="No clusters found"
-        icon={
-          <EmptyStateIcon
-            icon={CheckCircleIcon}
-            color="var(--pf-v5-global--success-color--100)"
-            size="sm"
-          />
-        }
-        headingLevel="h5"
-      />
+    <EmptyState
+      headingLevel="h5"
+      icon={CheckCircleIcon}
+      titleText="No clusters found"
+      variant="lg"
+    >
       <EmptyStateBody>This CVE doesn&apos;t affect any cluster.</EmptyStateBody>
     </EmptyState>
   </Bullseye>

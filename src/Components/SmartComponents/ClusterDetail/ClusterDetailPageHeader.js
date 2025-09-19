@@ -37,7 +37,7 @@ const ClusterDetailPageHeader = () => {
 
   return (
     <PageHeader>
-      <PageHeaderTitle title={pageTitle} className="pf-v5-u-mb-sm" />
+      <PageHeaderTitle title={pageTitle} className="pf-v6-u-mb-sm" />
       <div>
         UUID:&nbsp;
         <WithLoader
