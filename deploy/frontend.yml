@@ -1,3 +1,5 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/RedHatInsights/frontend-components/refs/heads/master/packages/config-utils/src/feo/spec/frontend-crd.schema.json
+---
 apiVersion: v1
 kind: Template
 metadata:
@@ -18,19 +20,63 @@ objects:
         paths:
           - /apps/ocp-vulnerability
       image: ${IMAGE}:${IMAGE_TAG}
-      navItems:
-        - appId: "ocp-vulnerability"
-          title: "Vulnerability"
-          href: "/openshift/insights/vulnerability"
-          product: "Red Hat Insights"
-          expandable: true
-          routes:
-            - appId: 'ocp-vulnerability'
-              title: 'CVEs'
-              href: '/openshift/insights/vulnerability/cves'
-            - appId: 'ocp-vulnerability'
-              title: 'Clusters'
-              href: '/openshift/insights/vulnerability/clusters'
+      bundleSegments:
+        - segmentId: ocp-vulnerability
+          bundleId: openshift
+          position: 505
+          navItems:
+            - id: ocp-vulnerability
+              title: Vulnerability Dashboard
+              href: /openshift/insights/vulnerability
+              expandable: true
+              routes:
+                - id: ocp-vulnerability-cves
+                  title: CVEs
+                  href: /openshift/insights/vulnerability/cves
+                  product: Red Hat OpenShift Cluster Manager
+                - id: ocp-vulnerability-clusters
+                  title: Clusters
+                  href: /openshift/insights/vulnerability/clusters
+                  product: Red Hat OpenShift Cluster Manager
+
+      serviceTiles:
+        - id: ocp-vulnerability-observe
+          title: Vulnerability
+          description: "Identify and prioritize security vulnerabilities within your OpenShift clusters based on severity and frequency."
+          href: /openshift/insights/vulnerability/cves
+          group: openshift
+          section: observe
+          icon: OpenShiftIcon
+
+      searchEntries:
+        - id: OPENSHIFT.cves
+          title: CVEs - Vulnerability
+          description: "See targeted recommendations to optimize your OpenShift clusters’ availability, performance, and security."
+          href: /openshift/insights/vulnerability/cves
+          alt_title:
+            - CVEs
+            - CVE
+            - security
+            - Vulnerability
+            - Vulnerability Management
+            - insights
+            - vulnerable
+            - exposure
+            - Weakness
+            - compliance
+            - security gap
+            - breach
+            - patch
+            - security
+            - vulnerabilities
+            - cve
+            - common vulnerability exposure
+            - cvss
+            - risk
+            - critical
+            - errata
+            - Errat
+
       module:
         manifestLocation: "/apps/ocp-vulnerability/fed-mods.json"
         modules:
