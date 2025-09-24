@@ -1,19 +1,14 @@
 import React from 'react';
 import propTypes from 'prop-types';
-import {
-  EmptyState,
-  EmptyStateBody,
-  Bullseye,
-  EmptyStateHeader,
-} from '@patternfly/react-core';
+import { EmptyState, EmptyStateBody, Bullseye } from '@patternfly/react-core';
 
 const NoMatchingItems = ({ items = 'items' }) => (
   <Bullseye>
-    <EmptyState variant="lg">
-      <EmptyStateHeader
-        titleText={`No matching ${items} found`}
-        headingLevel="h5"
-      />
+    <EmptyState
+      headingLevel="h5"
+      titleText={`No matching ${items} found`}
+      variant="lg"
+    >
       <EmptyStateBody>
         To continue, edit your filter settings and search again.
       </EmptyStateBody>

@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  EmptyState,
-  EmptyStateBody,
-  Bullseye,
-  EmptyStateHeader,
-} from '@patternfly/react-core';
+import { EmptyState, EmptyStateBody, Bullseye } from '@patternfly/react-core';
 import { ExternalLinkAltIcon } from '@patternfly/react-icons';
 import { useFeatureFlag } from '../../../Helpers/hooks';
 
@@ -35,11 +30,11 @@ const NoMatchingCves = () => {
 
   return (
     <Bullseye>
-      <EmptyState variant="lg">
-        <EmptyStateHeader
-          titleText="No matching CVEs found"
-          headingLevel="h5"
-        />
+      <EmptyState
+        headingLevel="h5"
+        titleText="No matching CVEs found"
+        variant="lg"
+      >
         <EmptyStateBody>
           To continue, edit your filter settings and search again.
           <br />

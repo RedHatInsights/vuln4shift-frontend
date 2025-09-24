@@ -2,10 +2,8 @@ import React from 'react';
 import {
   EmptyState,
   EmptyStateBody,
-  EmptyStateIcon,
   Button,
   Bullseye,
-  EmptyStateHeader,
   EmptyStateFooter,
 } from '@patternfly/react-core';
 import { PlusCircleIcon } from '@patternfly/react-icons';
@@ -16,12 +14,12 @@ const NoClusters = () => {
 
   return (
     <Bullseye>
-      <EmptyState variant="lg">
-        <EmptyStateHeader
-          titleText="No clusters yet"
-          icon={<EmptyStateIcon icon={PlusCircleIcon} size="sm" />}
-          headingLevel="h5"
-        />
+      <EmptyState
+        headingLevel="h5"
+        icon={PlusCircleIcon}
+        titleText="No clusters yet"
+        variant="lg"
+      >
         <EmptyStateBody>
           To get started, create or register your cluster to get information
           from {isLightspeedEnabled ? 'Lightspeed' : 'Insights'} Vulnerability.
@@ -41,7 +39,7 @@ const NoClusters = () => {
             component="a"
             href="https://console.redhat.com/openshift/register/"
             target="_blank"
-            className="pf-v5-u-mt-md"
+            className="pf-v6-u-mt-md"
           >
             Register Cluster
           </Button>

@@ -3,7 +3,7 @@ import strictUriEncode from 'strict-uri-encode';
 
 export const itIsSortedBy = (param) => {
   it(`is sorted by ${param}`, () => {
-    cy.get('.pf-m-selected > .pf-v5-c-table__button').should(
+    cy.get('.pf-m-selected > .pf-v6-c-table__button').should(
       'have.text',
       param
     );
@@ -12,7 +12,7 @@ export const itIsSortedBy = (param) => {
 
 export const itIsNotSorted = () => {
   it('does not show sorting indicator', () => {
-    cy.get('.pf-m-selected > .pf-v5-c-table__button').should('have.length', 0);
+    cy.get('.pf-m-selected > .pf-v6-c-table__button').should('have.length', 0);
   });
 };
 
@@ -21,7 +21,7 @@ export const itHasTableFunctionsDisabled = () => {
     cy.get('button[aria-label=Export]').click();
     cy.get('[aria-label=Export]')
       .parent()
-      .get('.pf-v5-c-menu__item')
+      .get('.pf-v6-c-menu__item')
       .should('be.disabled');
 
     cy.get('[data-ouia-component-id=pagination-top] button').should(
@@ -38,14 +38,14 @@ export const itHasTableFunctionsDisabled = () => {
 
 export const itHasActiveFilter = (filterName, filterValue) => {
   it(`has ${filterName}: ${filterValue} filter active by default`, () => {
-    cy.get('.pf-v5-c-chip-group__label').should('have.text', filterName);
-    cy.get('.pf-v5-c-chip-group__main ul').should('have.text', filterValue);
+    cy.get('.pf-v6-c-label-group__label').should('have.text', filterName);
+    cy.get('.pf-v6-c-label-group__main ul').should('have.text', filterValue);
   });
 };
 
 export const itHasNoActiveFilter = () => {
   it('does not have any filter active by default', () => {
-    cy.get('.pf-v5-c-chip-group__label').should('have.length', 0);
+    cy.get('.pf-v6-c-label-group__label').should('have.length', 0);
   });
 };
 
@@ -56,11 +56,11 @@ export const itExportsDataToFile = (jsonData, filenamePrefix) => {
     cy.get('button[aria-label=Export]').click();
     cy.get('[aria-label=Export]')
       .parent()
-      .get('.pf-v5-c-menu__item')
+      .get('.pf-v6-c-menu__item')
       .should('have.length', 2);
     cy.get('[aria-label=Export]')
       .parent()
-      .get('.pf-v5-c-menu__item')
+      .get('.pf-v6-c-menu__item')
       .contains('Export to JSON')
       .click();
 
@@ -68,7 +68,7 @@ export const itExportsDataToFile = (jsonData, filenamePrefix) => {
 
     cy.get('[aria-label=Export]')
       .parent()
-      .get('.pf-v5-c-menu__item')
+      .get('.pf-v6-c-menu__item')
       .contains('Export to CSV')
       .click();
 
@@ -99,7 +99,7 @@ export const itIsExpandable = (rowCount) => {
     for (let i = 0; i < rowCount; i++) {
       cy.get(`tbody #expand-toggle${i}`).click();
     }
-    cy.get('tbody .pf-v5-c-table__expandable-row.pf-m-expanded > td').should(
+    cy.get('tbody .pf-v6-c-table__expandable-row.pf-m-expanded > td').should(
       'have.length',
       rowCount
     );
@@ -111,7 +111,7 @@ export const itIsExpandable = (rowCount) => {
     for (let i = 0; i < rowCount; i++) {
       cy.get(`tbody #expand-toggle${i}`).click();
     }
-    cy.get('tbody .pf-v5-c-table__expandable-row.pf-m-expanded > td').should(
+    cy.get('tbody .pf-v6-c-table__expandable-row.pf-m-expanded > td').should(
       'have.length',
       0
     );
@@ -129,7 +129,7 @@ export const itIsExpandable = (rowCount) => {
       'false'
     );
     cy.get('thead [id^=expand-toggle]').click();
-    cy.get('tbody .pf-v5-c-table__expandable-row.pf-m-expanded > td').should(
+    cy.get('tbody .pf-v6-c-table__expandable-row.pf-m-expanded > td').should(
       'have.length',
       rowCount
     );
@@ -139,7 +139,7 @@ export const itIsExpandable = (rowCount) => {
       'true'
     );
     cy.get('thead [id^=expand-toggle]').click();
-    cy.get('tbody .pf-v5-c-table__expandable-row.pf-m-expanded > td').should(
+    cy.get('tbody .pf-v6-c-table__expandable-row.pf-m-expanded > td').should(
       'have.length',
       0
     );
@@ -162,7 +162,7 @@ export const itIsNotExpandable = () => {
 };
 
 export const removeFilter = (chipText) => {
-  cy.get(`.pf-v5-c-chip-group__main:contains(${chipText}) button`).click();
+  cy.get(`.pf-v6-c-label-group__main:contains(${chipText}) button`).click();
 };
 
 export const testSorting = (
@@ -183,6 +183,7 @@ export const testSorting = (
           cy.get(tableHeaders)
             .children()
             .eq(index + (isTableExpandable ? 1 : 0))
+            .find('button')
             .click();
         }
 
@@ -191,6 +192,7 @@ export const testSorting = (
         cy.get(tableHeaders)
           .children()
           .eq(index + (isTableExpandable ? 1 : 0))
+          .find('button')
           .click();
 
         column.sortDefaultDirection === 'asc'
@@ -200,6 +202,7 @@ export const testSorting = (
         cy.get(tableHeaders)
           .children()
           .eq(index + (isTableExpandable ? 1 : 0))
+          .find('button')
           .click();
 
         column.sortDefaultDirection === 'asc'
@@ -214,7 +217,7 @@ export const testFilters = (filters) => {
     it(`filters by ${filter.urlParam}`, () => {
       if (filters.length > 1) {
         cy.get('button[aria-label="Conditional filter toggle"]').click();
-        cy.get('.pf-v5-c-menu__list-item button').eq(index).click();
+        cy.get('.pf-v6-c-menu__list-item button').eq(index).click();
       }
 
       switch (filter.type) {
@@ -233,7 +236,7 @@ export const testFilters = (filters) => {
         case 'radio': {
           cy.get(filter.selector).click();
 
-          cy.get('.pf-v5-c-menu__list-item')
+          cy.get('.pf-v6-c-menu__list-item')
             .children()
             .each((child, index) => {
               if (index === 0) {
@@ -266,14 +269,14 @@ export const testFilters = (filters) => {
 
           // uncheck all possible values selected by default
           if (filter.activeByDefault) {
-            cy.get('.pf-v5-c-menu__list-item input[type="checkbox"]').uncheck({
+            cy.get('.pf-v6-c-menu__list-item input[type="checkbox"]').uncheck({
               multiple: true,
             });
           }
 
           let selectedValues = [];
 
-          cy.get('.pf-v5-c-menu__list-item')
+          cy.get('.pf-v6-c-menu__list-item')
             .children()
             .each((child, index) => {
               const allItems = uniqBy(
@@ -359,14 +362,14 @@ export const testFilters = (filters) => {
 
 export const testPagination = () => {
   const navigationButtons =
-    '#options-menu-top-pagination > .pf-v5-c-pagination__nav button';
+    '#options-menu-top-pagination > .pf-v6-c-pagination__nav button';
 
   it('should change page size', () => {
     cy.get(navigationButtons).eq(0).should('be.disabled');
     cy.get(navigationButtons).eq(1).should('be.disabled');
 
-    cy.get('#options-menu-top-pagination .pf-v5-c-menu-toggle').click();
-    cy.get('.pf-v5-c-menu__content button').eq(0).click();
+    cy.get('#options-menu-top-pagination .pf-v6-c-menu-toggle').click();
+    cy.get('.pf-v6-c-menu__content button').eq(0).click();
 
     cy.url().should('include', `limit=10`);
     cy.get(navigationButtons).eq(1).should('be.enabled');
