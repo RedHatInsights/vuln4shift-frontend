@@ -3,7 +3,7 @@
 @import "~@redhat-cloud-services/frontend-components-utilities/styles/_all";
 
 .cves-header-questionmark {
-    font-size: var(--pf-v5-global--FontSize--md);
+    font-size: var(--pf-v6-global--FontSize--md);
 }
 
 .pointer {
@@ -15,7 +15,7 @@
 }
 
 .shield-set {
-    span {
+    span.shield-set-severity-value {
         vertical-align: 2px;
         margin-left: 4px;
         margin-right: 16px;
@@ -27,7 +27,7 @@
     cursor: default;
 
     span {
-        color: var(--pf-v5-global--disabled-color--100);
+        color: var(--pf-v6-global--disabled-color--100);
     }
 }
 
@@ -54,5 +54,5 @@
 }
 
 #cvss-vector-content {
-    font-size: var(--pf-v5-global--FontSize--sm);
+    font-size: var(--pf-v6-global--FontSize--sm);
 }

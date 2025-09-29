@@ -4,7 +4,7 @@ import {
   EmptyState,
   EmptyStateBody,
   Bullseye,
-  Text,
+  Content,
 } from '@patternfly/react-core';
 import { useFeatureFlag } from '../../../Helpers/hooks';
 
@@ -14,9 +14,9 @@ const MissingMetadata = ({ ...props }) => {
   return (
     <Bullseye>
       <EmptyState variant="lg" {...props}>
-        <Text>
+        <Content component="p">
           <strong>No description available</strong>
-        </Text>
+        </Content>
         <EmptyStateBody>
           This CVE has been published, however metadata about this CVE is not
           yet available on Red Hat{' '}

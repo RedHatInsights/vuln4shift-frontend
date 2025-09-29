@@ -1,5 +1,5 @@
 import React, { createContext, useState } from 'react';
-import NotificationsPortal from '@redhat-cloud-services/frontend-components-notifications/NotificationPortal';
+import NotificationsProvider from '@redhat-cloud-services/frontend-components-notifications/NotificationsProvider';
 import { Router } from './Router';
 import './App.scss';
 
@@ -9,12 +9,13 @@ const App = (props) => {
   const [persistentState, setPersistentState] = useState({});
 
   return (
-    <PersistenceContext.Provider
-      value={{ persistentState, setPersistentState }}
-    >
-      <NotificationsPortal />
-      <Router childProps={props} />
-    </PersistenceContext.Provider>
+    <NotificationsProvider>
+      <PersistenceContext.Provider
+        value={{ persistentState, setPersistentState }}
+      >
+        <Router childProps={props} />
+      </PersistenceContext.Provider>
+    </NotificationsProvider>
   );
 };
 

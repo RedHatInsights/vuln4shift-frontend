@@ -3,7 +3,7 @@ import {
   DeclarativeTable,
   setupFilters,
   decodeRangeFilter,
-} from 'declarative-table';
+} from '../../../DeclarativeTableFramework';
 import {
   CVE_LIST_ALLOWED_PARAMS,
   CVE_LIST_DEFAULT_FILTERS,

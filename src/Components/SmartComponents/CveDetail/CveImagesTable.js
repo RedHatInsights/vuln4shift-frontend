@@ -1,5 +1,8 @@
 import React from 'react';
-import { DeclarativeTable, setupFilters } from 'declarative-table';
+import {
+  DeclarativeTable,
+  setupFilters,
+} from '../../../DeclarativeTableFramework';
 import {
   CVE_IMAGES_DEFAULT_FILTERS,
   CVE_IMAGES_EXPORT_PREFIX,

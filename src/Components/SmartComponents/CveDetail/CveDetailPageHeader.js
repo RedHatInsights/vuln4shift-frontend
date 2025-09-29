@@ -8,9 +8,8 @@ import {
   GridItem,
   Stack,
   StackItem,
-  Text,
-  TextContent,
-  TextVariants,
+  Content,
+  ContentVariants,
 } from '@patternfly/react-core';
 import { Shield } from '@redhat-cloud-services/frontend-components/Shield';
 import CvssVector from '../../PresentationalComponents/CvssVector';
@@ -55,7 +54,7 @@ const CveDetailPageHeader = () => {
       <PageHeaderTitle
         title={
           <Fragment>
-            <span className="pf-v5-u-mr-md">{params.cveId}</span>
+            <span className="pf-v6-u-mr-md">{params.cveId}</span>
             {/* TODO: Implement after backend starts providing known exploit param
             hasKnownExploit && <KnownExploitLabel
               labelProps={{ style: { verticalAlign: 4, fontWeight: 300 } }}
@@ -63,13 +62,13 @@ const CveDetailPageHeader = () => {
             */}
           </Fragment>
         }
-        className="pf-v5-u-mb-sm"
+        className="pf-v6-u-mb-sm"
       />
       <Grid hasGutter>
         <GridItem md={8} sm={12}>
           <Stack hasGutter>
             {hasMetadata && (
-              <StackItem className="pf-v5-u-mt-sm">
+              <StackItem className="pf-v6-u-mt-sm">
                 Publish date:&nbsp;
                 <WithLoader
                   isLoading={isDetailLoading}
@@ -90,12 +89,14 @@ const CveDetailPageHeader = () => {
                 style={{ height: '132px', width: '100%' }}
               >
                 {hasMetadata ? (
-                  <TextContent
+                  <Content
                     style={{ textAlign: 'justify' }}
                     ouiaId="cve-detail-description"
                   >
-                    <Text component={TextVariants.p}>{description}</Text>
-                  </TextContent>
+                    <Content component={ContentVariants.p}>
+                      {description}
+                    </Content>
+                  </Content>
                 ) : (
                   <MissingMetadata
                     variant="full"
@@ -104,7 +105,7 @@ const CveDetailPageHeader = () => {
                 )}
               </WithLoader>
             </StackItem>
-            <StackItem className="pf-v5-u-mt-sm pf-v5-u-mb-md">
+            <StackItem className="pf-v6-u-mt-sm pf-v6-u-mb-md">
               <a
                 href={`https://access.redhat.com/security/cve/${params.cveId}`}
                 target="__blank"
@@ -116,17 +117,17 @@ const CveDetailPageHeader = () => {
           </Stack>
         </GridItem>
 
-        <GridItem md={4} sm={12} className="pf-v5-u-mt-sm pf-v5-u-ml-sm">
+        <GridItem md={4} sm={12} className="pf-v6-u-mt-sm pf-v6-u-ml-sm">
           <Stack hasGutter>
             <StackItem>
-              <TextContent>
-                <Text
-                  component={TextVariants.h6}
-                  className="pointer pf-v5-u-mb-xs"
+              <Content>
+                <Content
+                  component={ContentVariants.h6}
+                  className="pointer pf-v6-u-mb-xs"
                 >
                   Severity
-                </Text>
-              </TextContent>
+                </Content>
+              </Content>
               <WithLoader
                 isLoading={isDetailLoading}
                 variant={LoaderType.inlineSkeleton}
@@ -145,6 +146,7 @@ const CveDetailPageHeader = () => {
                     data-ouia-component-id="cve-detail-severity"
                   >
                     <Shield
+                      size="lg"
                       impact={hasMetadata ? severity : 'Unknown'}
                       hasLabel
                     />
