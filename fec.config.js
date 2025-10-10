@@ -9,6 +9,7 @@ module.exports = {
   sassPrefix: '.ocp-vulnerability, .ocpVulnerability',
   interceptChromeConfig: false,
   devtool: 'hidden-source-map',
+  _unstableSpdy: true,
   plugins: [
     // Put the Sentry Webpack plugin after all other plugins
     ...(process.env.ENABLE_SENTRY
