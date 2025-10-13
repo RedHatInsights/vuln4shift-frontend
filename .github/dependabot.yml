@@ -45,7 +45,3 @@ updates:
         patterns:
           - "react"
           - "react-dom"
-      webpack:
-        patterns:
-          - "webpack"
-          - "webpack-bundle-analyzer"

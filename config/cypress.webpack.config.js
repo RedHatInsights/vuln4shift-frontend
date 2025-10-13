@@ -1,4 +1,3 @@
-const webpack = require('webpack');
 const { resolve } = require('path');
 const config = require('@redhat-cloud-services/frontend-components-config');
 
@@ -17,10 +16,6 @@ webpackConfig.module.rules.push({
     },
   },
 });
-
-plugins.push(
-  new webpack.DefinePlugin({ insights: { chrome: { isProd: false } } })
-);
 
 module.exports = {
   ...webpackConfig,
