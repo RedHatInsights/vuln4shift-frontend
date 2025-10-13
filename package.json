@@ -63,7 +63,7 @@
     "@redhat-cloud-services/frontend-components-config": "^6.7.1",
     "@redhat-cloud-services/tsc-transform-imports": "^1.0.24",
     "babel-plugin-formatjs": "^10.5.39",
-    "babel-plugin-istanbul": "7.0.0",
+    "babel-plugin-istanbul": "7.0.1",
     "babel-plugin-transform-imports": "^2.0.0",
     "cypress": "^13.17.0",
     "eslint": "^8.57.1",
