@@ -43,9 +43,9 @@ const CveListPage = () => {
       bodyContent={
         <Fragment>
           The Vulnerability service identifies CVEs with errata that may affect
-          your {isLightspeedEnabled ? 'Lightspeed' : 'Insights'}-connected
-          OpenShift clusters. Vulnerability information applies for OCP4.8+
-          version only.
+          your Red Hat {isLightspeedEnabled ? 'Lightspeed' : 'Insights'}
+          -connected OpenShift clusters. Vulnerability information applies for
+          OCP4.8+ version only.
         </Fragment>
       }
       footerContent={
