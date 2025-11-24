@@ -47,10 +47,10 @@
     "use-deep-compare-effect": "^1.8.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.28.0",
-    "@babel/plugin-transform-runtime": "^7.28.0",
-    "@babel/preset-env": "^7.28.0",
-    "@babel/preset-react": "^7.27.1",
+    "@babel/core": "^7.28.5",
+    "@babel/plugin-transform-runtime": "^7.28.5",
+    "@babel/preset-env": "^7.28.5",
+    "@babel/preset-react": "^7.28.5",
     "@babel/runtime": "^7.27.6",
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
@@ -63,7 +63,7 @@
     "@redhat-cloud-services/frontend-components-config": "^6.7.1",
     "@redhat-cloud-services/tsc-transform-imports": "^1.0.24",
     "babel-plugin-formatjs": "^10.5.39",
-    "babel-plugin-istanbul": "7.0.0",
+    "babel-plugin-istanbul": "7.0.1",
     "babel-plugin-transform-imports": "^2.0.0",
     "cypress": "^13.17.0",
     "eslint": "^8.57.1",
