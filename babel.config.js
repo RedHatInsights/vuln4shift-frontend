@@ -11,7 +11,7 @@ module.exports = {
     ],
   ],
   env: {
-    component: {
+    componentTest: {
       plugins: ['istanbul'],
     },
   },
