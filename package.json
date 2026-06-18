@@ -18,7 +18,7 @@
     "test": "npm run test:ct",
     "test:coverage": "curl -sSL 'https://raw.githubusercontent.com/RedHatInsights/insights-interact-tools/refs/heads/main/scripts/coverage.sh' | bash",
     "test:ct": "BABEL_ENV=componentTest cypress run --component",
-    "test:openct": "BABEL_ENV=component cypress open --component",
+    "test:openct": "BABEL_ENV=componentTest cypress open --component",
     "ci:verify": "npm run test:coverage",
     "verify": "npm-run-all build lint test",
     "postinstall": "ts-patch install"
