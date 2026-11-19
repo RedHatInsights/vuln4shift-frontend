@@ -8,6 +8,7 @@ import {
   CLUSTER_LIST_DEFAULT_FILTERS,
   CLUSTER_LIST_EXPORT_PREFIX,
   CLUSTER_LIST_TABLE_MAPPER,
+  COLUMN_MANAGEMENT_FEATURE_FLAG,
   clusterTextFilter,
   clusterStatusFilter,
   versionFilter,
@@ -21,12 +22,19 @@ import {
   fetchClusterListTable,
 } from '../../../Store/Actions';
 import NoClusters from '../../PresentationalComponents/EmptyStates/NoClusters';
-import { useExport, useUrlBoundParams } from '../../../Helpers/hooks';
+import {
+  useExport,
+  useFeatureFlag,
+  useUrlBoundParams,
+} from '../../../Helpers/hooks';
 import NoMatchingItems from '../../PresentationalComponents/EmptyStates/NoMatchingItems';
 import { fetchClusters } from '../../../Helpers/apiHelper';
 
 const ClusterCvesTable = () => {
   const dispatch = useDispatch();
+  const isColumnManagementEnabled = useFeatureFlag(
+    COLUMN_MANAGEMENT_FEATURE_FLAG
+  );
 
   const { clusters, isLoading, meta, error, columns } = useSelector(
     ({ ClusterListStore }) => ClusterListStore
@@ -70,6 +78,7 @@ const ClusterCvesTable = () => {
   return (
     <DeclarativeTable
       isLoading={isLoading}
+      areColumnsManageable={isColumnManagementEnabled}
       rows={clusters.map((row) => CLUSTER_LIST_TABLE_MAPPER(row))}
       columns={columns}
       filterConfig={filterConfig}

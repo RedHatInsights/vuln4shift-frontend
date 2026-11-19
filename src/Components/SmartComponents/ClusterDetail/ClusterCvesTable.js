@@ -9,6 +9,7 @@ import {
   CLUSTER_CVES_DEFAULT_FILTERS,
   CLUSTER_CVES_EXPORT_PREFIX,
   CLUSTER_CVES_TABLE_MAPPER,
+  COLUMN_MANAGEMENT_FEATURE_FLAG,
   cveTextFilter,
   cvssFilter,
   publishedFilter,
@@ -21,12 +22,19 @@ import {
   fetchClusterCvesTable,
 } from '../../../Store/Actions';
 import { useParams } from 'react-router-dom';
-import { useExport, useUrlBoundParams } from '../../../Helpers/hooks';
+import {
+  useExport,
+  useFeatureFlag,
+  useUrlBoundParams,
+} from '../../../Helpers/hooks';
 import NoMatchingCves from '../../PresentationalComponents/EmptyStates/NoMatchingCves';
 import { fetchClusterCves } from '../../../Helpers/apiHelper';
 
 const ClusterCvesTable = () => {
   const dispatch = useDispatch();
+  const isColumnManagementEnabled = useFeatureFlag(
+    COLUMN_MANAGEMENT_FEATURE_FLAG
+  );
 
   const params = useParams();
 
@@ -71,6 +79,7 @@ const ClusterCvesTable = () => {
     <DeclarativeTable
       isLoading={isTableLoading}
       isExpandable
+      areColumnsManageable={isColumnManagementEnabled}
       rows={cves.map((row) => CLUSTER_CVES_TABLE_MAPPER(row))}
       columns={columns}
       filterConfig={filterConfig}
