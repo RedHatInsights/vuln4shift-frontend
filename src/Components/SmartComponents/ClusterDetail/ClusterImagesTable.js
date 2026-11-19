@@ -8,6 +8,7 @@ import {
   CLUSTER_IMAGES_DEFAULT_FILTERS,
   CLUSTER_IMAGES_EXPORT_PREFIX,
   CLUSTER_IMAGES_TABLE_MAPPER,
+  COLUMN_MANAGEMENT_FEATURE_FLAG,
   imageTextFilter,
   registryFilter,
 } from '../../../Helpers/constants';
@@ -18,12 +19,19 @@ import {
   fetchClusterImagesTable,
 } from '../../../Store/Actions';
 import { useParams } from 'react-router-dom';
-import { useExport, useUrlBoundParams } from '../../../Helpers/hooks';
+import {
+  useExport,
+  useFeatureFlag,
+  useUrlBoundParams,
+} from '../../../Helpers/hooks';
 import NoMatchingItems from '../../PresentationalComponents/EmptyStates/NoMatchingItems';
 import { fetchClusterImages } from '../../../Helpers/apiHelper';
 
 const ClusterImagesTable = () => {
   const dispatch = useDispatch();
+  const isColumnManagementEnabled = useFeatureFlag(
+    COLUMN_MANAGEMENT_FEATURE_FLAG
+  );
 
   const params = useParams();
 
@@ -63,6 +71,7 @@ const ClusterImagesTable = () => {
   return (
     <DeclarativeTable
       isLoading={isTableLoading}
+      areColumnsManageable={isColumnManagementEnabled}
       rows={exposed_images.map((row) => CLUSTER_IMAGES_TABLE_MAPPER(row))}
       columns={columns}
       filterConfig={filterConfig}
