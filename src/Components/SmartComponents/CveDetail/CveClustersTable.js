@@ -6,6 +6,7 @@ import {
 import {
   clusterStatusFilter,
   clusterTextFilter,
+  COLUMN_MANAGEMENT_FEATURE_FLAG,
   CVE_CLUSTERS_ALLOWED_PARAMS,
   CVE_CLUSTERS_DEFAULT_FILTERS,
   CVE_CLUSTERS_EXPORT_PREFIX,
@@ -16,7 +17,11 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import NoMatchingItems from '../../PresentationalComponents/EmptyStates/NoMatchingItems';
 import { useParams } from 'react-router-dom';
-import { useExport, useUrlBoundParams } from '../../../Helpers/hooks';
+import {
+  useExport,
+  useFeatureFlag,
+  useUrlBoundParams,
+} from '../../../Helpers/hooks';
 import {
   changeCveClustersTableColumns,
   changeCveClustersTableParams,
@@ -26,6 +31,9 @@ import { fetchExposedClusters } from '../../../Helpers/apiHelper';
 
 const CveClustersTable = () => {
   const dispatch = useDispatch();
+  const isColumnManagementEnabled = useFeatureFlag(
+    COLUMN_MANAGEMENT_FEATURE_FLAG
+  );
 
   const params = useParams();
 
@@ -75,6 +83,7 @@ const CveClustersTable = () => {
   return (
     <DeclarativeTable
       isLoading={isTableLoading}
+      areColumnsManageable={isColumnManagementEnabled}
       rows={clusters.map((row) => CVE_CLUSTERS_TABLE_MAPPER(row))}
       columns={columns}
       filterConfig={filterConfig}

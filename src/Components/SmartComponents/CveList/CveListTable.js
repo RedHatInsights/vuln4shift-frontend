@@ -5,6 +5,7 @@ import {
   decodeRangeFilter,
 } from '../../../DeclarativeTableFramework';
 import {
+  COLUMN_MANAGEMENT_FEATURE_FLAG,
   CVE_LIST_ALLOWED_PARAMS,
   CVE_LIST_DEFAULT_FILTERS,
   CVE_LIST_TABLE_MAPPER,
@@ -22,11 +23,18 @@ import {
   changeCveListTableColumns,
 } from '../../../Store/Actions';
 import NoMatchingCves from '../../PresentationalComponents/EmptyStates/NoMatchingCves';
-import { useUrlBoundParams, useExport } from '../../../Helpers/hooks';
+import {
+  useUrlBoundParams,
+  useExport,
+  useFeatureFlag,
+} from '../../../Helpers/hooks';
 import { fetchCves } from '../../../Helpers/apiHelper';
 
 const CveListTable = () => {
   const dispatch = useDispatch();
+  const isColumnManagementEnabled = useFeatureFlag(
+    COLUMN_MANAGEMENT_FEATURE_FLAG
+  );
 
   const { cves, isLoading, meta, error, columns } = useSelector(
     ({ CveListStore }) => CveListStore
@@ -68,6 +76,7 @@ const CveListTable = () => {
     <DeclarativeTable
       isLoading={isLoading}
       isExpandable
+      areColumnsManageable={isColumnManagementEnabled}
       rows={cves.map((row) => CVE_LIST_TABLE_MAPPER(row))}
       columns={columns}
       filterConfig={filterConfig}

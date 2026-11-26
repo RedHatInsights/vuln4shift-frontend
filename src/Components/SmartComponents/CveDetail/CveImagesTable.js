@@ -4,6 +4,7 @@ import {
   setupFilters,
 } from '../../../DeclarativeTableFramework';
 import {
+  COLUMN_MANAGEMENT_FEATURE_FLAG,
   CVE_IMAGES_DEFAULT_FILTERS,
   CVE_IMAGES_EXPORT_PREFIX,
   CVE_IMAGES_TABLE_MAPPER,
@@ -14,7 +15,11 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import NoMatchingItems from '../../PresentationalComponents/EmptyStates/NoMatchingItems';
 import { useParams } from 'react-router-dom';
-import { useExport, useUrlBoundParams } from '../../../Helpers/hooks';
+import {
+  useExport,
+  useFeatureFlag,
+  useUrlBoundParams,
+} from '../../../Helpers/hooks';
 import {
   changeCveImagesTableColumns,
   changeCveImagesTableParams,
@@ -24,6 +29,9 @@ import { fetchExposedImages } from '../../../Helpers/apiHelper';
 
 const CveImagesTable = () => {
   const dispatch = useDispatch();
+  const isColumnManagementEnabled = useFeatureFlag(
+    COLUMN_MANAGEMENT_FEATURE_FLAG
+  );
 
   const params = useParams();
 
@@ -63,6 +71,7 @@ const CveImagesTable = () => {
   return (
     <DeclarativeTable
       isLoading={isTableLoading}
+      areColumnsManageable={isColumnManagementEnabled}
       rows={images.map((row) => CVE_IMAGES_TABLE_MAPPER(row))}
       columns={columns}
       filterConfig={filterConfig}
